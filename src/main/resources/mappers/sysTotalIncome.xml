@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.ISysTotalIncomeDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="SysTotalIncome" keyProperty="total_income_id" useGeneratedKeys="true">
+	insert into sys_total_income 
+	<set>
+		<if test="deposit_source != null and deposit_source != ''">
+			deposit_source = #{deposit_source},
+		</if>
+		<if test="depositor != null and depositor != ''">
+			depositor = #{depositor},
+		</if>
+		<if test="deposit_time != null and deposit_time != ''">
+			deposit_time = #{deposit_time},
+		</if>
+		<if test="amount != null and amount != ''">
+			amount = #{amount},
+		</if>
+		<if test="operator_id != null and operator_id != ''">
+			operator_id = #{operator_id},
+		</if>
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update sys_total_income set validation = 0 
+	where total_income_id in 
+	<foreach item="item" index="index" collection="array"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<delete id="deleteObjectById" parameterType="int">
+	delete from sys_total_income where total_income_id = #{total_income_id}
+</delete>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="SysTotalIncome" parameterType="SysTotalIncome">
+	select * from sys_total_income
+	where validation = 1
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="SysTotalIncome" parameterType="int">
+	select * from sys_total_income where total_income_id = #{total_income_id}
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="SysTotalIncome" parameterType="SysTotalIncome">
+	select * from sys_total_income
+	<where>
+		validation = 1
+		<if test="total_income_id != null and total_income_id != '' ">
+			and total_income_id = #{total_income_id}
+		</if>
+		<if test="deposit_source != null and deposit_source != '' ">
+			and deposit_source = #{deposit_source}
+		</if>
+		<if test="depositor != null and depositor != '' ">
+			and depositor = #{depositor}
+		</if>
+		<if test="deposit_time != null and deposit_time != '' ">
+			and deposit_time like "%"#{deposit_time}"%"
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="operator_id != null and operator_id != '' ">
+			and operator_id = #{operator_id}
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="SysTotalIncome">
+	select count(*) from sys_total_income
+	<where>
+		validation = 1
+		<if test="total_income_id != null and total_income_id != '' ">
+			and total_income_id = #{total_income_id}
+		</if>
+		<if test="deposit_source != null and deposit_source != '' ">
+			and deposit_source = #{deposit_source}
+		</if>
+		<if test="depositor != null and depositor != '' ">
+			and depositor = #{depositor}
+		</if>
+		<if test="deposit_time != null and deposit_time != '' ">
+			and deposit_time like "%"#{deposit_time}"%"
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="operator_id != null and operator_id != '' ">
+			and operator_id = #{operator_id}
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="SysTotalIncome">
+	update sys_total_income
+	<set>
+		<if test="deposit_source != null and deposit_source != ''">
+			deposit_source = #{deposit_source},
+		</if>
+		<if test="depositor != null and depositor != ''">
+			depositor = #{depositor},
+		</if>
+		<if test="deposit_time != null and deposit_time != ''">
+			deposit_time = #{deposit_time},
+		</if>
+		<if test="amount != null and amount != ''">
+			amount = #{amount},
+		</if>
+		<if test="operator_id != null and operator_id != ''">
+			operator_id = #{operator_id},
+		</if>
+	</set>
+</update>
+</mapper>

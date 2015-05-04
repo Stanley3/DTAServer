@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.ISchoolIncomeDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="SchoolIncome" keyProperty="school_income_id" useGeneratedKeys="true">
+	insert into school_income 
+	<set>
+		<if test="school_id != null and school_id != ''">
+			school_id = #{school_id},
+		</if>
+		<if test="imprest != null and imprest != ''">
+			imprest = #{imprest},
+		</if>
+		<if test="gross_charge != null and gross_charge != ''">
+			gross_charge = #{gross_charge},
+		</if>
+		<if test="frozen_amount != null and frozen_amount != ''">
+			frozen_amount = #{frozen_amount},
+		</if>
+		<if test="gross_income != null and gross_income != ''">
+			gross_income = #{gross_income},
+		</if>
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update school_income set validation = 0 
+	where school_income_id in 
+	<foreach item="item" index="index" collection="array"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<delete id="deleteObjectById" parameterType="int">
+	delete from school_income where school_income_id = #{school_income_id}
+</delete>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="SchoolIncome" parameterType="SchoolIncome">
+	select * from school_income
+	where validation = 1
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="SchoolIncome" parameterType="int">
+	select * from school_income where school_income_id = #{school_income_id}
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="SchoolIncome" parameterType="SchoolIncome">
+	select * from school_income
+	<where>
+		validation = 1
+		<if test="school_income_id != null and school_income_id != '' ">
+			and school_income_id = #{school_income_id}
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="imprest != null and imprest != '' ">
+			and imprest = #{imprest}
+		</if>
+		<if test="gross_charge != null and gross_charge != '' ">
+			and gross_charge = #{gross_charge}
+		</if>
+		<if test="frozen_amount != null and frozen_amount != '' ">
+			and frozen_amount = #{frozen_amount}
+		</if>
+		<if test="gross_income != null and gross_income != '' ">
+			and gross_income = #{gross_income}
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="SchoolIncome">
+	select count(*) from school_income
+	<where>
+		validation = 1
+		<if test="school_income_id != null and school_income_id != '' ">
+			and school_income_id = #{school_income_id}
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="imprest != null and imprest != '' ">
+			and imprest = #{imprest}
+		</if>
+		<if test="gross_charge != null and gross_charge != '' ">
+			and gross_charge = #{gross_charge}
+		</if>
+		<if test="frozen_amount != null and frozen_amount != '' ">
+			and frozen_amount = #{frozen_amount}
+		</if>
+		<if test="gross_income != null and gross_income != '' ">
+			and gross_income = #{gross_income}
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="SchoolIncome">
+	update school_income
+	<set>
+		<if test="school_id != null and school_id != ''">
+			school_id = #{school_id},
+		</if>
+		<if test="imprest != null and imprest != ''">
+			imprest = #{imprest},
+		</if>
+		<if test="gross_charge != null and gross_charge != ''">
+			gross_charge = #{gross_charge},
+		</if>
+		<if test="frozen_amount != null and frozen_amount != ''">
+			frozen_amount = #{frozen_amount},
+		</if>
+		<if test="gross_income != null and gross_income != ''">
+			gross_income = #{gross_income},
+		</if>
+	</set>
+</update>
+</mapper>

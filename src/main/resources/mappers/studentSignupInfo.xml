@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.IStudentSignupInfoDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="StudentSignupInfo" keyProperty="signup_id" useGeneratedKeys="true">
+	insert into student_signup_info 
+	<set>
+		<if test="student_id != null and student_id != ''">
+			student_id = #{student_id},
+		</if>
+		<if test="singup_driving_school != null and singup_driving_school != ''">
+			singup_driving_school = #{singup_driving_school},
+		</if>
+		<if test="chartered_driving_school != null and chartered_driving_school != ''">
+			chartered_driving_school = #{chartered_driving_school},
+		</if>
+		<if test="chartered_coach_2 != null and chartered_coach_2 != ''">
+			chartered_coach_2 = #{chartered_coach_2},
+		</if>
+		<if test="chartered_coach_3 != null and chartered_coach_3 != ''">
+			chartered_coach_3 = #{chartered_coach_3},
+		</if>
+		<if test="course_status != null and course_status != ''">
+			course_status = #{course_status},
+		</if>
+		<if test="signup_time != null and signup_time != ''">
+			signup_time = #{signup_time},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update student_signup_info set validation = 0 
+	where signup_id in 
+	<foreach item="item" index="index" collection="array"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<delete id="deleteObjectById" parameterType="int">
+	delete from student_signup_info where signup_id = #{signup_id}
+</delete>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="StudentSignupInfo" parameterType="StudentSignupInfo">
+	select * from student_signup_info
+	where validation = 1
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="StudentSignupInfo" parameterType="int">
+	select * from student_signup_info where signup_id = #{signup_id}
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="StudentSignupInfo" parameterType="StudentSignupInfo">
+	select * from student_signup_info
+	<where>
+		validation = 1
+		<if test="signup_id != null and signup_id != '' ">
+			and signup_id = #{signup_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="singup_driving_school != null and singup_driving_school != '' ">
+			and singup_driving_school = #{singup_driving_school}
+		</if>
+		<if test="chartered_driving_school != null and chartered_driving_school != '' ">
+			and chartered_driving_school = #{chartered_driving_school}
+		</if>
+		<if test="chartered_coach_2 != null and chartered_coach_2 != '' ">
+			and chartered_coach_2 = #{chartered_coach_2}
+		</if>
+		<if test="chartered_coach_3 != null and chartered_coach_3 != '' ">
+			and chartered_coach_3 = #{chartered_coach_3}
+		</if>
+		<if test="course_status != null and course_status != '' ">
+			and course_status = #{course_status}
+		</if>
+		<if test="signup_time != null and signup_time != '' ">
+			and signup_time like "%"#{signup_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="StudentSignupInfo">
+	select count(*) from student_signup_info
+	<where>
+		validation = 1
+		<if test="signup_id != null and signup_id != '' ">
+			and signup_id = #{signup_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="singup_driving_school != null and singup_driving_school != '' ">
+			and singup_driving_school = #{singup_driving_school}
+		</if>
+		<if test="chartered_driving_school != null and chartered_driving_school != '' ">
+			and chartered_driving_school = #{chartered_driving_school}
+		</if>
+		<if test="chartered_coach_2 != null and chartered_coach_2 != '' ">
+			and chartered_coach_2 = #{chartered_coach_2}
+		</if>
+		<if test="chartered_coach_3 != null and chartered_coach_3 != '' ">
+			and chartered_coach_3 = #{chartered_coach_3}
+		</if>
+		<if test="course_status != null and course_status != '' ">
+			and course_status = #{course_status}
+		</if>
+		<if test="signup_time != null and signup_time != '' ">
+			and signup_time like "%"#{signup_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="StudentSignupInfo">
+	update student_signup_info
+	<set>
+		<if test="student_id != null and student_id != ''">
+			student_id = #{student_id},
+		</if>
+		<if test="singup_driving_school != null and singup_driving_school != ''">
+			singup_driving_school = #{singup_driving_school},
+		</if>
+		<if test="chartered_driving_school != null and chartered_driving_school != ''">
+			chartered_driving_school = #{chartered_driving_school},
+		</if>
+		<if test="chartered_coach_2 != null and chartered_coach_2 != ''">
+			chartered_coach_2 = #{chartered_coach_2},
+		</if>
+		<if test="chartered_coach_3 != null and chartered_coach_3 != ''">
+			chartered_coach_3 = #{chartered_coach_3},
+		</if>
+		<if test="course_status != null and course_status != ''">
+			course_status = #{course_status},
+		</if>
+		<if test="signup_time != null and signup_time != ''">
+			signup_time = #{signup_time},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+	</set>
+</update>
+</mapper>

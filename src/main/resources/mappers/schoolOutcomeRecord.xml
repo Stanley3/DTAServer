@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.ISchoolOutcomeRecordDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="SchoolOutcomeRecord" keyProperty="outcome_record_id" useGeneratedKeys="true">
+	insert into school_outcome_record 
+	<set>
+		<if test="school_id != null and school_id != ''">
+			school_id = #{school_id},
+		</if>
+		<if test="operator != null and operator != ''">
+			operator = #{operator},
+		</if>
+		<if test="payee != null and payee != ''">
+			payee = #{payee},
+		</if>
+		<if test="operate_time != null and operate_time != ''">
+			operate_time = #{operate_time},
+		</if>
+		<if test="amount != null and amount != ''">
+			amount = #{amount},
+		</if>
+		<if test="arrival != null and arrival != ''">
+			arrival = #{arrival},
+		</if>
+		<if test="account_type != null and account_type != ''">
+			account_type = #{account_type},
+		</if>
+		<if test="account != null and account != ''">
+			account = #{account},
+		</if>
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update school_outcome_record set validation = 0 
+	where outcome_record_id in 
+	<foreach item="item" index="index" collection="array"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<delete id="deleteObjectById" parameterType="int">
+	delete from school_outcome_record where outcome_record_id = #{outcome_record_id}
+</delete>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="SchoolOutcomeRecord" parameterType="SchoolOutcomeRecord">
+	select * from school_outcome_record
+	where validation = 1
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="SchoolOutcomeRecord" parameterType="int">
+	select * from school_outcome_record where outcome_record_id = #{outcome_record_id}
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="SchoolOutcomeRecord" parameterType="SchoolOutcomeRecord">
+	select * from school_outcome_record
+	<where>
+		validation = 1
+		<if test="outcome_record_id != null and outcome_record_id != '' ">
+			and outcome_record_id = #{outcome_record_id}
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="operator != null and operator != '' ">
+			and operator = #{operator}
+		</if>
+		<if test="payee != null and payee != '' ">
+			and payee = #{payee}
+		</if>
+		<if test="operate_time != null and operate_time != '' ">
+			and operate_time like "%"#{operate_time}"%"
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="arrival != null and arrival != '' ">
+			and arrival = #{arrival}
+		</if>
+		<if test="account_type != null and account_type != '' ">
+			and account_type = #{account_type}
+		</if>
+		<if test="account != null and account != '' ">
+			and account like "%"#{account}"%"
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="SchoolOutcomeRecord">
+	select count(*) from school_outcome_record
+	<where>
+		validation = 1
+		<if test="outcome_record_id != null and outcome_record_id != '' ">
+			and outcome_record_id = #{outcome_record_id}
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="operator != null and operator != '' ">
+			and operator = #{operator}
+		</if>
+		<if test="payee != null and payee != '' ">
+			and payee = #{payee}
+		</if>
+		<if test="operate_time != null and operate_time != '' ">
+			and operate_time like "%"#{operate_time}"%"
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="arrival != null and arrival != '' ">
+			and arrival = #{arrival}
+		</if>
+		<if test="account_type != null and account_type != '' ">
+			and account_type = #{account_type}
+		</if>
+		<if test="account != null and account != '' ">
+			and account like "%"#{account}"%"
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="SchoolOutcomeRecord">
+	update school_outcome_record
+	<set>
+		<if test="school_id != null and school_id != ''">
+			school_id = #{school_id},
+		</if>
+		<if test="operator != null and operator != ''">
+			operator = #{operator},
+		</if>
+		<if test="payee != null and payee != ''">
+			payee = #{payee},
+		</if>
+		<if test="operate_time != null and operate_time != ''">
+			operate_time = #{operate_time},
+		</if>
+		<if test="amount != null and amount != ''">
+			amount = #{amount},
+		</if>
+		<if test="arrival != null and arrival != ''">
+			arrival = #{arrival},
+		</if>
+		<if test="account_type != null and account_type != ''">
+			account_type = #{account_type},
+		</if>
+		<if test="account != null and account != ''">
+			account = #{account},
+		</if>
+	</set>
+</update>
+</mapper>

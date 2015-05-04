@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.ICoachFinanceRecordDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="CoachFinanceRecord" keyProperty="finance_record_id" useGeneratedKeys="true">
+	insert into coach_finance_record 
+	<set>
+		<if test="coach_id != null and coach_id != ''">
+			coach_id = #{coach_id},
+		</if>
+		<if test="income_amount != null and income_amount != ''">
+			income_amount = #{income_amount},
+		</if>
+		<if test="payed_amount != null and payed_amount != ''">
+			payed_amount = #{payed_amount},
+		</if>
+		<if test="record_time != null and record_time != ''">
+			record_time = #{record_time},
+		</if>
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update coach_finance_record set validation = 0 
+	where finance_record_id in 
+	<foreach item="item" index="index" collection="array"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<delete id="deleteObjectById" parameterType="int">
+	delete from coach_finance_record where finance_record_id = #{finance_record_id}
+</delete>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="CoachFinanceRecord" parameterType="CoachFinanceRecord">
+	select * from coach_finance_record
+	where validation = 1
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="CoachFinanceRecord" parameterType="int">
+	select * from coach_finance_record where finance_record_id = #{finance_record_id}
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="CoachFinanceRecord" parameterType="CoachFinanceRecord">
+	select * from coach_finance_record
+	<where>
+		validation = 1
+		<if test="finance_record_id != null and finance_record_id != '' ">
+			and finance_record_id = #{finance_record_id}
+		</if>
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="income_amount != null and income_amount != '' ">
+			and income_amount = #{income_amount}
+		</if>
+		<if test="payed_amount != null and payed_amount != '' ">
+			and payed_amount = #{payed_amount}
+		</if>
+		<if test="record_time != null and record_time != '' ">
+			and record_time like "%"#{record_time}"%"
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="CoachFinanceRecord">
+	select count(*) from coach_finance_record
+	<where>
+		validation = 1
+		<if test="finance_record_id != null and finance_record_id != '' ">
+			and finance_record_id = #{finance_record_id}
+		</if>
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="income_amount != null and income_amount != '' ">
+			and income_amount = #{income_amount}
+		</if>
+		<if test="payed_amount != null and payed_amount != '' ">
+			and payed_amount = #{payed_amount}
+		</if>
+		<if test="record_time != null and record_time != '' ">
+			and record_time like "%"#{record_time}"%"
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="CoachFinanceRecord">
+	update coach_finance_record
+	<set>
+		<if test="coach_id != null and coach_id != ''">
+			coach_id = #{coach_id},
+		</if>
+		<if test="income_amount != null and income_amount != ''">
+			income_amount = #{income_amount},
+		</if>
+		<if test="payed_amount != null and payed_amount != ''">
+			payed_amount = #{payed_amount},
+		</if>
+		<if test="record_time != null and record_time != ''">
+			record_time = #{record_time},
+		</if>
+	</set>
+</update>
+</mapper>

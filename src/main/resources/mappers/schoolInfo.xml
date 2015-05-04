@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.ISchoolInfoDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="SchoolInfo" keyProperty="school_id" useGeneratedKeys="true">
+	insert into school_info 
+	<set>
+		<if test="school_name != null and school_name != ''">
+			school_name = #{school_name},
+		</if>
+		<if test="contract_no != null and contract_no != ''">
+			contract_no = #{contract_no},
+		</if>
+		<if test="leader != null and leader != ''">
+			leader = #{leader},
+		</if>
+		<if test="leader_phone != null and leader_phone != ''">
+			leader_phone = #{leader_phone},
+		</if>
+		<if test="school_address != null and school_address != ''">
+			school_address = #{school_address},
+		</if>
+		<if test="school_phone != null and school_phone != ''">
+			school_phone = #{school_phone},
+		</if>
+		<if test="longitude != null and longitude != ''">
+			longitude = #{longitude},
+		</if>
+		<if test="latitude != null and latitude != ''">
+			latitude = #{latitude},
+		</if>
+		<if test="coach_number != null and coach_number != ''">
+			coach_number = #{coach_number},
+		</if>
+		<if test="subject_2_number != null and subject_2_number != ''">
+			subject_2_number = #{subject_2_number},
+		</if>
+		<if test="subject_3_number != null and subject_3_number != ''">
+			subject_3_number = #{subject_3_number},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update school_info set validation = 0 
+	where school_id in 
+	<foreach item="item" index="index" collection="array"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<delete id="deleteObjectById" parameterType="int">
+	delete from school_info where school_id = #{school_id}
+</delete>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="SchoolInfo" parameterType="SchoolInfo">
+	select * from school_info
+	where validation = 1
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="SchoolInfo" parameterType="int">
+	select * from school_info where school_id = #{school_id}
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="SchoolInfo" parameterType="SchoolInfo">
+	select * from school_info
+	<where>
+		validation = 1
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="school_name != null and school_name != '' ">
+			and school_name like "%"#{school_name}"%"
+		</if>
+		<if test="contract_no != null and contract_no != '' ">
+			and contract_no like "%"#{contract_no}"%"
+		</if>
+		<if test="leader != null and leader != '' ">
+			and leader like "%"#{leader}"%"
+		</if>
+		<if test="leader_phone != null and leader_phone != '' ">
+			and leader_phone like "%"#{leader_phone}"%"
+		</if>
+		<if test="school_address != null and school_address != '' ">
+			and school_address like "%"#{school_address}"%"
+		</if>
+		<if test="school_phone != null and school_phone != '' ">
+			and school_phone like "%"#{school_phone}"%"
+		</if>
+		<if test="longitude != null and longitude != '' ">
+			and longitude = #{longitude}
+		</if>
+		<if test="latitude != null and latitude != '' ">
+			and latitude = #{latitude}
+		</if>
+		<if test="coach_number != null and coach_number != '' ">
+			and coach_number = #{coach_number}
+		</if>
+		<if test="subject_2_number != null and subject_2_number != '' ">
+			and subject_2_number = #{subject_2_number}
+		</if>
+		<if test="subject_3_number != null and subject_3_number != '' ">
+			and subject_3_number = #{subject_3_number}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="SchoolInfo">
+	select count(*) from school_info
+	<where>
+		validation = 1
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="school_name != null and school_name != '' ">
+			and school_name like "%"#{school_name}"%"
+		</if>
+		<if test="contract_no != null and contract_no != '' ">
+			and contract_no like "%"#{contract_no}"%"
+		</if>
+		<if test="leader != null and leader != '' ">
+			and leader like "%"#{leader}"%"
+		</if>
+		<if test="leader_phone != null and leader_phone != '' ">
+			and leader_phone like "%"#{leader_phone}"%"
+		</if>
+		<if test="school_address != null and school_address != '' ">
+			and school_address like "%"#{school_address}"%"
+		</if>
+		<if test="school_phone != null and school_phone != '' ">
+			and school_phone like "%"#{school_phone}"%"
+		</if>
+		<if test="longitude != null and longitude != '' ">
+			and longitude = #{longitude}
+		</if>
+		<if test="latitude != null and latitude != '' ">
+			and latitude = #{latitude}
+		</if>
+		<if test="coach_number != null and coach_number != '' ">
+			and coach_number = #{coach_number}
+		</if>
+		<if test="subject_2_number != null and subject_2_number != '' ">
+			and subject_2_number = #{subject_2_number}
+		</if>
+		<if test="subject_3_number != null and subject_3_number != '' ">
+			and subject_3_number = #{subject_3_number}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="SchoolInfo">
+	update school_info
+	<set>
+		<if test="school_name != null and school_name != ''">
+			school_name = #{school_name},
+		</if>
+		<if test="contract_no != null and contract_no != ''">
+			contract_no = #{contract_no},
+		</if>
+		<if test="leader != null and leader != ''">
+			leader = #{leader},
+		</if>
+		<if test="leader_phone != null and leader_phone != ''">
+			leader_phone = #{leader_phone},
+		</if>
+		<if test="school_address != null and school_address != ''">
+			school_address = #{school_address},
+		</if>
+		<if test="school_phone != null and school_phone != ''">
+			school_phone = #{school_phone},
+		</if>
+		<if test="longitude != null and longitude != ''">
+			longitude = #{longitude},
+		</if>
+		<if test="latitude != null and latitude != ''">
+			latitude = #{latitude},
+		</if>
+		<if test="coach_number != null and coach_number != ''">
+			coach_number = #{coach_number},
+		</if>
+		<if test="subject_2_number != null and subject_2_number != ''">
+			subject_2_number = #{subject_2_number},
+		</if>
+		<if test="subject_3_number != null and subject_3_number != ''">
+			subject_3_number = #{subject_3_number},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+	</set>
+</update>
+</mapper>

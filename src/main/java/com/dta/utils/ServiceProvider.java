@@ -13,12 +13,12 @@ public class ServiceProvider {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		Object object = null;
 		if(context.containsBean(beanName)){
-			System.out.println("´æÔÚbeanName£º " + beanName);
+			System.out.println("å­˜åœ¨beanNameï¼š " + beanName);
 			object = context.getBean(beanName);
 			
 		}	
 		else{
-			System.out.println("beanName: " + beanName + "²»´æÔÚ¡£");
+			System.out.println("beanName: " + beanName + "ä¸å­˜åœ¨");
 		}
 		return object;
 	}

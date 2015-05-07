@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.ws.rs.FormParam;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.dta.vo.PageParam;
 
+@XmlRootElement
 public class SysUser extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@FormParam("user_id")

@@ -3,48 +3,70 @@ package com.dta.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import com.dta.dao.INewsInfoDao;
+import com.dta.dao.base.IBaseAllDao;
 import com.dta.service.IBaseAllService;
 
 public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
+	private IBaseAllDao<T, V> dao;
 
-	public int addObject(T po) {
+	public BaseAllServiceImpl(){
+		
+	}
+	public int addObject(T po)  {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.addObject(po);
 	}
 
-	public int updateObjectById(int id) {
+	public int updateObjectById(T po) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateObjectById(po);
 	}
 
 	public int deleteObjectById(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteObjectById(id);
 	}
 
-	public int deleteMultiData(List<Serializable> ids) {
+	public int deleteMultiData(List<?> ids) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteMultiData(ids);
 	}
 
-	public List<T> getAll() {
+	public List<T> getAll(T po) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getAll(po);
 	}
 
-	public List<T> getPage() {
+	public List<T> getPage(T po) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getPage(po);
 	}
 
-	public int getSize() {
+	public int getSize(T po) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.getSize(po);
 	}
 
 	public T getObjectById(Serializable id) {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("dao is a instance of newsInfoDao?" + (dao instanceof INewsInfoDao));
+		T po = null;
+		if(dao != null)
+			 po = dao.getObjectById(id);
+		else
+			System.out.println("dao is null");
+		return po;
+	}
+
+	
+	
+	public IBaseAllDao<T, V> getDao() {
+		return dao;
+	}
+
+	public void setDao(IBaseAllDao<T, V> dao) {
+		this.dao = dao;
 	}
 	
 }

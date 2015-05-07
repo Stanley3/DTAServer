@@ -5,42 +5,42 @@ import java.util.List;
 
 public interface IBaseAllDao<T, V>{
 	/*
-	 * ÔöÌíÒ»ÌõÊı¾İ
+	 * å¢æ·»ä¸€ä¸ªå¯¹è±¡
 	 */
 	public int addObject(T po);
 	
 	/*
-	 * ¸ù¾İid¸üĞÂÒ»ÌõÊı¾İ
+	 * æ ¹æ®idæ›´æ–°ä¸€ä¸ªå¯¹è±¡
 	 */
 	public int updateObjectById(T po);
 	
 	/*
-	 * ¸ù¾İidÉ¾³ıÒ»ÌõÊı¾İ
+	 * æ ¹æ®idåˆ é™¤ä¸€ä¸ªå¯¹è±¡
 	 */
 	public int deleteObjectById(Serializable id);
 	
 	/*
-	 * É¾³ı¶àÌõÊı¾İ
+	 * åˆ é™¤å¤šä¸ªå¯¹è±¡
 	 */
-	public int deleteMultiData(List<Serializable> ids);
+	public int deleteMultiData(List<?> ids);
 	
 	/*
-	 * ²éÑ¯ËùÓĞµÄÊı¾İ
+	 * æŸ¥è¯¢æ‰€æœ‰ç¬¦åˆæ¡ä»¶çš„æ•°æ®
 	 */
-	public List<T>getAll();
+	public List<T>getAll(T po);
 	
 	/*
-	 *·ÖÒ³²éÑ¯ 
+	 *åˆ†é¡µæŸ¥è¯¢æ‰€æœ‰ç¬¦åˆæ¡ä»¶çš„æ•°æ®
 	 */
-	public List<T>getPage();
+	public List<T>getPage(T po);
 	
 	/*
-	 * µÃµ½×ÜÊı
+	 * æŸ¥è¯¢æ‰€æœ‰ç¬¦åˆæ¡ä»¶çš„æ•°æ®çš„æ€»æ•°
 	 */
-	public int getSize();
+	public int getSize(T po);
 	
 	/*
-	 * ¸ù¾İid²éÑ¯Ò»ÌõÊı¾İ
+	 * æ ¹æ®idæŸ¥è¯¢ä¸€ä¸ªå¯¹è±¡
 	 */
 	public T getObjectById(Serializable id);
 	

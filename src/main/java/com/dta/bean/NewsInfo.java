@@ -4,17 +4,19 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.ws.rs.FormParam;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.dta.vo.PageParam;
 
-public class NewsInfo extends PageParam implements Serializable{
+//@XmlRootElement
+public class NewsInfo extends PageParam  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@FormParam("news_info_id")
 	private Integer news_info_id;
 	@FormParam("sender")
 	private Integer sender;
 	@FormParam("send_time")
-	private Date send_time;
+	private String send_time;
 	@FormParam("content")
 	private String content;
 	@FormParam("receiver_type")
@@ -33,10 +35,10 @@ public class NewsInfo extends PageParam implements Serializable{
 	public Integer getSender() {
 		return sender;
 	}
-	public void setSend_time(Date send_time){
+	public void setSend_time(String send_time){
 		this.send_time = send_time;
 	}
-	public Date getSend_time() {
+	public String getSend_time() {
 		return send_time;
 	}
 	public void setContent(String content){

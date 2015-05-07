@@ -40,11 +40,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SysUser" parameterType="SysUser">
 	select * from sys_user
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="user_id != null and user_id != '' ">
+			and user_id = #{user_id}
+		</if>
+		<if test="user_name != null and user_name != '' ">
+			and user_name like "%"#{user_name}"%"
+		</if>
+		<if test="user_pwd != null and user_pwd != '' ">
+			and user_pwd like "%"#{user_pwd}"%"
+		</if>
+		<if test="role_ids != null and role_ids != '' ">
+			and role_ids like "%"#{role_ids}"%"
+		</if>
+		<if test="user_photo != null and user_photo != '' ">
+			and user_photo like "%"#{user_photo}"%"
+		</if>
+		<if test="user_attribute != null and user_attribute != '' ">
+			and user_attribute = #{user_attribute}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SysUser" parameterType="int">
-	select * from sys_user where user_id = #{user_id}
+	select 
+		 user_id,
+	 	 user_name,
+	 	 user_pwd,
+	 	 role_ids,
+		 user_attribute 
+	from sys_user 
+	where user_id = #{user_id}
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SysUser" parameterType="SysUser">
@@ -120,5 +147,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			user_attribute = #{user_attribute},
 		</if>
 	</set>
+	where user_id = #{user_id}
 </update>
 </mapper>

@@ -160,6 +160,15 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${jcloverslf4j.version}</version>
 		</dependency>
+		
+		<!-- reflectasm
+			https://github.com/EsotericSoftware/reflectasm/tree/master 
+		-->
+		<dependency>
+	        <groupId>com.esotericsoftware</groupId>
+	        <artifactId>reflectasm</artifactId>
+	        <version>1.11.0</version>
+    	</dependency>
 	</dependencies>
 	<build>
 		<plugins>

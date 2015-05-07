@@ -1,10 +1,14 @@
 package com.dta.vo;
 
 import javax.ws.rs.FormParam;
+import javax.xml.bind.annotation.XmlAnyElement;;
+
 
 public class PageParam{
+	@XmlAnyElement
 	@FormParam("sort")
 	public String sort;
+	@XmlAnyElement
 	@FormParam("order")
 	public String order;
 	@FormParam("page")

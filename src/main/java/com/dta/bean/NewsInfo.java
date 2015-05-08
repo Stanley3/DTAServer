@@ -1,10 +1,8 @@
 package com.dta.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.ws.rs.FormParam;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.dta.vo.PageParam;
 

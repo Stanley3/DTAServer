@@ -31,6 +31,10 @@ public class OrderRecord extends PageParam implements Serializable{
 	private Date order_dead_time;
 	@FormParam("order_memo")
 	private String order_memo;
+	@FormParam("validation")
+	private Integer validation;
+	@FormParam("course_status")
+	private Integer course_status;
 	public void setOrder_id(Integer order_id){
 		this.order_id = order_id;
 	}
@@ -96,5 +100,17 @@ public class OrderRecord extends PageParam implements Serializable{
 	}
 	public String getOrder_memo() {
 		return order_memo;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
+	}
+	public void setCourse_status(Integer course_status){
+		this.course_status = course_status;
+	}
+	public Integer getCourse_status() {
+		return course_status;
 	}
 }

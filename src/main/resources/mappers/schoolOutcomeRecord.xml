@@ -31,29 +31,65 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="account != null and account != ''">
 			account = #{account},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update school_outcome_record set validation = 0 
 	where outcome_record_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from school_outcome_record where outcome_record_id = #{outcome_record_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update school_outcome_record set validation = 0 where outcome_record_id = #{outcome_record_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SchoolOutcomeRecord" parameterType="SchoolOutcomeRecord">
 	select * from school_outcome_record
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="outcome_record_id != null and outcome_record_id != '' ">
+			and outcome_record_id = #{outcome_record_id}
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="operator != null and operator != '' ">
+			and operator = #{operator}
+		</if>
+		<if test="payee != null and payee != '' ">
+			and payee = #{payee}
+		</if>
+		<if test="operate_time != null and operate_time != '' ">
+			and operate_time like "%"#{operate_time}"%"
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="arrival != null and arrival != '' ">
+			and arrival = #{arrival}
+		</if>
+		<if test="account_type != null and account_type != '' ">
+			and account_type = #{account_type}
+		</if>
+		<if test="account != null and account != '' ">
+			and account like "%"#{account}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SchoolOutcomeRecord" parameterType="int">
-	select * from school_outcome_record where outcome_record_id = #{outcome_record_id}
+	select * from school_outcome_record
+	where outcome_record_id = #{outcome_record_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SchoolOutcomeRecord" parameterType="SchoolOutcomeRecord">
@@ -86,6 +122,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="account != null and account != '' ">
 			and account like "%"#{account}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -125,6 +164,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="account != null and account != '' ">
 			and account like "%"#{account}"%"
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -155,6 +197,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="account != null and account != ''">
 			account = #{account},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where outcome_record_id =  #{outcome_record_id}
 </update>
 </mapper>

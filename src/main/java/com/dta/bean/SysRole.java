@@ -14,6 +14,8 @@ public class SysRole extends PageParam implements Serializable{
 	private String role_name;
 	@FormParam("role_permission")
 	private Integer role_permission;
+	@FormParam("validation")
+	private Integer validation;
 	public void setRole_id(Integer role_id){
 		this.role_id = role_id;
 	}
@@ -31,5 +33,11 @@ public class SysRole extends PageParam implements Serializable{
 	}
 	public Integer getRole_permission() {
 		return role_permission;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

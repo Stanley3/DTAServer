@@ -19,29 +19,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="time != null and time != ''">
 			time = #{time},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update sys_total_outcome set validation = 0 
 	where total_outcome_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from sys_total_outcome where total_outcome_id = #{total_outcome_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update sys_total_outcome set validation = 0 where total_outcome_id = #{total_outcome_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SysTotalOutcome" parameterType="SysTotalOutcome">
 	select * from sys_total_outcome
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="total_outcome_id != null and total_outcome_id != '' ">
+			and total_outcome_id = #{total_outcome_id}
+		</if>
+		<if test="payee_id != null and payee_id != '' ">
+			and payee_id = #{payee_id}
+		</if>
+		<if test="payee_type != null and payee_type != '' ">
+			and payee_type = #{payee_type}
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="time != null and time != '' ">
+			and time like "%"#{time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SysTotalOutcome" parameterType="int">
-	select * from sys_total_outcome where total_outcome_id = #{total_outcome_id}
+	select * from sys_total_outcome
+	where total_outcome_id = #{total_outcome_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SysTotalOutcome" parameterType="SysTotalOutcome">
@@ -62,6 +86,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="time != null and time != '' ">
 			and time like "%"#{time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -89,6 +116,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="time != null and time != '' ">
 			and time like "%"#{time}"%"
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -107,6 +137,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="time != null and time != ''">
 			time = #{time},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where total_outcome_id =  #{total_outcome_id}
 </update>
 </mapper>

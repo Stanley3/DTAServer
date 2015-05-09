@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.ws.rs.FormParam;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.dta.vo.PageParam;
 
-@XmlRootElement
 public class SysUser extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@FormParam("user_id")
@@ -23,6 +21,8 @@ public class SysUser extends PageParam implements Serializable{
 	private Blob user_photo;
 	@FormParam("user_attribute")
 	private Integer user_attribute;
+	@FormParam("validation")
+	private Integer validation;
 	public void setUser_id(Integer user_id){
 		this.user_id = user_id;
 	}
@@ -58,5 +58,11 @@ public class SysUser extends PageParam implements Serializable{
 	}
 	public Integer getUser_attribute() {
 		return user_attribute;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

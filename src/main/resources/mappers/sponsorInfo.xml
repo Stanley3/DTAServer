@@ -22,29 +22,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="ratio != null and ratio != ''">
 			ratio = #{ratio},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update sponsor_info set validation = 0 
 	where sponsor_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from sponsor_info where sponsor_id = #{sponsor_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update sponsor_info set validation = 0 where sponsor_id = #{sponsor_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SponsorInfo" parameterType="SponsorInfo">
 	select * from sponsor_info
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="sponsor_id != null and sponsor_id != '' ">
+			and sponsor_id = #{sponsor_id}
+		</if>
+		<if test="sponsor_name != null and sponsor_name != '' ">
+			and sponsor_name like "%"#{sponsor_name}"%"
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="time != null and time != '' ">
+			and time like "%"#{time}"%"
+		</if>
+		<if test="advertisement != null and advertisement != '' ">
+			and advertisement like "%"#{advertisement}"%"
+		</if>
+		<if test="ratio != null and ratio != '' ">
+			and ratio like "%"#{ratio}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SponsorInfo" parameterType="int">
-	select * from sponsor_info where sponsor_id = #{sponsor_id}
+	select * from sponsor_info
+	where sponsor_id = #{sponsor_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SponsorInfo" parameterType="SponsorInfo">
@@ -68,6 +95,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="ratio != null and ratio != '' ">
 			and ratio like "%"#{ratio}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -98,6 +128,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="ratio != null and ratio != '' ">
 			and ratio like "%"#{ratio}"%"
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -119,6 +152,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="ratio != null and ratio != ''">
 			ratio = #{ratio},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where sponsor_id =  #{sponsor_id}
 </update>
 </mapper>

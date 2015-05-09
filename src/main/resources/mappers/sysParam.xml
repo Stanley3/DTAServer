@@ -25,23 +25,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="deleteMultiData">
 	update sys_param set validation = 0 
 	where param_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from sys_param where param_id = #{param_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update sys_param set validation = 0 where param_id = #{param_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SysParam" parameterType="SysParam">
 	select * from sys_param
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="param_id != null and param_id != '' ">
+			and param_id = #{param_id}
+		</if>
+		<if test="evalution_weight != null and evalution_weight != '' ">
+			and evalution_weight like "%"#{evalution_weight}"%"
+		</if>
+		<if test="signup_fee != null and signup_fee != '' ">
+			and signup_fee = #{signup_fee}
+		</if>
+		<if test="upgrade_fee != null and upgrade_fee != '' ">
+			and upgrade_fee = #{upgrade_fee}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SysParam" parameterType="int">
-	select * from sys_param where param_id = #{param_id}
+	select * from sys_param
+	where param_id = #{param_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SysParam" parameterType="SysParam">
@@ -108,5 +126,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			validation = #{validation},
 		</if>
 	</set>
+	where param_id =  #{param_id}
 </update>
 </mapper>

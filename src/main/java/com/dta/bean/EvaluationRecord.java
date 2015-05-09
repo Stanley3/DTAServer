@@ -29,6 +29,8 @@ public class EvaluationRecord extends PageParam implements Serializable{
 	private Date evaluation_time;
 	@FormParam("evalution_type")
 	private Integer evalution_type;
+	@FormParam("validation")
+	private Integer validation;
 	public void setEvaluation_record_id(Integer evaluation_record_id){
 		this.evaluation_record_id = evaluation_record_id;
 	}
@@ -88,5 +90,11 @@ public class EvaluationRecord extends PageParam implements Serializable{
 	}
 	public Integer getEvalution_type() {
 		return evalution_type;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

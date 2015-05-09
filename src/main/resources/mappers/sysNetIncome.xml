@@ -16,29 +16,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="time != null and time != ''">
 			time = #{time},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update sys_net_income set validation = 0 
 	where net_income_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from sys_net_income where net_income_id = #{net_income_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update sys_net_income set validation = 0 where net_income_id = #{net_income_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SysNetIncome" parameterType="SysNetIncome">
 	select * from sys_net_income
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="net_income_id != null and net_income_id != '' ">
+			and net_income_id = #{net_income_id}
+		</if>
+		<if test="net_income_source != null and net_income_source != '' ">
+			and net_income_source = #{net_income_source}
+		</if>
+		<if test="amount != null and amount != '' ">
+			and amount = #{amount}
+		</if>
+		<if test="time != null and time != '' ">
+			and time like "%"#{time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SysNetIncome" parameterType="int">
-	select * from sys_net_income where net_income_id = #{net_income_id}
+	select * from sys_net_income
+	where net_income_id = #{net_income_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SysNetIncome" parameterType="SysNetIncome">
@@ -56,6 +77,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="time != null and time != '' ">
 			and time like "%"#{time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -80,6 +104,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="time != null and time != '' ">
 			and time like "%"#{time}"%"
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -95,6 +122,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="time != null and time != ''">
 			time = #{time},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where net_income_id =  #{net_income_id}
 </update>
 </mapper>

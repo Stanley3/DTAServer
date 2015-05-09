@@ -37,29 +37,77 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="order_memo != null and order_memo != ''">
 			order_memo = #{order_memo},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+		<if test="course_status != null and course_status != ''">
+			course_status = #{course_status},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update order_record set validation = 0 
 	where order_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from order_record where order_id = #{order_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update order_record set validation = 0 where order_id = #{order_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="OrderRecord" parameterType="OrderRecord">
 	select * from order_record
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="order_id != null and order_id != '' ">
+			and order_id = #{order_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="order_time != null and order_time != '' ">
+			and order_time like "%"#{order_time}"%"
+		</if>
+		<if test="order_amount != null and order_amount != '' ">
+			and order_amount = #{order_amount}
+		</if>
+		<if test="order_status != null and order_status != '' ">
+			and order_status = #{order_status}
+		</if>
+		<if test="training_start_time != null and training_start_time != '' ">
+			and training_start_time like "%"#{training_start_time}"%"
+		</if>
+		<if test="training_end_time != null and training_end_time != '' ">
+			and training_end_time like "%"#{training_end_time}"%"
+		</if>
+		<if test="order_dead_time != null and order_dead_time != '' ">
+			and order_dead_time like "%"#{order_dead_time}"%"
+		</if>
+		<if test="order_memo != null and order_memo != '' ">
+			and order_memo like "%"#{order_memo}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+		<if test="course_status != null and course_status != '' ">
+			and course_status = #{course_status}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="OrderRecord" parameterType="int">
-	select * from order_record where order_id = #{order_id}
+	select * from order_record
+	where order_id = #{order_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="OrderRecord" parameterType="OrderRecord">
@@ -98,6 +146,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="order_memo != null and order_memo != '' ">
 			and order_memo like "%"#{order_memo}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+		<if test="course_status != null and course_status != '' ">
+			and course_status = #{course_status}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -143,6 +197,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="order_memo != null and order_memo != '' ">
 			and order_memo like "%"#{order_memo}"%"
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+		<if test="course_status != null and course_status != '' ">
+			and course_status = #{course_status}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -179,6 +239,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="order_memo != null and order_memo != ''">
 			order_memo = #{order_memo},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+		<if test="course_status != null and course_status != ''">
+			course_status = #{course_status},
+		</if>
 	</set>
+	where order_id =  #{order_id}
 </update>
 </mapper>

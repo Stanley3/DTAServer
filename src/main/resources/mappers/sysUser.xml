@@ -28,14 +28,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="deleteMultiData">
 	update sys_user set validation = 0 
 	where user_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
 <delete id="deleteObjectById" parameterType="int">
-	delete from sys_user where user_id = #{user_id}
+	update sys_user set validation = 0 where user_id = #{user_id}
 </delete>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SysUser" parameterType="SysUser">

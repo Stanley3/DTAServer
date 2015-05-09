@@ -37,23 +37,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="deleteMultiData">
 	update student_signup_info set validation = 0 
 	where signup_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from student_signup_info where signup_id = #{signup_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update student_signup_info set validation = 0 where signup_id = #{signup_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="StudentSignupInfo" parameterType="StudentSignupInfo">
 	select * from student_signup_info
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="signup_id != null and signup_id != '' ">
+			and signup_id = #{signup_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="singup_driving_school != null and singup_driving_school != '' ">
+			and singup_driving_school = #{singup_driving_school}
+		</if>
+		<if test="chartered_driving_school != null and chartered_driving_school != '' ">
+			and chartered_driving_school = #{chartered_driving_school}
+		</if>
+		<if test="chartered_coach_2 != null and chartered_coach_2 != '' ">
+			and chartered_coach_2 = #{chartered_coach_2}
+		</if>
+		<if test="chartered_coach_3 != null and chartered_coach_3 != '' ">
+			and chartered_coach_3 = #{chartered_coach_3}
+		</if>
+		<if test="course_status != null and course_status != '' ">
+			and course_status = #{course_status}
+		</if>
+		<if test="signup_time != null and signup_time != '' ">
+			and signup_time like "%"#{signup_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="StudentSignupInfo" parameterType="int">
-	select * from student_signup_info where signup_id = #{signup_id}
+	select * from student_signup_info
+	where signup_id = #{signup_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="StudentSignupInfo" parameterType="StudentSignupInfo">
@@ -156,5 +186,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			validation = #{validation},
 		</if>
 	</set>
+	where signup_id =  #{signup_id}
 </update>
 </mapper>

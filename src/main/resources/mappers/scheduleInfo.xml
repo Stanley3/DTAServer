@@ -43,23 +43,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="deleteMultiData">
 	update schedule_info set validation = 0 
 	where schedule_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from schedule_info where schedule_id = #{schedule_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update schedule_info set validation = 0 where schedule_id = #{schedule_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="ScheduleInfo" parameterType="ScheduleInfo">
 	select * from schedule_info
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="schedule_id != null and schedule_id != '' ">
+			and schedule_id = #{schedule_id}
+		</if>
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="operator_id != null and operator_id != '' ">
+			and operator_id = #{operator_id}
+		</if>
+		<if test="operate_time != null and operate_time != '' ">
+			and operate_time like "%"#{operate_time}"%"
+		</if>
+		<if test="subject != null and subject != '' ">
+			and subject = #{subject}
+		</if>
+		<if test="content != null and content != '' ">
+			and content like "%"#{content}"%"
+		</if>
+		<if test="student_toplimit != null and student_toplimit != '' ">
+			and student_toplimit like "%"#{student_toplimit}"%"
+		</if>
+		<if test="student_attribute != null and student_attribute != '' ">
+			and student_attribute like "%"#{student_attribute}"%"
+		</if>
+		<if test="schedule_date != null and schedule_date != '' ">
+			and schedule_date like "%"#{schedule_date}"%"
+		</if>
+		<if test="device_attribude != null and device_attribude != '' ">
+			and device_attribude = #{device_attribude}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="ScheduleInfo" parameterType="int">
-	select * from schedule_info where schedule_id = #{schedule_id}
+	select * from schedule_info
+	where schedule_id = #{schedule_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="ScheduleInfo" parameterType="ScheduleInfo">
@@ -180,5 +216,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			validation = #{validation},
 		</if>
 	</set>
+	where schedule_id =  #{schedule_id}
 </update>
 </mapper>

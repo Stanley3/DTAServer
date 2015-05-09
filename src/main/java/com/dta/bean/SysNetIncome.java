@@ -17,6 +17,8 @@ public class SysNetIncome extends PageParam implements Serializable{
 	private String amount;
 	@FormParam("time")
 	private Date time;
+	@FormParam("validation")
+	private Integer validation;
 	public void setNet_income_id(Integer net_income_id){
 		this.net_income_id = net_income_id;
 	}
@@ -40,5 +42,11 @@ public class SysNetIncome extends PageParam implements Serializable{
 	}
 	public Date getTime() {
 		return time;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

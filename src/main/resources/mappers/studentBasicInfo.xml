@@ -34,23 +34,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="deleteMultiData">
 	update student_basic_info set validation = 0 
 	where student_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from student_basic_info where student_id = #{student_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update student_basic_info set validation = 0 where student_id = #{student_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="StudentBasicInfo" parameterType="StudentBasicInfo">
 	select * from student_basic_info
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="student_name != null and student_name != '' ">
+			and student_name like "%"#{student_name}"%"
+		</if>
+		<if test="student_photo != null and student_photo != '' ">
+			and student_photo like "%"#{student_photo}"%"
+		</if>
+		<if test="identity_card_no != null and identity_card_no != '' ">
+			and identity_card_no like "%"#{identity_card_no}"%"
+		</if>
+		<if test="student_gender != null and student_gender != '' ">
+			and student_gender like "%"#{student_gender}"%"
+		</if>
+		<if test="student_phone != null and student_phone != '' ">
+			and student_phone like "%"#{student_phone}"%"
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="StudentBasicInfo" parameterType="int">
-	select * from student_basic_info where student_id = #{student_id}
+	select * from student_basic_info
+	where student_id = #{student_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="StudentBasicInfo" parameterType="StudentBasicInfo">
@@ -144,5 +171,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			validation = #{validation},
 		</if>
 	</set>
+	where student_id =  #{student_id}
 </update>
 </mapper>

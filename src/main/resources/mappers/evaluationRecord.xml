@@ -34,29 +34,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evalution_type != null and evalution_type != ''">
 			evalution_type = #{evalution_type},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update evaluation_record set validation = 0 
 	where evaluation_record_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from evaluation_record where evaluation_record_id = #{evaluation_record_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update evaluation_record set validation = 0 where evaluation_record_id = #{evaluation_record_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="EvaluationRecord" parameterType="EvaluationRecord">
 	select * from evaluation_record
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="evaluation_record_id != null and evaluation_record_id != '' ">
+			and evaluation_record_id = #{evaluation_record_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="order_id != null and order_id != '' ">
+			and order_id = #{order_id}
+		</if>
+		<if test="content != null and content != '' ">
+			and content like "%"#{content}"%"
+		</if>
+		<if test="skill != null and skill != '' ">
+			and skill = #{skill}
+		</if>
+		<if test="service_attitude != null and service_attitude != '' ">
+			and service_attitude = #{service_attitude}
+		</if>
+		<if test="hygiene != null and hygiene != '' ">
+			and hygiene = #{hygiene}
+		</if>
+		<if test="evaluation_time != null and evaluation_time != '' ">
+			and evaluation_time like "%"#{evaluation_time}"%"
+		</if>
+		<if test="evalution_type != null and evalution_type != '' ">
+			and evalution_type = #{evalution_type}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="EvaluationRecord" parameterType="int">
-	select * from evaluation_record where evaluation_record_id = #{evaluation_record_id}
+	select * from evaluation_record
+	where evaluation_record_id = #{evaluation_record_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="EvaluationRecord" parameterType="EvaluationRecord">
@@ -92,6 +131,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="evalution_type != null and evalution_type != '' ">
 			and evalution_type = #{evalution_type}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -134,6 +176,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evalution_type != null and evalution_type != '' ">
 			and evalution_type = #{evalution_type}
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -167,6 +212,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evalution_type != null and evalution_type != ''">
 			evalution_type = #{evalution_type},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where evaluation_record_id =  #{evaluation_record_id}
 </update>
 </mapper>

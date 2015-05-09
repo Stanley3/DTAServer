@@ -21,6 +21,8 @@ public class SysTotalIncome extends PageParam implements Serializable{
 	private String amount;
 	@FormParam("operator_id")
 	private Integer operator_id;
+	@FormParam("validation")
+	private Integer validation;
 	public void setTotal_income_id(Integer total_income_id){
 		this.total_income_id = total_income_id;
 	}
@@ -56,5 +58,11 @@ public class SysTotalIncome extends PageParam implements Serializable{
 	}
 	public Integer getOperator_id() {
 		return operator_id;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

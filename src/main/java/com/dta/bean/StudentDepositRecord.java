@@ -25,6 +25,8 @@ public class StudentDepositRecord extends PageParam implements Serializable{
 	private String source_no;
 	@FormParam("deposit_date")
 	private Date deposit_date;
+	@FormParam("validation")
+	private Integer validation;
 	public void setDeposit_record_id(Integer deposit_record_id){
 		this.deposit_record_id = deposit_record_id;
 	}
@@ -72,5 +74,11 @@ public class StudentDepositRecord extends PageParam implements Serializable{
 	}
 	public Date getDeposit_date() {
 		return deposit_date;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

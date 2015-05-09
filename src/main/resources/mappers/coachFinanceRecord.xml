@@ -19,29 +19,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="record_time != null and record_time != ''">
 			record_time = #{record_time},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update coach_finance_record set validation = 0 
 	where finance_record_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from coach_finance_record where finance_record_id = #{finance_record_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update coach_finance_record set validation = 0 where finance_record_id = #{finance_record_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="CoachFinanceRecord" parameterType="CoachFinanceRecord">
 	select * from coach_finance_record
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="finance_record_id != null and finance_record_id != '' ">
+			and finance_record_id = #{finance_record_id}
+		</if>
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="income_amount != null and income_amount != '' ">
+			and income_amount = #{income_amount}
+		</if>
+		<if test="payed_amount != null and payed_amount != '' ">
+			and payed_amount = #{payed_amount}
+		</if>
+		<if test="record_time != null and record_time != '' ">
+			and record_time like "%"#{record_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="CoachFinanceRecord" parameterType="int">
-	select * from coach_finance_record where finance_record_id = #{finance_record_id}
+	select * from coach_finance_record
+	where finance_record_id = #{finance_record_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="CoachFinanceRecord" parameterType="CoachFinanceRecord">
@@ -62,6 +86,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="record_time != null and record_time != '' ">
 			and record_time like "%"#{record_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -89,6 +116,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="record_time != null and record_time != '' ">
 			and record_time like "%"#{record_time}"%"
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -107,6 +137,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="record_time != null and record_time != ''">
 			record_time = #{record_time},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where finance_record_id =  #{finance_record_id}
 </update>
 </mapper>

@@ -20,6 +20,8 @@ public class SponsorInfo extends PageParam implements Serializable{
 	private String advertisement;
 	@FormParam("ratio")
 	private String ratio;
+	@FormParam("validation")
+	private Integer validation;
 	public void setSponsor_id(Integer sponsor_id){
 		this.sponsor_id = sponsor_id;
 	}
@@ -55,5 +57,11 @@ public class SponsorInfo extends PageParam implements Serializable{
 	}
 	public String getRatio() {
 		return ratio;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

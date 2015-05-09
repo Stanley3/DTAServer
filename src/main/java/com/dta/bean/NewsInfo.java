@@ -1,26 +1,28 @@
 package com.dta.bean;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.ws.rs.FormParam;
 
 import com.dta.vo.PageParam;
 
-//@XmlRootElement
-public class NewsInfo extends PageParam  implements Serializable{
+public class NewsInfo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@FormParam("news_info_id")
 	private Integer news_info_id;
 	@FormParam("sender")
 	private Integer sender;
 	@FormParam("send_time")
-	private String send_time;
+	private Date send_time;
 	@FormParam("content")
 	private String content;
 	@FormParam("receiver_type")
 	private Integer receiver_type;
-	@FormParam("attribude")
-	private Integer attribude;
+	@FormParam("attribute")
+	private Integer attribute;
+	@FormParam("validation")
+	private Integer validation;
 	public void setNews_info_id(Integer news_info_id){
 		this.news_info_id = news_info_id;
 	}
@@ -33,10 +35,10 @@ public class NewsInfo extends PageParam  implements Serializable{
 	public Integer getSender() {
 		return sender;
 	}
-	public void setSend_time(String send_time){
+	public void setSend_time(Date send_time){
 		this.send_time = send_time;
 	}
-	public String getSend_time() {
+	public Date getSend_time() {
 		return send_time;
 	}
 	public void setContent(String content){
@@ -51,10 +53,16 @@ public class NewsInfo extends PageParam  implements Serializable{
 	public Integer getReceiver_type() {
 		return receiver_type;
 	}
-	public void setAttribude(Integer attribude){
-		this.attribude = attribude;
+	public void setAttribute(Integer attribute){
+		this.attribute = attribute;
 	}
-	public Integer getAttribude() {
-		return attribude;
+	public Integer getAttribute() {
+		return attribute;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

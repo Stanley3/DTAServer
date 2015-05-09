@@ -22,29 +22,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="withdraw_status != null and withdraw_status != ''">
 			withdraw_status = #{withdraw_status},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update coach_withdraw_reocrd set validation = 0 
 	where withdraw_reocrd_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from coach_withdraw_reocrd where withdraw_reocrd_id = #{withdraw_reocrd_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update coach_withdraw_reocrd set validation = 0 where withdraw_reocrd_id = #{withdraw_reocrd_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="CoachWithdrawReocrd" parameterType="CoachWithdrawReocrd">
 	select * from coach_withdraw_reocrd
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="withdraw_reocrd_id != null and withdraw_reocrd_id != '' ">
+			and withdraw_reocrd_id = #{withdraw_reocrd_id}
+		</if>
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="withdraw_time != null and withdraw_time != '' ">
+			and withdraw_time like "%"#{withdraw_time}"%"
+		</if>
+		<if test="withdraw_amount != null and withdraw_amount != '' ">
+			and withdraw_amount = #{withdraw_amount}
+		</if>
+		<if test="drawee != null and drawee != '' ">
+			and drawee = #{drawee}
+		</if>
+		<if test="withdraw_status != null and withdraw_status != '' ">
+			and withdraw_status = #{withdraw_status}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="CoachWithdrawReocrd" parameterType="int">
-	select * from coach_withdraw_reocrd where withdraw_reocrd_id = #{withdraw_reocrd_id}
+	select * from coach_withdraw_reocrd
+	where withdraw_reocrd_id = #{withdraw_reocrd_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="CoachWithdrawReocrd" parameterType="CoachWithdrawReocrd">
@@ -68,6 +95,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="withdraw_status != null and withdraw_status != '' ">
 			and withdraw_status = #{withdraw_status}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -98,6 +128,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="withdraw_status != null and withdraw_status != '' ">
 			and withdraw_status = #{withdraw_status}
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -119,6 +152,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="withdraw_status != null and withdraw_status != ''">
 			withdraw_status = #{withdraw_status},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where withdraw_reocrd_id =  #{withdraw_reocrd_id}
 </update>
 </mapper>

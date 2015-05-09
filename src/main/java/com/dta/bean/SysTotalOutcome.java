@@ -19,6 +19,8 @@ public class SysTotalOutcome extends PageParam implements Serializable{
 	private String amount;
 	@FormParam("time")
 	private Date time;
+	@FormParam("validation")
+	private Integer validation;
 	public void setTotal_outcome_id(Integer total_outcome_id){
 		this.total_outcome_id = total_outcome_id;
 	}
@@ -48,5 +50,11 @@ public class SysTotalOutcome extends PageParam implements Serializable{
 	}
 	public Date getTime() {
 		return time;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

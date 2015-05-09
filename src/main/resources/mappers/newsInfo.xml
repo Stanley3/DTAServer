@@ -19,8 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="receiver_type != null and receiver_type != ''">
 			receiver_type = #{receiver_type},
 		</if>
-		<if test="attribude != null and attribude != ''">
-			attribude = #{attribude},
+		<if test="attribute != null and attribute != ''">
+			attribute = #{attribute},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
 		</if>
 	</set>
 </insert>
@@ -28,23 +31,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="deleteMultiData">
 	update news_info set validation = 0 
 	where news_info_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from news_info where news_info_id = #{news_info_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update news_info set validation = 0 where news_info_id = #{news_info_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="NewsInfo" parameterType="NewsInfo">
 	select * from news_info
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="news_info_id != null and news_info_id != '' ">
+			and news_info_id = #{news_info_id}
+		</if>
+		<if test="sender != null and sender != '' ">
+			and sender = #{sender}
+		</if>
+		<if test="send_time != null and send_time != '' ">
+			and send_time like "%"#{send_time}"%"
+		</if>
+		<if test="content != null and content != '' ">
+			and content like "%"#{content}"%"
+		</if>
+		<if test="receiver_type != null and receiver_type != '' ">
+			and receiver_type = #{receiver_type}
+		</if>
+		<if test="attribute != null and attribute != '' ">
+			and attribute = #{attribute}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="NewsInfo" parameterType="int">
-	select * from news_info where news_info_id = #{news_info_id}
+	select * from news_info
+	where news_info_id = #{news_info_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="NewsInfo" parameterType="NewsInfo">
@@ -66,8 +93,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="receiver_type != null and receiver_type != '' ">
 			and receiver_type = #{receiver_type}
 		</if>
-		<if test="attribude != null and attribude != '' ">
-			and attribude = #{attribude}
+		<if test="attribute != null and attribute != '' ">
+			and attribute = #{attribute}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -95,8 +125,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="receiver_type != null and receiver_type != '' ">
 			and receiver_type = #{receiver_type}
 		</if>
-		<if test="attribude != null and attribude != '' ">
-			and attribude = #{attribude}
+		<if test="attribute != null and attribute != '' ">
+			and attribute = #{attribute}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 </select>
@@ -116,9 +149,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="receiver_type != null and receiver_type != ''">
 			receiver_type = #{receiver_type},
 		</if>
-		<if test="attribude != null and attribude != ''">
-			attribude = #{attribude},
+		<if test="attribute != null and attribute != ''">
+			attribute = #{attribute},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
 		</if>
 	</set>
+	where news_info_id =  #{news_info_id}
 </update>
 </mapper>

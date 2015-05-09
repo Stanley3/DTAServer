@@ -27,6 +27,8 @@ public class SchoolOutcomeRecord extends PageParam implements Serializable{
 	private Integer account_type;
 	@FormParam("account")
 	private String account;
+	@FormParam("validation")
+	private Integer validation;
 	public void setOutcome_record_id(Integer outcome_record_id){
 		this.outcome_record_id = outcome_record_id;
 	}
@@ -80,5 +82,11 @@ public class SchoolOutcomeRecord extends PageParam implements Serializable{
 	}
 	public String getAccount() {
 		return account;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

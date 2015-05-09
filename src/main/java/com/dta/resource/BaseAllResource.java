@@ -9,8 +9,10 @@ import java.util.Map;
 
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -19,6 +21,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 //import org.springframework.beans.factory.annotation.Autowired;
+
+
+
+
 
 
 
@@ -72,8 +78,9 @@ public class BaseAllResource<T, V>{
 		Class<?> cl = po.getClass();
 		try{
 		MethodAccess access = MethodAccess.get(cl);
-		access.invoke(cl, generateMethodName("set", mianId), id);
-		System.out.println(access.invoke(cl, generateMethodName("get", mianId)));
+		int table_id = Integer.valueOf(id);
+		access.invoke(po, generateMethodName("set", mianId), table_id);
+		//System.out.println(access.invoke(po, generateMethodName("get", mianId)));
 		if(service.updateObjectById(po) == 1){
 			return Response.status(201).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
 					GlobalConstant.UPDATE_SUCCESS)).build();
@@ -114,10 +121,11 @@ public class BaseAllResource<T, V>{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteMultiObjects(@QueryParam("ids")String ids){
 		try{
-			String[] strArray = ids.split("|");
-			ArrayList<Integer> idArray = null;
-			for(int i=0; i<strArray.length; ++i)
+			String[] strArray = ids.split("\\|");
+			ArrayList<Integer> idArray = new ArrayList<Integer>();
+			for(int i=0; i<strArray.length; ++i){
 				idArray.add(Integer.valueOf(strArray[i]));
+			}
 			if(service.deleteMultiData(idArray) >= 0){
 				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
 						GlobalConstant.DELETE_SUCCESS)).build();
@@ -134,6 +142,7 @@ public class BaseAllResource<T, V>{
 	
 	@POST
 	@Path("getAll")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAll(@BeanParam T po){
 		try{
@@ -153,15 +162,16 @@ public class BaseAllResource<T, V>{
 	
 	@POST
 	@Path("getPage")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPage(@BeanParam T po){
 		Class<?> cl = po.getClass();
 		try{
 			MethodAccess access = MethodAccess.get(cl);
-			int page = (Integer)access.invoke(cl, "getPage");
-			int rows = (Integer)access.invoke(cl, "getRows");
+			int page = (Integer)access.invoke(po, "getPage");
+			int rows = (Integer)access.invoke(po, "getRows");
 			if(page > 0 && rows > 0){
-				access.invoke(cl, "setPage", (page-1)*rows);
+				access.invoke(po, "setPage", (page-1)*rows);
 				List<T> resultList = service.getPage(po);
 				int size = service.getSize(po);
 				if(resultList != null){
@@ -184,16 +194,27 @@ public class BaseAllResource<T, V>{
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	//@Produces(MediaType.APPLICATION_XML)
-	public Response getObjectById(@PathParam("id")int id) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+	public Response getObjectById(@PathParam("id")int id){
 		System.out.println(id);
 		if(service != null){
 			System.out.println("serive is not null");
 			System.out.println(service instanceof NewsInfoServiceImpl );
 		}
-		T po = service.getObjectById(id);
-		//return Response.status(200).entity("{\"code\":1, \"desc\":\"success\"}").build();
-		//System.out.println(po.getClass().getMethod("getUser_name").invoke(po));
-		return Response.status(200).entity(po).build();
+		try{
+			T po = service.getObjectById(id);
+			//return Response.status(200).entity("{\"code\":1, \"desc\":\"success\"}").build();
+			//System.out.println(po.getClass().getMethod("getUser_name").invoke(po));
+			if(po != null){
+				return Response.status(200).entity(po).build();
+			}else{
+				return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
+						GlobalConstant.SELECT_FAIL)).build();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
 	}
 
 	private String generateMethodName(String methodName, String mainId){

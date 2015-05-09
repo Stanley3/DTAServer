@@ -28,29 +28,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="deposit_date != null and deposit_date != ''">
 			deposit_date = #{deposit_date},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update student_deposit_record set validation = 0 
 	where deposit_record_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from student_deposit_record where deposit_record_id = #{deposit_record_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update student_deposit_record set validation = 0 where deposit_record_id = #{deposit_record_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="StudentDepositRecord" parameterType="StudentDepositRecord">
 	select * from student_deposit_record
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="deposit_record_id != null and deposit_record_id != '' ">
+			and deposit_record_id = #{deposit_record_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="deposit_amount != null and deposit_amount != '' ">
+			and deposit_amount = #{deposit_amount}
+		</if>
+		<if test="depositor_name != null and depositor_name != '' ">
+			and depositor_name like "%"#{depositor_name}"%"
+		</if>
+		<if test="depositor_id != null and depositor_id != '' ">
+			and depositor_id = #{depositor_id}
+		</if>
+		<if test="deposit_way != null and deposit_way != '' ">
+			and deposit_way = #{deposit_way}
+		</if>
+		<if test="source_no != null and source_no != '' ">
+			and source_no like "%"#{source_no}"%"
+		</if>
+		<if test="deposit_date != null and deposit_date != '' ">
+			and deposit_date like "%"#{deposit_date}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="StudentDepositRecord" parameterType="int">
-	select * from student_deposit_record where deposit_record_id = #{deposit_record_id}
+	select * from student_deposit_record
+	where deposit_record_id = #{deposit_record_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="StudentDepositRecord" parameterType="StudentDepositRecord">
@@ -80,6 +113,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="deposit_date != null and deposit_date != '' ">
 			and deposit_date like "%"#{deposit_date}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -116,6 +152,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="deposit_date != null and deposit_date != '' ">
 			and deposit_date like "%"#{deposit_date}"%"
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -143,6 +182,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="deposit_date != null and deposit_date != ''">
 			deposit_date = #{deposit_date},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where deposit_record_id =  #{deposit_record_id}
 </update>
 </mapper>

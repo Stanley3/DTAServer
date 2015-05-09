@@ -18,7 +18,7 @@ public class NewsInfoServiceImpl extends BaseAllServiceImpl<NewsInfo, NewsInfo> 
 	//@PostConstruct
 	public void init(){
 		//System.out.println("\n\n\n in initMethod dao is null ?" + (dao == null));
-		System.out.println("*******初始化newsInfoServiceImpl********");
+		//System.out.println("*******初始化newsInfoServiceImpl********");
 		super.setDao(dao);
 	}
 	

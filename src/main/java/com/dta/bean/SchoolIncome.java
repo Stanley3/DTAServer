@@ -20,6 +20,8 @@ public class SchoolIncome extends PageParam implements Serializable{
 	private String frozen_amount;
 	@FormParam("gross_income")
 	private String gross_income;
+	@FormParam("validation")
+	private Integer validation;
 	public void setSchool_income_id(Integer school_income_id){
 		this.school_income_id = school_income_id;
 	}
@@ -55,5 +57,11 @@ public class SchoolIncome extends PageParam implements Serializable{
 	}
 	public String getGross_income() {
 		return gross_income;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

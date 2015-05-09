@@ -19,6 +19,8 @@ public class CoachFinanceRecord extends PageParam implements Serializable{
 	private String payed_amount;
 	@FormParam("record_time")
 	private Date record_time;
+	@FormParam("validation")
+	private Integer validation;
 	public void setFinance_record_id(Integer finance_record_id){
 		this.finance_record_id = finance_record_id;
 	}
@@ -48,5 +50,11 @@ public class CoachFinanceRecord extends PageParam implements Serializable{
 	}
 	public Date getRecord_time() {
 		return record_time;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

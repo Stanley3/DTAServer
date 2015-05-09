@@ -13,29 +13,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="role_permission != null and role_permission != ''">
 			role_permission = #{role_permission},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
 	update sys_role set validation = 0 
 	where role_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from sys_role where role_id = #{role_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update sys_role set validation = 0 where role_id = #{role_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SysRole" parameterType="SysRole">
 	select * from sys_role
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="role_id != null and role_id != '' ">
+			and role_id = #{role_id}
+		</if>
+		<if test="role_name != null and role_name != '' ">
+			and role_name like "%"#{role_name}"%"
+		</if>
+		<if test="role_permission != null and role_permission != '' ">
+			and role_permission = #{role_permission}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SysRole" parameterType="int">
-	select * from sys_role where role_id = #{role_id}
+	select * from sys_role
+	where role_id = #{role_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SysRole" parameterType="SysRole">
@@ -50,6 +68,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="role_permission != null and role_permission != '' ">
 			and role_permission = #{role_permission}
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -71,6 +92,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="role_permission != null and role_permission != '' ">
 			and role_permission = #{role_permission}
 		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -83,6 +107,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="role_permission != null and role_permission != ''">
 			role_permission = #{role_permission},
 		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
 	</set>
+	where role_id =  #{role_id}
 </update>
 </mapper>

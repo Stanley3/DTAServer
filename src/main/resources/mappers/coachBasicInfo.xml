@@ -43,23 +43,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="deleteMultiData">
 	update coach_basic_info set validation = 0 
 	where coach_id in 
-	<foreach item="item" index="index" collection="array"
+	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
 	</foreach>
 </update>
 <!-- **********删除一个对象********* -->
-<delete id="deleteObjectById" parameterType="int">
-	delete from coach_basic_info where coach_id = #{coach_id}
-</delete>
+<update id="deleteObjectById" parameterType="int">
+	update coach_basic_info set validation = 0 where coach_id = #{coach_id}
+</update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="CoachBasicInfo" parameterType="CoachBasicInfo">
 	select * from coach_basic_info
-	where validation = 1
+	<where>
+		validation = 1
+		<if test="coach_id != null and coach_id != '' ">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="coach_name != null and coach_name != '' ">
+			and coach_name like "%"#{coach_name}"%"
+		</if>
+		<if test="identity_card_no != null and identity_card_no != '' ">
+			and identity_card_no like "%"#{identity_card_no}"%"
+		</if>
+		<if test="phone != null and phone != '' ">
+			and phone like "%"#{phone}"%"
+		</if>
+		<if test="photo != null and photo != '' ">
+			and photo like "%"#{photo}"%"
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="register_date != null and register_date != '' ">
+			and register_date like "%"#{register_date}"%"
+		</if>
+		<if test="training_place != null and training_place != '' ">
+			and training_place like "%"#{training_place}"%"
+		</if>
+		<if test="contract_no != null and contract_no != '' ">
+			and contract_no like "%"#{contract_no}"%"
+		</if>
+		<if test="login_pwd != null and login_pwd != '' ">
+			and login_pwd like "%"#{login_pwd}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+	</where>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="CoachBasicInfo" parameterType="int">
-	select * from coach_basic_info where coach_id = #{coach_id}
+	select * from coach_basic_info
+	where coach_id = #{coach_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="CoachBasicInfo" parameterType="CoachBasicInfo">
@@ -180,5 +216,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			validation = #{validation},
 		</if>
 	</set>
+	where coach_id =  #{coach_id}
 </update>
 </mapper>

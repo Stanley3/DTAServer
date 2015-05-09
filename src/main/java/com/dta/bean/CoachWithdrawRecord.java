@@ -7,7 +7,7 @@ import javax.ws.rs.FormParam;
 
 import com.dta.vo.PageParam;
 
-public class CoachWithdrawReocrd extends PageParam implements Serializable{
+public class CoachWithdrawRecord extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@FormParam("withdraw_reocrd_id")
 	private Integer withdraw_reocrd_id;
@@ -21,6 +21,8 @@ public class CoachWithdrawReocrd extends PageParam implements Serializable{
 	private Integer drawee;
 	@FormParam("withdraw_status")
 	private Integer withdraw_status;
+	@FormParam("validation")
+	private Integer validation;
 	public void setWithdraw_reocrd_id(Integer withdraw_reocrd_id){
 		this.withdraw_reocrd_id = withdraw_reocrd_id;
 	}
@@ -56,5 +58,11 @@ public class CoachWithdrawReocrd extends PageParam implements Serializable{
 	}
 	public Integer getWithdraw_status() {
 		return withdraw_status;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 }

@@ -13,7 +13,6 @@ public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUser> imp
 	private ISysUserDao dao;
 	
 	public void init(){
-		System.out.println("*******初始化sysUserServiceImpl********");
 		super.setDao(dao);
 	}
 }

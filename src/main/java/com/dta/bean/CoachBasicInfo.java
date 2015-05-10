@@ -18,7 +18,7 @@ public class CoachBasicInfo extends PageParam implements Serializable{
 	@FormParam("phone")
 	private String phone;
 	@FormParam("photo")
-	private Blob photo;
+	private byte[] photo;
 	@FormParam("school_id")
 	private Integer school_id;
 	@FormParam("register_date")
@@ -31,6 +31,7 @@ public class CoachBasicInfo extends PageParam implements Serializable{
 	private String login_pwd;
 	@FormParam("validation")
 	private Integer validation;
+	private Integer havePhoto;
 	public void setCoach_id(Integer coach_id){
 		this.coach_id = coach_id;
 	}
@@ -55,10 +56,10 @@ public class CoachBasicInfo extends PageParam implements Serializable{
 	public String getPhone() {
 		return phone;
 	}
-	public void setPhoto(Blob photo){
+	public void setPhoto(byte[] photo){
 		this.photo = photo;
 	}
-	public Blob getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 	public void setSchool_id(Integer school_id){
@@ -96,5 +97,11 @@ public class CoachBasicInfo extends PageParam implements Serializable{
 	}
 	public Integer getValidation() {
 		return validation;
+	}
+	public Integer getHavePhoto() {
+		return havePhoto;
+	}
+	public void setHavePhoto(Integer havePhoto) {
+		this.havePhoto = havePhoto;
 	}
 }

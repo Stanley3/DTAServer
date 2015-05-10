@@ -12,10 +12,11 @@ public class GlobalConstant{
 	public static final String DELETE_FAIL = "删除失败";
 	public static final String OPERATION_EXCEPTION_DESC = "系统异常";
 	public static final String SELECT_FAIL = "查询失败";
+	public static final String NOFILE = "表单中不存在文件";
 	
 	public static final String COACHBASICINFO = "coach_id";
 	public static final String COACHFINANCERECORD = "finance_record_id";
-	public static final String COACHWITHDRAWREOCRD = "withdraw_reocrd_id";
+	public static final String COACHWITHDRAWRECORD = "withdraw_record_id";
 	public static final String EVALUATIONRECORD = "evaluation_record_id";
 	public static final String NEWSINFO = "news_info_id";
 	public static final String ORDERRECORD = "order_id";

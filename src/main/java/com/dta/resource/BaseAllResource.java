@@ -1,12 +1,17 @@
 package com.dta.resource;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -40,7 +46,30 @@ import javax.ws.rs.core.Response;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.ResultBean;
+import com.dta.bean.StudentBasicInfo;
+import com.dta.bean.SysUser;
 import com.dta.service.IBaseAllService;
 import com.dta.service.impl.NewsInfoServiceImpl;
 import com.dta.utils.GlobalConstant;
@@ -50,17 +79,25 @@ public class BaseAllResource<T, V>{
 	//@Autowired
 	private IBaseAllService<T, V> service;
 	private String mianId; //T javabean对应表的主键
+	@Context
+	private  HttpServletRequest request;
+	@Context 
+	private HttpServletResponse response;
 	@POST
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response add(@BeanParam T po){
 		try{
+			if(po instanceof CoachBasicInfo){
+				String idCard_no = ((CoachBasicInfo) po).getIdentity_card_no();
+				((CoachBasicInfo) po).setLogin_pwd(idCard_no.substring(idCard_no.length() - 6));
+			}
 			if(service.addObject(po) == 1){
 				return Response.status(201).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
 						GlobalConstant.INSERT_SUCCESS)).build();
 			}else{
-				return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
+				return Response.status(500).header("Content-Type", "image/jgp").entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
 						GlobalConstant.INSERT_FAIL)).build();
 			}
 		}catch(Exception e){
@@ -70,6 +107,7 @@ public class BaseAllResource<T, V>{
 		}
 	}
 	
+	@Transactional
 	@POST
 	@Path("update/{id}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -217,7 +255,7 @@ public class BaseAllResource<T, V>{
 		}
 	}
 
-	private String generateMethodName(String methodName, String mainId){
+	protected String generateMethodName(String methodName, String mainId){
 		return methodName + mainId.substring(0, 1).toUpperCase() + mainId.substring(1).toLowerCase();
 	}
 	
@@ -235,5 +273,13 @@ public class BaseAllResource<T, V>{
 
 	public void setMianId(String mianId) {
 		this.mianId = mianId;
+	}
+
+	public HttpServletResponse getResponse() {
+		return response;
+	}
+
+	public HttpServletRequest getRequest() {
+		return request;
 	}
 }

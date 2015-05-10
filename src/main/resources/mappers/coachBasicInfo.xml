@@ -94,7 +94,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="CoachBasicInfo" parameterType="int">
-	select * from coach_basic_info
+	select 
+		coach_id,
+		coach_name,
+		identity_card_no,
+		phone,
+		school_id,
+		register_date,
+		training_place,
+		contract_no,
+		ogin_pwd,
+		validation,
+		IF((PHOTO IS NULL), 0, 1) AS havePhoto
+	from coach_basic_info
 	where coach_id = #{coach_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
@@ -218,4 +230,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</set>
 	where coach_id =  #{coach_id}
 </update>
+<select id="downloadPhoto" resultType="CoachBasicInfo">
+	select photo from coach_basic_info where conach_id = #{coach_id}
+</select>
 </mapper>

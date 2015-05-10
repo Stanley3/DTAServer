@@ -2,6 +2,7 @@ package com.dta.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.SysUser;
 import com.dta.dao.ISysUserDao;
@@ -14,5 +15,9 @@ public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUser> imp
 	
 	public void init(){
 		super.setDao(dao);
+	}
+	
+	public SysUser downloadPhoto(int id){
+		return dao.downloadPhoto(id);
 	}
 }

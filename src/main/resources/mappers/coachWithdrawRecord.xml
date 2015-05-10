@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dta.dao.ICoachWithdrawReocrdDao">
+<mapper namespace="com.dta.dao.ICoachWithdrawRecordDao">
 <!-- **********增加对象********** -->
-<insert id="addObject" parameterType="CoachWithdrawReocrd" keyProperty="withdraw_reocrd_id" useGeneratedKeys="true">
-	insert into coach_withdraw_reocrd 
+<insert id="addObject" parameterType="CoachWithdrawRecord" keyProperty="withdraw_Record_id" useGeneratedKeys="true">
+	insert into coach_withdraw_Record 
 	<set>
 		<if test="coach_id != null and coach_id != ''">
 			coach_id = #{coach_id},
@@ -29,8 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 <!-- **********删除对象********** -->
 <update id="deleteMultiData">
-	update coach_withdraw_reocrd set validation = 0 
-	where withdraw_reocrd_id in 
+	update coach_withdraw_Record set validation = 0 
+	where withdraw_Record_id in 
 	<foreach item="item" index="index" collection="list"
 		 open="(" separator="," close=")">
 			 #{item}
@@ -38,15 +38,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <!-- **********删除一个对象********* -->
 <update id="deleteObjectById" parameterType="int">
-	update coach_withdraw_reocrd set validation = 0 where withdraw_reocrd_id = #{withdraw_reocrd_id}
+	update coach_withdraw_Record set validation = 0 where withdraw_Record_id = #{withdraw_Record_id}
 </update>
 <!-- **********获取所有对象********* -->
-<select id="getAll" resultType="CoachWithdrawReocrd" parameterType="CoachWithdrawReocrd">
-	select * from coach_withdraw_reocrd
+<select id="getAll" resultType="CoachWithdrawRecord" parameterType="CoachWithdrawRecord">
+	select * from coach_withdraw_Record
 	<where>
 		validation = 1
-		<if test="withdraw_reocrd_id != null and withdraw_reocrd_id != '' ">
-			and withdraw_reocrd_id = #{withdraw_reocrd_id}
+		<if test="withdraw_Record_id != null and withdraw_Record_id != '' ">
+			and withdraw_Record_id = #{withdraw_Record_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
@@ -69,17 +69,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</where>
 </select>
 <!-- **********获取一个对象********* -->
-<select id="getObjectById" resultType="CoachWithdrawReocrd" parameterType="int">
-	select * from coach_withdraw_reocrd
-	where withdraw_reocrd_id = #{withdraw_reocrd_id} and validation = 1
+<select id="getObjectById" resultType="CoachWithdrawRecord" parameterType="int">
+	select * from coach_withdraw_Record
+	where withdraw_Record_id = #{withdraw_Record_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
-<select id="getPage" resultType="CoachWithdrawReocrd" parameterType="CoachWithdrawReocrd">
-	select * from coach_withdraw_reocrd
+<select id="getPage" resultType="CoachWithdrawRecord" parameterType="CoachWithdrawRecord">
+	select * from coach_withdraw_Record
 	<where>
 		validation = 1
-		<if test="withdraw_reocrd_id != null and withdraw_reocrd_id != '' ">
-			and withdraw_reocrd_id = #{withdraw_reocrd_id}
+		<if test="withdraw_Record_id != null and withdraw_Record_id != '' ">
+			and withdraw_Record_id = #{withdraw_Record_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
@@ -106,12 +106,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	LIMIt #{page}, #{rows}
 </select>
 <!-- **********获取总数********* -->
-<select id="getSize" resultType="int" parameterType="CoachWithdrawReocrd">
-	select count(*) from coach_withdraw_reocrd
+<select id="getSize" resultType="int" parameterType="CoachWithdrawRecord">
+	select count(*) from coach_withdraw_Record
 	<where>
 		validation = 1
-		<if test="withdraw_reocrd_id != null and withdraw_reocrd_id != '' ">
-			and withdraw_reocrd_id = #{withdraw_reocrd_id}
+		<if test="withdraw_Record_id != null and withdraw_Record_id != '' ">
+			and withdraw_Record_id = #{withdraw_Record_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
@@ -134,8 +134,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</where>
 </select>
 <!-- *********更新对象********* -->
-<update id="updateObjectById" parameterType="CoachWithdrawReocrd">
-	update coach_withdraw_reocrd
+<update id="updateObjectById" parameterType="CoachWithdrawRecord">
+	update coach_withdraw_Record
 	<set>
 		<if test="coach_id != null and coach_id != ''">
 			coach_id = #{coach_id},
@@ -156,6 +156,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			validation = #{validation},
 		</if>
 	</set>
-	where withdraw_reocrd_id =  #{withdraw_reocrd_id}
+	where withdraw_Record_id =  #{withdraw_Record_id}
 </update>
 </mapper>

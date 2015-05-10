@@ -15,4 +15,8 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 	public void init(){
 		super.setDao(dao);
 	}
+	
+	public CoachBasicInfo downloadPhoto(int id){
+		return dao.downloadPhoto(id);
+	}
 }

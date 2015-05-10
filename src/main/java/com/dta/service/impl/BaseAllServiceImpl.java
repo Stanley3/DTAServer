@@ -3,6 +3,8 @@ package com.dta.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.dta.dao.INewsInfoDao;
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.service.IBaseAllService;
@@ -13,6 +15,7 @@ public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
 	public BaseAllServiceImpl(){
 		
 	}
+	@Transactional
 	public int addObject(T po)  {
 		// TODO Auto-generated method stub
 		return dao.addObject(po);

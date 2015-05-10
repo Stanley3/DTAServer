@@ -16,6 +16,6 @@ public class CoachWithdrawRecordResource extends BaseAllResource<CoachWithdrawRe
 	public ICoachWithdrawRecordService service = (ICoachWithdrawRecordService)ServiceProvider.getBean("coachWithdrawRecordServiceImpl");
 	public CoachWithdrawRecordResource(){
 		super.setService(service);
-		super.setMianId(GlobalConstant.COACHWITHDRAWREOCRD);
+		super.setMianId(GlobalConstant.COACHWITHDRAWRECORD);
 	}
 }

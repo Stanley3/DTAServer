@@ -7,7 +7,7 @@ import com.dta.service.ICoachFinanceRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 
-@Path("news")
+@Path("coachFinanceRecord")
 public class CoachFinanceRecordResource extends BaseAllResource<CoachFinanceRecord, CoachFinanceRecord>{
 	private ICoachFinanceRecordService service = (ICoachFinanceRecordService)ServiceProvider.getBean("coachFinanceRecordServiceImpl");
 	public CoachFinanceRecordResource(){

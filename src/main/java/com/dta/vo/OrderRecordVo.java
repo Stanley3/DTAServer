@@ -1,30 +1,41 @@
-package com.dta.bean;
+package com.dta.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.ws.rs.FormParam;
 
-import com.dta.vo.PageParam;
-
-public class OrderRecord extends PageParam implements Serializable{
+public class OrderRecordVo extends PageParam implements Serializable{
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
+	@FormParam("order_id")
 	private Integer order_id;
+	@FormParam("student_id")
 	private Integer student_id;
+	@FormParam("coach_id")
 	private Integer coach_id;
+	@FormParam("school_id")
 	private Integer school_id;
+	@FormParam("order_time")
 	private Date order_time;
+	@FormParam("order_amount")
 	private String order_amount;
+	@FormParam("order_status")
 	private Integer order_status;
+	@FormParam("training_start_time")
 	private Date training_start_time;
+	@FormParam("training_end_time")
 	private Date training_end_time;
+	@FormParam("order_dead_time")
 	private Date order_dead_time;
+	@FormParam("order_memo")
 	private String order_memo;
+	@FormParam("validation")
 	private Integer validation;
+	@FormParam("course_status")
 	private Integer course_status;
-	private String coach_name;
-	private String phone;
-	private String training_place;
-	private Integer havePhoto;
 	public void setOrder_id(Integer order_id){
 		this.order_id = order_id;
 	}
@@ -102,29 +113,5 @@ public class OrderRecord extends PageParam implements Serializable{
 	}
 	public Integer getCourse_status() {
 		return course_status;
-	}
-	public String getCoach_name() {
-		return coach_name;
-	}
-	public void setCoach_name(String coach_name) {
-		this.coach_name = coach_name;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public Integer getHavePhoto() {
-		return havePhoto;
-	}
-	public void setHavePhoto(Integer havePhoto) {
-		this.havePhoto = havePhoto;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getTraining_place() {
-		return training_place;
-	}
-	public void setTraining_place(String training_place) {
-		this.training_place = training_place;
 	}
 }

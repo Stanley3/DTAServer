@@ -21,34 +21,37 @@ public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
 		return dao.addObject(po);
 	}
 
+	@Transactional
 	public int updateObjectById(T po) {
 		// TODO Auto-generated method stub
 		return dao.updateObjectById(po);
 	}
 
+	@Transactional
 	public int deleteObjectById(int id) {
 		// TODO Auto-generated method stub
 		return dao.deleteObjectById(id);
 	}
 
+	@Transactional
 	public int deleteMultiData(List<?> ids) {
 		// TODO Auto-generated method stub
 		return dao.deleteMultiData(ids);
 	}
 
-	public List<T> getAll(T po) {
+	public List<T> getAll(V vo) {
 		// TODO Auto-generated method stub
-		return dao.getAll(po);
+		return dao.getAll(vo);
 	}
 
-	public List<T> getPage(T po) {
+	public List<T> getPage(V vo) {
 		// TODO Auto-generated method stub
-		return dao.getPage(po);
+		return dao.getPage(vo);
 	}
 
-	public int getSize(T po) {
+	public int getSize(V vo) {
 		// TODO Auto-generated method stub
-		return dao.getSize(po);
+		return dao.getSize(vo);
 	}
 
 	public T getObjectById(Serializable id) {

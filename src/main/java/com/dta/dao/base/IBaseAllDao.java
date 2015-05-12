@@ -27,17 +27,17 @@ public interface IBaseAllDao<T, V>{
 	/*
 	 * 查询所有符合条件的数据
 	 */
-	public List<T>getAll(T po);
+	public List<T>getAll(V vo);
 	
 	/*
 	 *分页查询所有符合条件的数据
 	 */
-	public List<T>getPage(T po);
+	public List<T>getPage(V vo);
 	
 	/*
 	 * 查询所有符合条件的数据的总数
 	 */
-	public int getSize(T po);
+	public int getSize(V vo);
 	
 	/*
 	 * 根据id查询一个对象

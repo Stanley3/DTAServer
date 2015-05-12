@@ -182,9 +182,9 @@ public class BaseAllResource<T, V>{
 	@Path("getAll")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAll(@BeanParam T po){
+	public Response getAll(@BeanParam V vo){
 		try{
-			List<T> resultList = service.getAll(po);
+			List<T> resultList = service.getAll(vo);
 			if(resultList != null){
 				return Response.status(200).entity(resultList).build();
 			}else{
@@ -202,16 +202,16 @@ public class BaseAllResource<T, V>{
 	@Path("getPage")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPage(@BeanParam T po){
-		Class<?> cl = po.getClass();
+	public Response getPage(@BeanParam V vo){
+		Class<?> cl = vo.getClass();
 		try{
 			MethodAccess access = MethodAccess.get(cl);
-			int page = (Integer)access.invoke(po, "getPage");
-			int rows = (Integer)access.invoke(po, "getRows");
+			int page = (Integer)access.invoke(vo, "getPage");
+			int rows = (Integer)access.invoke(vo, "getRows");
 			if(page > 0 && rows > 0){
-				access.invoke(po, "setPage", (page-1)*rows);
-				List<T> resultList = service.getPage(po);
-				int size = service.getSize(po);
+				access.invoke(vo, "setPage", (page-1)*rows);
+				List<T> resultList = service.getPage(vo);
+				int size = service.getSize(vo);
 				if(resultList != null){
 					Map<String,Object> resultMap = new HashMap<String, Object>(); 
 					resultMap.put("total", size);

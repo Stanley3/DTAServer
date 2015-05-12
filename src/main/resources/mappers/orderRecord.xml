@@ -59,10 +59,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update order_record set validation = 0 where order_id = #{order_id}
 </update>
 <!-- **********获取所有对象********* -->
-<select id="getAll" resultType="OrderRecord" parameterType="OrderRecord">
-	select * from order_record
+<select id="getAll" resultType="OrderRecord" parameterType="OrderRecordVo">
+	select 
+	 	R.order_id,
+	 	R.student_id,
+	 	R.coach_id,
+	 	R.school_id,
+	 	R.course_status,
+	 	R.order_time,
+	 	R.order_amount,
+	 	R.order_status,
+	 	R.training_start_time,
+	 	R.training_end_time,
+	 	R.order_dead_time,
+	 	R.order_memo,
+	 	coach.coach_name,
+	 	coach.phone,
+	 	coach.training_place,
+	 	IF((coach.photo IS NULL), 0, 1) AS havePhoto
+	from 
+		order_record as R 
+		join 
+		coach_basic_info as coach 
+		on 
+		R.coach_id = coach.coach_id
 	<where>
-		validation = 1
+		R.validation = 1
+		and coach.validation = 1
 		<if test="order_id != null and order_id != '' ">
 			and order_id = #{order_id}
 		</if>
@@ -70,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and student_id = #{student_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
-			and coach_id = #{coach_id}
+			and R.coach_id = #{coach_id}
 		</if>
 		<if test="school_id != null and school_id != '' ">
 			and school_id = #{school_id}
@@ -103,6 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and course_status = #{course_status}
 		</if>
 	</where>
+	order by R.training_start_time DESC
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="OrderRecord" parameterType="int">
@@ -111,9 +135,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="OrderRecord" parameterType="OrderRecord">
-	select * from order_record
+	select 
+	 	R.order_id,
+	 	R.student_id,
+	 	R.coach_id,
+	 	R.school_id,
+	 	R.course_status,
+	 	R.order_time,
+	 	R.order_amount,
+	 	R.order_status,
+	 	R.training_start_time,
+	 	R.training_end_time,
+	 	R.order_dead_time,
+	 	R.order_memo,
+	 	coach.coach_name,
+	 	coach.phone,
+	 	coach.training_place,
+	 	IF((coach.photo IS NULL), 0, 1) AS havePhoto
+	from 
+		order_record as R 
+		join 
+		coach_basic_info as coach 
+		on 
+		R.coach_id = coach.coach_id
 	<where>
-		validation = 1
+		R.validation = 1
+		and coach.validation = 1
 		<if test="order_id != null and order_id != '' ">
 			and order_id = #{order_id}
 		</if>
@@ -121,7 +168,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and student_id = #{student_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
-			and coach_id = #{coach_id}
+			and R.coach_id = #{coach_id}
 		</if>
 		<if test="school_id != null and school_id != '' ">
 			and school_id = #{school_id}
@@ -154,16 +201,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and course_status = #{course_status}
 		</if>
 	</where>
-	<if test="sort != null">
-		order by #{sort} #{order}
-	</if>
+	order by R.training_start_time DESC
 	LIMIt #{page}, #{rows}
 </select>
 <!-- **********获取总数********* -->
 <select id="getSize" resultType="int" parameterType="OrderRecord">
-	select count(*) from order_record
+	select 
+	count(R.order_id) 
+	from 
+		order_record as R 
+		join 
+		coach_basic_info as coach 
+		on 
+		R.coach_id = coach.coach_id
 	<where>
-		validation = 1
+		R.validation = 1
+		and coach.validation = 1
 		<if test="order_id != null and order_id != '' ">
 			and order_id = #{order_id}
 		</if>

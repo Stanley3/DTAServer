@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.service.ICoachBasicInfoService;
+import com.dta.vo.CoachBasicInfoVo;
 
 @Service
-public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo, CoachBasicInfo> implements ICoachBasicInfoService{
+public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo, CoachBasicInfoVo> implements ICoachBasicInfoService{
 	@Autowired
 	private ICoachBasicInfoDao dao;
 	

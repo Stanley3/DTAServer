@@ -1,25 +1,44 @@
-package com.dta.bean;
+package com.dta.vo;
 
 import java.io.Serializable;
 
-public class CoachBasicInfo implements Serializable{
+import javax.ws.rs.FormParam;
+
+import com.dta.vo.PageParam;
+
+public class CoachBasicInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
+	@FormParam("coach_id")
 	private Integer coach_id;
+	@FormParam("coach_name")
 	private String coach_name;
+	@FormParam("identity_card_no")
 	private String identity_card_no;
+	@FormParam("phone")
 	private String phone;
+	@FormParam("photo")
 	private byte[] photo;
+	@FormParam("school_id")
 	private Integer school_id;
+	@FormParam("register_date")
 	private String register_date;
+	@FormParam("training_place")
 	private String training_place;
+	@FormParam("contract_no")
 	private String contract_no;
+	@FormParam("login_pwd")
 	private String login_pwd;
+	@FormParam("validation")
 	private Integer validation;
-	private Integer havePhoto;
+	@FormParam("service_count")
 	private Integer service_count;
+	@FormParam("teaching_age")
 	private Integer teaching_age;
+	@FormParam("online")
 	private Integer online;
+	@FormParam("available_times")
 	private Integer available_times;//今天还可预约的次数
+	@FormParam("star")
 	private Integer star;
 	
 	public Integer getService_count() {
@@ -117,11 +136,5 @@ public class CoachBasicInfo implements Serializable{
 	}
 	public Integer getValidation() {
 		return validation;
-	}
-	public Integer getHavePhoto() {
-		return havePhoto;
-	}
-	public void setHavePhoto(Integer havePhoto) {
-		this.havePhoto = havePhoto;
 	}
 }

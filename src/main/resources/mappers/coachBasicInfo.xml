@@ -37,6 +37,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="teaching_age != null and teaching_age != ''">
+			teaching_age = #{teaching_age},
+		</if>
+		<if test="service_count != null and service_count != ''">
+			service_count = #{service_count},
+		</if>
+		<if test="star != null and star != ''">
+			star = #{star},
+		</if>
+		<if test="online != null and online != ''">
+			online = #{online},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -54,7 +66,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="CoachBasicInfo" parameterType="CoachBasicInfo">
-	select * from coach_basic_info
+	select 
+		coach_id,
+		coach_name,
+		identity_card_no,
+		phone,
+		school_id,
+		register_date,
+		training_place,
+		contract_no,
+		login_pwd,
+		validation,
+		teaching_age,
+		service_count,
+		star,
+		online,
+		IF((PHOTO IS NULL), 0, 1) AS havePhoto 
+	from coach_basic_info
 	<where>
 		validation = 1
 		<if test="coach_id != null and coach_id != '' ">
@@ -89,6 +117,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
+		</if>
+		<if test="teaching_age != null and teaching_age != '' ">
+			and teaching_age = #{teaching_age}
+		</if>
+		<if test="service_count != null and service_count != '' ">
+			and service_count = #{service_count}
+		</if>
+		<if test="star != null and star != '' ">
+			and star = #{star}
+		</if>
+		<if test="online != null and online != '' ">
+			and online = #{online}
 		</if>
 	</where>
 </select>
@@ -103,15 +143,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		register_date,
 		training_place,
 		contract_no,
-		ogin_pwd,
+		login_pwd,
 		validation,
+		teaching_age,
+		service_count,
+		star,
+		online,
 		IF((PHOTO IS NULL), 0, 1) AS havePhoto
 	from coach_basic_info
 	where coach_id = #{coach_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="CoachBasicInfo" parameterType="CoachBasicInfo">
-	select * from coach_basic_info
+	select 
+		coach_id,
+		coach_name,
+		identity_card_no,
+		phone,
+		school_id,
+		register_date,
+		training_place,
+		contract_no,
+		login_pwd,
+		validation,
+		teaching_age,
+		service_count,
+		star,
+		online,
+		IF((PHOTO IS NULL), 0, 1) AS havePhoto
+	from coach_basic_info
 	<where>
 		validation = 1
 		<if test="coach_id != null and coach_id != '' ">
@@ -146,6 +206,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
+		</if>
+		<if test="teaching_age != null and teaching_age != '' ">
+			and teaching_age = #{teaching_age}
+		</if>
+		<if test="service_count != null and service_count != '' ">
+			and service_count = #{service_count}
+		</if>
+		<if test="star != null and star != '' ">
+			and star = #{star}
+		</if>
+		<if test="online != null and online != '' ">
+			and online = #{online}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -191,6 +263,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
 		</if>
+		<if test="teaching_age != null and teaching_age != '' ">
+			and teaching_age = #{teaching_age}
+		</if>
+		<if test="service_count != null and service_count != '' ">
+			and service_count = #{service_count}
+		</if>
+		<if test="star != null and star != '' ">
+			and star = #{star}
+		</if>
+		<if test="online != null and online != '' ">
+			and online = #{online}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -227,10 +311,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="teaching_age != null and teaching_age != ''">
+			teaching_age = #{teaching_age},
+		</if>
+		<if test="service_count != null and service_count != ''">
+			service_count = #{service_count},
+		</if>
+		<if test="star != null and star != ''">
+			star = #{star},
+		</if>
+		<if test="online != null and online != ''">
+			online = #{online},
+		</if>
 	</set>
 	where coach_id =  #{coach_id}
 </update>
 <select id="downloadPhoto" resultType="CoachBasicInfo">
-	select photo from coach_basic_info where conach_id = #{coach_id}
+	select photo from coach_basic_info where coach_id = #{coach_id}
 </select>
 </mapper>

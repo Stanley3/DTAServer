@@ -6,7 +6,7 @@ import java.sql.Date;
 
 import com.dta.vo.PageParam;
 
-public class OrderRecord extends PageParam implements Serializable{
+public class OrderRecord implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer order_id;
 	private Integer student_id;

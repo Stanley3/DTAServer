@@ -26,11 +26,12 @@ import com.dta.bean.ResultBean;
 import com.dta.service.ICoachBasicInfoService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.vo.CoachBasicInfoVo;
 import com.esotericsoftware.reflectasm.MethodAccess;
 
 @Path("coachBasicInfo")
 public class CoachBasicInfoResource extends
-		BaseAllResource<CoachBasicInfo, CoachBasicInfo> {
+		BaseAllResource<CoachBasicInfo, CoachBasicInfoVo> {
 	private ICoachBasicInfoService service = (ICoachBasicInfoService) ServiceProvider
 			.getBean("coachBasicInfoServiceImpl");
 
@@ -100,7 +101,7 @@ public class CoachBasicInfoResource extends
 	public Response download(@QueryParam("id") int id) {
 		HttpServletResponse response = super.getResponse();
 		CoachBasicInfo po = service.downloadPhoto(id);
-		if (po.getPhoto() != null) {
+		if (po != null && po.getPhoto() != null) {
 			response.setHeader("Content-Type", "image/jpeg;charset=utf-8");
 			response.setHeader("Content-Disposition",
 					"attachment;filename=\"pic.jpg\"");

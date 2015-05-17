@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IBaseAllService<T, V>{
 	public int addObject(T po);
-	public int updateObjectById(T po);
+	public int updateObjectById(T po) throws Exception;
 	public int deleteObjectById(int id);
 	public int deleteMultiData(List<?> ids);
 	public List<T>getAll(V vo);

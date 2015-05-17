@@ -107,7 +107,6 @@ public class BaseAllResource<T, V>{
 		}
 	}
 	
-	@Transactional
 	@POST
 	@Path("update/{id}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -118,7 +117,7 @@ public class BaseAllResource<T, V>{
 		MethodAccess access = MethodAccess.get(cl);
 		int table_id = Integer.valueOf(id);
 		access.invoke(po, generateMethodName("set", mianId), table_id);
-		//System.out.println(access.invoke(po, generateMethodName("get", mianId)));
+		//System.out.println(access.invoke(po, generateMethodName("get", "order_status")));
 		if(service.updateObjectById(po) == 1){
 			return Response.status(201).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
 					GlobalConstant.UPDATE_SUCCESS)).build();
@@ -243,6 +242,10 @@ public class BaseAllResource<T, V>{
 			//return Response.status(200).entity("{\"code\":1, \"desc\":\"success\"}").build();
 			//System.out.println(po.getClass().getMethod("getUser_name").invoke(po));
 			if(po != null){
+				/*Map<String, Object> map = new HashMap<String, Object>();
+				List<T> list = new ArrayList<T>();
+				list.add(po);
+				map.put("data", list);*/
 				return Response.status(200).entity(po).build();
 			}else{
 				return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 

@@ -22,8 +22,8 @@ public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
 	}
 
 	@Transactional
-	public int updateObjectById(T po) {
-		// TODO Auto-generated method stub
+	public int updateObjectById(T po) throws Exception{
+		System.out.println("父类的更新方法得到执行");
 		return dao.updateObjectById(po);
 	}
 

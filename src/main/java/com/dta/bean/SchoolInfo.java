@@ -34,6 +34,18 @@ public class SchoolInfo extends PageParam implements Serializable{
 	private Integer subject_3_number;
 	@FormParam("validation")
 	private Integer validation;
+	@FormParam("register_time")
+	private String register_time;
+	@FormParam("register_number")
+	private Integer register_number;
+	@FormParam("student_number")
+	private Integer student_number;
+	@FormParam("school_type")
+	private Integer school_type;
+	@FormParam("status")
+	private Integer status;
+	@FormParam("prepaid")
+	private double prepaid;
 	public void setSchool_id(Integer school_id){
 		this.school_id = school_id;
 	}
@@ -112,4 +124,41 @@ public class SchoolInfo extends PageParam implements Serializable{
 	public Integer getValidation() {
 		return validation;
 	}
+	public void setRegister_time(String register_time){
+		this.register_time = register_time;
+	}
+	public String getRegister_time() {
+		return register_time;
+	}
+	public void setRegister_number(Integer register_number){
+		this.register_number = register_number;
+	}
+	public Integer getRegister_number() {
+		return register_number;
+	}
+	public void setStudent_number(Integer student_number){
+		this.student_number = student_number;
+	}
+	public Integer getStudent_number() {
+		return student_number;
+	}
+	public void setSchool_type(Integer school_type){
+		this.school_type = school_type;
+	}
+	public Integer getSchool_type() {
+		return school_type;
+	}
+	public void setStatus(Integer status){
+		this.status = status;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public double getPrepaid() {
+		return prepaid;
+	}
+	public void setPrepaid(double prepaid) {
+		this.prepaid = prepaid;
+	}
+	
 }

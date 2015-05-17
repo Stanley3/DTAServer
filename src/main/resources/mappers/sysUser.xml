@@ -39,7 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </delete>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SysUser" parameterType="SysUser">
-	select * from sys_user
+	select
+		 user_id,
+	 	 user_name,
+	 	 user_pwd,
+	 	 role_ids,
+		 user_attribute,
+		 IF((user_photo IS NULL), 0, 1) AS havePhoto 
+	 from sys_user
 	<where>
 		validation = 1
 		<if test="user_id != null and user_id != '' ">
@@ -70,13 +77,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 user_pwd,
 	 	 role_ids,
 		 user_attribute,
-		 IF((photo IS NULL, 0, 1)) AS havePhoto
+		 IF((user_photo IS NULL), 0, 1) AS havePhoto
 	from sys_user 
 	where user_id = #{user_id}
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="SysUser" parameterType="SysUser">
-	select * from sys_user
+	select
+		 user_id,
+	 	 user_name,
+	 	 user_pwd,
+	 	 role_ids,
+		 user_attribute,
+		 IF((user_photo IS NULL), 0, 1) AS havePhoto 
+	from sys_user
 	<where>
 		validation = 1
 		<if test="user_id != null and user_id != '' ">

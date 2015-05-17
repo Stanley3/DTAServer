@@ -43,6 +43,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="register_time != null and register_time != ''">
+			register_time = #{register_time},
+		</if>
+		<if test="register_number != null and register_number != ''">
+			register_number = #{register_number},
+		</if>
+		<if test="student_number != null and student_number != ''">
+			student_number = #{student_number},
+		</if>
+		<if test="school_type != null and school_type != ''">
+			school_type = #{school_type},
+		</if>
+		<if test="status != null and status != ''">
+			status = #{status},
+		</if>
+		<if test="prepaid != null and prepaid != ''">
+			prepaid = #{prepaid},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -102,6 +120,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
 		</if>
+		<if test="register_time != null and register_time != '' ">
+			and register_time like "%"#{register_time}"%"
+		</if>
+		<if test="register_number != null and register_number != '' ">
+			and register_number = #{register_number}
+		</if>
+		<if test="student_number != null and student_number != '' ">
+			and student_number = #{student_number}
+		</if>
+		<if test="school_type != null and school_type != '' ">
+			and school_type = #{school_type}
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		<if test="prepaid != null and prepaid != '' ">
+			and prepaid = #{prepaid}
+		</if>
 	</where>
 </select>
 <!-- **********获取一个对象********* -->
@@ -153,6 +189,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
 		</if>
+		<if test="register_time != null and register_time != '' ">
+			and register_time like "%"#{register_time}"%"
+		</if>
+		<if test="register_number != null and register_number != '' ">
+			and register_number = #{register_number}
+		</if>
+		<if test="student_number != null and student_number != '' ">
+			and student_number = #{student_number}
+		</if>
+		<if test="school_type != null and school_type != '' ">
+			and school_type = #{school_type}
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		<if test="prepaid != null and prepaid != '' ">
+			and prepaid = #{prepaid}
+		</if>
 	</where>
 	<if test="sort != null">
 		order by #{sort} #{order}
@@ -203,6 +257,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
 		</if>
+		<if test="register_time != null and register_time != '' ">
+			and register_time like "%"#{register_time}"%"
+		</if>
+		<if test="register_number != null and register_number != '' ">
+			and register_number = #{register_number}
+		</if>
+		<if test="student_number != null and student_number != '' ">
+			and student_number = #{student_number}
+		</if>
+		<if test="school_type != null and school_type != '' ">
+			and school_type = #{school_type}
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		<if test="prepaid != null and prepaid != '' ">
+			and prepaid = #{prepaid}
+		</if>
 	</where>
 </select>
 <!-- *********更新对象********* -->
@@ -244,6 +316,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
+		</if>
+		<if test="register_time != null and register_time != ''">
+			register_time = #{register_time},
+		</if>
+		<if test="register_number != null and register_number != ''">
+			register_number = #{register_number},
+		</if>
+		<if test="student_number != null and student_number != ''">
+			student_number = #{student_number},
+		</if>
+		<if test="school_type != null and school_type != ''">
+			school_type = #{school_type},
+		</if>
+		<if test="status != null and status != ''">
+			status = #{status},
+		</if>
+		<if test="prepaid != null and prepaid != ''">
+			prepaid = #{prepaid},
 		</if>
 	</set>
 	where school_id =  #{school_id}

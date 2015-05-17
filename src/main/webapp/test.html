@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>测试DataTables</title>
+<link href="dt/jquery.dataTables.css">
+</head>
+<body>
+<h1>测试DataTables</h1>
+<div>
+	<table id="table">
+		<thead>
+			<tr>
+				<th>序号</th>
+				<th>姓名</th>
+				<th>电话</th>
+				<th>住址</th>
+				<th>性别</th>
+				<th>测试</th>
+			</tr>
+		</thead>
+		
+		<tfoot>
+			<tr>
+				<th>序号</th>
+				<th>姓名</th>
+				<th>电话</th>
+				<th>住址</th>
+				<th>性别</th>
+				<th>测试</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<script type="text/javascript" src="dt/jquery.js"></script>
+<script type="text/javascript" src="dt/jquery.dataTables.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//alert(1);
+		$('#table').attr('width', '100%');
+		//$('#table').DataTable();
+		try{
+		/* $('#table').dataTable({
+			 "processing": true,
+		     "serverSide": true,
+			 "ajax": {
+				 "url": "rest/orderRecord/1",
+				 "dataSrc": function(data){
+					 var json = '[' + JSON.stringify(data) + ']';
+					 alert(json);
+					 return JSON.parse(json);
+				 }
+			 },
+			"columns":[
+			            {"data": "order_id"},
+			            {"data": "student_id"},
+			            {"data": "coach_id"},
+			            {"data": "school_id"},
+			            {"data": "order_time"},
+			            {"data": "validation"}  
+			     ]
+		}); */
+			$('#table').DataTable({
+			      "processing": true,
+				  "serverSide": true,
+				  "ajax":{
+					  "url": "rest/schoolInfo/getAll",
+					  "type": "post",
+					  "dataSrc": function(json){
+						  alert(JSON.stringify(json));
+						  return json;
+					  }
+				  },
+				  "columns":[
+								{"data": "register_time"},
+								{"data": "school_name"},
+								{"data": "coach_number"},
+								{"data": "register_number"},
+								{"data": "status"},
+								{"data": "prepaid"}
+					     ],
+					"language":{
+						"decimal": ","
+					}
+			   });
+			  // alert(table.ajax.url());
+
+		/* $('#table').dataTable({
+			"ajax": {
+				"url":"dt/data.json",
+				"dataSrc": function(json){
+					alert(JSON.stringify(json.data));
+					return json.data;
+				}
+			},
+			 "columns": [
+
+			             { "data": "name" },
+
+			             { "data": "position" },
+
+			             { "data": "office" },
+
+			             { "data": "extn" },
+
+			             { "data": "start_date" },
+
+			             { "data": "salary" }
+
+			         ]
+		}); */
+		//alert(tt.ajax.url());
+		/* tt.on('xhr', function(){
+			alert(1);
+			var json = tt.ajax.json();
+		    alert( json.data.length +' row(s) were loaded' );
+		}); */
+		}catch(err){alert(err);}
+		
+		/* var xhr = new XMLHttpRequest();
+		xhr.open("get", "rest/orderRecord/1", false);
+		xhr.send(null);
+		alert(xhr.responseText); */
+		
+		/* $.ajax({
+			url: 'rest/orderRecord/getAll',
+			type: 'post',
+			data: 'student_id:10',
+			dataType: 'json',
+			success: function(data){
+				alert(JSON.stringify(data));
+			},
+			error: function(xhr, err){
+				alert(err);
+			}
+		}); */
+	});
+</script>
+</body>
+</html>

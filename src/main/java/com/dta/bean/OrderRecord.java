@@ -4,22 +4,38 @@ import java.io.Serializable;
 import java.sql.Date;
 
 
+
+import javax.ws.rs.FormParam;
+
 import com.dta.vo.PageParam;
 
 public class OrderRecord implements Serializable{
 	private static final long serialVersionUID = 1L;
+	@FormParam("order_id")
 	private Integer order_id;
+	@FormParam("student_id")
 	private Integer student_id;
+	@FormParam("coach_id")
 	private Integer coach_id;
+	@FormParam("school_id")
 	private Integer school_id;
+	@FormParam("order_time")
 	private Date order_time;
+	@FormParam("order_amount")
 	private String order_amount;
+	@FormParam("order_status")
 	private Integer order_status;
-	private Date training_start_time;
-	private Date training_end_time;
-	private Date order_dead_time;
+	@FormParam("training_start_time")
+	private String training_start_time;
+	@FormParam("training_end_time")
+	private String training_end_time;
+	@FormParam("order_dead_time")
+	private String order_dead_time;
+	@FormParam("order_memo")
 	private String order_memo;
+	@FormParam("validation")
 	private Integer validation;
+	@FormParam("course_status")
 	private Integer course_status;
 	private String coach_name;
 	private String phone;
@@ -67,23 +83,29 @@ public class OrderRecord implements Serializable{
 	public Integer getOrder_status() {
 		return order_status;
 	}
-	public void setTraining_start_time(Date training_start_time){
+	public String getTraining_start_time() {
+		if(training_start_time != null)
+			return training_start_time.substring(0, training_start_time.lastIndexOf('.'));
+		return null;
+	}
+	public void setTraining_start_time(String training_start_time) {
 		this.training_start_time = training_start_time;
 	}
-	public Date getTraining_start_time() {
-		return training_start_time;
+	public String getTraining_end_time() {
+		if(training_end_time != null)
+			return training_end_time.substring(0, training_end_time.lastIndexOf('.'));
+		return null;
 	}
-	public void setTraining_end_time(Date training_end_time){
+	public void setTraining_end_time(String training_end_time) {
 		this.training_end_time = training_end_time;
 	}
-	public Date getTraining_end_time() {
-		return training_end_time;
+	public String getOrder_dead_time() {
+		if(order_dead_time != null)
+			return order_dead_time.substring(0, order_dead_time.lastIndexOf('.'));
+		return null;
 	}
-	public void setOrder_dead_time(Date order_dead_time){
+	public void setOrder_dead_time(String order_dead_time) {
 		this.order_dead_time = order_dead_time;
-	}
-	public Date getOrder_dead_time() {
-		return order_dead_time;
 	}
 	public void setOrder_memo(String order_memo){
 		this.order_memo = order_memo;

@@ -1,23 +1,22 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class SysNetIncomeVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("net_income_id")
+	@QueryParam("net_income_id")
 	private Integer net_income_id;
-	@FormParam("net_income_source")
+	@QueryParam("net_income_source")
 	private Integer net_income_source;
-	@FormParam("amount")
+	@QueryParam("amount")
 	private String amount;
-	@FormParam("time")
-	private Date time;
-	@FormParam("validation")
+	@QueryParam("time")
+	private String time;
+	@QueryParam("validation")
 	private Integer validation;
 	public void setNet_income_id(Integer net_income_id){
 		this.net_income_id = net_income_id;
@@ -37,10 +36,10 @@ public class SysNetIncomeVo extends PageParam implements Serializable{
 	public String getAmount() {
 		return amount;
 	}
-	public void setTime(Date time){
+	public void setTime(String time){
 		this.time = time;
 	}
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 	public void setValidation(Integer validation){

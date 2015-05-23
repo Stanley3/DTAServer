@@ -2,25 +2,25 @@ package com.dta.vo;
 
 import java.io.Serializable;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class SponsorInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("sponsor_id")
+	@QueryParam("sponsor_id")
 	private Integer sponsor_id;
-	@FormParam("sponsor_name")
+	@QueryParam("sponsor_name")
 	private String sponsor_name;
-	@FormParam("amount")
+	@QueryParam("amount")
 	private String amount;
-	@FormParam("time")
+	@QueryParam("time")
 	private String time;
-	@FormParam("advertisement")
+	@QueryParam("advertisement")
 	private String advertisement;
-	@FormParam("ratio")
+	@QueryParam("ratio")
 	private String ratio;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setSponsor_id(Integer sponsor_id){
 		this.sponsor_id = sponsor_id;

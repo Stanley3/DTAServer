@@ -18,9 +18,10 @@ import com.dta.service.IStudentBasicInfoService;
 import com.dta.service.IStudentLoginInfoService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.vo.StudentBasicInfoVo;
 
 @Path("studentBasicInfo")
-public class StudentBasicInfoResource extends BaseAllResource<StudentBasicInfo, StudentBasicInfo>{
+public class StudentBasicInfoResource extends BaseAllResource<StudentBasicInfo, StudentBasicInfoVo>{
 	//@Autowired
 	public IStudentBasicInfoService service = (IStudentBasicInfoService)ServiceProvider.getBean("studentBasicInfoServiceImpl");
 	public IStudentLoginInfoService loginInfoService = (IStudentLoginInfoService)ServiceProvider.getBean("studentLoginInfoServiceImpl");

@@ -1,35 +1,34 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class EvaluationRecordVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("evaluation_record_id")
+	@QueryParam("evaluation_record_id")
 	private Integer evaluation_record_id;
-	@FormParam("student_id")
+	@QueryParam("student_id")
 	private Integer student_id;
-	@FormParam("coach_id")
+	@QueryParam("coach_id")
 	private Integer coach_id;
-	@FormParam("order_id")
+	@QueryParam("order_id")
 	private Integer order_id;
-	@FormParam("content")
+	@QueryParam("content")
 	private String content;
-	@FormParam("skill")
+	@QueryParam("skill")
 	private Integer skill;
-	@FormParam("service_attitude")
+	@QueryParam("service_attitude")
 	private Integer service_attitude;
-	@FormParam("hygiene")
+	@QueryParam("hygiene")
 	private Integer hygiene;
-	@FormParam("evaluation_time")
-	private Date evaluation_time;
-	@FormParam("evalution_type")
+	@QueryParam("evaluation_time")
+	private String evaluation_time;
+	@QueryParam("evalution_type")
 	private Integer evalution_type;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setEvaluation_record_id(Integer evaluation_record_id){
 		this.evaluation_record_id = evaluation_record_id;
@@ -79,10 +78,10 @@ public class EvaluationRecordVo extends PageParam implements Serializable{
 	public Integer getHygiene() {
 		return hygiene;
 	}
-	public void setEvaluation_time(Date evaluation_time){
+	public void setEvaluation_time(String evaluation_time){
 		this.evaluation_time = evaluation_time;
 	}
-	public Date getEvaluation_time() {
+	public String getEvaluation_time() {
 		return evaluation_time;
 	}
 	public void setEvalution_type(Integer evalution_type){

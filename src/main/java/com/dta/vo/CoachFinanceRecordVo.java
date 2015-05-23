@@ -1,25 +1,24 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class CoachFinanceRecordVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("finance_record_id")
+	@QueryParam("finance_record_id")
 	private Integer finance_record_id;
-	@FormParam("coach_id")
+	@QueryParam("coach_id")
 	private Integer coach_id;
-	@FormParam("income_amount")
+	@QueryParam("income_amount")
 	private String income_amount;
-	@FormParam("payed_amount")
+	@QueryParam("payed_amount")
 	private String payed_amount;
-	@FormParam("record_time")
-	private Date record_time;
-	@FormParam("validation")
+	@QueryParam("record_time")
+	private String record_time;
+	@QueryParam("validation")
 	private Integer validation;
 	public void setFinance_record_id(Integer finance_record_id){
 		this.finance_record_id = finance_record_id;
@@ -45,10 +44,10 @@ public class CoachFinanceRecordVo extends PageParam implements Serializable{
 	public String getPayed_amount() {
 		return payed_amount;
 	}
-	public void setRecord_time(Date record_time){
+	public void setRecord_time(String record_time){
 		this.record_time = record_time;
 	}
-	public Date getRecord_time() {
+	public String getRecord_time() {
 		return record_time;
 	}
 	public void setValidation(Integer validation){

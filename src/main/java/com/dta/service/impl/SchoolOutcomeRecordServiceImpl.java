@@ -9,9 +9,10 @@ import com.dta.bean.SchoolOutcomeRecord;
 import com.dta.dao.ICoachWithdrawRecordDao;
 import com.dta.dao.ISchoolOutcomeRecordDao;
 import com.dta.service.ISchoolOutcomeRecordService;
+import com.dta.vo.SchoolOutcomeRecordVo;
 
 @Service
-public class SchoolOutcomeRecordServiceImpl extends BaseAllServiceImpl<SchoolOutcomeRecord, SchoolOutcomeRecord> implements ISchoolOutcomeRecordService{
+public class SchoolOutcomeRecordServiceImpl extends BaseAllServiceImpl<SchoolOutcomeRecord, SchoolOutcomeRecordVo> implements ISchoolOutcomeRecordService{
 	@Autowired
 	private ISchoolOutcomeRecordDao dao;
 	@Autowired

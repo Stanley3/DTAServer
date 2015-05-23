@@ -1,29 +1,26 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class StudentBasicInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("student_id")
+	@QueryParam("student_id")
 	private Integer student_id;
-	@FormParam("student_name")
+	@QueryParam("student_name")
 	private String student_name;
-	@FormParam("student_photo")
-	private Blob student_photo;
-	@FormParam("identity_card_no")
+	@QueryParam("identity_card_no")
 	private String identity_card_no;
-	@FormParam("student_gender")
+	@QueryParam("student_gender")
 	private String student_gender;
-	@FormParam("student_phone")
+	@QueryParam("student_phone")
 	private String student_phone;
-	@FormParam("status")
+	@QueryParam("status")
 	private Integer status;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setStudent_id(Integer student_id){
 		this.student_id = student_id;
@@ -36,12 +33,6 @@ public class StudentBasicInfoVo extends PageParam implements Serializable{
 	}
 	public String getStudent_name() {
 		return student_name;
-	}
-	public void setStudent_photo(Blob student_photo){
-		this.student_photo = student_photo;
-	}
-	public Blob getStudent_photo() {
-		return student_photo;
 	}
 	public void setIdentity_card_no(String identity_card_no){
 		this.identity_card_no = identity_card_no;

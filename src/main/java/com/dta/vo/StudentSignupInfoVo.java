@@ -1,31 +1,30 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class StudentSignupInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("signup_id")
+	@QueryParam("signup_id")
 	private Integer signup_id;
-	@FormParam("student_id")
+	@QueryParam("student_id")
 	private Integer student_id;
-	@FormParam("singup_driving_school")
+	@QueryParam("singup_driving_school")
 	private Integer singup_driving_school;
-	@FormParam("chartered_driving_school")
+	@QueryParam("chartered_driving_school")
 	private Integer chartered_driving_school;
-	@FormParam("chartered_coach_2")
+	@QueryParam("chartered_coach_2")
 	private Integer chartered_coach_2;
-	@FormParam("chartered_coach_3")
+	@QueryParam("chartered_coach_3")
 	private Integer chartered_coach_3;
-	@FormParam("course_status")
+	@QueryParam("course_status")
 	private Integer course_status;
-	@FormParam("signup_time")
-	private Date signup_time;
-	@FormParam("validation")
+	@QueryParam("signup_time")
+	private String signup_time;
+	@QueryParam("validation")
 	private Integer validation;
 	public void setSignup_id(Integer signup_id){
 		this.signup_id = signup_id;
@@ -69,10 +68,10 @@ public class StudentSignupInfoVo extends PageParam implements Serializable{
 	public Integer getCourse_status() {
 		return course_status;
 	}
-	public void setSignup_time(Date signup_time){
+	public void setSignup_time(String signup_time){
 		this.signup_time = signup_time;
 	}
-	public Date getSignup_time() {
+	public String getSignup_time() {
 		return signup_time;
 	}
 	public void setValidation(Integer validation){

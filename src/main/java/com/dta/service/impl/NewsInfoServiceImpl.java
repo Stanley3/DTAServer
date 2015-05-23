@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.NewsInfo;
 import com.dta.dao.INewsInfoDao;
 import com.dta.service.INewsInfoService;
+import com.dta.vo.NewsInfoVo;
 
 @Service
-public class NewsInfoServiceImpl extends BaseAllServiceImpl<NewsInfo, NewsInfo> implements INewsInfoService{
+public class NewsInfoServiceImpl extends BaseAllServiceImpl<NewsInfo, NewsInfoVo> implements INewsInfoService{
 	@Resource
 	private INewsInfoDao dao;
 	

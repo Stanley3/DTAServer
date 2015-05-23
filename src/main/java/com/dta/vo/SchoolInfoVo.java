@@ -2,7 +2,6 @@ package com.dta.vo;
 
 import java.io.Serializable;
 
-import javax.ws.rs.FormParam;
 import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
@@ -46,7 +45,19 @@ public class SchoolInfoVo extends PageParam implements Serializable{
 	@QueryParam("status")
 	private Integer status;
 	@QueryParam("prepaid")
-	private double prepaid;
+	private String prepaid;
+	@QueryParam("bank_acount")
+	private String bank_acount;
+	@QueryParam("acount_holder")
+	private String acount_holder;
+	@QueryParam("subject_2_fee")
+	private String subject_2_fee;
+	@QueryParam("subject_3_fee")
+	private String subject_3_fee;
+	@QueryParam("charter_2_fee")
+	private String charter_2_fee;
+	@QueryParam("charter_3_fee")
+	private String charter_3_fee;
 	public void setSchool_id(Integer school_id){
 		this.school_id = school_id;
 	}
@@ -155,11 +166,46 @@ public class SchoolInfoVo extends PageParam implements Serializable{
 	public Integer getStatus() {
 		return status;
 	}
-	public double getPrepaid() {
-		return prepaid;
-	}
-	public void setPrepaid(double prepaid) {
+	public void setPrepaid(String prepaid){
 		this.prepaid = prepaid;
 	}
-	
+	public String getPrepaid() {
+		return prepaid;
+	}
+	public void setBank_acount(String bank_acount){
+		this.bank_acount = bank_acount;
+	}
+	public String getBank_acount() {
+		return bank_acount;
+	}
+	public void setAcount_holder(String acount_holder){
+		this.acount_holder = acount_holder;
+	}
+	public String getAcount_holder() {
+		return acount_holder;
+	}
+	public void setSubject_2_fee(String subject_2_fee){
+		this.subject_2_fee = subject_2_fee;
+	}
+	public String getSubject_2_fee() {
+		return subject_2_fee;
+	}
+	public void setSubject_3_fee(String subject_3_fee){
+		this.subject_3_fee = subject_3_fee;
+	}
+	public String getSubject_3_fee() {
+		return subject_3_fee;
+	}
+	public void setCharter_2_fee(String charter_2_fee){
+		this.charter_2_fee = charter_2_fee;
+	}
+	public String getCharter_2_fee() {
+		return charter_2_fee;
+	}
+	public void setCharter_3_fee(String charter_3_fee){
+		this.charter_3_fee = charter_3_fee;
+	}
+	public String getCharter_3_fee() {
+		return charter_3_fee;
+	}
 }

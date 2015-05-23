@@ -1,27 +1,26 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class NewsInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("news_info_id")
+	@QueryParam("news_info_id")
 	private Integer news_info_id;
-	@FormParam("sender")
+	@QueryParam("sender")
 	private Integer sender;
-	@FormParam("send_time")
-	private Date send_time;
-	@FormParam("content")
+	@QueryParam("send_time")
+	private String send_time;
+	@QueryParam("content")
 	private String content;
-	@FormParam("receiver_type")
+	@QueryParam("receiver_type")
 	private Integer receiver_type;
-	@FormParam("attribute")
+	@QueryParam("attribute")
 	private Integer attribute;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setNews_info_id(Integer news_info_id){
 		this.news_info_id = news_info_id;
@@ -35,10 +34,10 @@ public class NewsInfoVo extends PageParam implements Serializable{
 	public Integer getSender() {
 		return sender;
 	}
-	public void setSend_time(Date send_time){
+	public void setSend_time(String send_time){
 		this.send_time = send_time;
 	}
-	public Date getSend_time() {
+	public String getSend_time() {
 		return send_time;
 	}
 	public void setContent(String content){

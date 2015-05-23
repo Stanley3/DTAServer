@@ -1,25 +1,24 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class SysTotalOutcomeVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("total_outcome_id")
+	@QueryParam("total_outcome_id")
 	private Integer total_outcome_id;
-	@FormParam("payee_id")
+	@QueryParam("payee_id")
 	private Integer payee_id;
-	@FormParam("payee_type")
+	@QueryParam("payee_type")
 	private Integer payee_type;
-	@FormParam("amount")
+	@QueryParam("amount")
 	private String amount;
-	@FormParam("time")
-	private Date time;
-	@FormParam("validation")
+	@QueryParam("time")
+	private String time;
+	@QueryParam("validation")
 	private Integer validation;
 	public void setTotal_outcome_id(Integer total_outcome_id){
 		this.total_outcome_id = total_outcome_id;
@@ -45,10 +44,10 @@ public class SysTotalOutcomeVo extends PageParam implements Serializable{
 	public String getAmount() {
 		return amount;
 	}
-	public void setTime(Date time){
+	public void setTime(String time){
 		this.time = time;
 	}
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 	public void setValidation(Integer validation){

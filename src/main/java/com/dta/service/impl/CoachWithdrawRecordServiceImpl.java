@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.CoachWithdrawRecord;
 import com.dta.dao.ICoachWithdrawRecordDao;
 import com.dta.service.ICoachWithdrawRecordService;
+import com.dta.vo.CoachWithdrawRecordVo;
 
 @Service
-public class CoachWithdrawRecordServiceImpl extends BaseAllServiceImpl<CoachWithdrawRecord, CoachWithdrawRecord> implements ICoachWithdrawRecordService{
+public class CoachWithdrawRecordServiceImpl extends BaseAllServiceImpl<CoachWithdrawRecord, CoachWithdrawRecordVo> implements ICoachWithdrawRecordService{
 	@Autowired
 	private ICoachWithdrawRecordDao dao;
 	

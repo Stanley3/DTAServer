@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.CoachFinanceRecord;
 import com.dta.dao.ICoachFinanceRecordDao;
 import com.dta.service.ICoachFinanceRecordService;
+import com.dta.vo.CoachFinanceRecordVo;
 
 @Service
-public class CoachFinanceRecordServiceImpl extends BaseAllServiceImpl<CoachFinanceRecord, CoachFinanceRecord> implements ICoachFinanceRecordService{
+public class CoachFinanceRecordServiceImpl extends BaseAllServiceImpl<CoachFinanceRecord, CoachFinanceRecordVo> implements ICoachFinanceRecordService{
 	@Autowired
 	private ICoachFinanceRecordDao dao;
 	

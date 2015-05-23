@@ -2,21 +2,21 @@ package com.dta.vo;
 
 import java.io.Serializable;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class SysParamVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("param_id")
+	@QueryParam("param_id")
 	private Integer param_id;
-	@FormParam("evalution_weight")
+	@QueryParam("evalution_weight")
 	private String evalution_weight;
-	@FormParam("signup_fee")
+	@QueryParam("signup_fee")
 	private String signup_fee;
-	@FormParam("upgrade_fee")
+	@QueryParam("upgrade_fee")
 	private String upgrade_fee;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setParam_id(Integer param_id){
 		this.param_id = param_id;

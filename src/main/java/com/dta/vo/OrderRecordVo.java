@@ -3,40 +3,48 @@ package com.dta.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 public class OrderRecordVo extends PageParam implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@FormParam("order_id")
+	@QueryParam("order_id")
 	private Integer order_id;
-	@FormParam("student_id")
+	@QueryParam("student_id")
 	private Integer student_id;
-	@FormParam("coach_id")
+	@QueryParam("coach_id")
 	private Integer coach_id;
-	@FormParam("school_id")
+	@QueryParam("school_id")
 	private Integer school_id;
-	@FormParam("order_time")
-	private Date order_time;
-	@FormParam("order_amount")
+	@QueryParam("order_time")
+	private String order_time;
+	@QueryParam("order_amount")
 	private String order_amount;
-	@FormParam("order_status")
+	@QueryParam("order_status")
 	private Integer order_status;
-	@FormParam("training_start_time")
+	@QueryParam("training_start_time")
 	private Date training_start_time;
-	@FormParam("training_end_time")
+	@QueryParam("training_end_time")
 	private Date training_end_time;
-	@FormParam("order_dead_time")
+	@QueryParam("order_dead_time")
 	private Date order_dead_time;
-	@FormParam("order_memo")
+	@QueryParam("order_memo")
 	private String order_memo;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
-	@FormParam("course_status")
+	@QueryParam("course_status")
 	private Integer course_status;
 	
+	public String getOrder_time() {
+		if(order_time != null && order_time != "")
+			return order_time.substring(0, order_time.lastIndexOf('.'));
+		return this.order_time;
+	}
+	public void setOrder_time(String order_time) {
+		this.order_time = order_time;
+	}
 	public void setOrder_id(Integer order_id){
 		this.order_id = order_id;
 	}
@@ -60,12 +68,6 @@ public class OrderRecordVo extends PageParam implements Serializable{
 	}
 	public Integer getSchool_id() {
 		return school_id;
-	}
-	public void setOrder_time(Date order_time){
-		this.order_time = order_time;
-	}
-	public Date getOrder_time() {
-		return order_time;
 	}
 	public void setOrder_amount(String order_amount){
 		this.order_amount = order_amount;

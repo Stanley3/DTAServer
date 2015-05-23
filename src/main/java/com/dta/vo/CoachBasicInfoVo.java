@@ -2,43 +2,43 @@ package com.dta.vo;
 
 import java.io.Serializable;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class CoachBasicInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("coach_id")
+	@QueryParam("coach_id")
 	private Integer coach_id;
-	@FormParam("coach_name")
+	@QueryParam("coach_name")
 	private String coach_name;
-	@FormParam("identity_card_no")
+	@QueryParam("identity_card_no")
 	private String identity_card_no;
-	@FormParam("phone")
+	@QueryParam("phone")
 	private String phone;
-	@FormParam("photo")
+	@QueryParam("photo")
 	private byte[] photo;
-	@FormParam("school_id")
+	@QueryParam("school_id")
 	private Integer school_id;
-	@FormParam("register_date")
+	@QueryParam("register_date")
 	private String register_date;
-	@FormParam("training_place")
+	@QueryParam("training_place")
 	private String training_place;
-	@FormParam("contract_no")
+	@QueryParam("contract_no")
 	private String contract_no;
-	@FormParam("login_pwd")
+	@QueryParam("login_pwd")
 	private String login_pwd;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
-	@FormParam("service_count")
+	@QueryParam("service_count")
 	private Integer service_count;
-	@FormParam("teaching_age")
+	@QueryParam("teaching_age")
 	private Integer teaching_age;
-	@FormParam("online")
+	@QueryParam("online")
 	private Integer online;
-	@FormParam("available_times")
+	@QueryParam("available_times")
 	private Integer available_times;//今天还可预约的次数
-	@FormParam("star")
+	@QueryParam("star")
 	private Integer star;
 	
 	public Integer getService_count() {

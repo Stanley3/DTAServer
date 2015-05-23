@@ -2,19 +2,19 @@ package com.dta.vo;
 
 import java.io.Serializable;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class SysRoleVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("role_id")
+	@QueryParam("role_id")
 	private Integer role_id;
-	@FormParam("role_name")
+	@QueryParam("role_name")
 	private String role_name;
-	@FormParam("role_permission")
+	@QueryParam("role_permission")
 	private Integer role_permission;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setRole_id(Integer role_id){
 		this.role_id = role_id;

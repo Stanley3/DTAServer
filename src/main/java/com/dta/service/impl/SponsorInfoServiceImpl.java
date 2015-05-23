@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.SponsorInfo;
 import com.dta.dao.ISponsorInfoDao;
 import com.dta.service.ISponsorInfoService;
+import com.dta.vo.SponsorInfoVo;
 
 @Service
-public class SponsorInfoServiceImpl extends BaseAllServiceImpl<SponsorInfo, SponsorInfo> implements ISponsorInfoService{
+public class SponsorInfoServiceImpl extends BaseAllServiceImpl<SponsorInfo, SponsorInfoVo> implements ISponsorInfoService{
 	@Autowired
 	private ISponsorInfoDao dao;
 	

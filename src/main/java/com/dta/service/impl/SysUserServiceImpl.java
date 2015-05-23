@@ -7,9 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dta.bean.SysUser;
 import com.dta.dao.ISysUserDao;
 import com.dta.service.ISysUserService;
+import com.dta.vo.SysUserVo;
 
 @Service
-public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUser> implements ISysUserService{
+public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUserVo> implements ISysUserService{
 	@Autowired
 	private ISysUserDao dao;
 	

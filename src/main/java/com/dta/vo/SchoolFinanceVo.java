@@ -2,25 +2,25 @@ package com.dta.vo;
 
 import java.io.Serializable;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
-public class SchoolIncomeVo extends PageParam implements Serializable{
+public class SchoolFinanceVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("school_income_id")
+	@QueryParam("school_income_id")
 	private Integer school_income_id;
-	@FormParam("school_id")
+	@QueryParam("school_id")
 	private Integer school_id;
-	@FormParam("imprest")
+	@QueryParam("imprest")
 	private String imprest;
-	@FormParam("gross_charge")
+	@QueryParam("gross_charge")
 	private String gross_charge;
-	@FormParam("frozen_amount")
+	@QueryParam("frozen_amount")
 	private String frozen_amount;
-	@FormParam("gross_income")
+	@QueryParam("gross_income")
 	private String gross_income;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setSchool_income_id(Integer school_income_id){
 		this.school_income_id = school_income_id;

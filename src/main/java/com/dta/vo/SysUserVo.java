@@ -1,27 +1,26 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class SysUserVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("user_id")
+	@QueryParam("user_id")
 	private Integer user_id;
-	@FormParam("user_name")
+	@QueryParam("user_name")
 	private String user_name;
-	@FormParam("user_pwd")
+	@QueryParam("user_pwd")
 	private String user_pwd;
-	@FormParam("role_ids")
+	@QueryParam("role_ids")
 	private String role_ids;
-	@FormParam("user_photo")
+	@QueryParam("user_photo")
 	private byte[] user_photo;
-	@FormParam("user_attribute")
+	@QueryParam("user_attribute")
 	private Integer user_attribute;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	private Integer havePhoto;
 	public void setUser_id(Integer user_id){

@@ -1,27 +1,26 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class StudentLoginInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("login_id")
+	@QueryParam("login_id")
 	private Integer login_id;
-	@FormParam("student_id")
+	@QueryParam("student_id")
 	private Integer student_id;
-	@FormParam("login_name")
+	@QueryParam("login_name")
 	private String login_name;
-	@FormParam("login_pwd")
+	@QueryParam("login_pwd")
 	private String login_pwd;
-	@FormParam("login_nickname")
+	@QueryParam("login_nickname")
 	private String login_nickname;
-	@FormParam("register_time")
-	private Date register_time;
-	@FormParam("validation")
+	@QueryParam("register_time")
+	private String register_time;
+	@QueryParam("validation")
 	private Integer validation;
 	public void setLogin_id(Integer login_id){
 		this.login_id = login_id;
@@ -53,10 +52,10 @@ public class StudentLoginInfoVo extends PageParam implements Serializable{
 	public String getLogin_nickname() {
 		return login_nickname;
 	}
-	public void setRegister_time(Date register_time){
+	public void setRegister_time(String register_time){
 		this.register_time = register_time;
 	}
-	public Date getRegister_time() {
+	public String getRegister_time() {
 		return register_time;
 	}
 	public void setValidation(Integer validation){

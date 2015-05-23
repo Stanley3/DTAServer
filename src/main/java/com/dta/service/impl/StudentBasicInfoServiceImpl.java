@@ -9,9 +9,10 @@ import com.dta.bean.StudentLoginInfo;
 import com.dta.dao.IStudentBasicInfoDao;
 import com.dta.dao.IStudentLoginInfoDao;
 import com.dta.service.IStudentBasicInfoService;
+import com.dta.vo.StudentBasicInfoVo;
 
 @Service
-public class StudentBasicInfoServiceImpl extends BaseAllServiceImpl<StudentBasicInfo, StudentBasicInfo> implements IStudentBasicInfoService{
+public class StudentBasicInfoServiceImpl extends BaseAllServiceImpl<StudentBasicInfo, StudentBasicInfoVo> implements IStudentBasicInfoService{
 	@Autowired
 	private IStudentBasicInfoDao dao;
 	@Autowired

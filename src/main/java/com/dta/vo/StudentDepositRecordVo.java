@@ -1,31 +1,30 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class StudentDepositRecordVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("deposit_record_id")
+	@QueryParam("deposit_record_id")
 	private Integer deposit_record_id;
-	@FormParam("student_id")
+	@QueryParam("student_id")
 	private Integer student_id;
-	@FormParam("deposit_amount")
+	@QueryParam("deposit_amount")
 	private String deposit_amount;
-	@FormParam("depositor_name")
+	@QueryParam("depositor_name")
 	private String depositor_name;
-	@FormParam("depositor_id")
+	@QueryParam("depositor_id")
 	private Integer depositor_id;
-	@FormParam("deposit_way")
+	@QueryParam("deposit_way")
 	private Integer deposit_way;
-	@FormParam("source_no")
+	@QueryParam("source_no")
 	private String source_no;
-	@FormParam("deposit_date")
-	private Date deposit_date;
-	@FormParam("validation")
+	@QueryParam("deposit_date")
+	private String deposit_date;
+	@QueryParam("validation")
 	private Integer validation;
 	public void setDeposit_record_id(Integer deposit_record_id){
 		this.deposit_record_id = deposit_record_id;
@@ -69,10 +68,10 @@ public class StudentDepositRecordVo extends PageParam implements Serializable{
 	public String getSource_no() {
 		return source_no;
 	}
-	public void setDeposit_date(Date deposit_date){
+	public void setDeposit_date(String deposit_date){
 		this.deposit_date = deposit_date;
 	}
-	public Date getDeposit_date() {
+	public String getDeposit_date() {
 		return deposit_date;
 	}
 	public void setValidation(Integer validation){

@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.SysRole;
 import com.dta.dao.ISysRoleDao;
 import com.dta.service.ISysRoleService;
+import com.dta.vo.SysRoleVo;
 
 @Service
-public class SysRoleServiceImpl extends BaseAllServiceImpl<SysRole, SysRole> implements ISysRoleService{
+public class SysRoleServiceImpl extends BaseAllServiceImpl<SysRole, SysRoleVo> implements ISysRoleService{
 	@Autowired
 	private ISysRoleDao dao;
 	

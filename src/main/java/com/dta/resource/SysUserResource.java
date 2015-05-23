@@ -29,10 +29,11 @@ import com.dta.bean.SysUser;
 import com.dta.service.ISysUserService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.vo.SysUserVo;
 import com.esotericsoftware.reflectasm.MethodAccess;
 
 @Path("sysUser")
-public class SysUserResource extends BaseAllResource<SysUser, SysUser> {
+public class SysUserResource extends BaseAllResource<SysUser, SysUserVo> {
 	// @Autowired
 	public ISysUserService service = (ISysUserService) ServiceProvider
 			.getBean("sysUserServiceImpl");

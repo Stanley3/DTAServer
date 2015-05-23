@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.SysNetIncome;
 import com.dta.dao.ISysNetIncomeDao;
 import com.dta.service.ISysNetIncomeService;
+import com.dta.vo.SysNetIncomeVo;
 
 @Service
-public class SysNetIncomeServiceImpl extends BaseAllServiceImpl<SysNetIncome, SysNetIncome> implements ISysNetIncomeService{
+public class SysNetIncomeServiceImpl extends BaseAllServiceImpl<SysNetIncome, SysNetIncomeVo> implements ISysNetIncomeService{
 	@Autowired
 	private ISysNetIncomeDao dao;
 	

@@ -1,27 +1,26 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class CoachWithdrawRecordVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("withdraw_reocrd_id")
+	@QueryParam("withdraw_reocrd_id")
 	private Integer withdraw_reocrd_id;
-	@FormParam("coach_id")
+	@QueryParam("coach_id")
 	private Integer coach_id;
-	@FormParam("withdraw_time")
-	private Date withdraw_time;
-	@FormParam("withdraw_amount")
+	@QueryParam("withdraw_time")
+	private String withdraw_time;
+	@QueryParam("withdraw_amount")
 	private String withdraw_amount;
-	@FormParam("drawee")
+	@QueryParam("drawee")
 	private Integer drawee;
-	@FormParam("withdraw_status")
+	@QueryParam("withdraw_status")
 	private Integer withdraw_status;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setWithdraw_reocrd_id(Integer withdraw_reocrd_id){
 		this.withdraw_reocrd_id = withdraw_reocrd_id;
@@ -35,10 +34,10 @@ public class CoachWithdrawRecordVo extends PageParam implements Serializable{
 	public Integer getCoach_id() {
 		return coach_id;
 	}
-	public void setWithdraw_time(Date withdraw_time){
+	public void setWithdraw_time(String withdraw_time){
 		this.withdraw_time = withdraw_time;
 	}
-	public Date getWithdraw_time() {
+	public String getWithdraw_time() {
 		return withdraw_time;
 	}
 	public void setWithdraw_amount(String withdraw_amount){

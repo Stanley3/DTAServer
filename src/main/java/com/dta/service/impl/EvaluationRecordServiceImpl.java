@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.EvaluationRecord;
 import com.dta.dao.IEvaluationRecordDao;
 import com.dta.service.IEvaluationRecordService;
+import com.dta.vo.EvaluationRecordVo;
 
 @Service
-public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRecord, EvaluationRecord> implements IEvaluationRecordService{
+public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRecord, EvaluationRecordVo> implements IEvaluationRecordService{
 	@Autowired
 	private IEvaluationRecordDao dao;
 	

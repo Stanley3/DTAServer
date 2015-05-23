@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.dta.bean.ScheduleInfo;
 import com.dta.dao.IScheduleInfoDao;
 import com.dta.service.IScheduleInfoService;
+import com.dta.vo.ScheduleInfoVo;
 
 @Service
-public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, ScheduleInfo> implements IScheduleInfoService{
+public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, ScheduleInfoVo> implements IScheduleInfoService{
 	@Autowired
 	private IScheduleInfoDao dao;
 	

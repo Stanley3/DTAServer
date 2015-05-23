@@ -1,33 +1,32 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class SchoolOutcomeRecordVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("outcome_record_id")
+	@QueryParam("outcome_record_id")
 	private Integer outcome_record_id;
-	@FormParam("school_id")
+	@QueryParam("school_id")
 	private Integer school_id;
-	@FormParam("operator")
+	@QueryParam("operator")
 	private Integer operator;
-	@FormParam("payee")
+	@QueryParam("payee")
 	private Integer payee;
-	@FormParam("operate_time")
-	private Date operate_time;
-	@FormParam("amount")
+	@QueryParam("operate_time")
+	private String operate_time;
+	@QueryParam("amount")
 	private String amount;
-	@FormParam("arrival")
+	@QueryParam("arrival")
 	private Integer arrival;
-	@FormParam("account_type")
+	@QueryParam("account_type")
 	private Integer account_type;
-	@FormParam("account")
+	@QueryParam("account")
 	private String account;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setOutcome_record_id(Integer outcome_record_id){
 		this.outcome_record_id = outcome_record_id;
@@ -53,10 +52,10 @@ public class SchoolOutcomeRecordVo extends PageParam implements Serializable{
 	public Integer getPayee() {
 		return payee;
 	}
-	public void setOperate_time(Date operate_time){
+	public void setOperate_time(String operate_time){
 		this.operate_time = operate_time;
 	}
-	public Date getOperate_time() {
+	public String getOperate_time() {
 		return operate_time;
 	}
 	public void setAmount(String amount){

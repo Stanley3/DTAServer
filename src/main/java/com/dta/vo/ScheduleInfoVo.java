@@ -1,35 +1,34 @@
 package com.dta.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
 public class ScheduleInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("schedule_id")
+	@QueryParam("schedule_id")
 	private Integer schedule_id;
-	@FormParam("coach_id")
+	@QueryParam("coach_id")
 	private Integer coach_id;
-	@FormParam("operator_id")
+	@QueryParam("operator_id")
 	private Integer operator_id;
-	@FormParam("operate_time")
-	private Date operate_time;
-	@FormParam("subject")
+	@QueryParam("operate_time")
+	private String operate_time;
+	@QueryParam("subject")
 	private Integer subject;
-	@FormParam("content")
+	@QueryParam("content")
 	private String content;
-	@FormParam("student_toplimit")
+	@QueryParam("student_toplimit")
 	private String student_toplimit;
-	@FormParam("student_attribute")
+	@QueryParam("student_attribute")
 	private String student_attribute;
-	@FormParam("schedule_date")
+	@QueryParam("schedule_date")
 	private String schedule_date;
-	@FormParam("device_attribude")
+	@QueryParam("device_attribude")
 	private Integer device_attribude;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
 	public void setSchedule_id(Integer schedule_id){
 		this.schedule_id = schedule_id;
@@ -49,10 +48,10 @@ public class ScheduleInfoVo extends PageParam implements Serializable{
 	public Integer getOperator_id() {
 		return operator_id;
 	}
-	public void setOperate_time(Date operate_time){
+	public void setOperate_time(String operate_time){
 		this.operate_time = operate_time;
 	}
-	public Date getOperate_time() {
+	public String getOperate_time() {
 		return operate_time;
 	}
 	public void setSubject(Integer subject){

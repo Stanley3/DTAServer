@@ -1,21 +1,26 @@
 package com.dta.vo;
 
-import javax.ws.rs.FormParam;
-import javax.xml.bind.annotation.XmlAnyElement;;
+import javax.ws.rs.QueryParam;
 
 
 public class PageParam{
-	@XmlAnyElement
-	@FormParam("sort")
+	@QueryParam("sort")
 	public String sort;
-	@XmlAnyElement
-	@FormParam("order")
+	@QueryParam("dir")
 	public String order;
-	@FormParam("page")
+	@QueryParam("start")
 	public int page;
-	@FormParam("rows")
+	@QueryParam("length")
 	public int rows;
+	@QueryParam("draw")
+	private Integer draw;
 	
+	public Integer getDraw() {
+		return draw;
+	}
+	public void setDraw(Integer draw) {
+		this.draw = draw;
+	}
 	public String getSort() {
 		return sort;
 	}

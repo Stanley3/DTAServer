@@ -36,6 +36,7 @@ public class OrderRecordVo extends PageParam implements Serializable{
 	private Integer validation;
 	@FormParam("course_status")
 	private Integer course_status;
+	
 	public void setOrder_id(Integer order_id){
 		this.order_id = order_id;
 	}

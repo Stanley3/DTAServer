@@ -60,6 +60,7 @@ import javax.ws.rs.core.Response;
 
 
 
+
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -68,6 +69,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.ResultBean;
+import com.dta.bean.SchoolInfo;
 import com.dta.bean.StudentBasicInfo;
 import com.dta.bean.SysUser;
 import com.dta.service.IBaseAllService;
@@ -177,9 +179,9 @@ public class BaseAllResource<T, V>{
 		}
 	}
 	
-	@POST
+	@GET
 	@Path("getAll")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAll(@BeanParam V vo){
 		try{
@@ -206,15 +208,23 @@ public class BaseAllResource<T, V>{
 		try{
 			MethodAccess access = MethodAccess.get(cl);
 			int page = (Integer)access.invoke(vo, "getPage");
+			int draw = (Integer)access.invoke(vo, "getDraw");
 			int rows = (Integer)access.invoke(vo, "getRows");
-			if(page > 0 && rows > 0){
-				access.invoke(vo, "setPage", (page-1)*rows);
-				List<T> resultList = service.getPage(vo);
+			if(page >= 0 && draw >= 0){
+				/*access.invoke(vo, "setPage", (page-1)*rows);*/
+				
+				List<T> resultList = null;
+				if(rows == -1)
+					resultList = service.getAll(vo);
+				else
+					resultList = service.getPage(vo);
 				int size = service.getSize(vo);
 				if(resultList != null){
-					Map<String,Object> resultMap = new HashMap<String, Object>(); 
-					resultMap.put("total", size);
-					resultMap.put("rows", resultList);
+					Map<String,Object> resultMap = new HashMap<String, Object>();
+					resultMap.put("draw", draw);
+					resultMap.put("recordsTotal", size);
+					resultMap.put("recordsFiltered", size);
+					resultMap.put("data", resultList);
 					return Response.status(200).entity(resultMap).build();
 				}
 			}

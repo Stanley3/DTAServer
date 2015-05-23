@@ -1,50 +1,51 @@
-package com.dta.bean;
+package com.dta.vo;
 
 import java.io.Serializable;
 
 import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 
 import com.dta.vo.PageParam;
 
-public class SchoolInfo implements Serializable{
+public class SchoolInfoVo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("school_id")
+	@QueryParam("school_id")
 	private Integer school_id;
-	@FormParam("school_name")
+	@QueryParam("school_name")
 	private String school_name;
-	@FormParam("contract_no")
+	@QueryParam("contract_no")
 	private String contract_no;
-	@FormParam("leader")
+	@QueryParam("leader")
 	private String leader;
-	@FormParam("leader_phone")
+	@QueryParam("leader_phone")
 	private String leader_phone;
-	@FormParam("school_address")
+	@QueryParam("school_address")
 	private String school_address;
-	@FormParam("school_phone")
+	@QueryParam("school_phone")
 	private String school_phone;
-	@FormParam("longitude")
+	@QueryParam("longitude")
 	private String longitude;
-	@FormParam("latitude")
+	@QueryParam("latitude")
 	private String latitude;
-	@FormParam("coach_number")
+	@QueryParam("coach_number")
 	private Integer coach_number;
-	@FormParam("subject_2_number")
+	@QueryParam("subject_2_number")
 	private Integer subject_2_number;
-	@FormParam("subject_3_number")
+	@QueryParam("subject_3_number")
 	private Integer subject_3_number;
-	@FormParam("validation")
+	@QueryParam("validation")
 	private Integer validation;
-	@FormParam("register_time")
+	@QueryParam("register_time")
 	private String register_time;
-	@FormParam("register_number")
+	@QueryParam("register_number")
 	private Integer register_number;
-	@FormParam("student_number")
+	@QueryParam("student_number")
 	private Integer student_number;
-	@FormParam("school_type")
+	@QueryParam("school_type")
 	private Integer school_type;
-	@FormParam("status")
+	@QueryParam("status")
 	private Integer status;
-	@FormParam("prepaid")
+	@QueryParam("prepaid")
 	private double prepaid;
 	public void setSchool_id(Integer school_id){
 		this.school_id = school_id;

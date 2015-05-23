@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update school_info set validation = 0 where school_id = #{school_id}
 </update>
 <!-- **********获取所有对象********* -->
-<select id="getAll" resultType="SchoolInfo" parameterType="SchoolInfo">
+<select id="getAll" resultType="SchoolInfo" parameterType="SchoolInfoVo">
 	select * from school_info
 	<where>
 		validation = 1
@@ -139,6 +139,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and prepaid = #{prepaid}
 		</if>
 	</where>
+	<if test="sort != null and sort != ''">
+		order by ${sort} ${order}
+	</if>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SchoolInfo" parameterType="int">
@@ -146,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where school_id = #{school_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
-<select id="getPage" resultType="SchoolInfo" parameterType="SchoolInfo">
+<select id="getPage" resultType="SchoolInfo" parameterType="SchoolInfoVo">
 	select * from school_info
 	<where>
 		validation = 1
@@ -208,8 +211,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and prepaid = #{prepaid}
 		</if>
 	</where>
-	<if test="sort != null">
-		order by #{sort} #{order}
+	<if test="sort != null and sort != ''">
+		order by ${sort} ${order}
 	</if>
 	LIMIt #{page}, #{rows}
 </select>

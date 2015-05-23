@@ -292,13 +292,13 @@
 
 						<ul class="breadcrumb">
 
-							<li><i class="icon-home"></i> <a href="../main.html">后台首页</a>
+							<li><i class="icon-home"></i> <a href="../main/main.html">后台首页</a>
 
 								<i class="icon-angle-right"></i></li>
 
-							<li><a href="#">驾校考场</a> <i class="icon-angle-right"></i></li>
+							<li><a href="javascript:void(0)">驾校考场</a> <i class="icon-angle-right"></i></li>
 
-							<li><a href="#">驾校列表</a></li>
+							<li><a href="javascript:void(0)">驾校列表</a></li>
 
 						</ul>
 
@@ -342,12 +342,7 @@
 						<div class="actions" style="margin-left:15px;"></div>
 						<div class="tools">
 
-
-
-							<a href="javascript:;" class="reload"></a>
-
-
-
+							<a href="javascript:void(0)" class="reload"></a>
 
 						</div>
 
@@ -430,7 +425,7 @@
 	<script src="../media/js/jquery-migrate-1.2.1.min.js"
 		type="text/javascript"></script>
 
-	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+	IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip
 
 	<script src="../media/js/jquery-ui-1.10.1.custom.min.js"
 		type="text/javascript"></script>
@@ -458,7 +453,7 @@
 
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script type="text/javascript" src="../media/js/select2.min.js"></script>
+	<!-- <script type="text/javascript" src="../media/js/select2.min.js"></script> -->
 
 	<script type="text/javascript"
 		src="../media/js/jquery.dataTables.min.js"></script>
@@ -477,16 +472,27 @@
 
 		jQuery(document).ready(function() {       
 
-		   App.init();
+		  	App.init();
 
 		   //TableAdvanced.init();
 		     var table = $('#sample_2').DataTable({
 		      "processing": true,
-			  "serverSide": true,
+			  /* "serverSide": true, */
 			  "ajax":{
 				  "url": "../rest/schoolInfo/getAll",
-				  "type": "post",
-				  "data": {},
+				  "type": "get",
+				  /* "data": function(data, settings){
+					  console.log("请求的数据长度: " + data.length);
+					  console.log(data.order[0]);
+					  console.log(data.order[0].column);
+					  var index = data.order[0].column;
+					  console.log("请求排序的列名: " + data.columns[index].data);
+					  console.log("请求排序的顺序：" + data.order[0].dir);
+					  data.sort = data.columns[index].data;
+					  data.dir = data.order[0].dir;
+					  data.search = data.search.value;
+					  console.log("请求的搜索字段是: " + data.search);
+				  } */
 				  "dataSrc": ""
 			  },
 			  "columnDefs": [ {
@@ -523,6 +529,10 @@
 						  }
 						  return data;
 					  }
+				  },
+				  {
+					  "targets": 10,
+					  "orderable": false
 				  }],
 			  "columns":[
 							{"data": "register_time"},
@@ -541,20 +551,20 @@
 					"url": "../media/json/lang.json"
 				},
 				"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "全部"] ],
-				"pageLength": 1
+				"pageLength": 10
 		   });
 
-		   table.on('xhr', function(){
+		   /* table.on('xhr', function(){
 			   var json = table.ajax.json();
 			   console.log( json ); 
 			   var info = table.page.info();
 			   info.recordsTotal = 2;
 			    $('#pageInfo').html( 'Showing page: '+info.page+' of '+info.pages );
 			    console.log(info); 
-			    console.log("当前页的索引：" + info.page);
+			    console.log("当前页的索引：" + info.pages);
 			    console.log("总的记录数：" + info.recordsTotal);
 			    console.log("当前显示的记录数：" + info.recordsDisplay);
-		   });
+		   }); */
 		});  
 
 	</script>

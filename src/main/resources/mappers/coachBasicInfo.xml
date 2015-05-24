@@ -71,20 +71,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		coach_name,
 		identity_card_no,
 		phone,
-		school_id,
+		C.school_id,
 		register_date,
 		training_place,
-		contract_no,
 		login_pwd,
-		validation,
+		C.validation,
 		teaching_age,
 		service_count,
 		star,
 		online,
-		IF((PHOTO IS NULL), 0, 1) AS havePhoto 
-	from coach_basic_info
+		IF((PHOTO IS NULL), 0, 1) AS havePhoto ,
+		school_name
+	from coach_basic_info as C join school_info as S on C.school_id = S.school_id 
 	<where>
-		validation = 1
+		C.validation = 1 
+		and S.validation = 1
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
 		</if>
@@ -139,19 +140,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		coach_name,
 		identity_card_no,
 		phone,
-		school_id,
+		C.school_id,
 		register_date,
 		training_place,
-		contract_no,
 		login_pwd,
-		validation,
+		C.validation,
 		teaching_age,
 		service_count,
 		star,
 		online,
 		IF((PHOTO IS NULL), 0, 1) AS havePhoto
-	from coach_basic_info
-	where coach_id = #{coach_id} and validation = 1
+	from coach_basic_info as C join school_info as S on C.school_id = S.school_id
+	where coach_id = #{coach_id} and C.validation = 1 and S.validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="CoachBasicInfo" parameterType="CoachBasicInfo">
@@ -160,20 +160,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		coach_name,
 		identity_card_no,
 		phone,
-		school_id,
+		C.school_id,
 		register_date,
 		training_place,
-		contract_no,
 		login_pwd,
-		validation,
+		C.validation,
 		teaching_age,
 		service_count,
 		star,
 		online,
 		IF((PHOTO IS NULL), 0, 1) AS havePhoto
-	from coach_basic_info
+	school_name
+	from coach_basic_info as C join school_info as S on C.school_id = S.school_id 
 	<where>
-		validation = 1
+		C.validation = 1 
+		and S.validation = 1
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
 		</if>

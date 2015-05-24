@@ -43,9 +43,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
-		<if test="register_time != null and register_time != ''">
-			register_time = #{register_time},
-		</if>
 		<if test="register_number != null and register_number != ''">
 			register_number = #{register_number},
 		</if>
@@ -61,6 +58,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="prepaid != null and prepaid != ''">
 			prepaid = #{prepaid},
 		</if>
+		<if test="device_2_status != null">
+			device_2_status = #{device_2_status},
+		</if>
+		<if test="device_3_status != null">
+			device_3_status = #{device_3_status},
+		</if>
+		register_time = now()
 	</set>
 </insert>
 <!-- **********删除对象********** -->

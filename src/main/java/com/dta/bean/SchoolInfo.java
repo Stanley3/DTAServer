@@ -6,8 +6,15 @@ import javax.ws.rs.FormParam;
 
 import com.dta.vo.PageParam;
 
-public class SchoolInfo implements Serializable{
+/**
+ * 
+ * @author gujh
+ * <p>添加驾校web界面对应的javabean文件</p>
+ *
+ */
+public class SchoolInfo extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
+	//此为联盟驾校信息表(school_info)对应的字段
 	@FormParam("school_id")
 	private Integer school_id;
 	@FormParam("school_name")
@@ -45,7 +52,32 @@ public class SchoolInfo implements Serializable{
 	@FormParam("status")
 	private Integer status;
 	@FormParam("prepaid")
-	private double prepaid;
+	private String prepaid;
+	@FormParam("bank_acount")
+	private String bank_acount;
+	@FormParam("acount_holder")
+	private String acount_holder;
+	@FormParam("subject_2_fee")
+	private String subject_2_fee;
+	@FormParam("subject_3_fee")
+	private String subject_3_fee;
+	@FormParam("charter_2_fee")
+	private String charter_2_fee;
+	@FormParam("charter_3_fee")
+	private String charter_3_fee;
+	@FormParam("device_2_status")
+	private Integer device_2_status;
+	@FormParam("device_3_status")
+	private Integer device_3_status;
+	@FormParam("vehicle_number")
+	private Integer vehicle_number;
+	
+	public Integer getVehicle_number() {
+		return vehicle_number;
+	}
+	public void setVehicle_number(Integer vehicle_number) {
+		this.vehicle_number = vehicle_number;
+	}
 	public void setSchool_id(Integer school_id){
 		this.school_id = school_id;
 	}
@@ -154,11 +186,133 @@ public class SchoolInfo implements Serializable{
 	public Integer getStatus() {
 		return status;
 	}
-	public double getPrepaid() {
-		return prepaid;
-	}
-	public void setPrepaid(double prepaid) {
+	public void setPrepaid(String prepaid){
 		this.prepaid = prepaid;
 	}
+	public String getPrepaid() {
+		return prepaid;
+	}
+	public void setBank_acount(String bank_acount){
+		this.bank_acount = bank_acount;
+	}
+	public String getBank_acount() {
+		return bank_acount;
+	}
+	public void setAcount_holder(String acount_holder){
+		this.acount_holder = acount_holder;
+	}
+	public String getAcount_holder() {
+		return acount_holder;
+	}
+	public void setSubject_2_fee(String subject_2_fee){
+		this.subject_2_fee = subject_2_fee;
+	}
+	public String getSubject_2_fee() {
+		return subject_2_fee;
+	}
+	public void setSubject_3_fee(String subject_3_fee){
+		this.subject_3_fee = subject_3_fee;
+	}
+	public String getSubject_3_fee() {
+		return subject_3_fee;
+	}
+	public void setCharter_2_fee(String charter_2_fee){
+		this.charter_2_fee = charter_2_fee;
+	}
+	public String getCharter_2_fee() {
+		return charter_2_fee;
+	}
+	public void setCharter_3_fee(String charter_3_fee){
+		this.charter_3_fee = charter_3_fee;
+	}
+	public String getCharter_3_fee() {
+		return charter_3_fee;
+	}
+	public void setDevice_2_status(Integer device_2_status){
+		this.device_2_status = device_2_status;
+	}
+	public Integer getDevice_2_status() {
+		return device_2_status;
+	}
+	public void setDevice_3_status(Integer device_3_status){
+		this.device_3_status = device_3_status;
+	}
+	public Integer getDevice_3_status() {
+		return device_3_status;
+	}
 	
+	//此为后台用户表(sys_user)对应的字段
+	@FormParam("user_id")
+	private Integer user_id;
+	@FormParam("user_name")
+	private String user_name;
+	@FormParam("user_pwd")
+	private String user_pwd;
+	@FormParam("role_ids")
+	private String role_ids;
+	@FormParam("user_photo")
+	private byte[] user_photo;
+	@FormParam("user_attribute")
+	private Integer user_attribute;
+	@FormParam("schoolmaster_name")
+	private String schoolmaster_name;
+	@FormParam("obligate_code")
+	private String obligate_code;
+	private Integer havePhoto;
+	
+	
+	public String getSchoolmaster_name() {
+		return schoolmaster_name;
+	}
+	public void setSchoolmaster_name(String schoolmaster_name) {
+		this.schoolmaster_name = schoolmaster_name;
+	}
+	public String getObligate_code() {
+		return obligate_code;
+	}
+	public void setObligate_code(String obligate_code) {
+		this.obligate_code = obligate_code;
+	}
+	public void setUser_id(Integer user_id){
+		this.user_id = user_id;
+	}
+	public Integer getUser_id() {
+		return user_id;
+	}
+	public void setUser_name(String user_name){
+		this.user_name = user_name;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_pwd(String user_pwd){
+		this.user_pwd = user_pwd;
+	}
+	public String getUser_pwd() {
+		return user_pwd;
+	}
+	public void setRole_ids(String role_ids){
+		this.role_ids = role_ids;
+	}
+	public String getRole_ids() {
+		return role_ids;
+	}
+	public void setUser_photo(byte[] user_photo){
+		this.user_photo = user_photo;
+	}
+	public byte[] getUser_photo() {
+		return user_photo;
+	}
+	public void setUser_attribute(Integer user_attribute){
+		this.user_attribute = user_attribute;
+	}
+	public Integer getUser_attribute() {
+		return user_attribute;
+	}
+	public Integer getHavePhoto() {
+		return havePhoto;
+	}
+	public void setHavePhoto(Integer havePhoto) {
+		this.havePhoto = havePhoto;
+	}
 }

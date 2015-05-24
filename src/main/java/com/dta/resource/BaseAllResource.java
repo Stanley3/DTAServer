@@ -99,7 +99,7 @@ public class BaseAllResource<T, V>{
 				return Response.status(201).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
 						GlobalConstant.INSERT_SUCCESS)).build();
 			}else{
-				return Response.status(500).header("Content-Type", "image/jgp").entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
+				return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
 						GlobalConstant.INSERT_FAIL)).build();
 			}
 		}catch(Exception e){

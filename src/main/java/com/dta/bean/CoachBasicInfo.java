@@ -40,6 +40,14 @@ public class CoachBasicInfo implements Serializable{
 	@FormParam("star")
 	private Integer star;
 	private Integer havePhoto;
+	private String school_name;
+	
+	public String getSchool_name() {
+		return school_name;
+	}
+	public void setSchool_name(String school_name) {
+		this.school_name = school_name;
+	}
 	public Integer getService_count() {
 		return service_count;
 	}

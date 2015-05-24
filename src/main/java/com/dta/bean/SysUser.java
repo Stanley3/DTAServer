@@ -23,7 +23,25 @@ public class SysUser extends PageParam implements Serializable{
 	private Integer user_attribute;
 	@FormParam("validation")
 	private Integer validation;
+	@FormParam("schoolmaster_name")
+	private String schoolmaster_name;
+	@FormParam("obligate_code")
+	private String obligate_code;
 	private Integer havePhoto;
+	
+	
+	public String getSchoolmaster_name() {
+		return schoolmaster_name;
+	}
+	public void setSchoolmaster_name(String schoolmaster_name) {
+		this.schoolmaster_name = schoolmaster_name;
+	}
+	public String getObligate_code() {
+		return obligate_code;
+	}
+	public void setObligate_code(String obligate_code) {
+		this.obligate_code = obligate_code;
+	}
 	public void setUser_id(Integer user_id){
 		this.user_id = user_id;
 	}

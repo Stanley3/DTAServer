@@ -497,13 +497,20 @@
 			  },
 			  "columnDefs": [ {
 				    "targets":  10 ,
-				    "data": null,
-				    "defaultContent": "<a href=\"../test.html\">查看</a>"
+				    "data": "school_id",
+				    "render": function(data, type, row, meta){
+				    	if(type == 'display'){
+				    		return "<a href=\"school_view_info.html?school_id=" + data + "\">查看</a>";
+				    	}
+				    	return data;
+				    }
 				  },
 				  {
 					  "targets": 4,
 					  "data": "status",
-					  "render": function(data, type, full, meta){
+					  "render": function(data, type, row, meta){
+						  if(meta.row == 1)
+							  console.log(row);
 						  if(type === 'display'){
 							  if(data == 0)	
 								  return "暂停";
@@ -545,7 +552,7 @@
 							{"data": "school_type"},
 							{"data": "subject_2_number"},
 							{"data": "subject_3_number"},
-							null
+							{"data": "school_id"}
 				     ],
 				"language":{
 					"url": "../media/json/lang.json"

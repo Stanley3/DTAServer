@@ -22,6 +22,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="user_attribute != null and user_attribute != ''">
 			user_attribute = #{user_attribute},
 		</if>
+		<if test="schoolmaster_name != null and schoolmaster_name != ''">
+			schoolmaster_name = #{schoolmaster_name},
+		</if>
+		<if test="obligate_code != null and obligate_code != ''">
+			obligate_code = #{obligate_code},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -77,6 +83,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 user_pwd,
 	 	 role_ids,
 		 user_attribute,
+		 obligate_code,
+		 schoolmaster_name,
 		 IF((user_photo IS NULL), 0, 1) AS havePhoto
 	from sys_user 
 	where user_id = #{user_id}
@@ -169,5 +177,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	user_photo
 	from sys_user
 	where user_id = #{user_id}
+</select>
+<select id="getUserByFK" resultType="SysUser">
+	select 
+		 user_id,
+	 	 user_name,
+	 	 user_pwd,
+	 	 role_ids,
+		 user_attribute,
+		 obligate_code,
+		 schoolmaster_name,
+		 IF((user_photo IS NULL), 0, 1) AS havePhoto
+	from sys_user 
+	where user_attribute = #{school_id}
 </select>
 </mapper>

@@ -53,10 +53,10 @@ public class SchoolInfo extends PageParam implements Serializable{
 	private Integer status;
 	@FormParam("prepaid")
 	private String prepaid;
-	@FormParam("bank_acount")
-	private String bank_acount;
-	@FormParam("acount_holder")
-	private String acount_holder;
+	@FormParam("bank_account")
+	private String bank_account;
+	@FormParam("account_holder")
+	private String account_holder;
 	@FormParam("subject_2_fee")
 	private String subject_2_fee;
 	@FormParam("subject_3_fee")
@@ -192,17 +192,17 @@ public class SchoolInfo extends PageParam implements Serializable{
 	public String getPrepaid() {
 		return prepaid;
 	}
-	public void setBank_acount(String bank_acount){
-		this.bank_acount = bank_acount;
+	public void setBank_account(String bank_account){
+		this.bank_account = bank_account;
 	}
-	public String getBank_acount() {
-		return bank_acount;
+	public String getBank_account() {
+		return bank_account;
 	}
-	public void setAcount_holder(String acount_holder){
-		this.acount_holder = acount_holder;
+	public String getAccount_holder() {
+		return account_holder;
 	}
-	public String getAcount_holder() {
-		return acount_holder;
+	public void setAccount_holder(String account_holder) {
+		this.account_holder = account_holder;
 	}
 	public void setSubject_2_fee(String subject_2_fee){
 		this.subject_2_fee = subject_2_fee;

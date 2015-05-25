@@ -43,6 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="register_time != null and register_time != ''">
+			register_time = #{register_time},
+		</if>
 		<if test="register_number != null and register_number != ''">
 			register_number = #{register_number},
 		</if>
@@ -58,11 +61,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="prepaid != null and prepaid != ''">
 			prepaid = #{prepaid},
 		</if>
-		<if test="device_2_status != null">
+		<if test="bank_account != null and bank_account != ''">
+			bank_account = #{bank_account},
+		</if>
+		<if test="account_holder != null and account_holder != ''">
+			account_holder = #{account_holder},
+		</if>
+		<if test="subject_2_fee != null and subject_2_fee != ''">
+			subject_2_fee = #{subject_2_fee},
+		</if>
+		<if test="subject_3_fee != null and subject_3_fee != ''">
+			subject_3_fee = #{subject_3_fee},
+		</if>
+		<if test="charter_2_fee != null and charter_2_fee != ''">
+			charter_2_fee = #{charter_2_fee},
+		</if>
+		<if test="charter_3_fee != null and charter_3_fee != ''">
+			charter_3_fee = #{charter_3_fee},
+		</if>
+		<if test="device_2_status != null and device_2_status != ''">
 			device_2_status = #{device_2_status},
 		</if>
-		<if test="device_3_status != null">
+		<if test="device_3_status != null and device_3_status != ''">
 			device_3_status = #{device_3_status},
+		</if>
+		<if test="vehicle_number != null and vehicle_number != ''">
+			vehicle_number = #{vehicle_number},
 		</if>
 		register_time = now()
 	</set>
@@ -138,6 +162,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="status != null and status != '' ">
 			and status = #{status}
+		</if>
+		<if test="prepaid != null and prepaid != '' ">
+			and prepaid = #{prepaid}
 		</if>
 		<if test="prepaid != null and prepaid != '' ">
 			and prepaid = #{prepaid}
@@ -342,6 +369,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="prepaid != null and prepaid != ''">
 			prepaid = #{prepaid},
 		</if>
+		<if test="bank_account != null and bank_account != ''">
+			bank_account = #{bank_account},
+		</if>
+		<if test="account_holder != null and account_holder != ''">
+			account_holder = #{account_holder},
+		</if>
+		<if test="subject_2_fee != null and subject_2_fee != ''">
+			subject_2_fee = #{subject_2_fee},
+		</if>
+		<if test="subject_3_fee != null and subject_3_fee != ''">
+			subject_3_fee = #{subject_3_fee},
+		</if>
+		<if test="charter_2_fee != null and charter_2_fee != ''">
+			charter_2_fee = #{charter_2_fee},
+		</if>
+		<if test="charter_3_fee != null and charter_3_fee != ''">
+			charter_3_fee = #{charter_3_fee},
+		</if>
+		<if test="device_2_status != null and device_2_status != ''">
+			device_2_status = #{device_2_status},
+		</if>
+		<if test="device_3_status != null and device_3_status != ''">
+			device_3_status = #{device_3_status},
+		</if>
+		<if test="vehicle_number != null and vehicle_number != ''">
+			vehicle_number = #{vehicle_number},
+		</if>
+		register_time = now()
 	</set>
 	where school_id =  #{school_id}
 </update>

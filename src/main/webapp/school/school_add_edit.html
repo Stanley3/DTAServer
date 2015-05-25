@@ -425,11 +425,11 @@
 								<label class="control-label">类型</label>
 								<div class="controls">
 									<label class="radio"> <input type="radio"
-										name="type" value="1" checked /> 驾校
+										name="school_type" value="1" checked /> 驾校
 									</label> <label class="radio"> <input type="radio"
-										name="type" value="2" /> 科二考场
+										name="school_type" value="2" /> 科二考场
 									</label> <label class="radio"> <input type="radio"
-										name="type" value="3" /> 科三考场
+										name="school_type" value="3" /> 科三考场
 									</label>
 								</div>
 							</div>
@@ -462,7 +462,7 @@
 								<label class="control-label"><span class="required">*</span>教练数量</label>
 								<div class="controls">
 									<input class="validate[required, custom[number], max[65535]] m-wrap medium" type="text" placeholder="开通教练数量" name="register_number"
-										id="registerName"/>
+										id="registerNumber"/>
 								</div>
 							</div>
 							<div class="control-group">
@@ -697,7 +697,7 @@
 			console.log($('#form').serialize());
 			console.log($('#form').serializeArray());
 			if(flag){
-				alert("执行: " + $('#form').attr('action'));
+				//alert("执行: " + $('#form').attr('action'));
 				$.ajax({
 					url: '../rest/schoolInfo/add',
 					type: 'post',
@@ -709,12 +709,12 @@
 						alert(JSON.stringify(data));
 					},
 					error: function(xhr, err){
-						alert("wrong");
+						//alert("wrong");
 						alert(err + " " + xhr.responseText);
-					},
+					}/* ,
 					complete: function(xhr, ts){
 						alert("status:" + xhr.status + ", statusText: " + xhr.statusText + ", responseText: " + xhr.responseText+ ", " + ts);
-					}
+					} */
 				});
 			}
 		}

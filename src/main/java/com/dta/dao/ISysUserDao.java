@@ -7,4 +7,6 @@ import com.dta.vo.SysUserVo;
 import com.dta.bean.SysUser;
 public interface ISysUserDao extends IBaseAllDao<SysUser, SysUserVo> {
 	public SysUser downloadPhoto(Serializable id);
+	
+	public SysUser getUserByFK(Serializable fk);
 }

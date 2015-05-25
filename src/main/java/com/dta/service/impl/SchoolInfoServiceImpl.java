@@ -1,5 +1,7 @@
 package com.dta.service.impl;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +37,17 @@ public class SchoolInfoServiceImpl extends BaseAllServiceImpl<SchoolInfo, School
 		user.setRole_ids("1");
 		result = userDao.addObject(user);
 		return result;
+	}
+	
+	public SchoolInfo getObjectById(Serializable id){
+		SchoolInfo schoolInfo = new SchoolInfo();
+		SysUser sysUser = new SysUser();
+		schoolInfo = dao.getObjectById(id);
+		sysUser = userDao.getUserByFK(schoolInfo.getSchool_id());
+		schoolInfo.setSchoolmaster_name(sysUser.getSchoolmaster_name());
+		schoolInfo.setUser_name(sysUser.getUser_name());
+		schoolInfo.setUser_pwd(sysUser.getUser_pwd());
+		schoolInfo.setObligate_code(sysUser.getObligate_code());
+		return schoolInfo;
 	}
 }

@@ -55,9 +55,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="school_type != null and school_type != ''">
 			school_type = #{school_type},
 		</if>
-		<if test="status != null and status != ''">
-			status = #{status},
-		</if>
 		<if test="prepaid != null and prepaid != ''">
 			prepaid = #{prepaid},
 		</if>
@@ -79,15 +76,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="charter_3_fee != null and charter_3_fee != ''">
 			charter_3_fee = #{charter_3_fee},
 		</if>
-		<if test="device_2_status != null and device_2_status != ''">
-			device_2_status = #{device_2_status},
-		</if>
-		<if test="device_3_status != null and device_3_status != ''">
-			device_3_status = #{device_3_status},
-		</if>
 		<if test="vehicle_number != null and vehicle_number != ''">
 			vehicle_number = #{vehicle_number},
 		</if>
+		device_2_status = #{device_2_status},
+		device_3_status = #{device_3_status},
+		status = #{status},
 		register_time = now()
 	</set>
 </insert>
@@ -363,9 +357,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="school_type != null and school_type != ''">
 			school_type = #{school_type},
 		</if>
-		<if test="status != null and status != ''">
-			status = #{status},
-		</if>
 		<if test="prepaid != null and prepaid != ''">
 			prepaid = #{prepaid},
 		</if>
@@ -387,15 +378,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="charter_3_fee != null and charter_3_fee != ''">
 			charter_3_fee = #{charter_3_fee},
 		</if>
-		<if test="device_2_status != null and device_2_status != ''">
-			device_2_status = #{device_2_status},
-		</if>
-		<if test="device_3_status != null and device_3_status != ''">
-			device_3_status = #{device_3_status},
-		</if>
 		<if test="vehicle_number != null and vehicle_number != ''">
 			vehicle_number = #{vehicle_number},
 		</if>
+		device_2_status = #{device_2_status},
+		device_3_status = #{device_3_status},
+		status = #{status},
 		register_time = now()
 	</set>
 	where school_id =  #{school_id}

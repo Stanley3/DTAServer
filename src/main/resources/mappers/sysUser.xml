@@ -169,6 +169,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="user_attribute != null and user_attribute != ''">
 			user_attribute = #{user_attribute},
 		</if>
+		<if test="schoolmaster_name != null and schoolmaster_name != ''">
+			schoolmaster_name = #{schoolmaster_name},
+		</if>
+		<if test="obligate_code != null and obligate_code != ''">
+			obligate_code = #{obligate_code},
+		</if>
 	</set>
 	where user_id = #{user_id}
 </update>

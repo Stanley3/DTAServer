@@ -27,7 +27,7 @@ public class SchoolInfoResource extends BaseAllResource<SchoolInfo, SchoolInfoVo
 		if(service == null)
 			throw new Exception("service is null");
 		super.setService(service);
-		super.setMianId(GlobalConstant.SYSUSER);
+		super.setMianId(GlobalConstant.SCHOOLINFO);
 	}
 	
 	

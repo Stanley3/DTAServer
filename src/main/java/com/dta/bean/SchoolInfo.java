@@ -30,9 +30,9 @@ public class SchoolInfo extends PageParam implements Serializable{
 	@FormParam("school_phone")
 	private String school_phone;
 	@FormParam("longitude")
-	private String longitude;
+	private Double longitude;
 	@FormParam("latitude")
-	private String latitude;
+	private Double latitude;
 	@FormParam("coach_number")
 	private Integer coach_number;
 	@FormParam("subject_2_number")
@@ -52,19 +52,19 @@ public class SchoolInfo extends PageParam implements Serializable{
 	@FormParam("status")
 	private Integer status;
 	@FormParam("prepaid")
-	private String prepaid;
+	private Double prepaid;
 	@FormParam("bank_account")
 	private String bank_account;
 	@FormParam("account_holder")
 	private String account_holder;
 	@FormParam("subject_2_fee")
-	private String subject_2_fee;
+	private Double subject_2_fee;
 	@FormParam("subject_3_fee")
-	private String subject_3_fee;
+	private Double subject_3_fee;
 	@FormParam("charter_2_fee")
-	private String charter_2_fee;
+	private Double charter_2_fee;
 	@FormParam("charter_3_fee")
-	private String charter_3_fee;
+	private Double charter_3_fee;
 	@FormParam("device_2_status")
 	private Integer device_2_status;
 	@FormParam("device_3_status")
@@ -120,18 +120,6 @@ public class SchoolInfo extends PageParam implements Serializable{
 	public String getSchool_phone() {
 		return school_phone;
 	}
-	public void setLongitude(String longitude){
-		this.longitude = longitude;
-	}
-	public String getLongitude() {
-		return longitude;
-	}
-	public void setLatitude(String latitude){
-		this.latitude = latitude;
-	}
-	public String getLatitude() {
-		return latitude;
-	}
 	public void setCoach_number(Integer coach_number){
 		this.coach_number = coach_number;
 	}
@@ -186,12 +174,6 @@ public class SchoolInfo extends PageParam implements Serializable{
 	public Integer getStatus() {
 		return status;
 	}
-	public void setPrepaid(String prepaid){
-		this.prepaid = prepaid;
-	}
-	public String getPrepaid() {
-		return prepaid;
-	}
 	public void setBank_account(String bank_account){
 		this.bank_account = bank_account;
 	}
@@ -203,30 +185,6 @@ public class SchoolInfo extends PageParam implements Serializable{
 	}
 	public void setAccount_holder(String account_holder) {
 		this.account_holder = account_holder;
-	}
-	public void setSubject_2_fee(String subject_2_fee){
-		this.subject_2_fee = subject_2_fee;
-	}
-	public String getSubject_2_fee() {
-		return subject_2_fee;
-	}
-	public void setSubject_3_fee(String subject_3_fee){
-		this.subject_3_fee = subject_3_fee;
-	}
-	public String getSubject_3_fee() {
-		return subject_3_fee;
-	}
-	public void setCharter_2_fee(String charter_2_fee){
-		this.charter_2_fee = charter_2_fee;
-	}
-	public String getCharter_2_fee() {
-		return charter_2_fee;
-	}
-	public void setCharter_3_fee(String charter_3_fee){
-		this.charter_3_fee = charter_3_fee;
-	}
-	public String getCharter_3_fee() {
-		return charter_3_fee;
 	}
 	public void setDevice_2_status(Integer device_2_status){
 		this.device_2_status = device_2_status;
@@ -315,4 +273,48 @@ public class SchoolInfo extends PageParam implements Serializable{
 	public void setHavePhoto(Integer havePhoto) {
 		this.havePhoto = havePhoto;
 	}
+	public Double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	public Double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	public Double getPrepaid() {
+		return prepaid;
+	}
+	public void setPrepaid(Double prepaid) {
+		this.prepaid = prepaid;
+	}
+	public Double getSubject_2_fee() {
+		return subject_2_fee;
+	}
+	public void setSubject_2_fee(Double subject_2_fee) {
+		this.subject_2_fee = subject_2_fee;
+	}
+	public Double getSubject_3_fee() {
+		return subject_3_fee;
+	}
+	public void setSubject_3_fee(Double subject_3_fee) {
+		this.subject_3_fee = subject_3_fee;
+	}
+	public Double getCharter_2_fee() {
+		return charter_2_fee;
+	}
+	public void setCharter_2_fee(Double charter_2_fee) {
+		this.charter_2_fee = charter_2_fee;
+	}
+	public Double getCharter_3_fee() {
+		return charter_3_fee;
+	}
+	public void setCharter_3_fee(Double charter_3_fee) {
+		this.charter_3_fee = charter_3_fee;
+	}
+	
+	
 }

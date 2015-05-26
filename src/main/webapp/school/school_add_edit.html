@@ -476,9 +476,9 @@
 								<label class="control-label">当前状态</label>
 								<div class="controls">
 									<label class="radio"> <input type="radio"
-										name="status" value="0" checked /> 有效
+										name="status" value="0" checked /> 暂停
 									</label> <label class="radio"> <input type="radio"
-										name="status" value="1" /> 暂停
+										name="status" value="1" /> 有效
 									</label>
 								</div>
 							</div>
@@ -548,6 +548,14 @@
 									</div>
 								</div>
 								<div class="control-group">
+									<label class="control-label">预付款</label>
+									<div class="controls">
+										<input type="text" class="validate[custom[number]] m-wrap small" placeholder="驾校预付款" name="prepaid"
+											id="prepaid"/><span
+											class="help-inline">元</span>
+									</div>
+								</div>
+								<div class="control-group">
 									<label class="control-label">协议编号</label>
 									<div class="controls">
 										<input name="contract_no" type="text" class="m-wrap small"
@@ -560,7 +568,7 @@
 							<div class="control-group">
 								<label class="control-label">校长姓名<span class="required">*</span></label>
 								<div class="controls">
-									<input name="schoolmaster_name" type="text" class="validate[required, maxSize[10]] span6 m-wrap"
+									<input name="schoolmaster_name" type="text" class="validate[required, maxSize[10]] span6 m-wrap" id="schoolmasterName"
 										placeholder="校长姓名" /> <span class="help-inline">校长姓名</span>
 								</div>
 							</div>
@@ -593,7 +601,7 @@
 								</div>
 							</div>
 
-							<button  style="margin-left:100px;" class="btn blue" onclick="add()">添加</button>
+							<a href="javascript:void(0)" class="btn blue" style="margin-left:100px;" onclick="add()">添加</a>
 							<button type="reset" class="btn" onclick="$('#form').validationEngine('hideAll')">重填</button>	
 						</form>
 					</div>
@@ -697,7 +705,6 @@
 			console.log($('#form').serialize());
 			console.log($('#form').serializeArray());
 			if(flag){
-				//alert("执行: " + $('#form').attr('action'));
 				$.ajax({
 					url: '../rest/schoolInfo/add',
 					type: 'post',
@@ -705,16 +712,11 @@
 					data: $('#form').serialize(),
 					processData: false,
 					success: function(data){
-						alert("success");
-						alert(JSON.stringify(data));
+						alert(data.desc);
 					},
 					error: function(xhr, err){
-						//alert("wrong");
 						alert(err + " " + xhr.responseText);
-					}/* ,
-					complete: function(xhr, ts){
-						alert("status:" + xhr.status + ", statusText: " + xhr.statusText + ", responseText: " + xhr.responseText+ ", " + ts);
-					} */
+					}
 				});
 			}
 		}

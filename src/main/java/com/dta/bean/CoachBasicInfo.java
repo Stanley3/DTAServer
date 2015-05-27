@@ -39,9 +39,18 @@ public class CoachBasicInfo implements Serializable{
 	private Integer available_times;//今天还可预约的次数
 	@FormParam("star")
 	private Integer star;
+	@FormParam("subject")
+	private Integer subject;
 	private Integer havePhoto;
 	private String school_name;
 	
+	
+	public Integer getSubject() {
+		return subject;
+	}
+	public void setSubject(Integer subject) {
+		this.subject = subject;
+	}
 	public String getSchool_name() {
 		return school_name;
 	}

@@ -39,7 +39,7 @@ public class OrderRecord implements Serializable{
 	private Integer course_status;
 	private String coach_name;
 	private String phone;
-	private String training_place;
+	private String school_address;
 	private Integer havePhoto;
 	public void setOrder_id(Integer order_id){
 		this.order_id = order_id;
@@ -143,10 +143,10 @@ public class OrderRecord implements Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getTraining_place() {
-		return training_place;
+	public String getSchool_address() {
+		return school_address;
 	}
-	public void setTraining_place(String training_place) {
-		this.training_place = training_place;
+	public void setSchool_address(String school_address) {
+		this.school_address = school_address;
 	}
 }

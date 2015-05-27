@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		phone,
 		C.school_id,
 		register_date,
-		training_place,
+		S.school_address,
 		login_pwd,
 		C.validation,
 		teaching_age,
@@ -102,13 +102,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and photo like "%"#{photo}"%"
 		</if>
 		<if test="school_id != null and school_id != '' ">
-			and school_id = #{school_id}
+			and C.school_id = #{school_id}
 		</if>
 		<if test="register_date != null and register_date != '' ">
 			and register_date like "%"#{register_date}"%"
-		</if>
-		<if test="training_place != null and training_place != '' ">
-			and training_place like "%"#{training_place}"%"
 		</if>
 		<if test="contract_no != null and contract_no != '' ">
 			and contract_no like "%"#{contract_no}"%"

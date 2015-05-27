@@ -75,17 +75,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	R.order_memo,
 	 	coach.coach_name,
 	 	coach.phone,
-	 	coach.training_place,
+	 	S.school_address,
 	 	IF((coach.photo IS NULL), 0, 1) AS havePhoto
 	from 
-		order_record as R 
+			order_record as R 
 		join 
-		coach_basic_info as coach 
+			coach_basic_info as coach 
 		on 
-		R.coach_id = coach.coach_id
+			R.coach_id = coach.coach_id
+		join 
+			school_info as S
+		on 
+			R.school_id = S.school_id
 	<where>
 		R.validation = 1
 		and coach.validation = 1
+		and S.validation = 1
 		<if test="order_id != null and order_id != '' ">
 			and order_id = #{order_id}
 		</if>

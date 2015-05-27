@@ -253,7 +253,7 @@
 
 			<!-- 开始 左侧通用 菜单 -->        
 
-			<script src="../left.js" type="text/javascript"></script>
+			<script src="../media/left.js" type="text/javascript"></script>
 
 			<!-- END SIDEBAR MENU -->
 
@@ -374,7 +374,7 @@
     <a class=" btn blue"  href="school_view_info.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>驾校信息</a>
     <a class=" btn blue"  href="school_view_techer.html" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>教练信息</a>
     <a class=" btn blue"  href="school_view_students.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>学员信息</a>
-    <a class=" btn purple"  href="school_view_money.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i> 财务信息</a>
+    <a class=" btn purple"  href="javascript:void(0);" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i> 财务信息</a>
 
 
 				<div class="portlet box blue">
@@ -491,7 +491,13 @@
 
 		   App.init();
 
-		   TableAdvanced.init();
+		   //TableAdvanced.init();
+		   var id = window.location.search.match(/\d+/);
+		   if(id != null){
+			   $('#schoolInfo').attr('href', $('#schoolInfo').attr('href') + '?school_id=' + id);
+			   $('#studentInfo').attr('href', $('#studentInfo').attr('href') + '?school_id=' + id);
+			   $('#teacherInfo').attr('href', $('#teacherInfo').attr('href') + '?school_id=' + id);
+		   }
 
 		});
 

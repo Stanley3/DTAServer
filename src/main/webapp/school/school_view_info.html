@@ -644,10 +644,12 @@
 		   //TableAdvanced.init();
 		   var id = window.location.search.match(/\d+/);
 		   var url = '../rest/schoolInfo/' + id;
-		   $('#coachInfo').attr('href', 'school_view_techer.html?school_id=' + id);
-		   $('#studentInfo').attr('href', 'school_view_students.html?school_id=' + id);
-		   $('#financeInfo').attr('href', 'school_view_money.html?school_id=' + id);
-		   console.log(url);
+		   if(id != null){
+			   $('#coachInfo').attr('href', 'school_view_techer.html?school_id=' + id);
+			   $('#studentInfo').attr('href', 'school_view_students.html?school_id=' + id);
+			   $('#financeInfo').attr('href', 'school_view_money.html?school_id=' + id);
+		   }
+		   console.log($('#coachInfo').attr('href'));
 		   if(id != ""){
 			   $.ajax({
 				   url: url,

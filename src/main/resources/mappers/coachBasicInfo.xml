@@ -25,9 +25,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="register_date != null and register_date != ''">
 			register_date = #{register_date},
 		</if>
-		<if test="training_place != null and training_place != ''">
-			training_place = #{training_place},
-		</if>
 		<if test="contract_no != null and contract_no != ''">
 			contract_no = #{contract_no},
 		</if>
@@ -49,6 +46,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="online != null and online != ''">
 			online = #{online},
 		</if>
+		<if test="obligate_code != null and obligate_code != ''">
+			obligate_code = #{obligate_code},
+		</if>
+		gender = #{gender},
+		register_date = now()
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -84,8 +86,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		school_name
 	from coach_basic_info as C join school_info as S on C.school_id = S.school_id 
 	<where>
-		C.validation = 1 
-		and S.validation = 1
+		<!-- C.validation = 1 
+		and S.validation = 1 -->
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
 		</if>
@@ -139,13 +141,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		phone,
 		C.school_id,
 		register_date,
-		training_place,
 		login_pwd,
 		C.validation,
 		teaching_age,
 		service_count,
 		star,
+		gender,
 		online,
+		obligate_code,
 		IF((PHOTO IS NULL), 0, 1) AS havePhoto
 	from coach_basic_info as C join school_info as S on C.school_id = S.school_id
 	where coach_id = #{coach_id} and C.validation = 1 and S.validation = 1
@@ -159,19 +162,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		phone,
 		C.school_id,
 		register_date,
-		training_place,
-		login_pwd,
 		C.validation,
 		teaching_age,
 		service_count,
 		star,
 		online,
-		IF((PHOTO IS NULL), 0, 1) AS havePhoto
-	school_name
+		IF((PHOTO IS NULL), 0, 1) AS havePhoto,
+		school_name
 	from coach_basic_info as C join school_info as S on C.school_id = S.school_id 
 	<where>
-		C.validation = 1 
-		and S.validation = 1
+		<!-- C.validation = 1 
+		and S.validation = 1 -->
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
 		</if>
@@ -192,9 +193,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="register_date != null and register_date != '' ">
 			and register_date like "%"#{register_date}"%"
-		</if>
-		<if test="training_place != null and training_place != '' ">
-			and training_place like "%"#{training_place}"%"
 		</if>
 		<if test="contract_no != null and contract_no != '' ">
 			and contract_no like "%"#{contract_no}"%"
@@ -219,18 +217,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</where>
 	<if test="sort != null">
-		order by #{sort} #{order}
+		order by ${sort} ${order}
 	</if>
 	LIMIt #{page}, #{rows}
 </select>
 <!-- **********获取总数********* -->
-<select id="getSize" resultType="int" parameterType="CoachBasicInfo">
+<select id="getSize" resultType="int" parameterType="CoachBasicInfoVo">
 	select count(*) from coach_basic_info
 	<where>
-		validation = 1
-		<if test="coach_id != null and coach_id != '' ">
-			and coach_id = #{coach_id}
-		</if>
+		<!-- validation = 1 -->
 		<if test="coach_name != null and coach_name != '' ">
 			and coach_name like "%"#{coach_name}"%"
 		</if>
@@ -240,38 +235,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="phone != null and phone != '' ">
 			and phone like "%"#{phone}"%"
 		</if>
-		<if test="photo != null and photo != '' ">
-			and photo like "%"#{photo}"%"
-		</if>
-		<if test="school_id != null and school_id != '' ">
-			and school_id = #{school_id}
-		</if>
 		<if test="register_date != null and register_date != '' ">
 			and register_date like "%"#{register_date}"%"
-		</if>
-		<if test="training_place != null and training_place != '' ">
-			and training_place like "%"#{training_place}"%"
 		</if>
 		<if test="contract_no != null and contract_no != '' ">
 			and contract_no like "%"#{contract_no}"%"
 		</if>
-		<if test="login_pwd != null and login_pwd != '' ">
-			and login_pwd like "%"#{login_pwd}"%"
-		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
 		</if>
-		<if test="teaching_age != null and teaching_age != '' ">
+		<if test="teaching_age != null and teaching_age != 0 ">
 			and teaching_age = #{teaching_age}
 		</if>
-		<if test="service_count != null and service_count != '' ">
+		<if test="service_count != null and service_count != 0 ">
 			and service_count = #{service_count}
 		</if>
-		<if test="star != null and star != '' ">
+		<if test="star != null and star != 0 ">
 			and star = #{star}
-		</if>
-		<if test="online != null and online != '' ">
-			and online = #{online}
 		</if>
 	</where>
 </select>
@@ -296,9 +276,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="register_date != null and register_date != ''">
 			register_date = #{register_date},
-		</if>
-		<if test="training_place != null and training_place != ''">
-			training_place = #{training_place},
 		</if>
 		<if test="contract_no != null and contract_no != ''">
 			contract_no = #{contract_no},
@@ -326,5 +303,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <select id="downloadPhoto" resultType="CoachBasicInfo">
 	select photo from coach_basic_info where coach_id = #{coach_id}
+</select>
+<select id="globalSearch" resultType="CoachBasicInfo" parameterType="CoachBasicInfoVo">
+	select 
+		coach_id,
+		coach_name,
+		identity_card_no,
+		phone,
+		C.school_id,
+		register_date,
+		C.validation,
+		teaching_age,
+		service_count,
+		star,
+		online,
+		IF((PHOTO IS NULL), 0, 1) AS havePhoto,
+		school_name
+	from coach_basic_info as C join school_info as S on C.school_id = S.school_id 
+	<where>
+		<!-- C.validation = 1 
+		and S.validation = 1 -->
+		<if test="coach_name != null and coach_name != '' ">
+			or coach_name like "%"#{coach_name}"%"
+		</if>
+		<if test="identity_card_no != null and identity_card_no != '' ">
+			or identity_card_no like "%"#{identity_card_no}"%"
+		</if>
+		<if test="phone != null and phone != '' ">
+			or phone like "%"#{phone}"%"
+		</if>
+		<if test="register_date != null and register_date != '' ">
+			or register_date like "%"#{register_date}"%"
+		</if>
+		<if test="school_name != null and school_name != ''">
+			or S.school_name like "%"#{school_name}"%"
+		</if>
+	</where>
+	<if test="sort != null">
+		order by ${sort} ${order}
+	</if>
+	<if test="rows != 0">
+		LIMIt #{page}, #{rows}
+	</if>
+</select>
+<select id="globalSearchSize" resultType="int" parameterType="CoachBasicInfoVo">
+	select count(*) 
+	from coach_basic_info as C join school_info as S on C.school_id = S.school_id
+	<where>
+		<!-- C.validation = 1 
+		and S.validation = 1 -->
+		<if test="coach_name != null and coach_name != '' ">
+			or coach_name like "%"#{coach_name}"%"
+		</if>
+		<if test="identity_card_no != null and identity_card_no != '' ">
+			or identity_card_no like "%"#{identity_card_no}"%"
+		</if>
+		<if test="phone != null and phone != '' ">
+			or phone like "%"#{phone}"%"
+		</if>
+		<if test="register_date != null and register_date != '' ">
+			or register_date like "%"#{register_date}"%"
+		</if>
+		<if test="school_name != null and school_name != ''">
+			or S.school_name like "%"#{school_name}"%"
+		</if>
+	</where> 
 </select>
 </mapper>

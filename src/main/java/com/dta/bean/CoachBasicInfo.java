@@ -41,10 +41,26 @@ public class CoachBasicInfo implements Serializable{
 	private Integer star;
 	@FormParam("subject")
 	private Integer subject;
+	@FormParam("gender")
+	private Integer gender;
+	@FormParam("obligate_code")
+	private String obligate_code;
 	private Integer havePhoto;
 	private String school_name;
 	
 	
+	public String getObligate_code() {
+		return obligate_code;
+	}
+	public void setObligate_code(String obligate_code) {
+		this.obligate_code = obligate_code;
+	}
+	public Integer getGender() {
+		return gender;
+	}
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
 	public Integer getSubject() {
 		return subject;
 	}

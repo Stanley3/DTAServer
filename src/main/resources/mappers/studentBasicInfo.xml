@@ -16,18 +16,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="identity_card_no != null and identity_card_no != ''">
 			identity_card_no = #{identity_card_no},
 		</if>
-		<if test="student_gender != null and student_gender != ''">
+		<if test="student_gender != null">
 			student_gender = #{student_gender},
 		</if>
 		<if test="student_phone != null and student_phone != ''">
 			student_phone = #{student_phone},
 		</if>
-		<if test="status != null and status != ''">
-			status = #{status},
-		</if>
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="subject != null">
+			subject = #{subject},
+		</if>
+		<if test="driving_license_type != null">
+			driving_license_type = #{driving_license_type},
+		</if>
+		<if test="school_id != null and school_id != 0">
+			school_id = #{school_id},
+		</if>
+		register_date = now()
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -45,17 +52,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="StudentBasicInfo" parameterType="StudentBasicInfo">
-	select * from student_basic_info
+	select 
+		 ST.register_date,
+		 ST.student_id,
+		 ST.student_name,
+		 ST.student_phone,
+		 ST.subject,
+		 ST.validation,
+		 ST.school_id,
+		 SC.school_name
+	from 
+		student_basic_info as ST
+	left join 
+		school_info as SC
+	on 
+		ST.school_id = SC.school_id
 	<where>
-		validation = 1
 		<if test="student_id != null and student_id != '' ">
 			and student_id = #{student_id}
 		</if>
 		<if test="student_name != null and student_name != '' ">
 			and student_name like "%"#{student_name}"%"
-		</if>
-		<if test="student_photo != null and student_photo != '' ">
-			and student_photo like "%"#{student_photo}"%"
 		</if>
 		<if test="identity_card_no != null and identity_card_no != '' ">
 			and identity_card_no like "%"#{identity_card_no}"%"
@@ -66,32 +83,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_phone != null and student_phone != '' ">
 			and student_phone like "%"#{student_phone}"%"
 		</if>
-		<if test="status != null and status != '' ">
-			and status = #{status}
-		</if>
 		<if test="validation != null and validation != '' ">
-			and validation = #{validation}
+			and ST.validation = #{validation}
 		</if>
 	</where>
+	<if test="sort != null and order != null">
+		order by ${sort} ${order}
+	</if>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="StudentBasicInfo" parameterType="int">
-	select * from student_basic_info
-	where student_id = #{student_id} and validation = 1
+	select 
+		SB.student_id,
+		SB.student_name,
+		SB.identity_card_no,
+		SB.student_gender,
+		SB.student_phone,
+		SB.subject,
+		SB.school_id,
+		SB.driving_license_type,
+		SB.validation,
+		SL.login_pwd,
+		SL.obligate_code,
+		SL.login_id,
+		IF((student_photo is null), 0, 1) as havePhoto
+	from 
+		student_basic_info as SB
+	join 
+		student_login_info as SL
+	on
+		SB.student_id = SL.student_id
+	where 
+		SB.student_id = #{student_id} and 
+		SB.validation = 1 and
+		SL.validation = 1
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="StudentBasicInfo" parameterType="StudentBasicInfo">
-	select * from student_basic_info
+	select 
+		 ST.register_date,
+		 ST.student_id,
+		 ST.student_name,
+		 ST.student_phone,
+		 ST.subject,
+		 ST.validation,
+		 ST.school_id,
+		 SC.school_name
+	from 
+		student_basic_info as ST
+	left join 
+		school_info as SC
+	on 
+		ST.school_id = SC.school_id
 	<where>
-		validation = 1
 		<if test="student_id != null and student_id != '' ">
 			and student_id = #{student_id}
 		</if>
 		<if test="student_name != null and student_name != '' ">
 			and student_name like "%"#{student_name}"%"
-		</if>
-		<if test="student_photo != null and student_photo != '' ">
-			and student_photo like "%"#{student_photo}"%"
 		</if>
 		<if test="identity_card_no != null and identity_card_no != '' ">
 			and identity_card_no like "%"#{identity_card_no}"%"
@@ -102,15 +151,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_phone != null and student_phone != '' ">
 			and student_phone like "%"#{student_phone}"%"
 		</if>
-		<if test="status != null and status != '' ">
-			and status = #{status}
-		</if>
 		<if test="validation != null and validation != '' ">
-			and validation = #{validation}
+			and ST.validation = #{validation}
 		</if>
 	</where>
-	<if test="sort != null">
-		order by #{sort} #{order}
+	<if test="sort != null and order != null">
+		order by ${sort} ${order}
 	</if>
 	LIMIt #{page}, #{rows}
 </select>
@@ -125,9 +171,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_name != null and student_name != '' ">
 			and student_name like "%"#{student_name}"%"
 		</if>
-		<if test="student_photo != null and student_photo != '' ">
-			and student_photo like "%"#{student_photo}"%"
-		</if>
 		<if test="identity_card_no != null and identity_card_no != '' ">
 			and identity_card_no like "%"#{identity_card_no}"%"
 		</if>
@@ -136,9 +179,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="student_phone != null and student_phone != '' ">
 			and student_phone like "%"#{student_phone}"%"
-		</if>
-		<if test="status != null and status != '' ">
-			and status = #{status}
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
@@ -164,13 +204,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_phone != null and student_phone != ''">
 			student_phone = #{student_phone},
 		</if>
-		<if test="status != null and status != ''">
-			status = #{status},
-		</if>
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
+		</if>
+		<if test="subject != null and subject != ''">
+			subject = #{subject},
+		</if>
+		<if test="driving_license_type != null and driving_license_type != ''">
+			driving_license_type = #{driving_license_type},
+		</if>
+		<if test="school_id != null and school_id != ''">
+			school_id = #{school_id},
+		</if>
+		<if test="register_date != null and register_date != ''">
+			register_date = #{register_date},
 		</if>
 	</set>
 	where student_id =  #{student_id}
 </update>
+<select id="downloadPhoto" resultType="StudentBasicInfo">
+	select student_photo from student_basic_info where student_id = #{student_id}
+</select>
 </mapper>

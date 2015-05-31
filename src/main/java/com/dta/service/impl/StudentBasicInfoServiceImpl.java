@@ -24,15 +24,40 @@ public class StudentBasicInfoServiceImpl extends BaseAllServiceImpl<StudentBasic
 	
 	@Transactional
 	public int addObject(StudentBasicInfo po){
+		if(po.getSchool_id() == 0)
+			po.setSchool_id(null);
 		int superResult = super.addObject(po);
 		StudentLoginInfo loginInfo = new StudentLoginInfo();
 		loginInfo.setStudent_id(po.getStudent_id());
 		loginInfo.setLogin_name(po.getStudent_phone());
-		loginInfo.setLogin_pwd(po.getIdentity_card_no().substring(12));
+		//loginInfo.setLogin_pwd(po.getIdentity_card_no().substring(12));
+		loginInfo.setLogin_pwd(po.getLogin_pwd());
+		loginInfo.setObligate_code(po.getObligate_code());
 		if(superResult == 1 && loginInfoDao.addObject(loginInfo) == 1)
 			return 1;
 		else 
 			return 0;
 		
 	}
+	
+	@Transactional
+	public int updateObjectById(StudentBasicInfo po) throws Exception{
+		if(po.getSchool_id() == 0)
+			po.setSchool_id(null);
+		int result = super.updateObjectById(po);
+		StudentLoginInfo loginInfo = new StudentLoginInfo();
+		loginInfo.setLogin_id(po.getLogin_id());
+		loginInfo.setStudent_id(po.getStudent_id());
+		loginInfo.setLogin_name(po.getStudent_phone());
+		loginInfo.setLogin_pwd(po.getLogin_pwd());
+		loginInfo.setObligate_code(po.getObligate_code());
+		result = loginInfoDao.updateObjectById(loginInfo);
+		return result;
+	}
+
+	@Override
+	public StudentBasicInfo downloadPhoto(Integer student_id) {
+		return dao.downloadPhoto(student_id);
+	}
+	
 }

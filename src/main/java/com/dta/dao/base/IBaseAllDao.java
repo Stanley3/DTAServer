@@ -44,4 +44,13 @@ public interface IBaseAllDao<T, V>{
 	 */
 	public T getObjectById(Serializable id);
 	
+	/*
+	 * web页面全局搜索
+	 */
+	public List<T>globalSearch(V vo);
+	
+	/*
+	 * web页面全局搜索到的数据总数
+	 */
+	public int globalSearchSize(V vo);
 }

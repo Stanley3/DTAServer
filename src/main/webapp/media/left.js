@@ -18,7 +18,7 @@ document.writeln("    </ul> </li> ");
 document.writeln("   <li class=\"\"> <a href=\"javascript:;\"><span class=\"title\">学员管理</span></a> ");
 document.writeln("    <ul class=\"sub-menu\"> ");
 document.writeln("     <li> <a href=\"../student/students_add.html\">添加学员</a> </li> ");
-document.writeln("     <li> <a href=\"../../student/students_view_list.html\">学员列表</a> </li> ");
+document.writeln("     <li> <a href=\"../student/students_view_list.html\">学员列表</a> </li> ");
 document.writeln("     <li> <a href=\"../student/students_view_list.html\">自由学员</a> </li> ");
 document.writeln("     <li> <a href=\"../student/students_view_list.html\">包科二学员</a> </li> ");
 document.writeln("     <li> <a href=\"../student/students_view_list.html\">包科三学员</a> </li> ");

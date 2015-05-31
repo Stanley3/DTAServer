@@ -40,7 +40,14 @@ public class CoachBasicInfoVo extends PageParam implements Serializable{
 	private Integer available_times;//今天还可预约的次数
 	@QueryParam("star")
 	private Integer star;
+	private String school_name;
 	
+	public String getSchool_name() {
+		return school_name;
+	}
+	public void setSchool_name(String school_name) {
+		this.school_name = school_name;
+	}
 	public Integer getService_count() {
 		return service_count;
 	}

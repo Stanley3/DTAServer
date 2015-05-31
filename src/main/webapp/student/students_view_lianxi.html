@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+ <!--<![endif]-->
+ <!-- BEGIN HEAD -->
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>练习记录-学员管理-驾考联盟后台管理系统</title> 
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" /> 
+  <meta content="" name="description" /> 
+  <meta content="" name="author" /> 
+  <!-- BEGIN GLOBAL MANDATORY STYLES --> 
+  <link href="../media/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> 
+  <link href="../media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" /> 
+  <link href="../media/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
+  <link href="../media/css/style-metro.css" rel="stylesheet" type="text/css" /> 
+  <link href="../media/css/style.css" rel="stylesheet" type="text/css" /> 
+  <link href="../media/css/style-responsive.css" rel="stylesheet" type="text/css" /> 
+  <link href="../media/css/default.css" rel="stylesheet" type="text/css" id="style_color" /> 
+  <link href="../media/css/uniform.default.css" rel="stylesheet" type="text/css" /> 
+  <!-- END GLOBAL MANDATORY STYLES --> 
+  <!-- BEGIN PAGE LEVEL STYLES --> 
+  <link rel="stylesheet" type="text/css" href="../media/css/select2_metro.css" /> 
+  <link rel="stylesheet" href="../media/css/DT_bootstrap.css" /> 
+  <!-- END PAGE LEVEL STYLES --> 
+  <link rel="shortcut icon" href="../media/image/favicon.ico" /> 
+ </head> 
+ <!-- END HEAD --> 
+ <!-- BEGIN BODY --> 
+ <body class="page-header-fixed"> 
+  <!-- BEGIN HEADER --> 
+  <div class="header navbar navbar-inverse navbar-fixed-top"> 
+   <!-- BEGIN TOP NAVIGATION BAR --> 
+   <div class="navbar-inner"> 
+    <div class="container-fluid"> 
+     <!-- BEGIN LOGO --> 
+     <a class="brand" style="margin-left:10px; " href="../index.html"> 驾考联盟后台管理系统 </a> 
+     <!-- END LOGO --> 
+     <!-- BEGIN RESPONSIVE MENU TOGGLER --> 
+     <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse"> <img src="../media/image/menu-toggler.png" alt="" /> </a> 
+     <!-- END RESPONSIVE MENU TOGGLER --> 
+     <!-- BEGIN TOP NAVIGATION MENU --> 
+     <ul class="nav pull-right"> 
+      <!-- BEGIN INBOX DROPDOWN --> 
+      <li class="dropdown" id="header_inbox_bar"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-envelope"></i> <span class="badge">5</span> </a> 
+       <ul class="dropdown-menu extended inbox"> 
+        <li> <p>有 5 条未处理投诉</p> </li> 
+        <li> <a href="../inbox.html?a=view"> <span class="subject"> <span class="from">学员：张四</span> <span class="time">刚刚</span> </span> <span class="message"> 真是受不了啦还号称服务第一呢啥服务 </span> </a> </li> 
+        <li> <a href="../inbox.html?a=view"> <span class="subject"> <span class="from">学员：王五</span> <span class="time">16 分钟前</span> </span> <span class="message"> 我去了让我等了半个小时都不让我开始... </span> </a> </li> 
+        <li> <a href="../inbox.html?a=view"> <span class="subject"> <span class="from">学员：张三</span> <span class="time">2小时前</span> </span> <span class="message"> 你们的教练实在是太气人了都不好好教! </span> </a> </li> 
+        <li class="external"> <a href="../inbox.html">查看所有投诉信息<i class="m-icon-swapright"></i></a> </li> 
+       </ul> </li> 
+      <!-- 结束全站顶部投诉信息 --> 
+      <!-- BEGIN USER LOGIN DROPDOWN --> 
+      <li class="dropdown user"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="username">超级管理员：丁海伟</span> <i class="icon-angle-down"></i> </a> 
+       <ul class="dropdown-menu"> 
+        <li><a href="../extra_profile.html"><i class="icon-user"></i> 修改资料</a></li> 
+        <li class="divider"></li> 
+        <li><a href="../extra_lock.html"><i class="icon-lock"></i> 锁定屏幕</a></li> 
+        <li><a href="../login.html"><i class="icon-key"></i> 退出</a></li> 
+       </ul> </li> 
+      <!-- END USER LOGIN DROPDOWN --> 
+     </ul> 
+     <!-- END TOP NAVIGATION MENU --> 
+    </div> 
+   </div> 
+   <!-- END TOP NAVIGATION BAR --> 
+  </div> 
+  <!-- END HEADER --> 
+  <!-- BEGIN CONTAINER --> 
+  <div class="page-container row-fluid"> 
+   <!-- 开始侧边栏 --> 
+   <div class="page-sidebar nav-collapse collapse"> 
+    <!-- 开始 左侧通用 菜单 --> 
+    <script src="../media/left.js" type="text/javascript"></script> 
+    <!-- END SIDEBAR MENU --> 
+   </div> 
+   <!-- 结束侧边栏 --> 
+   <!-- BEGIN PAGE --> 
+   <div class="page-content"> 
+    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM--> 
+    <div id="portlet-config" class="modal hide"> 
+     <div class="modal-header"> 
+      <button data-dismiss="modal" class="close" type="button"></button> 
+      <h3>portlet Settings</h3> 
+     </div> 
+     <div class="modal-body"> 
+      <p>Here will be a configuration form</p> 
+     </div> 
+    </div> 
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM--> 
+    <!-- BEGIN PAGE CONTAINER--> 
+    <div class="container-fluid"> 
+     <!-- BEGIN PAGE HEADER--> 
+     <div class="row-fluid"> 
+      <div class="span12"> 
+       <!-- BEGIN STYLE CUSTOMIZER --> 
+       <div class="color-panel hidden-phone"> 
+        <div class="color-mode-icons icon-color"></div> 
+        <div class="color-mode-icons icon-color-close"></div> 
+        <div class="color-mode"> 
+         <p>更改后台颜色</p> 
+         <ul class="inline"> 
+          <li class="color-black current color-default" data-style="default"></li> 
+          <li class="color-blue" data-style="blue"></li> 
+          <li class="color-brown" data-style="brown"></li> 
+          <li class="color-purple" data-style="purple"></li> 
+          <li class="color-grey" data-style="grey"></li> 
+          <li class="color-white color-light" data-style="light"></li> 
+         </ul> 
+        </div> 
+       </div> 
+       <!-- END BEGIN STYLE CUSTOMIZER --> 
+       <!-- BEGIN PAGE TITLE & BREADCRUMB--> 
+       <h3 class="page-title">刘新华练习记录<small>练习记录</small> </h3> 
+       <ul class="breadcrumb"> 
+        <li> <i class="icon-home"></i> <a href="../main.html">后台首页</a> <i class="icon-angle-right"></i> </li> 
+        <li> <a href="students_view_list.html">学员管理</a> <i class="icon-angle-right"></i> </li> 
+        <li><a href="#">练习记录</a></li> 
+       </ul> 
+       <!-- END PAGE TITLE & BREADCRUMB--> 
+      </div> 
+     </div> 
+     
+    <a class=" btn blue"  href="students_edit.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>学员信息</a>
+    <a class=" btn purple"  href="students_view_lianxi.html" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>练习记录</a>
+    <a class=" btn blue"  href="students_view_money.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>财务记录</a>
+    <a class=" btn blue"  href="students_view_pingjia.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>评价记录</a>
+     
+     <div class="portlet box blue"> 
+      <div class="portlet-title"> 
+       <div class="caption">
+        <i class="icon-cogs"></i>刘新华练习记录
+       </div> 
+       <div class="actions" style="margin-left:15px;"></div> 
+       <div class="tools"> 
+        <a href="javascript:;" class="reload"></a> 
+       </div> 
+      </div> 
+      <div class="portlet-body">
+<table class="table table-striped table-bordered table-hover table-full-width" id="sample_2"> 
+   <thead> 
+    <tr> 
+     <th>练习日期</th> 
+     <th>教练姓名</th> 
+     <th class="hidden-480">教练电话</th>
+     <th class="hidden-480">练习场所</th> 
+     <th class="hidden-480">教练星级</th> 
+     <th class="hidden-480">练习科目</th> 
+     <th class="hidden-480">金额(元)</th> 
+     <th class="hidden-480">订单</th> 
+     </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td>2015-04-17 </td> 
+     <td>张全蛋</td> 
+     <td class="hidden-480">15137000067</td>
+     <td class="hidden-480">商丘顺达驾校</td> 
+     <td class="hidden-480">一星级</td> 
+     <td class="hidden-480">科二</td> 
+     <td class="hidden-480">0</td> 
+     <td class="hidden-480">结束</td> 
+     </tr> 
+    <tr> 
+     <td>2015-04-16</td> 
+     <td>张全福</td> 
+     <td class="hidden-480">18937000000</td>
+     <td class="hidden-480">商丘顺达驾校</td> 
+     <td class="hidden-480">三星级</td> 
+     <td class="hidden-480">科二</td> 
+     <td class="hidden-480">0</td> 
+     <td class="hidden-480">结束</td> 
+     </tr> 
+    <tr> 
+     <td>2015-04-15</td> 
+     <td>张全禄</td> 
+     <td class="hidden-480">13781551504</td>
+     <td class="hidden-480">商丘中原车城科三考场</td> 
+     <td class="hidden-480">四星级</td> 
+     <td class="hidden-480">科三</td> 
+     <td class="hidden-480">80</td> 
+     <td class="hidden-480">取消</td> 
+     </tr> 
+    <tr> 
+     <td>2015-04-14</td> 
+     <td>张全寿</td> 
+     <td class="hidden-480">18137000067</td>
+     <td class="hidden-480">宁陵梨园科二考场</td> 
+     <td class="hidden-480">三星级</td> 
+     <td class="hidden-480">科二</td> 
+     <td class="hidden-480">80</td> 
+     <td class="hidden-480">冻结</td> 
+     </tr> 
+    <tr> 
+     <td>2015-04-13</td> 
+     <td>张全喜</td> 
+     <td class="hidden-480">15137000067</td>
+     <td class="hidden-480">商丘顺达驾校</td> 
+     <td class="hidden-480">二星级</td> 
+     <td class="hidden-480">科三</td> 
+     <td class="hidden-480">80</td> 
+     <td class="hidden-480">预约</td> 
+     </tr> 
+    <tr> 
+     <td>2015-05-16</td> 
+     <td>张全文</td> 
+     <td class="hidden-480">16137000000</td>
+     <td class="hidden-480">商丘顺达驾校</td> 
+     <td class="hidden-480">三星级</td> 
+     <td class="hidden-480">科二</td> 
+     <td class="hidden-480">0</td> 
+     <td class="hidden-480">练习</td> 
+     </tr> 
+    <tr> 
+     <td>2015-05-11</td> 
+     <td>张全武</td> 
+     <td class="hidden-480">13100000000</td>
+     <td class="hidden-480">商丘顺达驾校</td> 
+     <td class="hidden-480">五星级</td> 
+     <td class="hidden-480">科二</td> 
+     <td class="hidden-480">0</td> 
+     <td class="hidden-480">待确认</td> 
+     </tr> 
+   </tbody> 
+</table>
+
+      </div> 
+     </div> 
+     <!-- END PAGE CONTENT--> 
+    </div> 
+    <!-- END PAGE CONTAINER--> 
+   </div> 
+   <!-- END PAGE --> 
+  </div> 
+  <!-- END CONTAINER --> 
+  <!-- BEGIN FOOTER --> 
+  <div class="footer"> 
+   <div class="footer-inner">
+     2013 &copy; HenanZhonghe Inc. 
+   </div> 
+   <div class="footer-tools"> 
+    <span class="go-top"> <i class="icon-angle-up"></i> </span> 
+   </div> 
+  </div> 
+  <!-- END FOOTER --> 
+  <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) --> 
+  <!-- BEGIN CORE PLUGINS --> 
+  <script src="../media/js/jquery-1.10.1.min.js" type="text/javascript"></script> 
+  <script src="../media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script> 
+  <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip --> 
+  <script src="../media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
+  <script src="../media/js/bootstrap.min.js" type="text/javascript"></script> 
+  <!--[if lt IE 9]>
+
+	<script src="media/js/excanvas.min.js"></script>
+
+	<script src="media/js/respond.min.js"></script>  
+
+	<![endif]--> 
+  <script src="../media/js/jquery.slimscroll.min.js" type="text/javascript"></script> 
+  <script src="../media/js/jquery.blockui.min.js" type="text/javascript"></script> 
+  <script src="../media/js/jquery.cookie.min.js" type="text/javascript"></script> 
+  <script src="../media/js/jquery.uniform.min.js" type="text/javascript"></script> 
+  <!-- END CORE PLUGINS --> 
+  <!-- BEGIN PAGE LEVEL PLUGINS --> 
+  <script type="text/javascript" src="../media/js/select2.min.js"></script> 
+  <script type="text/javascript" src="../media/js/jquery.dataTables.min.js"></script> 
+  <script type="text/javascript" src="../media/js/DT_bootstrap.js"></script> 
+  <!-- END PAGE LEVEL PLUGINS --> 
+  <!-- BEGIN PAGE LEVEL SCRIPTS --> 
+  <script src="../media/js/app.js"></script> 
+  <script src="../media/js/table-advanced.js"></script> 
+  <script>
+
+		jQuery(document).ready(function() {       
+
+		   App.init();
+
+		   TableAdvanced.init();
+
+		});
+
+	</script>  
+  <!-- END BODY --> 
+ </body>
+</html>

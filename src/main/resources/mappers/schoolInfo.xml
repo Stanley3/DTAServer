@@ -388,4 +388,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</set>
 	where school_id =  #{school_id}
 </update>
+<select id="getAvaiableCoachNumbers" resultType="int">
+	select 
+		(register_number - count(C.school_id)) as numbers
+	from 
+		school_info as S
+	join 
+		coach_basic_info as C
+	on S.school_id = C.school_id
+	where 
+		S.school_id = #{school_id} and 
+		S.validation = 1 and 
+		C.validation = 1
+</select>
 </mapper>

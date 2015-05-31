@@ -308,4 +308,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</set>
 	where order_id =  #{order_id}
 </update>
+<!-- 获取教练的预约信息 -->
+<select id="getCoPreRecord" resultType="CoachPrecontractRecord" parameterType="CoachPrecontractRecordVo">
+	select 
+		S.student_name,
+		S.student_phone,
+		S.student_id,
+		S.status,
+		O.coach_id,
+		O.order_id,
+		O.school_id,
+		O.course_status,
+		O.order_time,
+		O.training_start_time,
+		O.training_end_time,
+		O.order_status
+	from 
+		order_record as O
+	join 
+		student_basic_info as S
+	on 
+		O.student_id = S.student_id
+	<where>
+		O.coach_id = #{coach_id} and
+		S.validation = 1
+	</where>
+	<if test="sort != null and order != null">
+		order by ${sort}  ${order}
+	</if>
+	<if test="page != null and rows != null  and rows != 0">
+		limit #{page}, #{rows}
+	</if>
+</select>
 </mapper>

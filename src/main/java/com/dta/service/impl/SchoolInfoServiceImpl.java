@@ -72,4 +72,8 @@ public class SchoolInfoServiceImpl extends BaseAllServiceImpl<SchoolInfo, School
 		result = userDao.updateObjectById(user);
 		return result;
 	}
+	
+	public int getAvaiableCoachNumbers(int school_id){
+		return dao.getAvaiableCoachNumbers(school_id);
+	}
 }

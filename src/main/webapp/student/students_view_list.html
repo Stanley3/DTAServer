@@ -14,7 +14,7 @@
 
 <meta charset="utf-8" />
 
-<title>查看教练列表-财务管理-驾考联盟后台管理系统</title>
+<title>查看学员列表-学员管理-驾考联盟后台管理系统</title>
 
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -286,7 +286,7 @@
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
 						<h3 class="page-title">
-							教练信息列表<small>查看教练列表</small>
+							学员管理<small>查看所有学员</small>
 
 						</h3>
 
@@ -296,10 +296,10 @@
 
 								<i class="icon-angle-right"></i></li>
 
-							<li><a href="javascript:void(0);">教练信息</a> <i
+							<li><a href="javascript:void(0);">学员管理</a> <i
 								class="icon-angle-right"></i></li>
 
-							<li><a href="javascript:void(0)">教练信息</a></li>
+							<li><a href="javascript:void(0);">学员列表</a></li>
 
 						</ul>
 
@@ -311,18 +311,16 @@
 
 
 
-
-				<a class=" btn purple" href="techer_add_edit.html"
-					style="margin-bottom:10px;"><i class=" icon-user-md"
-					style="margin-right:5px;"></i>添加教练</a>
-
+				<a class=" btn purple" href="students_add.html"
+					style="margin-bottom:10px;"><i class="icon-plus"
+					style="margin-right:5px;"></i>添加学员</a>
 
 				<div class="portlet box blue">
 
 					<div class="portlet-title">
 
 						<div class="caption">
-							<i class="icon-cogs"></i>教练信息
+							<i class="icon-cogs"></i>所有学员列表
 						</div>
 
 						<div class="actions" style="margin-left:15px;"></div>
@@ -330,7 +328,7 @@
 
 
 
-							<a href="javascript:void(0);" class="reload"></a>
+							<a href="javascript:;" class="reload"></a>
 
 
 
@@ -348,13 +346,21 @@
 
 								<tr>
 									<th><span class="hidden-480">添加时间</span></th>
+
 									<th>姓名</th>
+
 									<th>电话</th>
-									<th class="hidden-480">所属</th>
-									<th class="hidden-480">状态</th>
-									<th class="hidden-480">级别</th>
-									<th class="hidden-480">授课</th>
+
+									<th class="hidden-480">所属驾校</th>
+									<th class="hidden-480">科二</th>
+
+									<th class="hidden-480">科三</th>
+									<th class="hidden-480">充值</th>
+									<th class="hidden-480">来源</th>
+									<th class="hidden-480">当前</th>
+
 									<th class="hidden-480">VIP</th>
+									<th class="hidden-480">状态</th>
 									<th class="hidden-480">操作</th>
 								</tr>
 
@@ -457,27 +463,73 @@
 
 		   //TableAdvanced.init();
 		   $('#sample_2').DataTable({
-			   'processing': true,
-			   'serverSide': true,
+			  'processing': true,
+			  'serverSide': true,
 			  'ajax':{
-				  'url': '../rest/coachBasicInfo/getPage',
+				  'url': '../rest/studentBasicInfo/getPage',
 				  'type': 'get',
-				  /* 'dataSrc': function(data){
-					  return data.rows;
-				  }, */
 				  'data': function(data, setting){
 					  var index = data.order[0].column;
 					  data.sort = data.columns[index].data;
 					  data.dir = data.order[0].dir;
 					  data.search = data.search.value;
-					  console.log(data);
 				  }
 			  },
+			  'columnDefs':[
+			                 {
+			                	 'targets':[4,5,6,7,9,11],
+			                	 'orderable': false
+			                 }
+			                 ],
 			  'columns':[
 			             {'data': 'register_date'},
-			             {'data': 'coach_name'},
-			             {'data': 'phone'},
+			             {'data': 'student_name'},
+			             {'data': 'student_phone'},
 			             {'data': 'school_name'},
+			             {
+			            	 'data': null,
+			            	 'defaultContent': '暂未实现'
+			             },
+			             {
+			            	 'data': null,
+			            	 'defaultContent': '暂未实现'
+			             },
+			             {
+			            	 'data': null,
+			            	 'defaultContent': '暂未实现'
+			             },
+			             {
+			            	 'data': null,
+			            	 'defaultContent': '暂未实现'
+			             },
+			             {
+			            	 'data': 'subject',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 switch(data){
+			            			 case 0: 
+			            				 return '未报名';
+			            			 case 1:
+			            				 return '科目一';
+			            			 case 2:
+			            				 return '科目二';
+			            			 case 3:
+			            				 return '科目三';
+			            			 case 4:
+			            				 return '科目四';
+			            			 case 5: 
+			            				 return '拿证';
+			            			 default:
+			            				return '未知';
+			            			 }
+			            		 }
+			            		 return data;
+			            	 }
+			             },
+			             {
+			            	 'data': null,
+			            	 'defaultContent': '暂未实现'
+			             },
 			             {
 			            	 'data': 'validation',
 			            	 'render': function(data, type, row, meta){
@@ -487,63 +539,24 @@
 			            			 else 
 			            				 return '暂停';
 			            		 }
-			            		 else 
-			            			 return data;
-			            	 }
-			           	 },
-			             {
-			           		 'data': 'star',
-			           		 'render': function(data, type, row, meta){
-			           			 if(type == 'display'){
-			           				 var value;
-			           				 switch(data){
-			           				 case 1:
-			           					 value = '一星级教练';
-			           					 break;
-			           				 case 2:
-			           					 value = '二星级教练';
-			           					 break;
-			           				 case 3:
-			           					 value = '三星级教练';
-			           					 break;
-			           				 case 4:
-			           					 value = '四星级教练';
-			           					 break;
-			           				 case 5:
-			           					 value = '五星级教练';
-			           					 break;
-			           			     default:
-			           			    	 value = '不推荐';
-			           			     	 break;
-			           				 }
-			           				 return value;
-			           			 }else{
-			           				 return data;
-			           			 }
-			           		 }
-			             },
-			             {
-			            	 'data': null,
-			            	 'defaultContent':'暂未实现'
-			             },
-			             {
-			            	 'data': null,
-			            	 'defaultContent': '暂未实现'
-			             },
-			             {
-			            	 'data': 'coach_id',
-			            	 'render': function(data, type, row, meta) {
-			            		 if(type == 'display'){
-			            			 return '<a href=\'techer_view_info.html?coach_id=' + data + '\'>查看</a>';
-			            		 }
 			            		 return data;
 			            	 }
+			             },
+			             {
+			            	 'data': 'student_id',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 return '<a href=\'students_edit.html?student_id=' + data + '\'>查看</a>';
+			            		 }
+			            		 return data;
+			            	 },
+			            	 'searchable': false
 			             }
 			             ],
-			  'language': {
-				  'url': '../media/json/lang.json'
-			  },
-			  'lengthMenu': [ [10, 25, 50, -1], [10, 25, 50, '全部'] ]
+			   'language':{
+				   'url': '../media/json/lang.json'
+			   },
+			   'lengthMenu': [ [10, 25, 50, -1], [10, 25, 50, '全部'] ]
 		   });
 
 		});

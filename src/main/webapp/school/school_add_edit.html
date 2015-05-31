@@ -573,28 +573,28 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">手机号<span class="required">*</span></label>
+								<label class="control-label"><span class="required">*</span>手机号</label>
 								<div class="controls">
 									<input type="text" class="validate[required, maxSize[11], custom[phone]] span6 m-wrap" name="user_name" id="userName" placeholder="此为登录用户名" /> <span
 										class="help-inline">手机号为用户名</span>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">密码<span class="required">*</span></label>
+								<label class="control-label"><span class="required">*</span>密码</label>
 								<div class="controls">
 									<input type="password" class="validate[required, minSize[6], maxSize[20]] span6 m-wrap" name="user_pwd" id="userPwd"
 										 /> <span class="help-inline">输入密码</span>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">确认密码<span class="required">*</span></label>
+								<label class="control-label"><span class="required">*</span>确认密码</label>
 								<div class="controls">
 									<input type="password" class="validate[equals[userPwd]] span6 m-wrap" id="rpassword" />
 									<span class="help-inline">再输入一次</span>
 								</div>
 							</div>
 							<div>
-								<label class="control-label">预留码<span class="required">*</span></label>
+								<label class="control-label"><span class="required">*</span>预留码</label>
 								<div class="controls">
 									<input type="text" class="validate[required] span6 m-wrap" name="obligate_code" id="obligateCode"/> <span
 										class="help-inline">输入您的预留码</span>
@@ -702,8 +702,6 @@
 		});
 		function add(){
 			var flag = $('#form').validationEngine('validate');
-			console.log($('#form').serialize());
-			console.log($('#form').serializeArray());
 			if(flag){
 				$.ajax({
 					url: '../rest/schoolInfo/add',

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.IStudentLoginInfoDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="StudentLoginInfo" keyProperty="login_id" useGeneratedKeys="true">
+	insert into student_login_info 
+	<set>
+		<if test="student_id != null and student_id != ''">
+			student_id = #{student_id},
+		</if>
+		<if test="login_name != null and login_name != ''">
+			login_name = #{login_name},
+		</if>
+		<if test="login_pwd != null and login_pwd != ''">
+			login_pwd = #{login_pwd},
+		</if>
+		<if test="login_nickname != null and login_nickname != ''">
+			login_nickname = #{login_nickname},
+		</if>
+		<if test="register_time != null and register_time != ''">
+			register_time = #{register_time},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+		<if test="obligate_code != null and obligate_code != ''">
+			obligate_code = #{obligate_code},
+		</if>
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update student_login_info set validation = 0 
+	where login_id in 
+	<foreach item="item" index="index" collection="list"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<update id="deleteObjectById" parameterType="int">
+	update student_login_info set validation = 0 where login_id = #{login_id}
+</update>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="StudentLoginInfo" parameterType="StudentLoginInfo">
+	select * from student_login_info
+	<where>
+		validation = 1
+		<if test="login_id != null and login_id != '' ">
+			and login_id = #{login_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="login_name != null and login_name != '' ">
+			and login_name like "%"#{login_name}"%"
+		</if>
+		<if test="login_pwd != null and login_pwd != '' ">
+			and login_pwd like "%"#{login_pwd}"%"
+		</if>
+		<if test="login_nickname != null and login_nickname != '' ">
+			and login_nickname like "%"#{login_nickname}"%"
+		</if>
+		<if test="register_time != null and register_time != '' ">
+			and register_time like "%"#{register_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+		<if test="obligate_code != null and obligate_code != '' ">
+			and obligate_code like "%"#{obligate_code}"%"
+		</if>
+	</where>
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="StudentLoginInfo" parameterType="int">
+	select * from student_login_info
+	where login_id = #{login_id} and validation = 1
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="StudentLoginInfo" parameterType="StudentLoginInfo">
+	select * from student_login_info
+	<where>
+		validation = 1
+		<if test="login_id != null and login_id != '' ">
+			and login_id = #{login_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="login_name != null and login_name != '' ">
+			and login_name like "%"#{login_name}"%"
+		</if>
+		<if test="login_pwd != null and login_pwd != '' ">
+			and login_pwd like "%"#{login_pwd}"%"
+		</if>
+		<if test="login_nickname != null and login_nickname != '' ">
+			and login_nickname like "%"#{login_nickname}"%"
+		</if>
+		<if test="register_time != null and register_time != '' ">
+			and register_time like "%"#{register_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+		<if test="obligate_code != null and obligate_code != '' ">
+			and obligate_code like "%"#{obligate_code}"%"
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="StudentLoginInfo">
+	select count(*) from student_login_info
+	<where>
+		validation = 1
+		<if test="login_id != null and login_id != '' ">
+			and login_id = #{login_id}
+		</if>
+		<if test="student_id != null and student_id != '' ">
+			and student_id = #{student_id}
+		</if>
+		<if test="login_name != null and login_name != '' ">
+			and login_name like "%"#{login_name}"%"
+		</if>
+		<if test="login_pwd != null and login_pwd != '' ">
+			and login_pwd like "%"#{login_pwd}"%"
+		</if>
+		<if test="login_nickname != null and login_nickname != '' ">
+			and login_nickname like "%"#{login_nickname}"%"
+		</if>
+		<if test="register_time != null and register_time != '' ">
+			and register_time like "%"#{register_time}"%"
+		</if>
+		<if test="validation != null and validation != '' ">
+			and validation = #{validation}
+		</if>
+		<if test="obligate_code != null and obligate_code != '' ">
+			and obligate_code like "%"#{obligate_code}"%"
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="StudentLoginInfo">
+	update student_login_info
+	<set>
+		<if test="student_id != null and student_id != ''">
+			student_id = #{student_id},
+		</if>
+		<if test="login_name != null and login_name != ''">
+			login_name = #{login_name},
+		</if>
+		<if test="login_pwd != null and login_pwd != ''">
+			login_pwd = #{login_pwd},
+		</if>
+		<if test="login_nickname != null and login_nickname != ''">
+			login_nickname = #{login_nickname},
+		</if>
+		<if test="register_time != null and register_time != ''">
+			register_time = #{register_time},
+		</if>
+		<if test="validation != null and validation != ''">
+			validation = #{validation},
+		</if>
+		<if test="obligate_code != null and obligate_code != ''">
+			obligate_code = #{obligate_code},
+		</if>
+	</set>
+	where login_id =  #{login_id}
+</update>
+</mapper>

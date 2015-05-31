@@ -23,6 +23,16 @@ public class StudentLoginInfo extends PageParam implements Serializable{
 	private Date register_time;
 	@FormParam("validation")
 	private Integer validation;
+	@FormParam("obligate_code")
+	private String obligate_code;
+	
+	
+	public String getObligate_code() {
+		return obligate_code;
+	}
+	public void setObligate_code(String obligate_code) {
+		this.obligate_code = obligate_code;
+	}
 	public void setLogin_id(Integer login_id){
 		this.login_id = login_id;
 	}

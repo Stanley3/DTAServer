@@ -61,6 +61,11 @@ import javax.ws.rs.core.Response;
 
 
 
+
+
+
+
+
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -73,8 +78,11 @@ import com.dta.bean.SchoolInfo;
 import com.dta.bean.StudentBasicInfo;
 import com.dta.bean.SysUser;
 import com.dta.service.IBaseAllService;
+import com.dta.service.ICoachBasicInfoService;
+import com.dta.service.impl.CoachBasicInfoServiceImpl;
 import com.dta.service.impl.NewsInfoServiceImpl;
 import com.dta.utils.GlobalConstant;
+import com.dta.vo.CoachBasicInfoVo;
 import com.esotericsoftware.reflectasm.MethodAccess;
 
 public class BaseAllResource<T, V>{
@@ -199,9 +207,9 @@ public class BaseAllResource<T, V>{
 		}
 	}
 	
-	@POST
+	@SuppressWarnings("unchecked")
+	@GET
 	@Path("getPage")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPage(@BeanParam V vo){
 		Class<?> cl = vo.getClass();
@@ -212,10 +220,10 @@ public class BaseAllResource<T, V>{
 			int rows = (Integer)access.invoke(vo, "getRows");
 			if(page >= 0 && draw >= 0){
 				/*access.invoke(vo, "setPage", (page-1)*rows);*/
-				
 				List<T> resultList = null;
-				if(rows == -1)
+				if(rows == -1){
 					resultList = service.getAll(vo);
+				}
 				else
 					resultList = service.getPage(vo);
 				int size = service.getSize(vo);
@@ -267,7 +275,8 @@ public class BaseAllResource<T, V>{
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
-
+	
+	
 	protected String generateMethodName(String methodName, String mainId){
 		return methodName + mainId.substring(0, 1).toUpperCase() + mainId.substring(1).toLowerCase();
 	}

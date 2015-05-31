@@ -14,7 +14,7 @@
 
 <meta charset="utf-8" />
 
-<title>新增驾校或考场-财务管理-驾考联盟后台管理系统</title>
+<title>新增学员-学员管理-驾考联盟后台管理系统</title>
 
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -46,11 +46,14 @@
 
 <link href="../media/css/uniform.default.css" rel="stylesheet"
 	type="text/css" />
-<!-- <link href="../media/css/select2_metro.css" rel="stylesheet" type="text/css"/> -->
-<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+
 <!-- END GLOBAL MANDATORY STYLES -->
 
 <!-- BEGIN PAGE LEVEL STYLES -->
+
+<!-- <link rel="stylesheet" type="text/css"
+	href="../media/css/select2_metro.css" /> -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" href="../media/css/DT_bootstrap.css" />
 
@@ -58,7 +61,6 @@
 
 <link rel="shortcut icon" href="../media/image/favicon.ico" />
 <link href="../media/css/validationEngine.jquery.css" rel="stylesheet" type="text/css">
-
 </head>
 
 <!-- END HEAD -->
@@ -285,20 +287,20 @@
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
 						<h3 class="page-title">
-							新增教练<small>增加教练</small>
+							新增学员<small>增加学员</small>
 
 						</h3>
 
 						<ul class="breadcrumb">
 
-							<li><i class="icon-home"></i> <a href="../main/main.html">后台首页</a>
+							<li><i class="icon-home"></i> <a href="../main.html">后台首页</a>
 
 								<i class="icon-angle-right"></i></li>
 
-							<li><a href="techer_view_list.html">教练信息</a> <i
+							<li><a href="students_view_list.html">学员管理</a> <i
 								class="icon-angle-right"></i></li>
 
-							<li><a href="javascript:void(0);">新增教练</a></li>
+							<li><a href="#">新增学员</a></li>
 
 						</ul>
 
@@ -308,18 +310,12 @@
 
 				</div>
 
-
-
-
-
-
-
 				<div class="portlet box blue">
 
 					<div class="portlet-title">
 
 						<div class="caption">
-							<i class="icon-cogs"></i>新增教练
+							<i class="icon-cogs"></i>批量增加学员
 						</div>
 
 						<div class="actions" style="margin-left:15px;"></div>
@@ -327,7 +323,7 @@
 
 
 
-							<a href="javascript:void(0)" class="reload" onclick="$('#form').validationEngine('hideAll')"></a>
+							<a href="javascript:void(0);" class="reload" onclick="$('#form').validationEngine('hideAll');"></a>
 
 
 
@@ -337,57 +333,109 @@
 					</div>
 
 					<div class="portlet-body">
-						<h3 class="form-section">教练基本信息</h3>
-						<form class="form-horizontal" id="form" enctype="multipart/form-data" 
-							action="../rest/coachBasicInfo/addWithPhoto" method="post" target="formIframe">
+						<h3 class="form-section">批量增加学员</h3>
+
+						<form action="#" class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label">上传文件</label>
+								<div class="controls">
+									<input type="file" class="default" /><span class="help-inline">
+										注：下载上传模板</span>
+								</div>
+							</div>
+							<button type="submit" style="margin-left:100px;" href="#myModal1"
+								role="button" data-toggle="modal" class="btn blue">上传</button>
+
+
+
+							<button type="button" class="btn">取消</button>
+						</form>
+
+						<!--批量上传学员-->
+						<div id="myModal1" class="modal hide fade" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+							<div class="modal-header">
+								<h3 id="myModalLabel1">批量上传学员</h3>
+							</div>
+							<div class="modal-body">
+								<p>正在上传请稍等！</p>
+								<p>
+									学员上传成功！<a href="students_view_list.html">点此查看学员列表</a>
+								</p>
+								<p>以下学员上传不成功，原因身份证重复，请检查！</p>
+								<p>刘新华 41142319841029553X</p>
+								<p>刘新生 411423198410295530</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+							</div>
+						</div>
+
+
+
+
+
+					</div>
+
+				</div>
+
+
+
+				<div class="portlet box blue">
+
+					<div class="portlet-title">
+
+						<div class="caption">
+							<i class="icon-cogs"></i>手动增加学员
+						</div>
+
+						<div class="actions" style="margin-left:15px;"></div>
+						<div class="tools">
+
+
+
+							<a href="javascript:;" class="reload" onclick="$('#form').validationEngine('hideAll');"></a>
+
+
+
+
+						</div>
+
+					</div>
+					
+					<div class="portlet-body">
+						<h3 class="form-section">学员基本信息</h3>
+						<form action="../rest/studentBasicInfo/handleWithPhoto" class="form-horizontal" id="form" 
+						method="post" enctype="multipart/form-data" target="formIframe">
 
 							<div class="control-group">
 
-								<label class="control-label"><span class="required">*</span>所属驾校</label>
+								<label class="control-label">所属驾校</label>
 
 								<div class="controls">
 
-									<select  class="medium m-wrap" tabindex="1" id="selectSchool" name="school_id" onchange="displayCoachNumbers(this.value);">
-									</select>
-									 <span class="btn red disabled">还可增加<span id="remainCoachNumbers">0</span>位教练！</span><span
-										class="help-inline"> 注：在选择驾校后此处显示还可以增加多少位教练</span>
+									<select class="medium m-wrap" tabindex="1"
+										data-placeholder="请选择驾校" id="selectSchool" name="school_id">
+										<option value="0">未选择驾校</option>
+									</select> <span class="help-inline"> 注：如果不选择驾校也可以！</span>
 								</div>
+
 							</div>
 
 							<div class="control-group">
 
-								<label class="control-label"><span class="required">*</span>姓名</label>
+								<label class="control-label">学员姓名<span class="required">*</span></label>
 
 								<div class="controls">
 
-									<input type="text" placeholder="教练姓名" class="validate[required, maxSize[10]] m-wrap medium" name="coach_name" />
+									<input type="text" placeholder="学员姓名" class="validate[required, maxSize[10]] m-wrap medium" name="student_name" />
 
-									<span class="help-inline">教练姓名</span>
+									<span class="help-inline">学员姓名</span>
 
 								</div>
 
 							</div>
-							<div class="control-group">
 
-								<label class="control-label"><span class="required">*</span>身份证号</label>
-
-								<div class="controls">
-
-									<input type="text" class="validate[required, maxSize[19]] m-wrap medium" name="identity_card_no" />
-								</div>
-
-							</div>
-							<div class="control-group">
-
-								<label class="control-label">教龄</label>
-
-								<div class="controls">
-
-									<input type="text" placeholder="从业年数" class="validate[max[100]] m-wrap small" name="teaching_age" /><span
-										class="help-inline"> 年</span>
-								</div>
-
-							</div>
 
 
 
@@ -396,58 +444,38 @@
 								<label class="control-label">性别</label>
 
 								<div class="controls">
-
 									<label class="radio"> <input type="radio"
-										name="gender" value="0" checked /> 男
+										name="student_gender" value="0" checked /> 男
 									</label> <label class="radio"> <input type="radio"
-										name="gender" value="1" /> 女
+										name="student_gender" value="1" /> 女
 
 									</label>
-
-
-
-
-								</div>
-
-							</div>
-
-							<!-- <div class="control-group">
-
-								<label class="control-label">所教科目</label>
-
-								<div class="controls">
-
-									<label class="radio"> <input type="radio"
-										name="optionsRadioss2" value="option1" /> 科二
-
-									</label> <label class="radio"> <input type="radio"
-										name="optionsRadioss2" value="option2" checked /> 科三
-
-									</label>
-
 								</div>
 
 							</div>
 
 							<div class="control-group">
 
-								<label class="control-label">科三设备</label>
+								<label class="control-label">当前科目</label>
 
 								<div class="controls">
-
-									<label class="checkbox"> <input type="checkbox"
-										value="" disabled /> 路考王专业设备
-
-									</label> <span class="btn red disabled">余0台路考王专业设备</span><span
-										class="help-inline"> 注：这里显示驾校还能添加多少台带设备如果为零则此项不可选</span>
-
-
-
-
-
+									<label class="radio"><input type="radio"
+										name="subject" value="0" />未报名</label> <label
+										class="radio"><input type="radio"
+										name="subject" value="1" />科一</label> <label
+										class="radio"><input type="radio"
+										name="subject" value="2" checked />科二</label> <label
+										class="radio"><input type="radio"
+										name="subject" value="3" />科三</label> <label
+										class="radio"><input type="radio"
+										name="subject" value="4" />科四</label> <label
+										class="radio"><input type="radio"
+										name="subject" value="5" />拿证</label>
 								</div>
 
 							</div>
+
+
 
 
 
@@ -456,15 +484,20 @@
 
 							<div class="control-group">
 
-								<label class="control-label">车型</label>
+								<label class="control-label">驾证类型</label>
 
 								<div class="controls">
 
-									<input type="text" class="m-wrap medium" placeholder="车辆型号"
-										value="新捷达" />
+									<label class="radio"><input type="radio"
+										name="driving_license_type" value="0" checked />C1</label> <label
+										class="radio"><input type="radio"
+										name="driving_license_type" value="1" />C2</label> <label
+										class="radio"><input type="radio"
+										name="driving_license_type" value="2" />B1</label>
+
 								</div>
 
-							</div> -->
+							</div>
 							<div class="control-group">
 
 								<label class="control-label">当前状态</label>
@@ -472,7 +505,7 @@
 								<div class="controls">
 
 									<label class="radio"> <input type="radio"
-										name="validation" value="0"  /> 暂停
+										name="validation" value="0" /> 暂停
 
 									</label> <label class="radio"> <input type="radio"
 										name="validation" value="1" checked /> 有效
@@ -488,7 +521,7 @@
 
 								<div class="controls">
 
-									<input type="file" class="default" name="photo" />
+									<input type="file" class="default" name="student_photo" />
 
 								</div>
 
@@ -496,28 +529,29 @@
 
 							<div class="control-group">
 
-								<label class="control-label">当前级别</label>
 
-								<div class="controls">
+								<h3 class="form-section" style="margin-top:15px;">学员登录信息</h3>
 
-									<select class="medium m-wrap" tabindex="1" id="selectCoachStar" name="star">
-										<option value="1" selected>一星级教练</option>
-										<option value="2">二星级教练</option>
-										<option value="3">三星级教练</option>
-										<option value="4">四星级教练</option>
-										<option value="5">五星级教练</option>
 
-									</select>
-
-								</div>
-								<h3 class="form-section" style="margin-top:15px;">教练帐户信息</h3>
 								<div class="control-group">
 
-									<label class="control-label"><span class="required">*</span>手机号</label>
+									<label class="control-label">身份证号<span class="required">*</span></label>
 
 									<div class="controls">
 
-										<input type="text" class="validate[required, custom[phone]] span6 m-wrap" name="phone" /> <span
+										<input type="text" class="validate[required, maxSize[18]] span6 m-wrap" name="identity_card_no" /> <span
+											class="help-inline">身份证号字母不区分大小写</span>
+
+									</div>
+
+								</div>
+								<div class="control-group">
+
+									<label class="control-label">手机号<span class="required">*</span></label>
+
+									<div class="controls">
+
+										<input type="text" class="validate[required, maxSize[11], custom[phone]] span6 m-wrap" name="student_phone" /> <span
 											class="help-inline">手机号为用户名</span>
 
 									</div>
@@ -526,12 +560,12 @@
 
 								<div class="control-group">
 
-									<label class="control-label"><span class="required">*</span>密码</label>
+									<label class="control-label">密码<span class="required">*</span></label>
 
 									<div class="controls">
 
 										<input type="password" class="validate[required, maxSize[20], minSize[6]] span6 m-wrap" name="login_pwd"
-											id="password" /> <span class="help-inline">输入密码</span>
+											id="pwd" /> <span class="help-inline">输入密码</span>
 
 									</div>
 
@@ -539,11 +573,11 @@
 
 								<div class="control-group">
 
-									<label class="control-label"><span class="required">*</span>重复密码</label>
+									<label class="control-label">重复密码<span class="required">*</span></label>
 
 									<div class="controls">
 
-										<input type="password" class="validate[equals[password]] span6 m-wrap" />
+										<input type="password" class="validate[equals[pwd]] span6 m-wrap" id="repwd"/>
 
 										<span class="help-inline">再输入一次</span>
 
@@ -553,11 +587,11 @@
 
 								<div class="control-group">
 
-									<label class="control-label"><span class="required">*</span>预留码</label>
+									<label class="control-label">预留码</label>
 
 									<div class="controls">
 
-										<input type="text" class="validate[required] span6 m-wrap" name="obligate_code" /> <span
+										<input type="text" class="validate[maxSize[20]] span6 m-wrap" name="obligate_code" /> <span
 											class="help-inline">输入您的预留码</span>
 
 									</div>
@@ -565,9 +599,8 @@
 								</div>
 
 							</div>
-							<button type="submit" style="margin-left:100px;" class="btn blue" id="submit">添加</button>
-							<!-- <a href="javascript:void(0)" class="btn blue" style="margin-left:100px;" onclick="add()" id="submit">添加</a> -->
-							<button type="reset" class="btn" onclick="$('#form').validationEngine('hideAll')">取消</button>
+							<button type="submit" style="margin-left:100px;" class="btn blue">添加</button>
+							<button type="button" class="btn" onclick="$('#form').validationEngine('hideAll')">取消</button>
 						</form>
 					</div>
 
@@ -601,7 +634,7 @@
 
 		</div>
 	</div>
-	<iframe name="formIframe" style="display:none;"></iframe>
+	<iframe style="display:none;" name="formIframe"></iframe>
 	<!-- END FOOTER -->
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -655,17 +688,17 @@
 	<script src="../media/js/app.js"></script>
 
 	<script src="../media/js/table-advanced.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 	<script type="text/javascript" src="../media/js/jquery.validationEngine-zh_CN.js"></script>
 	<script type="text/javascript" src="../media/js/jquery.validationEngine.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 	<script>
 
 		jQuery(document).ready(function() {       
+
 		   App.init();
-		   
-		   $('#selectCoachStar').select2();
+
+		   //TableAdvanced.init();
 		   $('#form').validationEngine();
-		   
 		   var dataArray = new Array();
 		   $.ajax({
 			   url: '../rest/schoolInfo/getAll',
@@ -678,77 +711,17 @@
 							 dataArray[i].id = data[i].school_id;
 							 dataArray[i].text = data[i].school_name;
 						 }
-				   }else{
-					   dataArray[0] = new Object();
-					   dataArray[0].id = -1;
-					   dataArray[0].text = '没有数据';
+					   $('#selectSchool').select2({
+							  data: dataArray
+						   });
 				   }
 			   },
-			   complete: function(xhr, ts){
-				   if(dataArray.length == 0){
-					   dataArray[0] = new Object();
-					   dataArray[0].id = -1;
-					   dataArray[0].text = '没有数据';
-				   }
-				   $('#selectSchool').select2({
-					  placeholder: '请选择驾校',
-					  data: dataArray
-				   });
-				   if(dataArray[0].id != -1)
-				   	displayCoachNumbers($('#selectSchool').val());
+			   error: function(xhr, err){
+				   alert('加载驾校信息出错');
 			   }
 		   });
-		   //TableAdvanced.init();
-		  /* $('#selectSchool').select2({
-			  placeholder: '请选择驾校',
-			  data: dataArray
-			   ajax: {
-				  url: '../rest/schoolInfo/getAll',
-				  dataType: 'json',
-				  type: 'get',
-				  data: function(params){
-					  //console.log(params);
-					  console.log(params.term);
-					  return{
-						  school_name: params.term
-					  };
-				  },
-				  processResults: function(data, page){
-					 var dataArray = new Array();
-					 for(i in data){
-						 dataArray[i]  = new Object();
-						 dataArray[i].id = data[i].school_id;
-						 dataArray[i].text = data[i].school_name;
-					 }
-					 console.log(dataArray);
-					 return dataArray;
-				  }
-			  } 
-		  }); */
 		});
-	function displayCoachNumbers(id){
-		$.ajax({
-			url: '../rest/schoolInfo/getAvaiableCoachNumbers',
-			type: 'get',
-			dataType: 'json',
-			data: {
-				school_id: id
-			},
-			complete: function(xhr, err){
-				if(xhr.status == 200){
-					var number = parseInt(JSON.parse(xhr.responseText).desc);
-					$('#remainCoachNumbers').html(number);
-					if(number == 0){
-						alert('不能选择教练');
-						document.getElementById('submit').disabled = true;
-					}
-				}else if(xhr.status == 500){
-					alert(JSON.parse(xhr.responseText).desc + ', ' + err);
-				}else
-					alert('网络错误');
-			}
-		});
-	}
+
 	</script>
 
 </body>

@@ -340,4 +340,73 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{page}, #{rows}
 	</if>
 </select>
+<!-- 学员训练记录 -->
+<select id="getStuTranRecord" resultType="TrainingRecord" parameterType="TrainingRecordVo">
+	select 
+		O.order_id,
+		O.training_start_time,
+		O.order_status,
+		O.order_amount,
+		O.order_dead_time,
+		O.order_time,
+		S.student_id,
+		S.student_name,
+		C.coach_id,
+		C.coach_name,
+		C.phone,
+		C.star,
+		SC.school_id
+	from 
+		order_record as O
+	join 
+		student_basic_info as S
+	on 
+		O.student_id = S.student_id
+	join 
+		coach_basic_info as C
+	on 
+		O.coach_id = C.coach_id
+	join 
+		school_info as SC
+	on 
+		O.school_id = SC.school_id
+	<where>
+		O.student_id = #{student_id} and
+		O.student_id = S.student_id and
+		O.coach_id = C.coach_id and
+		O.school_id = SC.school_id and 
+		O.validation = 1
+	</where>
+	<if test="sort != null and order != null and sort != '' and order != ''">
+		order by ${sort} ${order}
+	</if>
+	<if test="rows != 0 and rows != null">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="getStuTranRecordSize" resultType="int" parameterType="TrainingRecordVo">
+	select 
+		count(O.order_id) as recordSize
+	from 
+		order_record as O
+	join 
+		student_basic_info as S
+	on 
+		O.student_id = S.student_id
+	join 
+		coach_basic_info as C
+	on 
+		O.coach_id = C.coach_id
+	join 
+		school_info as SC
+	on 
+		O.school_id = SC.school_id
+	<where>
+		O.student_id = #{student_id} and
+		O.student_id = S.student_id and
+		O.coach_id = C.coach_id and
+		O.school_id = SC.school_id and 
+		O.validation = 1
+	</where>
+</select>
 </mapper>

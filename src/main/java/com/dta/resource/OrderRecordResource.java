@@ -1,5 +1,9 @@
 package com.dta.resource;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,11 +16,13 @@ import javax.ws.rs.core.Response;
 
 import com.dta.bean.OrderRecord;
 import com.dta.bean.ResultBean;
+import com.dta.bean.TrainingRecord;
 import com.dta.service.IOrderRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.OrderRecordVo;
+import com.dta.vo.TrainingRecordVo;
 
 @Path("orderRecord")
 public class OrderRecordResource extends
@@ -37,13 +43,40 @@ public class OrderRecordResource extends
 		try {
 			int page = vo.getPage();
 			int rows = vo.getRows();
-			if(rows != 0)
-				vo.setPage((page+1)*rows-rows);
-			return Response.status(200).entity(service.getCoPreRecord(vo)).build();
+			if (rows != 0)
+				vo.setPage((page + 1) * rows - rows);
+			return Response.status(200).entity(service.getCoPreRecord(vo))
+					.build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response
 					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+
+	@GET
+	@Path("getStuTranRecord")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getStuTranRecord(@BeanParam TrainingRecordVo vo) {
+		try {
+			int rows = vo.getRows();
+			if(rows == -1)
+				vo.setRows(0);
+			int size = service.getStuTranRecordSize(vo);
+			List<TrainingRecord> resultList = service.getStuTranRecord(vo);
+			int draw = vo.getDraw();
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("draw", draw);
+			resultMap.put("recordsTotal", size);
+			resultMap.put("recordsFiltered", size);
+			resultMap.put("data", resultList);
+			return Response.status(200).entity(resultMap).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response
+					.status(200)
 					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
 							GlobalConstant.SELECT_FAIL)).build();
 		}

@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.OrderRecord;
+import com.dta.bean.TrainingRecord;
 import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.dao.IOrderRecordDao;
 import com.dta.service.IOrderRecordService;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.OrderRecordVo;
+import com.dta.vo.TrainingRecordVo;
 
 @Service
 public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, OrderRecordVo> implements IOrderRecordService{
@@ -50,6 +52,25 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(vo.getCoach_id() == null)
 			throw new Exception("coach_id的值为null");
 		return dao.getCoPreRecord(vo);
+	}
+
+
+	@Override
+	public List<TrainingRecord> getStuTranRecord(TrainingRecordVo vo)
+			throws Exception {
+		if(vo.getStudent_id() == null && vo.getStudent_id() == 0){
+			throw new Exception("未知的student_id");
+		}
+		return dao.getStuTranRecord(vo);
+	}
+
+
+	@Override
+	public int getStuTranRecordSize(TrainingRecordVo vo) throws Exception {
+		if(vo.getStudent_id() == null && vo.getStudent_id() == 0){
+			throw new Exception("未知的student_id");
+		}
+		return dao.getStuTranRecordSize(vo);
 	}
 	
 	

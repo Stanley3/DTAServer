@@ -27,10 +27,43 @@ public class EvaluationRecord extends PageParam implements Serializable{
 	private Integer hygiene;
 	@FormParam("evaluation_time")
 	private Date evaluation_time;
-	@FormParam("evalution_type")
-	private Integer evalution_type;
+	@FormParam("evaluation_type")
+	private Integer evaluation_type;
 	@FormParam("validation")
 	private Integer validation;
+	@FormParam("evaluation")
+	private Integer evaluation;
+	
+	//学员评价界面额外需要的字段
+	private String coach_name;
+	private String phone;
+	private String course_status;
+	
+	
+	public String getCoach_name() {
+		return coach_name;
+	}
+	public void setCoach_name(String coach_name) {
+		this.coach_name = coach_name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getCourse_status() {
+		return course_status;
+	}
+	public void setCourse_status(String course_status) {
+		this.course_status = course_status;
+	}
+	public Integer getEvaluation() {
+		return evaluation;
+	}
+	public void setEvaluation(Integer evaluation) {
+		this.evaluation = evaluation;
+	}
 	public void setEvaluation_record_id(Integer evaluation_record_id){
 		this.evaluation_record_id = evaluation_record_id;
 	}
@@ -85,16 +118,16 @@ public class EvaluationRecord extends PageParam implements Serializable{
 	public Date getEvaluation_time() {
 		return evaluation_time;
 	}
-	public void setEvalution_type(Integer evalution_type){
-		this.evalution_type = evalution_type;
-	}
-	public Integer getEvalution_type() {
-		return evalution_type;
-	}
 	public void setValidation(Integer validation){
 		this.validation = validation;
 	}
 	public Integer getValidation() {
 		return validation;
+	}
+	public Integer getEvaluation_type() {
+		return evaluation_type;
+	}
+	public void setEvaluation_type(Integer evaluation_type) {
+		this.evaluation_type = evaluation_type;
 	}
 }

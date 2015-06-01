@@ -169,10 +169,10 @@
 					</div>
 				</div>
 
-				<a class=" btn purple" href="students_edit.html"
+				<a class=" btn purple" href="javascript:void(0);"
 					style="margin-bottom:10px;"><i class="icon-hospital"
-					style="margin-right:5px;"></i>学员信息</a> <a class=" btn blue"
-					href="students_view_lianxi.html" style="margin-bottom:10px;"><i
+					style="margin-right:5px;"></i>学员信息</a> <a class=" btn blue" id="trainingRecord"
+					href="javascript:void(0);" style="margin-bottom:10px;"><i
 					class=" icon-user-md" style="margin-right:5px;"></i>练习记录</a> <a
 					class=" btn blue" href="students_view_money.html"
 					style="margin-bottom:10px;"><i class=" icon-male"
@@ -517,6 +517,7 @@
 					document.getElementsByName('obligate_code')[0].value = data.obligate_code;
 					if(data.havePhoto == 1)
 						$('#image').attr('src', '../rest/studentBasicInfo/downloadPhoto?id=' + id);
+					$('#trainingRecord').attr('href', 'students_view_lianxi.html?student_id=' + id + '&student_name=' + encodeURI(data.student_name));
 					loadSchoolInfo(data.school_id);
 				},
 				complete: function(xhr, ts){

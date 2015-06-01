@@ -1,40 +1,40 @@
-package com.dta.bean;
+package com.dta.vo;
 
 import java.sql.Date;
+
+import javax.ws.rs.QueryParam;
 
 /*
  * 学员训练记录
  */
-public class TrainingRecord {
+public class TrainingRecordVo extends PageParam {
 	private Integer order_id;
+	@QueryParam("student_id")
 	private Integer student_id;
 	private Integer coach_id;
 	private Integer school_id;
+	@QueryParam("order_time")
 	private Date order_time;
+	@QueryParam("order_amount")
 	private String order_amount;
 	private Integer order_status;
-	private String training_start_time;
+	@QueryParam("training_date")
+	private String training_date;
 	private String order_dead_time;
 	private String order_memo;
+	private Integer validation;
 	private Integer course_status;
+	@QueryParam("coach_name")
 	private String coach_name;
 	private String phone;
 	private String school_address;
-	private Integer recordSize;
-	private Integer star;
 	
 	
-	public Integer getStar() {
-		return star;
+	public String getTraining_date() {
+		return training_date;
 	}
-	public void setStar(Integer star) {
-		this.star = star;
-	}
-	public Integer getRecordSize() {
-		return recordSize;
-	}
-	public void setRecordSize(Integer recordSize) {
-		this.recordSize = recordSize;
+	public void setTraining_date(String training_date) {
+		this.training_date = training_date;
 	}
 	public void setOrder_id(Integer order_id){
 		this.order_id = order_id;
@@ -78,14 +78,6 @@ public class TrainingRecord {
 	public Integer getOrder_status() {
 		return order_status;
 	}
-	public String getTraining_start_time() {
-		if(training_start_time != null)
-			return training_start_time.substring(0, training_start_time.lastIndexOf('.'));
-		return null;
-	}
-	public void setTraining_start_time(String training_start_time) {
-		this.training_start_time = training_start_time;
-	}
 	public String getOrder_dead_time() {
 		if(order_dead_time != null)
 			return order_dead_time.substring(0, order_dead_time.lastIndexOf('.'));
@@ -99,6 +91,12 @@ public class TrainingRecord {
 	}
 	public String getOrder_memo() {
 		return order_memo;
+	}
+	public void setValidation(Integer validation){
+		this.validation = validation;
+	}
+	public Integer getValidation() {
+		return validation;
 	}
 	public void setCourse_status(Integer course_status){
 		this.course_status = course_status;

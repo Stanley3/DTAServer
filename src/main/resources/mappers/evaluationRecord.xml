@@ -37,6 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="evalution != null">
+			evalution = #{evalution},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -54,20 +57,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="EvaluationRecord" parameterType="EvaluationRecord">
-	select * from evaluation_record
+	select 
+		E.evaluation_time,
+		C.coach_name,
+		C.coach_id,
+		C.phone,
+		O.course_status,
+		O.order_id,
+		E.evaluation,
+		E.evaluation_type,
+		E.evaluation_record_id
+	from 
+		evaluation_record as E
+	join
+		coach_basic_info as C
+	on 
+		E.coach_id = C.coach_id
+	join 
+		order_record as O
+	on 
+		E.order_id = O.order_id
 	<where>
-		validation = 1
 		<if test="evaluation_record_id != null and evaluation_record_id != '' ">
 			and evaluation_record_id = #{evaluation_record_id}
 		</if>
 		<if test="student_id != null and student_id != '' ">
-			and student_id = #{student_id}
+			and E.student_id = #{student_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
-			and coach_id = #{coach_id}
+			and E.coach_id = #{coach_id}
 		</if>
 		<if test="order_id != null and order_id != '' ">
-			and order_id = #{order_id}
+			and E.order_id = #{order_id}
 		</if>
 		<if test="content != null and content != '' ">
 			and content like "%"#{content}"%"
@@ -84,8 +105,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evaluation_time != null and evaluation_time != '' ">
 			and evaluation_time like "%"#{evaluation_time}"%"
 		</if>
-		<if test="evalution_type != null and evalution_type != '' ">
-			and evalution_type = #{evalution_type}
+		<if test="evaluation_type != null and evaluation_type != '' ">
+			and evaluation_type = #{evaluation_type}
+		</if>
+		<if test="evaluation != null and evaluation != '' ">
+			and evaluation = #{evaluation}
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
@@ -99,20 +123,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="EvaluationRecord" parameterType="EvaluationRecord">
-	select * from evaluation_record
+	select 
+		E.evaluation_time,
+		C.coach_name,
+		C.coach_id,
+		C.phone,
+		O.course_status,
+		O.order_id,
+		E.evaluation,
+		E.evaluation_type,
+		E.evaluation_record_id
+	from 
+		evaluation_record as E
+	join
+		coach_basic_info as C
+	on 
+		E.coach_id = C.coach_id
+	join 
+		order_record as O
+	on 
+		E.order_id = O.order_id
 	<where>
-		validation = 1
 		<if test="evaluation_record_id != null and evaluation_record_id != '' ">
 			and evaluation_record_id = #{evaluation_record_id}
 		</if>
 		<if test="student_id != null and student_id != '' ">
-			and student_id = #{student_id}
+			and E.student_id = #{student_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
-			and coach_id = #{coach_id}
+			and E.coach_id = #{coach_id}
 		</if>
 		<if test="order_id != null and order_id != '' ">
-			and order_id = #{order_id}
+			and E.order_id = #{order_id}
 		</if>
 		<if test="content != null and content != '' ">
 			and content like "%"#{content}"%"
@@ -129,34 +171,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evaluation_time != null and evaluation_time != '' ">
 			and evaluation_time like "%"#{evaluation_time}"%"
 		</if>
-		<if test="evalution_type != null and evalution_type != '' ">
-			and evalution_type = #{evalution_type}
+		<if test="evaluation_type != null and evalution_type != '' ">
+			and evaluation_type = #{evaluation_type}
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
 		</if>
 	</where>
 	<if test="sort != null">
-		order by #{sort} #{order}
+		order by ${sort} ${order}
 	</if>
-	LIMIt #{page}, #{rows}
+	<if test="rows != 0">
+		LIMIt #{page}, #{rows}
+	</if>
 </select>
 <!-- **********获取总数********* -->
 <select id="getSize" resultType="int" parameterType="EvaluationRecord">
-	select count(*) from evaluation_record
+	select 
+		count(evaluation_record_id)
+	from 
+		evaluation_record as E
+	join
+		coach_basic_info as C
+	on 
+		E.coach_id = C.coach_id
+	join 
+		order_record as O
+	on 
+		E.order_id = O.order_id
 	<where>
-		validation = 1
 		<if test="evaluation_record_id != null and evaluation_record_id != '' ">
-			and evaluation_record_id = #{evaluation_record_id}
+			and E.evaluation_record_id = #{evaluation_record_id}
 		</if>
 		<if test="student_id != null and student_id != '' ">
-			and student_id = #{student_id}
+			and E.student_id = #{student_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
-			and coach_id = #{coach_id}
+			and E.coach_id = #{coach_id}
 		</if>
 		<if test="order_id != null and order_id != '' ">
-			and order_id = #{order_id}
+			and E.order_id = #{order_id}
 		</if>
 		<if test="content != null and content != '' ">
 			and content like "%"#{content}"%"

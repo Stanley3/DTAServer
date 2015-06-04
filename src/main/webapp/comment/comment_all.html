@@ -74,7 +74,7 @@
    <!-- 开始侧边栏 --> 
    <div class="page-sidebar nav-collapse collapse"> 
     <!-- 开始 左侧通用 菜单 --> 
-    <script src="../left.js" type="text/javascript"></script> 
+    <script src="../media/left.js" type="text/javascript"></script> 
     <!-- END SIDEBAR MENU --> 
    </div> 
    <!-- 结束侧边栏 --> 
@@ -123,13 +123,13 @@
        <!-- END PAGE TITLE & BREADCRUMB--> 
       </div> 
      </div> 
-     <a class=" btn blue" href="comment_view.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>评价汇总</a> 
-     <a class=" btn purple" href="comment_all.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>所有评价</a> 
-     <a class=" btn blue" href="comment_good.html" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>好评列表</a> 
-     <a class=" btn blue" href="comment_mid.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>中评列表</a> 
-     <a class=" btn blue" href="comment_bad.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>差评列表</a> 
-     <a class=" btn blue" href="comment_complain.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>投诉列表</a> 
-     <a class=" btn blue" href="comment_advise.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>建议列表</a> 
+     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="viewComment"><i class="icon-hospital" style="margin-right:5px;"></i>评价汇总</a> 
+     <a class=" btn purple" href="javascript:void(0);" style="margin-bottom:10px;" id="allComment"><i class="icon-hospital" style="margin-right:5px;"></i>所有评价</a> 
+     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="goodComment"><i class=" icon-user-md" style="margin-right:5px;"></i>好评列表</a> 
+     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="midComment"><i class=" icon-male" style="margin-right:5px;"></i>中评列表</a> 
+     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="badComment"><i class="icon-hospital" style="margin-right:5px;"></i>差评列表</a> 
+     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="complain"><i class="icon-hospital" style="margin-right:5px;"></i>投诉列表</a> 
+     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="advise"><i class="icon-hospital" style="margin-right:5px;"></i>建议列表</a> 
      <div class="portlet box blue"> 
       <div class="portlet-title"> 
        <div class="caption">
@@ -157,94 +157,6 @@
           <th class="hidden-480">操作</th> 
          </tr> 
         </thead> 
-        <tbody> 
-         <tr> 
-          <td>2015-04-17 </td> 
-          <td>张全蛋</td> 
-          <td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign"></i></span></td> 
-          <td class="hidden-480">刘新华</td> 
-          <td class="hidden-480">驾校</td> 
-          <td class="hidden-480">科二</td> 
-          <td class="hidden-480">好评</td> 
-          <td class="hidden-480">评价</td> 
-          <td class="hidden-480">查看</td> 
-          <td class="hidden-480"> 
-           <!--以下为点结算以后弹出的界面开始--> 详细 </td> 
-         </tr> 
-         <tr> 
-          <td>2015-04-16</td> 
-          <td>张全福</td> 
-          <td class="hidden-480">普通</td> 
-          <td class="hidden-480">张新建</td> 
-          <td class="hidden-480">考场</td> 
-          <td class="hidden-480">科三</td> 
-          <td class="hidden-480">中评</td> 
-          <td class="hidden-480">建议</td> 
-          <td class="hidden-480">查看</td> 
-          <td class="hidden-480"> 
-           <!--以下为点结算以后弹出的界面开始--> 详细 </td> 
-         </tr> 
-         <tr> 
-          <td>2015-04-15</td> 
-          <td>老罗</td> 
-          <td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign"></i></span></td> 
-          <td class="hidden-480">王自如</td> 
-          <td class="hidden-480">驾校</td> 
-          <td class="hidden-480">科二</td> 
-          <td class="hidden-480">差评</td> 
-          <td class="hidden-480">投诉</td> 
-          <td class="hidden-480">查看</td> 
-          <td class="hidden-480">详细</td> 
-         </tr> 
-         <tr> 
-          <td>2015-04-14</td> 
-          <td>张全寿</td> 
-          <td class="hidden-480">普通</td> 
-          <td class="hidden-480">好好好</td> 
-          <td class="hidden-480">驾校</td> 
-          <td class="hidden-480">科三</td> 
-          <td class="hidden-480">好评</td> 
-          <td class="hidden-480">评价</td> 
-          <td class="hidden-480">查看</td> 
-          <td class="hidden-480">详细</td> 
-         </tr> 
-         <tr> 
-          <td>2015-04-13</td> 
-          <td>张全喜</td> 
-          <td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign"></i></span></td> 
-          <td class="hidden-480">张三</td> 
-          <td class="hidden-480">驾校</td> 
-          <td class="hidden-480">科二</td> 
-          <td class="hidden-480">好评</td> 
-          <td class="hidden-480">评价</td> 
-          <td class="hidden-480">查看</td> 
-          <td class="hidden-480">详细</td> 
-         </tr> 
-         <tr> 
-          <td>2015-05-16</td> 
-          <td>张全文</td> 
-          <td class="hidden-480">普通</td> 
-          <td class="hidden-480">李四</td> 
-          <td class="hidden-480">驾校</td> 
-          <td class="hidden-480">科二</td> 
-          <td class="hidden-480">中评</td> 
-          <td class="hidden-480">投诉</td> 
-          <td class="hidden-480"><a href="../order/order_edit.html">查看</a></td> 
-          <td class="hidden-480"><a href="comment_edit.html">详细</a></td> 
-         </tr> 
-         <tr> 
-          <td>2015-05-11</td> 
-          <td>张全武</td> 
-          <td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign"></i></span></td> 
-          <td class="hidden-480">王五</td> 
-          <td class="hidden-480">考场</td> 
-          <td class="hidden-480">科二</td> 
-          <td class="hidden-480">中评</td> 
-          <td class="hidden-480">建议</td> 
-          <td class="hidden-480">查看</td> 
-          <td class="hidden-480">详细</td> 
-         </tr> 
-        </tbody> 
        </table> 
       </div> 
      </div> 
@@ -298,10 +210,140 @@
 
 		   App.init();
 
-		   TableAdvanced.init();
-
+		   //TableAdvanced.init();
+		   loadPageInfo();
+		   $('#sample_2').DataTable({
+				  'processing':true,
+				  'serverSide': true,
+				  'ajax':{
+					  'url': '../rest/evaluationRecord/getAllEvaluationRecord',
+					  'type': 'get',
+					  'data': function(data, setting){
+						  var index = data.order[0].column;
+						  data.sort = data.columns[index].data;
+						  data.dir = data.order[0].dir;
+						  data.search = data.search.value;
+					  }
+				  },
+				  'columns': [
+				              {'data': 'evaluation_time'},
+				              {'data': 'student_name'},
+				              {
+				            	  'data': null,
+				            	  'defaultContent': '<span style="color:red;">暂未实现</span>'
+				              },
+				              {'data': 'coach_name'},
+				              {
+				            	  'data': 'school_type',
+				            	  'render': function(data, type, row, meta){
+				            		  if(type == 'display'){
+				            			  switch(data){
+				            			  case 1:
+				            				  return '驾校';
+				            			  case 2: 
+				            				  return '科目二考场';
+				            			  case 3:
+				            				  return '科目三考场';
+				            			  default:
+				            				  return '未知';
+				            			  }
+				            		  }
+				            		  return data;
+				            	  }
+				              },
+				              {
+				            	  'data': 'course_status',
+				            	  'render': function(data, type, row, meta){
+				            		  if(type == 'display'){
+				            			  switch(data){
+				            			  case 2:
+				            				  return '科目二';
+				            			  case 3:
+				            				  return '科目三';
+				            			  default:
+				            				  return '未知';
+				            			  }
+				            		  }
+				            		  return data;
+				            	  }
+				              },
+				              {
+				            	  'data': 'evaluation',
+				            	  'render': function(data, type, row, meta){
+				            		  if(type == 'display'){
+				            			  switch(data){
+				            			  case 0:
+				            				  return '差评';
+				            			  case 1: 
+				            				  return '中评';
+				            			  case 2:
+				            				  return '好评';
+				            			  default:
+				            				  return '未知';
+				            			  }
+				            		  }
+				            		  return data;
+				            	  }
+				              },
+				              {
+				            	  'data': 'evaluation_type',
+				            	  'render': function(data, type, row, meta){
+				            		  if(type == 'display'){
+				            			  switch(data){
+					            		  case 0:
+					            			  return '投诉';
+					            		  case 1:
+					            			  return '评价';
+					            		  case 2: 
+					            			  return '建议';
+					            		  default:
+					            			  return '未知';
+					            		  }
+				            		  }
+				            		 return data;
+				            	  }
+				              },
+				              {
+				            	  'data': 'order_id',
+				            	  'render': function(data, type, row, meta){
+				            		  if(type == 'display'){
+				            			  return '<a href="comment_edit.html?XID=' 
+				            					  + row.student_id 
+				            					  + '&XN=' + encodeURI(row.student_name) 
+				            					  + '&SCID=' + row.school_id 
+				            					  + '&SCN=' + encodeURI(row.school_name) 
+				            					  + '&EID=' + row.evaluation_record_id 
+				            					  + '&OID=' + row.order_id
+				            					  + '">查看</a>';
+				            		  }
+				            		  return data;
+				            	  }
+				              },
+				              {
+				            	  'data': 'evaluation_record_id',
+				            	  'render': function(data, type, row, meta){
+			            		  if(type == 'display'){
+			            			  return '详细';
+			            		  }
+			            		  return data;
+			            	  	}
+				              }
+				              ],
+	              'language':{
+					   'url': '../media/json/lang.json'
+				   },
+				   'lengthMenu': [ [10, 25, 50, -1], [10, 25, 50, '全部'] ]
+			   });
 		});
-
+	function loadPageInfo(){
+		$('#viewComment').attr('href', 'comment_view.html');
+		$('#allComment').attr('href', 'comment_all.html');
+		$('#goodComment').attr('href', 'comment_good.html?evaluation=2');
+		$('#midComment').attr('href', 'comment_mid.html?evaluation=1');
+		$('#badComment').attr('href', 'comment_bad.html?evaluation=0');
+		$('#complain').attr('href', 'comment_complain.html?evaluation_type=0');
+		$('#advise').attr('href', 'comment_advise.html?evaluation_type=2');
+	}
 	</script>  
   <!-- END BODY --> 
  </body>

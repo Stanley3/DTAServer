@@ -30,6 +30,9 @@
 	        <property name="maxIdle" value="30" />
 	        <property name="maxWaitMillis" value="-1" />
 	        <property name="poolPreparedStatements" value="true" />
+	        <property name="removeAbandonedOnMaintenance" value="true"/>
+	        <property name="removeAbandonedOnBorrow" value="true"/>
+	        <property name="removeAbandonedTimeout" value="30"></property>
 	        <property name="maxOpenPreparedStatements" value="100" />	
 		</bean>
 		

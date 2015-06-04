@@ -314,7 +314,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		S.student_name,
 		S.student_phone,
 		S.student_id,
-		S.status,
 		O.coach_id,
 		O.order_id,
 		O.school_id,

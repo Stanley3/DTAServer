@@ -1,41 +1,40 @@
 package com.dta.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-import javax.ws.rs.FormParam;
 
-import com.dta.vo.PageParam;
-
-public class StudentDepositRecord implements Serializable{
+public class ShowDepositRecord implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@FormParam("deposit_record_id")
 	private Integer deposit_record_id;
-	@FormParam("student_id")
 	private Integer student_id;
-	@FormParam("deposit_amount")
 	private String deposit_amount;
-	@FormParam("depositor_name")
 	private String depositor_name;
-	@FormParam("depositor_id")
 	private Integer depositor_id;
-	@FormParam("deposit_way")
 	private Integer deposit_way;
-	@FormParam("source_no")
 	private String source_no;
-	@FormParam("deposit_date")
-	private Date deposit_date;
-	@FormParam("validation")
+	private String deposit_date;
 	private Integer validation;
-	@FormParam("chartered_driving_school")
 	private Integer chartered_driving_school;
-	@FormParam("chartered_coach")
 	private Integer chartered_coach;
-	@FormParam("deposit_type")
 	private Integer deposit_type;
-	@FormParam("remark")
 	private String remark;
+	private String student_name;
+	private String student_phone;
 	
+	public String getStudent_name() {
+		return student_name;
+	}
+	public void setStudent_name(String student_name) {
+		this.student_name = student_name;
+	}
+	public String getStudent_phone() {
+		return student_phone;
+	}
+	public void setStudent_phone(String student_phone) {
+		this.student_phone = student_phone;
+	}
 	public String getRemark() {
 		return remark;
 	}
@@ -96,10 +95,18 @@ public class StudentDepositRecord implements Serializable{
 	public String getSource_no() {
 		return source_no;
 	}
-	public void setDeposit_date(Date deposit_date){
+	public void setDeposit_date(String deposit_date){
 		this.deposit_date = deposit_date;
 	}
-	public Date getDeposit_date() {
+	public String getDeposit_date() {
+		if(deposit_date != null){
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			try {
+				deposit_date = format.format(format.parse(deposit_date));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		return deposit_date;
 	}
 	public void setValidation(Integer validation){

@@ -15,11 +15,14 @@ import javax.ws.rs.Path;
 
 
 
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.EvaluationAndOrderInfo;
 import com.dta.bean.EvaluationRecord;
 import com.dta.bean.ResultBean;
 import com.dta.service.IEvaluationRecordService;
@@ -37,6 +40,13 @@ public class EvaluationRecordResource extends BaseAllResource<EvaluationRecord, 
 		super.setMianId(GlobalConstant.EVALUATIONRECORD);
 	}
 	
+	/**
+	 * 
+	 * @param AllEvaluationRecordVo vo
+	 * @return 
+	 * <p>web界面显示某个订单的详细内容，参数是评价id
+	 * <p>教练端教练查询自己的所有评价， 参数是教练id
+	 */
 	@GET
 	@Path("getAllEvaluationRecord")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -44,7 +54,7 @@ public class EvaluationRecordResource extends BaseAllResource<EvaluationRecord, 
 		try{
 			if(vo.getRows() == -1)
 				vo.setRows(0);
-			int draw = vo.getDraw();
+			int draw = vo.getDraw() == null ? 0 : vo.getDraw();
 			int size = 0;
 			List<AllEvaluationRecord> resultList = new ArrayList<AllEvaluationRecord>();
 			Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -71,6 +81,21 @@ public class EvaluationRecordResource extends BaseAllResource<EvaluationRecord, 
 			resultMap.put("data", resultList);
 			return Response.status(200).entity(resultMap).build();
 			
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+	
+	@GET
+	@Path("getEvaluationContent/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getEvaAndOrdById(@PathParam("id") Integer evaluation_record_id){
+		try{
+			EvaluationAndOrderInfo info = service.getEvaAndOrdById(evaluation_record_id);
+			if(info.getTraining_end_time() != null && info.getTraining_start_time() != null)
+				info.setTrainingTime(info.getTraining_start_time() + "-" + info.getTraining_end_time().split(" ")[1]);
+			return Response.status(200).entity(info).build();
 		}catch(Exception e){
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.SELECT_FAIL)).build();

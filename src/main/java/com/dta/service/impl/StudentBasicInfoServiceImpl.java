@@ -59,5 +59,11 @@ public class StudentBasicInfoServiceImpl extends BaseAllServiceImpl<StudentBasic
 	public StudentBasicInfo downloadPhoto(Integer student_id) {
 		return dao.downloadPhoto(student_id);
 	}
+
+	@Override
+	public Integer getStuByIDCard(String identity_card_no) {
+		// TODO Auto-generated method stub
+		return dao.getStuByIDCard(identity_card_no);
+	}
 	
 }

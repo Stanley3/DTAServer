@@ -1,11 +1,13 @@
 package com.dta.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.AllEvaluationRecordVo;
 import com.dta.vo.EvaluationRecordVo;
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.EvaluationAndOrderInfo;
 import com.dta.bean.EvaluationRecord;
 public interface IEvaluationRecordDao extends IBaseAllDao<EvaluationRecord, EvaluationRecordVo> {
 	
@@ -41,5 +43,11 @@ public interface IEvaluationRecordDao extends IBaseAllDao<EvaluationRecord, Eval
 	 */
 	public int globalSearchSize(AllEvaluationRecordVo vo);
 	
-	
+	/**
+	 * 
+	 * @param Integer evaluation_record_id
+	 * @return EvaluationAndOrderInfo
+	 * web查看评价详情界面用的bean 根据评价id获取订单和相关评价的内容
+	 */
+	public EvaluationAndOrderInfo getEvaAndOrdById(Integer evaluation_record_id);
 }

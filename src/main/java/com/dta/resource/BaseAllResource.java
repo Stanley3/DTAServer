@@ -66,6 +66,8 @@ import javax.ws.rs.core.Response;
 
 
 
+
+
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -73,6 +75,8 @@ import org.apache.commons.fileupload.util.Streams;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.CoachBasicInfo;
+import com.dta.bean.EvaluationRecord;
+import com.dta.bean.OrderRecord;
 import com.dta.bean.ResultBean;
 import com.dta.bean.SchoolInfo;
 import com.dta.bean.StudentBasicInfo;
@@ -127,11 +131,16 @@ public class BaseAllResource<T, V>{
 		MethodAccess access = MethodAccess.get(cl);
 		int table_id = Integer.valueOf(id);
 		access.invoke(po, generateMethodName("set", mianId), table_id);
+		boolean unique = updateUnique(po);
 		//System.out.println(access.invoke(po, generateMethodName("get", "order_status")));
 		if(service.updateObjectById(po) == 1){
+			if(unique)
+				return Response.status(201).header("Content-Type", "text/html").entity("<script>alert(\"更新成功\")</script>").build();
 			return Response.status(201).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
 					GlobalConstant.UPDATE_SUCCESS)).build();
 		}else{
+			if(unique)
+				return Response.status(500).entity("<script>alert(\"更新失败\")</script>").build();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
 					GlobalConstant.UPDATE_FAIL)).build();
 		}
@@ -143,6 +152,13 @@ public class BaseAllResource<T, V>{
 		
 	}
 	
+	private boolean updateUnique(T po) {
+		// TODO Auto-generated method stub
+		if((po instanceof EvaluationRecord) || (po instanceof OrderRecord))
+			return true;
+		return false;
+	}
+
 	@GET
 	@Path("delete/{id}")
 	@Produces(MediaType.APPLICATION_JSON)

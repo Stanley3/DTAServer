@@ -37,10 +37,28 @@ public class OrderRecord implements Serializable{
 	private Integer validation;
 	@FormParam("course_status")
 	private Integer course_status;
+	@FormParam("operation")
+	private String operation;
+	@FormParam("operator")
+	private Integer operator;
 	private String coach_name;
 	private String phone;
 	private String school_address;
 	private Integer havePhoto;
+	
+	
+	public String getOperation() {
+		return operation;
+	}
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+	public Integer getOperator() {
+		return operator;
+	}
+	public void setOperator(Integer operator) {
+		this.operator = operator;
+	}
 	public void setOrder_id(Integer order_id){
 		this.order_id = order_id;
 	}

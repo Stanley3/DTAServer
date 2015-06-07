@@ -16,8 +16,10 @@
 		
 		
 		<context:property-placeholder location="classpath:spring/db.properties"/>
-		<bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource" 
+		<!-- <bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource"  -->
+		<bean class="org.apache.tomcat.jdbc.pool.DataSource" id="dataSource"
 			destroy-method="close">
+			<!-- <property name="factory" value="org.apache.tomcat.jdbc.pool.DataSourceFactory" /> -->
 			<property name="driverClassName" value="${db.driver}"/>
 		    <property name="url" value="${db.url}"/>
 		    <property name="username" value="${db.username}"/>
@@ -26,14 +28,19 @@
 	        <property name="testWhileIdle" value="true" />
 	        <property name="timeBetweenEvictionRunsMillis" value="300000" />
 	        <property name="numTestsPerEvictionRun" value="6" />
-	        <property name="minEvictableIdleTimeMillis" value="1800000" />
+	        <property name="minEvictableIdleTimeMillis" value="30000" />
 	        <property name="maxIdle" value="30" />
-	        <property name="maxWaitMillis" value="-1" />
+	        <property name="removeAbandoned" value="true" />
+	        <property name="removeAbandonedTimeout" value="30000" />
+	        <property name="maxWait" value="60000" />
+	        <property name="maxActive" value="50" />
+	        
+	        <!-- <property name="maxWaitMillis" value="-1" />
 	        <property name="poolPreparedStatements" value="true" />
 	        <property name="removeAbandonedOnMaintenance" value="true"/>
 	        <property name="removeAbandonedOnBorrow" value="true"/>
 	        <property name="removeAbandonedTimeout" value="30"></property>
-	        <property name="maxOpenPreparedStatements" value="100" />	
+	        <property name="maxOpenPreparedStatements" value="100" /> -->	
 		</bean>
 		
 		<!--

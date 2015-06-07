@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import javax.ws.rs.Path;
 //import org.springframework.beans.factory.annotation.Autowired;
 
 
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -147,6 +150,24 @@ public class StudentBasicInfoResource extends BaseAllResource<StudentBasicInfo, 
 					.status(500)
 					.entity(new ResultBean(GlobalConstant.OPERATION_FAIL,
 							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+	
+	@GET
+	@Path("getStuByIDCard")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getStuByIDCard(@QueryParam("identity_card_no") String identity_card_no){
+		try{
+			Integer student_id = service.getStuByIDCard(identity_card_no);
+			if(student_id == null || student_id == 0){
+				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, GlobalConstant.SELECT_FAIL)).build();
+			}
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("student_id", student_id);
+			return Response.status(200).entity(map).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.SELECT_FAIL)).build();
 		}
 	}
 }

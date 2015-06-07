@@ -239,6 +239,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="updateObjectById" parameterType="EvaluationRecord">
 	update evaluation_record
 	<set>
+		validation = #{validation},
 		<if test="student_id != null and student_id != ''">
 			student_id = #{student_id},
 		</if>
@@ -263,11 +264,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evaluation_time != null and evaluation_time != ''">
 			evaluation_time = #{evaluation_time},
 		</if>
-		<if test="evalution_type != null and evalution_type != ''">
-			evalution_type = #{evalution_type},
+		<if test="evaluation_type != null and evaluation_type != ''">
+			evaluation_type = #{evaluation_type},
 		</if>
-		<if test="validation != null and validation != ''">
-			validation = #{validation},
+		<if test="operation != null and operation != ''">
+			operation = #{operation},
+		</if>
+		<if test="operator != null and operator != ''">
+			operator = #{operator}
 		</if>
 	</set>
 	where evaluation_record_id =  #{evaluation_record_id}
@@ -450,6 +454,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		or O.course_status like "%"#{search}"%"
 		or E.evaluation like "%"#{search}"%"
 		or E.evaluation_type like "%"#{search}"%"
+	</where>
+</select>
+<!-- web查看评价详情界面用的bean 根据评价id获取订单和相关评价的内容 -->
+<select id="getEvaAndOrdById" resultType="EvaluationAndOrderInfo">
+	select 
+		E.evaluation_record_id ,
+		E.evaluation_time,
+		E.skill,
+		E.service_attitude,
+		E.hygiene,
+		E.content,
+		E.evaluation_type,
+		E.evaluation,
+		E.validation,
+		E.operation as evaluation_operation,
+		O.order_id,
+		O.order_amount,
+		O.training_start_time,
+		O.training_end_time,
+		O.course_status,
+		O.order_status,
+		O.operation as order_operation,
+		C.coach_id,
+		C.coach_name,
+		C.phone as coach_phone,
+		SB.student_id,
+		SB.student_name,
+		SB.student_phone
+	from 
+		evaluation_record as E
+	join 
+		order_record as O
+	on 
+		E.order_id = O.order_id
+	join 
+		student_basic_info as SB
+	on 
+		E.student_id = SB.student_id
+	join 
+		coach_basic_info as C
+	on 
+		E.coach_id = C.coach_id
+	<where>
+		E.evaluation_record_id = #{evaluation_record_id}
 	</where>
 </select>
 </mapper>

@@ -381,10 +381,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="vehicle_number != null and vehicle_number != ''">
 			vehicle_number = #{vehicle_number},
 		</if>
-		device_2_status = #{device_2_status},
-		device_3_status = #{device_3_status},
-		status = #{status},
-		register_time = now()
+		<if test="device_2_status != null">
+			device_2_status = #{device_2_status},
+		</if>
+		<if test="device_3_status != null">
+			device_3_status = #{device_3_status},
+		</if>
+		<if test="status != null">
+			status = #{status},
+		</if>
 	</set>
 	where school_id =  #{school_id}
 </update>

@@ -305,6 +305,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="course_status != null and course_status != ''">
 			course_status = #{course_status},
 		</if>
+		<if test="operation != null and operation != ''">
+			operation = #{operation},
+		</if>
+		<if test="operator != null and operator != ''">
+			operator = #{operator},
+		</if>
 	</set>
 	where order_id =  #{order_id}
 </update>

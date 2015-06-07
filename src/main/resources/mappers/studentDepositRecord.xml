@@ -31,6 +31,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="chartered_driving_school != null and chartered_driving_school != 0">
+			chartered_driving_school = #{chartered_driving_school},
+		</if>
+		<if test="chartered_coach != null and chartered_coach != 0">
+			chartered_coach = #{chartered_coach},
+		</if>
+		<if test="remark != null and remark != ''">
+			remark = #{remark},
+		</if>
+		deposit_way = #{deposit_way},
+		deposit_type = #{deposit_type}
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -188,4 +199,89 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</set>
 	where deposit_record_id =  #{deposit_record_id}
 </update>
+<!-- 获取学员的充值信息 -->
+<select id="getStuDepInfo" resultType="ShowDepositRecord" parameterType="ShowDepositRecordVo">
+	select 
+		SD.deposit_record_id,
+		SD.deposit_amount,
+		SD.deposit_way,
+		SD.deposit_date,
+		SD.deposit_type,
+		SB.student_name,
+		SB.student_phone,
+		SD.remark
+	from 
+		student_deposit_record as SD
+	join 
+		student_basic_info as SB
+	on 
+		SD.student_id = SB.student_id
+	<if test="sort != null and sort != ''">
+		order by ${sort} ${order}
+	</if>	
+	<if test="rows != 0">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<!-- 获取学员的充值信息总数  -->
+<select id="getStuDepInfoSize" resultType="int" parameterType="ShowDepositRecordVo">
+	select 
+		count(SD.deposit_record_id)
+	from 
+		student_deposit_record as SD
+	join 
+		student_basic_info as SB
+	on 
+		SD.student_id = SB.student_id
+</select>
+<!-- 学员充值信息全局搜索 -->
+<select id="globalSerach" resultType="ShowDepositRecord" parameterType="ShowDepositRecordVo">
+	select 
+		SD.deposit_record_id,
+		SD.deposit_amount,
+		SD.deposit_way,
+		SD.deposit_date,
+		SD.deposit_type,
+		SB.student_name,
+		SB.student_phone,
+		SD.remark
+	from 
+		student_deposit_record as SD
+	join 
+		student_basic_info as SB
+	on 
+		SD.student_id = SB.student_id
+	<where>
+		<if test="deposit_date != null and deposit_date != ''">
+			 or deposit_date like "%"#{deposit_date}"%"
+		</if>
+		or SB.student_name like "%"#{search}"%"
+		or SB.student_phone like "%"#{search}"%"
+		or SD.deposit_amount like "%"#{search}"%"
+	</where>
+	<if test="sort != null and sort != ''">
+		order by ${sort} ${order}
+	</if>
+	<if test="rows != 0">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="globalSerachSize" resultType="int" parameterType="ShowDepositRecordVo">
+	select 
+		count(SD.deposit_record_id)
+	from 
+		student_deposit_record as SD
+	join 
+		student_basic_info as SB
+	on 
+		SD.student_id = SB.student_id
+	<where>
+		<if test="deposit_date != null and deposit_date != ''">
+			 or deposit_date like "%"#{deposit_date}"%"
+		</if>
+		or SB.student_name like "%"#{search}"%"
+		or SB.student_phone like "%"#{search}"%"
+		or SD.deposit_amount like "%"#{search}"%"
+	</where>
+</select>
 </mapper>

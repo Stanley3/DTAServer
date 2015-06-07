@@ -60,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 ST.subject,
 		 ST.validation,
 		 ST.school_id,
+		 ST.identity_card_no,
 		 SC.school_name
 	from 
 		student_basic_info as ST
@@ -224,5 +225,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <select id="downloadPhoto" resultType="StudentBasicInfo">
 	select student_photo from student_basic_info where student_id = #{student_id}
+</select>
+<select id="getStuByIDCard" resultType="Integer">
+	select student_id from student_basic_info where identity_card_no = #{identity_card_no} and validation = 1
 </select>
 </mapper>

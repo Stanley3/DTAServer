@@ -33,6 +33,10 @@ public class EvaluationRecord extends PageParam implements Serializable{
 	private Integer validation;
 	@FormParam("evaluation")
 	private Integer evaluation;
+	@FormParam("operation")
+	private String operation;
+	@FormParam("operator")
+	private Integer operator;
 	
 	//学员评价界面额外需要的字段
 	private String coach_name;
@@ -40,6 +44,18 @@ public class EvaluationRecord extends PageParam implements Serializable{
 	private String course_status;
 	
 	
+	public String getOperation() {
+		return operation;
+	}
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+	public Integer getOperator() {
+		return operator;
+	}
+	public void setOperator(Integer operator) {
+		this.operator = operator;
+	}
 	public String getCoach_name() {
 		return coach_name;
 	}

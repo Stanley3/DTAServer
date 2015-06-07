@@ -74,7 +74,7 @@
    <!-- 开始侧边栏 --> 
    <div class="page-sidebar nav-collapse collapse"> 
     <!-- 开始 左侧通用 菜单 --> 
-    <script src="../media/left.js" type="text/javascript"></script> 
+    <script src="../left.js" type="text/javascript"></script> 
     <!-- END SIDEBAR MENU --> 
    </div> 
    <!-- 结束侧边栏 --> 
@@ -114,11 +114,11 @@
        </div> 
        <!-- END BEGIN STYLE CUSTOMIZER --> 
        <!-- BEGIN PAGE TITLE & BREADCRUMB--> 
-       <h3 class="page-title">查看评价详细<small>评价详细</small> </h3> 
+       <h3 class="page-title">查看订单信息<small>增加学员</small> </h3> 
        <ul class="breadcrumb"> 
-        <li> <i class="icon-home"></i> <a href="../main/main.html">后台首页</a> <i class="icon-angle-right"></i> </li> 
-        <li> <a href="../order/order_list.html">订单管理</a> <i class="icon-angle-right"></i> </li> 
-        <li><a href="#">评价信息</a></li> 
+        <li> <i class="icon-home"></i> <a href="../main.html">后台首页</a> <i class="icon-angle-right"></i> </li> 
+        <li> <a href="order_list.html">订单管理</a> <i class="icon-angle-right"></i> </li> 
+        <li><a href="#">订单信息</a></li> 
        </ul> 
        <!-- END PAGE TITLE & BREADCRUMB--> 
       </div> 
@@ -129,105 +129,60 @@
      <div class="portlet box blue"> 
       <div class="portlet-title"> 
        <div class="caption">
-        <i class="icon-cogs"></i><span id="studentName1"></span>学员评价信息
+        <i class="icon-cogs"></i>刘新华学员订单信息
        </div> 
        <div class="actions" style="margin-left:15px;"></div> 
        <div class="tools"> 
-        <a href="javascript:void(0);" class="reload" onclick="window.location.reload();"></a> 
+        <a href="javascript:;" class="reload"></a> 
        </div> 
       </div> 
       <div class="portlet-body"> 
-         <h3 class="form-section">评价信息</h3>
+       <h3 class="form-section">基本信息</h3>
        
        <table class="table  table-bordered  " id="sample_100"> 
         
          <tbody> 
            <tr> 
-             <td width="50%">评价日期：<span id="evaluationTime"></span> </td>
-             <td width="50%">
-             评价结果：<span class="label  label-success good" style="display:none;">好评</span>
-                     <span class="label  label-warning mid" style="display:none;">中评</span>
-                     <span class="label label-important bad" style="display:none;">差评</span>
-             </td> 
+             <td width="50%">订单日期：2015-04-17 08:00-09:00</td>
+             <td width="50%">订单金额：200元</td> 
              </tr> 
            <tr> 
-             <td>学员信息：<a href="javascript:void(0);" id="studentName2"></a>　<a href="javascript:void(0);" id="schoolName"></a>　<span style="color:red;">暂未实现</span></td>
-             <td>
-             评价类别：<span class="label  label-success evaluation" style="display:none;">评价</span>
-                     <span class="label  label-warning advise" style="display:none;">建议</span>
-                     <span class="label label-important complain" style="display:none;">投诉</span>
-              </td> 
+             <td>学员信息：<a href="../student/students_edit.html">刘新华</a>　<a href="../school/school_view_info.html">商丘顺达驾校</a>　普通学员</td>
+             <td>教练信息：<a href="../techer/techer_view_info.html">张全蛋</a>　科目二　<a href="../school/school_view_info.html">商丘中原车城科三考场</a>　</td> 
              </tr>
            <tr>
-             <td colspan="2">教学技能：<span id="skill"></span>分　 服务态度：<span id="serviceAttitude"></span>分 　卫生：<span id="hygiene"></span>分</td>
-             </tr>
+             <td>学员电话：18137000067</td>
+             <td>教练电话：18937000079</td>
+           </tr>
            <tr>
-             <td colspan="2">评价内容：<span id="content"></span>　</td>
+             <td colspan="2">评价信息：尚未评价　</td>
              </tr>
            
            </tbody> 
-       </table>
-        <h3 class="form-section" style="margin-top:20px;">评价状态</h3>
-    <form class="form-horizontal" method="post" action="#" id="evaluationForm" target="formIframe"> 
+       </table>【注：此意义为如果已经评价这里就显示这单是好评还是差评并链接到相应的评价页，如果没有评价则为尚未评价】
+       <h3 class="form-section" style="margin-top:20px;">订单状态</h3>
+    <form action="#" class="form-horizontal"> 
     <div class="control-group"> 
      <label class="control-label">当前状态</label> 
     <div class="controls"> 
-    <label class="radio"> <input type="radio" name="validation" value="0" checked /> 禁止显示</label> 
-    <label class="radio"> <input type="radio" name="validation" value="1" /> 有效</label> 
+    <label class="radio"> <input type="radio" name="optionsRadios1" value="option1" checked="" /> 预约 </label> 
+    <label class="radio"> <input type="radio" name="optionsRadios1" value="option2" /> 练习 </label> 
+    <label class="radio"> <input type="radio" name="optionsRadios1" value="option2" /> 待评价 </label> 
+    <label class="radio"> <input type="radio" name="optionsRadios1" value="option3" /> 已结束 </label> 
+    <label class="radio"> <input type="radio" name="optionsRadios1" value="option4" /> 已冻结 </label> 
+    <label class="radio"> <input type="radio" name="optionsRadios1" value="option5" /> 取消预约 </label>
     </div> 
     </div>
       <div class="control-group"> 
    <label class="control-label">操作说明</label> 
    <div class="controls"> 
-    <textarea class="span12 m-wrap" rows="5" name="operation"></textarea><br> 请操作人员对操作进行备注如下：<br>
-2015-04-13 此学员评价内容不适易公开诉先冻结  丁海伟
-   </div> 
-  </div>
-  <button type="submit" style="margin-left:100px;" class="btn blue">处理评价</button>
-  <button type="reset" class="btn">取消</button>
-  </form>
-  <hr>
-
-       <h3 class="form-section">订单信息</h3>
-       
-       <table class="table  table-bordered  " id="sample_100"> 
-        
-         <tbody> 
-           <tr> 
-             <td width="50%">订单日期：<span id="trainingTime"></span></td>
-             <td width="50%">订单金额：<span id="orderAmount"></span></td> 
-             </tr> 
-           <tr> 
-             <td>学员信息：<a href="javascript:void(0);" id="studentName3"></a>　<a href="../school/school_view_info.html" id="schoolName2"></a>　<span style="color:red;">暂未实现</span></td>
-             <td>教练信息：<a href="javascript:void(0);" id="coachName"></a>　<span id="courseStatus"></span>　<a href="javascript:void(0);" id="schoolName3"></a>　</td> 
-             </tr>
-           <tr>
-             <td>学员电话：<span id="studentPhone"></span></td>
-             <td>教练电话：<span id="coachPhone"></span></td>
-           </tr>
-           </tbody> 
-       </table>
-       <h3 class="form-section" style="margin-top:20px;">所评价订单状态</h3>
-    <form action="#" class="form-horizontal" method="post" target="formIframe" id="orderForm"> 
-    <div class="control-group"> 
-     <label class="control-label">当前状态</label> 
-    <div class="controls"> 
-    <label class="radio"> <input type="radio" name="orderStatus" value="0" checked disabled/> 预约 </label> 
-    <label class="radio"> <input type="radio" name="orderStatus" value="1" disabled/> 取消预约 </label> 
-    <label class="radio"> <input type="radio" name="orderStatus" value="2" disabled/> 已冻结  </label> 
-    <label class="radio"> <input type="radio" name="orderStatus" value="3" disabled/> 已结束 </label> 
-    </div> 
-    </div>
-      <div class="control-group"> 
-   <label class="control-label">操作说明</label> 
-   <div class="controls"> 
-    <textarea class="span12 m-wrap" rows="5" name="operation"></textarea><br> 请操作人员对操作进行备注如下：<br>
+    <textarea class="span12 m-wrap" rows="5">2015-04-13 学员反馈说教练教的不好给差评，处理投诉先冻结 丁海伟 </textarea><br> 请操作人员对操作进行备注如下：<br>
 2015-04-13 学员反馈说教练教的不好给差评，处理投诉先冻结  丁海伟
    </div> 
   </div>
  
-  <button type="submit" style="margin-left:100px;" class="btn blue">处理订单</button>
-  <button type="reset" class="btn">取消</button>
+  <button type="submit" style="margin-left:100px;" class="btn blue">处理</button>
+  <button type="button" class="btn">取消</button>
     </form>
       </div> 
      </div> 
@@ -247,7 +202,6 @@
     <span class="go-top"> <i class="icon-angle-up"></i> </span> 
    </div> 
   </div> 
-  <iframe name="formIframe" style="display:none;"></iframe>
   <!-- END FOOTER --> 
   <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) --> 
   <!-- BEGIN CORE PLUGINS --> 
@@ -280,119 +234,12 @@
 
 		jQuery(document).ready(function() {       
 
-		   //App.init();
+		   App.init();
 
-		   //TableAdvanced.init();
-		  var search = window.location.search;
-		  var valueArray = search.split('&');
-		  if(valueArray.length != 6){
-			  App.init();
-			  return;
-		  }
-		  var student_id = valueArray[0].split('=')[1];
-		  var student_name = decodeURI(valueArray[1].split('=')[1]);
-		  var school_id = valueArray[2].split('=')[1];
-		  var school_name = decodeURI(valueArray[3].split('=')[1]);
-		  var evaluation_record_id = valueArray[4].split('=')[1];
-		  var order_id = valueArray[5].split('=')[1];
-		  $('#studentName1').html(student_name);
-		  $('#studentName2').html(student_name).attr('href', '../student/students_edit.html?student_id=' + student_id);
-		  $('#schoolName').html(school_name).attr('href', '../school/school_view_info.html?school_id=' + school_id);
-		  $('#evaluationForm').attr('action', '../rest/evaluationRecord/update/' + evaluation_record_id);
-		  $('#orderForm').attr('action', '../rest/orderRecord/update/' + order_id);
-		  loadEvaluationInfo(evaluation_record_id);
-		  //loadOrderInfo(order_id);
+		   TableAdvanced.init();
+
 		});
-	function loadEvaluationInfo(id){
-		$.ajax({
-			url: '../rest/evaluationRecord/getEvaluationContent/' + id,
-			type: 'get',
-			dataType: 'json',
-			success: function(data){
-				console.log(data);
-				$('#evaluationTime').html(data.evaluation_time);
-				$('#skill').html(data.skill);
-				$('#serviceAttitude').html(data.service_attitude);
-				$('#hygiene').html(data.hygiene);
-				$('#content').html(data.content);
-				document.getElementsByName('validation')[data.validation].checked = true;
-				switch(parseInt(data.evaluation)){
-				case 2:
-					$('.good').css('display', 'inline');
-					break;
-				case 1:
-					$('.mid').css('display', 'inline');
-					break;
-				case 0:
-					$('.bad').css('display', 'inline');
-					break;
-				default:
-					break;
-				}
-				switch(data.evaluation_type){
-				case 2:
-					$('.evaluation').css('display', 'inline');
-					break;
-				case 1:
-					$('.advise').css('display', 'inline');
-					break;
-				case 0:
-					$('.complain').css('display', 'inline');
-					break;
-				default:
-					break;
-				}
-				document.getElementsByName('operation')[0].value = data.evaluation_operation;
-				$('#trainingTime').html(data.trainingTime);
-				$('#orderAmount').html(data.order_amount);
-				$('#studentName3').html(data.student_name).attr('href', '../student/students_edit.html?student_id=' + data.student_id);
-				$('#coachName').html(data.coach_name).attr('href', '../techer/techer_view_info.html?coach_id=' + data.coach_id);
-				//$('#courseStatus').html(data.course_status);
-				switch(data.course_status){
-				case 2:
-					$('#courseStatus').html('科目二');
-					break;
-				case 3:
-					$('#courseStatus').html('科目三');
-					break;
-				}
-				$('#schoolName3').html(data.school_address).attr('href', '../school/school_view_info.html?school_id=' + data.school_id);
-				$('#studentPhone').html(data.student_phone);
-				$('#coachPhone').html(data.coach_phone);
-				document.getElementsByName('orderStatus')[data.order_status].checked = true;
-				document.getElementsByName('operation')[1].value = data.order_operation
-			},
-			complete: function(xhr, ts){
-				App.init();
-			}
-		});
-	}
-	function loadOrderInfo(id){
-		$.ajax({
-			url: '../rest/orderRecord/' + id,
-			type: 'get',
-			dataType: 'json',
-			success: function(data){
-				$('#trainingTime').html(data.training_start_time);
-				$('#orderAmount').html(data.order_amount);
-				$('#studentName3').html(data.student_name).attr('href', '../student/students_edit.html?student_id=' + data.student_id);
-				$('#coachName').html(data.coach_name).attr('href', '../techer/techer_view_info.html?coach_id=' + data.coach_id);
-				//$('#courseStatus').html(data.course_status);
-				switch(data.course_status){
-				case 2:
-					$('#courseStatus').html('科目二');
-					break;
-				case 3:
-					$('#courseStatus').html('科目三');
-					break;
-				}
-				$('#schoolName3').html(data.school_address).attr('href', '../school/school_view_info.html?school_id=' + data.school_id);
-				$('#studentPhone').html(data.student_phone);
-				$('#coachPhone').html(data.phone);
-				document.getElementsByName('orderStatus')[data.order_status].checked = true;
-			}
-		});
-	}
+
 	</script>  
   <!-- END BODY --> 
  </body>

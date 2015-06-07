@@ -32,12 +32,28 @@ public class EvaluationRecordVo extends PageParam implements Serializable{
 	private Integer validation;
 	@QueryParam("evaluation")
 	private Integer evaluation;
+	@QueryParam("operation")
+	private String operation;
+	@QueryParam("operator")
+	private Integer operator;
 	
 	private String coach_name;
 	private String phone;
 	private String course_status;
 	
 	
+	public String getOperation() {
+		return operation;
+	}
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+	public Integer getOperator() {
+		return operator;
+	}
+	public void setOperator(Integer operator) {
+		this.operator = operator;
+	}
 	public String getCoach_name() {
 		return coach_name;
 	}

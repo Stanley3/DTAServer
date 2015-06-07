@@ -3,6 +3,7 @@ package com.dta.service;
 import java.util.List;
 
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.EvaluationAndOrderInfo;
 import com.dta.bean.EvaluationRecord;
 import com.dta.vo.AllEvaluationRecordVo;
 import com.dta.vo.EvaluationRecordVo;
@@ -39,4 +40,13 @@ public interface IEvaluationRecordService extends IBaseAllService<EvaluationReco
 	 * 全局搜索评价总数
 	 */
 	public int globalSearchSize(AllEvaluationRecordVo vo);
+	
+	/**
+	 * 
+	 * @param Integer evaluation_record_id
+	 * @return EvaluationAndOrderInfo
+	 * web查看评价详情界面用的bean 根据评价id获取订单和相关评价的内容
+	 * @throws Exception 
+	 */
+	public EvaluationAndOrderInfo getEvaAndOrdById(Integer evaluation_record_id) throws Exception;
 }

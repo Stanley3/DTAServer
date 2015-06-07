@@ -26,6 +26,40 @@ public class StudentDepositRecordVo extends PageParam implements Serializable{
 	private String deposit_date;
 	@QueryParam("validation")
 	private Integer validation;
+	@QueryParam("chartered_driving_school")
+	private Integer chartered_driving_school;
+	@QueryParam("chartered_coach")
+	private Integer chartered_coach;
+	@QueryParam("deposit_type")
+	private Integer deposit_type;
+	@QueryParam("remark")
+	private String remark;
+	
+	public Integer getChartered_driving_school() {
+		return chartered_driving_school;
+	}
+	public void setChartered_driving_school(Integer chartered_driving_school) {
+		this.chartered_driving_school = chartered_driving_school;
+	}
+	public Integer getChartered_coach() {
+		return chartered_coach;
+	}
+	public void setChartered_coach(Integer chartered_coach) {
+		this.chartered_coach = chartered_coach;
+	}
+	
+	public Integer getDeposit_type() {
+		return deposit_type;
+	}
+	public void setDeposit_type(Integer deposit_type) {
+		this.deposit_type = deposit_type;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public void setDeposit_record_id(Integer deposit_record_id){
 		this.deposit_record_id = deposit_record_id;
 	}

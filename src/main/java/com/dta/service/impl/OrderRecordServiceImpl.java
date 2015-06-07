@@ -33,7 +33,8 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	@Transactional
 	public int updateObjectById(OrderRecord po) throws Exception {
 		System.out.println("子类的更新方法得到执行");
-		if(po.getOrder_status() == 3){
+		Integer status = po.getOrder_status();
+		if(status != null && status == 3){
 			int count = coachDao.getObjectById(po.getCoach_id()).getService_count();
 			CoachBasicInfo coach = new CoachBasicInfo();
 			coach.setService_count(count + 1);
@@ -42,6 +43,9 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 			if(result != 1)
 				throw new Exception("订单完成后，更新教练服务次数失败。");
 		}
+		String operation = po.getOperation();
+		if(operation != null && operation.length() > 50)
+			po.setOperation(operation.substring(0, 50));
 		return super.updateObjectById(po);
 	}
 

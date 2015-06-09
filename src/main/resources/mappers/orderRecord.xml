@@ -424,13 +424,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		O.course_status,
 		O.order_status,
 		O.student_id,
+		O.operation,
 		SB.student_name,
 		SB.student_phone,
 		C.coach_id,
 		C.coach_name,
 		C.phone as coach_phone,
 		SC.school_id,
-		SC.school_name
+		SC.school_name,
+		SB.student_level
 	from 
 		order_record as O 
 	join 

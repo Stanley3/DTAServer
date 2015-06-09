@@ -22,9 +22,15 @@ public class OrderInfo{
 	private String student_phone;
 	private String coach_phone;
 	private Integer Student_level;
-	private String school_address;
-	private String tainingTime;
+	private String school_name;
+	private String student_name;
 	
+	public String getStudent_name() {
+		return student_name;
+	}
+	public void setStudent_name(String student_name) {
+		this.student_name = student_name;
+	}
 	public String getStudent_phone() {
 		return student_phone;
 	}
@@ -121,16 +127,11 @@ public class OrderInfo{
 	public void setCoach_name(String coach_name) {
 		this.coach_name = coach_name;
 	}
-	public String getSchool_address() {
-		return school_address;
+	
+	public String getSchool_name() {
+		return school_name;
 	}
-	public void setSchool_address(String school_address) {
-		this.school_address = school_address;
+	public void setSchool_name(String school_name) {
+		this.school_name = school_name;
 	}
-	public String getTainingTime() {
-		return tainingTime;
-	}
-	public void setTainingTime(String tainingTime) {
-		this.tainingTime = tainingTime;
-	}	
 }

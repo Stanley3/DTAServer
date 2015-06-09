@@ -224,7 +224,15 @@
 				  }
 			 },
 			 'columns': [
-			             {'data': 'trainingTime'},
+			             {
+			            	 'data': 'training_start_time',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 return data + '-' + row.training_end_time.split(' ')[1];
+			            		 }
+			            		 return data;
+			            	 }
+			             },
 			             {'data': 'student_name'},
 			             {'data': 'student_phone'},
 			             {
@@ -242,6 +250,7 @@
 			            				 return '未知';
 			            			 }
 			            		 }
+			            		 return data;
 			            	 }
 			             },
 			             {
@@ -266,16 +275,21 @@
 			             {
 			            	 'data': 'order_status',
 			            	 'render': function(data, type, row, meta){
+			            		/*  var content = row.order_id + '|' + row.training_start_time + '|' + row.training_end_time + '|' + row.order_amount+ '|' 
+			            		 	+ row.student_name + '|' + row.student_level + '|' + row.coach_name + '|' + row.course_status + '|' + row.student_phone + '|'
+			            		 	+ row.coach_phone + '|' + row.order_status + '' */
+			            		 var content = JSON.stringify(row);
+			            		 console.log('<a href="order_edit.html?content=' + encodeURIComponent(content) + '">预约</a>');
 			            		 if(type == 'display'){
 			            			 switch(data){
 			            			 case 0:
-			            				 return '预约';
+			            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">预约</a>';
 			            			 case 1:
-			            				 return '取消';
+			            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">取消</a>';
 			            			 case 2: 
-			            				 return '冻结';
+			            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">冻结</a>';
 			            			 case 3:
-			            				 return '完成';
+			            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">完成</a>';
 		            				 default:
 		            					 return '未知';
 			            			 }

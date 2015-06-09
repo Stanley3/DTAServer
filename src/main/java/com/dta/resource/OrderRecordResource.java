@@ -1,5 +1,6 @@
 package com.dta.resource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.ResultBean;
 import com.dta.bean.TrainingRecord;
@@ -21,6 +23,7 @@ import com.dta.service.IOrderRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 import com.dta.vo.CoachPrecontractRecordVo;
+import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
 
@@ -79,6 +82,30 @@ public class OrderRecordResource extends
 					.status(200)
 					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
 							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+	
+	@GET
+	@Path("getOrderInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getOrderInfo(@BeanParam OrderInfoVo vo){
+		try{
+			if(vo.getRows() == -1)
+				vo.setRows(0);
+			int draw = vo.getDraw();
+			int size = service.getOrderInfoSize(vo);
+			List<OrderInfo> listResult = new ArrayList<OrderInfo>();
+			if(size != 0)
+				listResult = service.getOrderInfo(vo);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("draw", draw);
+			resultMap.put("recordsTotal", size);
+			resultMap.put("recordsFiltered", size);
+			resultMap.put("data", listResult);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
 }

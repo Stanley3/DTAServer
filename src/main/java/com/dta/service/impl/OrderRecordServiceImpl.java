@@ -9,12 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachPrecontractRecord;
+import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.TrainingRecord;
 import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.dao.IOrderRecordDao;
 import com.dta.service.IOrderRecordService;
 import com.dta.vo.CoachPrecontractRecordVo;
+import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
 
@@ -76,7 +78,18 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		}
 		return dao.getStuTranRecordSize(vo);
 	}
-	
-	
-	
+
+
+	@Override
+	public List<OrderInfo> getOrderInfo(OrderInfoVo vo) {
+		// TODO Auto-generated method stub
+		return dao.getOrderInfo(vo);
+	}
+
+
+	@Override
+	public int getOrderInfoSize(OrderInfoVo vo) {
+		// TODO Auto-generated method stub
+		return dao.getOrderInfoSize(vo);
+	}
 }

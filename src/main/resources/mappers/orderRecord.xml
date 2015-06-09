@@ -414,4 +414,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		O.validation = 1
 	</where>
 </select>
+<!-- 获取所有订单的相关信息 web 全部订单界面使用 -->
+<select id="getOrderInfo" resultType="OrderInfo" parameterType="OrderInfoVo">
+	select
+		O.training_start_time,
+		O.training_end_time,
+		O.order_id,
+		O.order_amount,
+		O.course_status,
+		O.order_status,
+		O.student_id,
+		SB.student_name,
+		SB.student_phone,
+		C.coach_id,
+		C.coach_name,
+		C.phone as coach_phone,
+		SC.school_id,
+		SC.school_name
+	from 
+		order_record as O 
+	join 
+		student_basic_info as SB
+	on 
+		O.student_id = SB.student_id
+	join
+		coach_basic_info as C
+	on 
+		O.coach_id = C.coach_id
+	join
+		school_info as SC
+	on
+		C.school_id = SC.school_id
+	<where>
+		<if test="search != null and search != ''">
+			or SB.student_name like "%"#{search}"%"
+			or SB.student_phone like "%"#{search}"%"
+			or C.coach_name like "%"#{search}"%"
+			or SC.school_name like "%"#{search}"%"
+		</if>
+	</where>
+	<if test="sort != null and sort != '' ">
+		order by ${sort} ${order}
+	</if>
+	<if test="rows != 0 and rows != null">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="getOrderInfoSize" resultType="int" parameterType="OrderInfoVo">
+	select 
+		count(O.order_id)
+	from 
+		order_record as O 
+	join 
+		student_basic_info as SB
+	on 
+		O.student_id = SB.student_id
+	join
+		coach_basic_info as C
+	on 
+		O.coach_id = C.coach_id
+	join
+		school_info as SC
+	on
+		C.school_id = SC.school_id
+	<where>
+		<if test="search != null and search != ''">
+			or SB.student_name like "%"#{search}"%"
+			or SB.student_phone like "%"#{search}"%"
+			or C.coach_name like "%"#{search}"%"
+			or SC.school_name like "%"#{search}"%"
+		</if>
+	</where>
+</select>
 </mapper>

@@ -1,5 +1,8 @@
 package com.dta.bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * 
  * @author myfu
@@ -16,7 +19,6 @@ public class OrderInfo{
 	private String training_end_time;
 	private Integer validation;
 	private Integer course_status;
-	private String operation;
 	private Integer operator;
 	private String coach_name;
 	private String student_phone;
@@ -24,7 +26,14 @@ public class OrderInfo{
 	private Integer Student_level;
 	private String school_name;
 	private String student_name;
+	private String operation;
 	
+	public String getOperation() {
+		return operation;
+	}
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
 	public String getStudent_name() {
 		return student_name;
 	}
@@ -85,13 +94,21 @@ public class OrderInfo{
 	public void setOrder_status(Integer order_status) {
 		this.order_status = order_status;
 	}
-	public String getTraining_start_time() {
+	public String getTraining_start_time() throws ParseException {
+		if(training_start_time != null && !training_start_time.isEmpty()){
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			training_start_time = format.format(format.parse(training_start_time));
+		}
 		return training_start_time;
 	}
 	public void setTraining_start_time(String training_start_time) {
 		this.training_start_time = training_start_time;
 	}
-	public String getTraining_end_time() {
+	public String getTraining_end_time() throws ParseException {
+		if(training_end_time != null && !training_end_time.isEmpty()){
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			training_end_time = format.format(format.parse(training_end_time));
+		}
 		return training_end_time;
 	}
 	public void setTraining_end_time(String training_end_time) {
@@ -108,12 +125,6 @@ public class OrderInfo{
 	}
 	public void setCourse_status(Integer course_status) {
 		this.course_status = course_status;
-	}
-	public String getOperation() {
-		return operation;
-	}
-	public void setOperation(String operation) {
-		this.operation = operation;
 	}
 	public Integer getOperator() {
 		return operator;

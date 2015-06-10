@@ -447,14 +447,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		school_info as SC
 	on
 		C.school_id = SC.school_id
-	<where>
+	<!-- <where>
+		<if test="order_status != null ">
+			and order_status = #{order_status}
+		</if>
 		<if test="search != null and search != ''">
 			or SB.student_name like "%"#{search}"%"
 			or SB.student_phone like "%"#{search}"%"
 			or C.coach_name like "%"#{search}"%"
-			or SC.school_name like "%"#{search}"%"
-		</if>
-	</where>
+			or SC.school_name like "%"#{search}"%" 
+		</if>		
+	</where> -->
+	where 1=1
+	<if test="order_status != null ">
+		and order_status = #{order_status}
+	</if>
+	<if test="search != null and search != ''">
+		 and( SB.student_name like "%"#{search}"%"
+		or SB.student_phone like "%"#{search}"%"
+		or C.coach_name like "%"#{search}"%"
+		or SC.school_name like "%"#{search}"%")
+	</if>
 	<if test="sort != null and sort != '' ">
 		order by ${sort} ${order}
 	</if>
@@ -479,13 +492,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		school_info as SC
 	on
 		C.school_id = SC.school_id
-	<where>
+	<!-- <where>
+		<if test="order_status != null ">
+			and order_status = #{order_status}
+		</if>
 		<if test="search != null and search != ''">
 			or SB.student_name like "%"#{search}"%"
 			or SB.student_phone like "%"#{search}"%"
 			or C.coach_name like "%"#{search}"%"
 			or SC.school_name like "%"#{search}"%"
 		</if>
+	</where> -->
+	where 1=1
+	<if test="order_status != null ">
+		and order_status = #{order_status}
+	</if>
+	<if test="search != null and search != ''">
+		 and (SB.student_name like "%"#{search}"%"
+		or SB.student_phone like "%"#{search}"%"
+		or C.coach_name like "%"#{search}"%"
+		or SC.school_name like "%"#{search}"%")
+	</if>
+</select>
+
+<!-- 通过订单ID得到评价信息 -->
+<select id="getEvaluationInfoByOrderId" resultType="AllEvaluationRecord">
+	select 
+		O.order_id,
+		E.evaluation,
+		E.evaluation_type,
+		E.evaluation_record_id
+	from 
+		order_record as O
+	join 
+		evaluation_record as E
+	on
+		O.order_id = E.order_id
+	<where>
+		O.order_id = #{order_id}
 	</where>
 </select>
 </mapper>

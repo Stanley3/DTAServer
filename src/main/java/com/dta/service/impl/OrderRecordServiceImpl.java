@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.OrderInfo;
@@ -91,5 +92,12 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	public int getOrderInfoSize(OrderInfoVo vo) {
 		// TODO Auto-generated method stub
 		return dao.getOrderInfoSize(vo);
+	}
+
+
+	@Override
+	public AllEvaluationRecord getEvaluationInfoByOrderId(Integer order_id) {
+		// TODO Auto-generated method stub
+		return dao.getEvaluationInfoByOrderId(order_id);
 	}
 }

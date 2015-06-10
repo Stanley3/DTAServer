@@ -166,7 +166,7 @@
     <div class="control-group"> 
      <label class="control-label">当前状态</label> 
     <div class="controls"> 
-    <label class="radio"> <input type="radio" name="orderStatus" value="0" checked="" disabled /> 预约 </label> 
+    <label class="radio"> <input type="radio" name="orderStatus" value="0" checked disabled /> 预约 </label> 
     <label class="radio"> <input type="radio" name="orderStatus" value="1" disabled/>  取消预约  </label> 
     <label class="radio"> <input type="radio" name="orderStatus" value="2" disabled/> 已冻结 </label> 
     <label class="radio"> <input type="radio" name="orderStatus" value="3" disabled/> 已结束 </label> 
@@ -235,7 +235,7 @@
 
 		jQuery(document).ready(function() {       
 		   //TableAdvanced.init();''
-		   App.init();
+		   
 		   var data = JSON.parse(decodeURIComponent(window.location.search.split('=')[1]));
 		   var subject;
 		   switch(data.course_status){
@@ -275,9 +275,33 @@
 		   $('#coachInfo').attr('href', '../techer/techer_view_info.html?coach_id=' + data.coach_id).html(data.coach_name);
 		   $('#courseStatus').html(subject);
 		   $('#coachPhone').html(data.coach_phone);
-		   document.getElementsByName('orderStatus')[data.order_status].checked = true;
+		   document.getElementsByName('orderStatus')[parseInt(data.order_status)].checked = true;
+		   console.log(data);
 		   $('#operation').val(data.operation);
 		   document.getElementsByTagName('form')[0].action = '../rest/orderRecord/update/' + data.order_id;
+		   App.init();
+		   if(data.order_status == 0 || data.order_status == 1 || data.order_status == 2)
+			   $('#evaluationInfo').html('尚未评价');
+		   else{
+			   $.ajax({
+				  url: '../rest/orderRecord/getEvaInfoByOrdId',
+				  type: 'get',
+				  dataTyep: 'json',
+				  data: {
+					  order_id: data.order_id
+				  },
+				  success: function(data2){
+					  console.log(data2);
+					  if(data2.evaluation)
+					  	$('#evaluationInfo').html('<a href="comment_edit.html?XID=' + data.student_id + '&XN=' + data.student_name + '&SCID=' + '&SCN=' + '&EID=' + data2.evaluation_record_id + '&OID=' + data2.order_id + '">' + data2.evaluation + '</a>');
+					  else
+						$('#evaluationInfo').html('尚未评价'); 
+				  },
+				  error: function(xhr, err){
+					  alert(err);
+				  }
+			   });
+		   }
 		});
 	/* function update(){
 		if($('#operation').val().length == 0)

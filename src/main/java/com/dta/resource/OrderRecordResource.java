@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 //import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -106,6 +107,18 @@ public class OrderRecordResource extends
 		}catch(Exception e){
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
+	@GET
+	@Path("getEvaInfoByOrdId")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getEvaluationInfoByOrderId(@QueryParam("order_id") Integer order_id){
+		try{
+			return Response.status(200).entity(service.getEvaluationInfoByOrderId(order_id)).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
 }

@@ -7,6 +7,7 @@ import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
+import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
@@ -44,5 +45,12 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	 */
 	public List<OrderInfo> getOrderInfo(OrderInfoVo vo);
 	public int getOrderInfoSize(OrderInfoVo vo);
+	
+	/**
+	 * <p>查看订单界面根据订单id获取评价信息
+	 * @param Integer order_id
+	 * @return List<AllEvaluationRecord>
+	 */
+	public AllEvaluationRecord getEvaluationInfoByOrderId(Integer order_id);
 }
 

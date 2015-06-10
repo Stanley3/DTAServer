@@ -125,7 +125,7 @@
      </div> 
      <a class=" btn blue" href="order_list_yuyue.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>最新预约</a> 
      <a class=" btn blue" href="order_list_lianxi.html" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>正在练习</a> 
-     <a class=" btn blue" href="order_list_weipingjia.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>尚未评价</a> 
+     <!-- <a class=" btn blue" href="order_list_weipingjia.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>尚未评价</a> --> 
      <a class=" btn blue" href="order_list_cancel.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>取消预约</a> 
      <a class=" btn blue" href="order_list_end.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>结束订单</a> 
      <a class=" btn blue" href="order_list_lock.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>冻结订单</a>
@@ -279,7 +279,6 @@
 			            		 	+ row.student_name + '|' + row.student_level + '|' + row.coach_name + '|' + row.course_status + '|' + row.student_phone + '|'
 			            		 	+ row.coach_phone + '|' + row.order_status + '' */
 			            		 var content = JSON.stringify(row);
-			            		 console.log('<a href="order_edit.html?content=' + encodeURIComponent(content) + '">预约</a>');
 			            		 if(type == 'display'){
 			            			 switch(data){
 			            			 case 0:

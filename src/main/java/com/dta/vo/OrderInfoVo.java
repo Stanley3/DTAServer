@@ -1,5 +1,7 @@
 package com.dta.vo;
 
+import javax.ws.rs.QueryParam;
+
 public class OrderInfoVo extends PageParam {
 	private Integer order_id;
 	private Integer student_id;
@@ -7,7 +9,15 @@ public class OrderInfoVo extends PageParam {
 	private String training_start_time;
 	private String training_end_time;
 	private String tainingTime;
+	@QueryParam("order_status")
+	private Integer order_status;
 	
+	public Integer getOrder_status() {
+		return order_status;
+	}
+	public void setOrder_status(Integer order_status) {
+		this.order_status = order_status;
+	}
 	public Integer getOrder_id() {
 		return order_id;
 	}

@@ -2,6 +2,7 @@ package com.dta.service;
 
 import java.util.List;
 
+import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
@@ -44,4 +45,11 @@ public interface IOrderRecordService extends IBaseAllService<OrderRecord, OrderR
 	 */
 	public List<OrderInfo> getOrderInfo(OrderInfoVo vo);
 	public int getOrderInfoSize(OrderInfoVo vo);
+	
+	/**
+	 * <p>查看订单界面根据订单id获取评价信息
+	 * @param Integer order_id
+	 * @return List<AllEvaluationRecord>
+	 */
+	public AllEvaluationRecord getEvaluationInfoByOrderId(Integer order_id);
 }

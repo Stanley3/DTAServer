@@ -11,7 +11,24 @@ public class OrderInfoVo extends PageParam {
 	private String tainingTime;
 	@QueryParam("order_status")
 	private Integer order_status;
+	@QueryParam("scanned")
+	private Integer scanned;
+	@QueryParam("now")
+	private String now;
 	
+	
+	public Integer getScanned() {
+		return scanned;
+	}
+	public void setScanned(Integer scanned) {
+		this.scanned = scanned;
+	}
+	public String getNow() {
+		return now;
+	}
+	public void setNow(String now) {
+		this.now = now;
+	}
 	public Integer getOrder_status() {
 		return order_status;
 	}

@@ -462,6 +462,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<if test="order_status != null ">
 		and order_status = #{order_status}
 	</if>
+	<!-- 表示正在练习 -->
+	<if test="now != null and now != '' and scanned == 1">
+		and training_start_time &lt;= #{now}
+		and training_end_time &gt;= #{now}
+		and scanned = 1
+	</if>
+	<!-- 表示最新预约 -->
+	<if test="now != null and now != '' and scanned == 0">
+		and training_start_time &gt; #{now}
+		and scanned = 0
+	</if>
 	<if test="search != null and search != ''">
 		 and( SB.student_name like "%"#{search}"%"
 		or SB.student_phone like "%"#{search}"%"
@@ -506,6 +517,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where 1=1
 	<if test="order_status != null ">
 		and order_status = #{order_status}
+	</if>
+	<!-- 表示正在练习 -->
+	<if test="now != null and now != '' and scanned == 1">
+		and training_start_time &lt;= #{now}
+		and training_end_time &gt;= #{now}
+		and scanned = 1
+	</if>
+	<!-- 表示最新预约 -->
+	<if test="now != null and now != '' and scanned == 0">
+		and training_start_time &gt; #{now}
+		and scanned = 0
 	</if>
 	<if test="search != null and search != ''">
 		 and (SB.student_name like "%"#{search}"%"

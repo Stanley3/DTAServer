@@ -61,6 +61,21 @@ public class OrderRecordResource extends
 	}
 
 	@GET
+	@Path("getOrder01Size")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getOrder01Size(@BeanParam CoachPrecontractRecordVo vo){
+		try{
+			return Response.status(200).entity(service.getOrder01Size(vo)).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response
+					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+	
+	@GET
 	@Path("getStuTranRecord")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getStuTranRecord(@BeanParam TrainingRecordVo vo) {

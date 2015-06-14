@@ -24,6 +24,14 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	
 	/**
 	 * 
+	 * @param CoachPrecontractRecordVo vo
+	 * @return int 
+	 * <p> 获取上次查询和当前时间这个时间段内取消预约和新增预约的总数 
+	 */
+	public int getOrder01Size(CoachPrecontractRecordVo vo);
+	
+	/**
+	 * 
 	 * @param TrainingRecordVo vo
 	 * @return List<TrainingRecord>
 	 * <p>获取学员的训练记录

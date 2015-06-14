@@ -27,7 +27,24 @@ public class CoachPrecontractRecordVo extends PageParam {
 	private String training_end_time;
 	@QueryParam("order_status")
 	private String order_status;
+	@QueryParam("lastQueryOrder0Time")
+	private String lastQueryOrder0Time; //记录上次查询‘已经预约’记录的时间
+	@QueryParam("lastQueryOrder1Time")
+	private String lastQueryOrder1Time; //记录上次查询‘取消预约’记录的时间
 	
+	
+	public String getLastQueryOrder0Time() {
+		return lastQueryOrder0Time;
+	}
+	public void setLastQueryOrder0Time(String lastQueryOrder0Time) {
+		this.lastQueryOrder0Time = lastQueryOrder0Time;
+	}
+	public String getLastQueryOrder1Time() {
+		return lastQueryOrder1Time;
+	}
+	public void setLastQueryOrder1Time(String lastQueryOrder1Time) {
+		this.lastQueryOrder1Time = lastQueryOrder1Time;
+	}
 	public String getStudent_name() {
 		return student_name;
 	}

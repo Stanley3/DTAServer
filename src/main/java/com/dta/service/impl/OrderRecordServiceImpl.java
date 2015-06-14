@@ -100,4 +100,12 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		// TODO Auto-generated method stub
 		return dao.getEvaluationInfoByOrderId(order_id);
 	}
+
+
+	@Override
+	public int getOrder01Size(CoachPrecontractRecordVo vo) throws Exception {
+		if(vo.getCoach_id() == null)
+			throw new Exception("coach_id的值为null");
+		return dao.getOrder01Size(vo);
+	}
 }

@@ -18,7 +18,15 @@ public class CoachPrecontractRecord {
 	private String training_start_time;
 	private String training_end_time;
 	private String order_status;//订单信息
+	private String queryTime; // 本次查询的时间
 	
+	
+	public String getQueryTime() {
+		return queryTime;
+	}
+	public void setQueryTime(String queryTime) {
+		this.queryTime = queryTime;
+	}
 	public String getStudent_name() {
 		return student_name;
 	}

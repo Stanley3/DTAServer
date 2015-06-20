@@ -20,11 +20,13 @@ import javax.ws.rs.core.Response;
 import com.dta.bean.ResultBean;
 import com.dta.bean.ShowDepositRecord;
 import com.dta.bean.StudentDepositRecord;
+import com.dta.bean.VIPStudentOfCoachInfo;
 import com.dta.service.IStudentDepositRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
+import com.dta.vo.VIPStudentOfCoachInfoVo;
 
 @Path("studentDepositRecord")
 public class StudentDepositRecordResource extends
@@ -75,6 +77,28 @@ public class StudentDepositRecordResource extends
 			e.printStackTrace();
 			return Response
 					.status(200)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
+	@GET
+	@Path("getVIPStudentOfCoachInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getVIPStudentOfCoachInfo(@BeanParam VIPStudentOfCoachInfoVo vo){
+		try{
+			int size = service.getVIPStudentOfCoachInfoSize(vo);
+			List<VIPStudentOfCoachInfo> list = new ArrayList<VIPStudentOfCoachInfo>();
+			if(size != 0)
+				list = service.getVIPStudentOfCoachInfo(vo);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("total", size);
+			resultMap.put("data", list);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response
+					.status(500)
 					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
 							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}

@@ -5,8 +5,10 @@ import java.util.List;
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
+import com.dta.vo.VIPStudentOfCoachInfoVo;
 import com.dta.bean.ShowDepositRecord;
 import com.dta.bean.StudentDepositRecord;
+import com.dta.bean.VIPStudentOfCoachInfo;
 public interface IStudentDepositRecordDao extends IBaseAllDao<StudentDepositRecord, StudentDepositRecordVo> {
 	/**
 	 * 
@@ -27,4 +29,20 @@ public interface IStudentDepositRecordDao extends IBaseAllDao<StudentDepositReco
 	public List<ShowDepositRecord> globalSerach(ShowDepositRecordVo vo);
 	
 	public int globalSerachSize(ShowDepositRecordVo vo);
+	
+	/**
+	 * 
+	 * @param VIPStudentOfCoachInfoVo vo
+	 * @return List<VIPStudentOfCoachInfo>
+	 * <p>App端获取教练名下VIP学员列表
+	 */
+	public List<VIPStudentOfCoachInfo> getVIPStudentOfCoachInfo(VIPStudentOfCoachInfoVo vo);
+	
+	/**
+	 * 
+	 * @param VIPStudentOfCoachInfoVo vo
+	 * @return List<VIPStudentOfCoachInfo>
+	 * <p>App端获取教练名下VIP学员的总数
+	 */
+	public int getVIPStudentOfCoachInfoSize(VIPStudentOfCoachInfoVo vo);
 }

@@ -500,4 +500,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		E.evaluation_record_id = #{evaluation_record_id}
 	</where>
 </select>
+<select id="getEvaluationSize" resultType="MapBean" parameterType="int">
+	call evaluation_type_size(#{coach_id})
+</select>
+<select id="getCoachEvaluationInfo" resultType="CoachEvaluationInfo" parameterType="CoachEvaluationInfoVo">
+	select * 
+	from evaluationInfo
+	<where>
+		<if test="coach_id != null">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="evaluation != null">
+			and evaluation = #{evaluation}
+		</if>
+	</where>
+	<if test="sort != null">
+		order by ${sort} ${order}
+	</if>
+	<if test="rows != 0 and rows != null">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="getCoachEvaluationInfoSize" resultType="int" parameterType="CoachEvaluationInfoVo">
+	select count(evaluation_record_id) 
+	from evaluationInfo
+	<where>
+		<if test="coach_id != null">
+			and coach_id = #{coach_id}
+		</if>
+		<if test="evaluation != null">
+			and evaluation = #{evaluation}
+		</if>
+	</where>
+</select>
 </mapper>

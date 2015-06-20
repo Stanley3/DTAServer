@@ -3,6 +3,7 @@ package com.dta.service;
 import java.util.List;
 
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
@@ -24,11 +25,19 @@ public interface IOrderRecordService extends IBaseAllService<OrderRecord, OrderR
 	/**
 	 * 
 	 * @param CoachPrecontractRecordVo vo
-	 * @return int 
-	 * <p> 获取上次查询和当前时间这个时间段内取消预约和新增预约的总数
-	 * @throws Exception 
+	 * @return int
+	 * <p> 获取上次查询和当前时间这个时间段内新增预约的总数 
 	 */
-	public int getOrder01Size(CoachPrecontractRecordVo vo) throws Exception;
+	public int getLatestRrecontractRecordSize(CoachPrecontractRecordVo vo);
+	
+	/**
+	 * 
+	 * @param CoachPrecontractRecordVo vo
+	 * @return int
+	 * <p> 获取上次查询和当前时间这个时间段内取消预约的总数 
+	 */
+	public int getLastestCancelRecordSize(CoachPrecontractRecordVo vo);
+	
 	/**
 	 * 
 	 * @param TrainingRecordVo vo
@@ -60,4 +69,12 @@ public interface IOrderRecordService extends IBaseAllService<OrderRecord, OrderR
 	 * @return List<AllEvaluationRecord>
 	 */
 	public AllEvaluationRecord getEvaluationInfoByOrderId(Integer order_id);
+	
+	/**
+	 * 
+	 * @param Integer coach_id
+	 * @return List<CoachFianceSummarizing>
+	 * <p>App端获取教练财务信息
+	 */
+	public List<CoachFianceSummarizing> getCoachFinanceSumInfo(Integer coach_id);
 }

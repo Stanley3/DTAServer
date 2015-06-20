@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.CoachEvaluationInfo;
 import com.dta.bean.EvaluationAndOrderInfo;
 import com.dta.bean.EvaluationRecord;
+import com.dta.bean.MapBean;
 import com.dta.dao.IEvaluationRecordDao;
 import com.dta.service.IEvaluationRecordService;
 import com.dta.vo.AllEvaluationRecordVo;
+import com.dta.vo.CoachEvaluationInfoVo;
 import com.dta.vo.EvaluationRecordVo;
 
 @Service
@@ -54,5 +57,27 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 		if(evaluation_record_id == null)
 			throw new Exception("未知的评价id(evaluation_record_id)");
 		return dao.getEvaAndOrdById(evaluation_record_id);
+	}
+
+	@Override
+	public List<CoachEvaluationInfo> getCoachEvaluationInfo(
+			CoachEvaluationInfoVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练的评价信息时coach_id为null");
+		return dao.getCoachEvaluationInfo(vo);
+	}
+
+	@Override
+	public int getCoachEvaluationInfoSize(CoachEvaluationInfoVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练的评价信息时coach_id为null");
+		return dao.getCoachEvaluationInfoSize(vo);
+	}
+
+	@Override
+	public List<MapBean> getEvaluationSize(Integer coach_id) {
+		if(coach_id == null)
+			throw new IllegalArgumentException("获取教练的评价个数时coach_id为null");
+		return dao.getEvaluationSize(coach_id);
 	}
 }

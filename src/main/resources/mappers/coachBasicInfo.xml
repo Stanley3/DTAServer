@@ -369,4 +369,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</where> 
 </select>
+<select id="getCoachInfo" resultType="CoachInfo" parameterType="int">
+	call coachInfo(#{coach_id})
+</select>
 </mapper>

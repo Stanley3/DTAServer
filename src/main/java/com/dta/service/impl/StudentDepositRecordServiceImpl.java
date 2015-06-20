@@ -4,19 +4,25 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.ShowDepositRecord;
+import com.dta.bean.StudentBasicInfo;
 import com.dta.bean.StudentDepositRecord;
+import com.dta.bean.VIPStudentOfCoachInfo;
+import com.dta.dao.IStudentBasicInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
 import com.dta.service.IStudentDepositRecordService;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
+import com.dta.vo.VIPStudentOfCoachInfoVo;
 
 @Service
 public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentDepositRecord, StudentDepositRecordVo> implements IStudentDepositRecordService{
 	@Autowired
 	private IStudentDepositRecordDao dao;
-	
+	@Autowired
+	private IStudentBasicInfoDao studentDao;
 	public void init(){
 		super.setDao(dao);
 	}
@@ -44,5 +50,34 @@ public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentD
 	public int globalSerachSize(ShowDepositRecordVo vo) {
 		// TODO Auto-generated method stub
 		return dao.globalSerachSize(vo);
+	}
+	
+	@Override
+	@Transactional
+	public int addObject(StudentDepositRecord po){
+		int result = 0;
+		if(po.getDeposit_type() != null){
+			StudentBasicInfo studentBasicInfo = new StudentBasicInfo();
+			studentBasicInfo.setStudent_level(po.getDeposit_type() - 1);
+			studentBasicInfo.setStudent_id(po.getStudent_id());
+			result = studentDao.updateObjectById(studentBasicInfo);
+		}
+		result = super.addObject(po);
+		return result;
+	}
+
+	@Override
+	public List<VIPStudentOfCoachInfo> getVIPStudentOfCoachInfo(
+			VIPStudentOfCoachInfoVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练名下VIP学员列表时 coach_id 为null");
+		return dao.getVIPStudentOfCoachInfo(vo);	
+	}
+
+	@Override
+	public int getVIPStudentOfCoachInfoSize(VIPStudentOfCoachInfoVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练名下VIP学员列表时 coach_id 为null");
+		return dao.getVIPStudentOfCoachInfoSize(vo);	
 	}
 }

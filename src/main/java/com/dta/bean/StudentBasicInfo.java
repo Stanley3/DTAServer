@@ -33,6 +33,9 @@ public class StudentBasicInfo implements Serializable{
 	private Integer school_id;
 	@FormParam("login_pwd")
 	private String login_pwd;
+	@FormParam("student_level")
+	private Integer student_level;
+	
 	private String register_date;
 	private String school_name;
 	private Integer havePhoto;
@@ -45,6 +48,12 @@ public class StudentBasicInfo implements Serializable{
 	private Integer login_id;
 	
 	
+	public Integer getStudent_level() {
+		return student_level;
+	}
+	public void setStudent_level(Integer student_level) {
+		this.student_level = student_level;
+	}
 	public Integer getLogin_id() {
 		return login_id;
 	}

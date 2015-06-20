@@ -57,7 +57,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from schedule_info
 	<where>
 		validation = 1
-		<if test="schedule_id != null and schedule_id != '' ">
+		and coach_id = #{coach_id}
+		<if test="startScheduleDate != null and startScheduleDate != ''">
+			and DATE_FORMAT(schedule_date,"%Y-%m-%d") &gt;= #{startScheduleDate}
+		</if>
+		<if test="endScheduleDate != null and endScheduleDate != ''">
+			and DATE_FORMAT(schedule_date, "%Y-%m-%d") &lt; #{endScheduleDate}
+		</if>
+		<!-- <if test="schedule_id != null and schedule_id != '' ">
 			and schedule_id = #{schedule_id}
 		</if>
 		<if test="coach_id != null and coach_id != '' ">
@@ -89,8 +96,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
-		</if>
-	</where>
+		</if>-->
+	</where> 
+	order by schedule_date asc
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="ScheduleInfo" parameterType="int">

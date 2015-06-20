@@ -8,6 +8,7 @@ import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
@@ -25,10 +26,18 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	/**
 	 * 
 	 * @param CoachPrecontractRecordVo vo
-	 * @return int 
-	 * <p> 获取上次查询和当前时间这个时间段内取消预约和新增预约的总数 
+	 * @return int
+	 * <p> 获取上次查询和当前时间这个时间段内新增预约的总数 
 	 */
-	public int getOrder01Size(CoachPrecontractRecordVo vo);
+	public int getLatestRrecontractRecordSize(CoachPrecontractRecordVo vo);
+	
+	/**
+	 * 
+	 * @param CoachPrecontractRecordVo vo
+	 * @return int
+	 * <p> 获取上次查询和当前时间这个时间段内取消预约的总数 
+	 */
+	public int getLastestCancelRecordSize(CoachPrecontractRecordVo vo);
 	
 	/**
 	 * 
@@ -60,5 +69,13 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	 * @return List<AllEvaluationRecord>
 	 */
 	public AllEvaluationRecord getEvaluationInfoByOrderId(Integer order_id);
+	
+	/**
+	 * 
+	 * @param Integer coach_id
+	 * @return List<CoachFianceSummarizing>
+	 * <p>App端获取教练财务信息
+	 */
+	public List<CoachFianceSummarizing> getCoachFinanceSumInfo(Integer coach_id);
 }
 

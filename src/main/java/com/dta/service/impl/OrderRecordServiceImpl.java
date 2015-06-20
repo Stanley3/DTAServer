@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachBasicInfo;
+import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
@@ -103,9 +104,31 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 
 
 	@Override
-	public int getOrder01Size(CoachPrecontractRecordVo vo) throws Exception {
+	public int getLatestRrecontractRecordSize(CoachPrecontractRecordVo vo) {
+		// TODO Auto-generated method stub
 		if(vo.getCoach_id() == null)
-			throw new Exception("coach_id的值为null");
-		return dao.getOrder01Size(vo);
+			throw new IllegalArgumentException("查询最新预约记录的总数时 coach_id 不能为null");
+		if(vo.getLastQueryTime() == null || vo.getLastQueryTime().isEmpty())
+			throw new IllegalArgumentException("查询最新预约记录的总数时  lastQueryTime 不能为nulll 或 空字符串");
+		return dao.getLatestRrecontractRecordSize(vo);
+	}
+	
+	@Override
+	public int getLastestCancelRecordSize(CoachPrecontractRecordVo vo) {
+		// TODO Auto-generated method stub
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("查询最新取消预约的总数时 coach_id 不能为null");
+		System.out.println("*******in OrderRecordServiceImple" + vo.getLastQueryTime());
+		if(vo.getLastQueryTime() == null || vo.getLastQueryTime().isEmpty())
+			throw new IllegalArgumentException("查询最新取消预约的总数时  lastQueryTime 不能为nulll 或 空字符串");
+		return dao.getLastestCancelRecordSize(vo);
+	}
+
+
+	@Override
+	public List<CoachFianceSummarizing> getCoachFinanceSumInfo(Integer coach_id) {
+		if(coach_id == null)
+			throw new IllegalArgumentException("获取教练财务信息时 coach_id 不能为null");
+		return dao.getCoachFinanceSumInfo(coach_id);
 	}
 }

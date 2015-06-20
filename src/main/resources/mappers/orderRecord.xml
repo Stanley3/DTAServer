@@ -346,8 +346,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{page}, #{rows}
 	</if>
 </select>
-<!-- 获取教练的预约信息 已经预约和取消预约最新记录的总数 -->
-<select id="getOrder01Size" resultType="int" parameterType="CoachPrecontractRecordVo">
+<!-- 获取教练的预约信息 已经预约最新记录的总数 -->
+<select id="getLatestRrecontractRecordSize" resultType="int" parameterType="CoachPrecontractRecordVo">
 	select 
 		count(O.order_id)
 	from 
@@ -357,19 +357,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on 
 		O.student_id = S.student_id
 	<where>
-		O.coach_id = #{coach_id} and
-		S.validation = 1
-		<if test="lastQueryOrder0Time != null and lastQueryOrder1Time != null">
-			and ( 
-				order_time &lt;= #{lastQueryOrder0Time}
-				and order_time &gt; now()
-				and order_status = 0
-				or( 
-				order_dead_time &lt;= #{lastQueryOrder1Time}
-				and order_dead_time &gt;= now()
-				and order_status = 1)
-			)
-		</if>
+		O.coach_id = #{coach_id}
+		and order_time &gt;= #{lastQueryTime}
+		and order_time &lt; now()
+		and order_status = 0
+	</where>
+</select>
+<!-- 获取教练的预约信息 取消预约最新记录的总数 -->
+<select id="getLastestCancelRecordSize" resultType="int" parameterType="CoachPrecontractRecordVo">
+	select 
+		count(O.order_id)
+	from 
+		order_record as O
+	join 
+		student_basic_info as S
+	on 
+		O.student_id = S.student_id
+	<where>
+		O.coach_id = #{coach_id}
+		and order_time &gt;= #{lastQueryTime}
+		and order_time &lt; now()
+		and order_status = 1
 	</where>
 </select>
 <!-- 学员训练记录 -->
@@ -563,7 +571,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		or SC.school_name like "%"#{search}"%")
 	</if>
 </select>
-
 <!-- 通过订单ID得到评价信息 -->
 <select id="getEvaluationInfoByOrderId" resultType="AllEvaluationRecord">
 	select 
@@ -580,5 +587,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<where>
 		O.order_id = #{order_id}
 	</where>
+</select>
+<select id="getCoachFinanceSumInfo" resultType="CoachFianceSummarizing" parameterType="int">
+	call coachFianceSummarizing(#{coach_id})
 </select>
 </mapper>

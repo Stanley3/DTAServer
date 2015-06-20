@@ -284,4 +284,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		or SD.deposit_amount like "%"#{search}"%"
 	</where>
 </select>
+<select id="getVIPStudentOfCoachInfo" resultType="VIPStudentOfCoachInfo" parameterType="VIPStudentOfCoachInfoVo">
+	select *
+	from vipstudentofcoachinfo
+	<where>
+		<if test="coach_id != null ">
+			and chartered_coach = #{coach_id}
+		</if>
+	</where>
+	<if test="sort != null">
+		order by ${sort} ${order}
+	</if>
+	<if test="rows != 0">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="getVIPStudentOfCoachInfoSize" resultType="int" parameterType="VIPStudentOfCoachInfoVo">
+	select count(*)
+	from vipstudentofcoachinfo
+	<where>
+		<if test="coach_id != null ">
+			and chartered_coach = #{coach_id}
+		</if>
+	</where>
+</select>
 </mapper>

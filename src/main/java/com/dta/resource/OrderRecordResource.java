@@ -16,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.ResultBean;
@@ -61,17 +62,27 @@ public class OrderRecordResource extends
 	}
 
 	@GET
-	@Path("getOrder01Size")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getOrder01Size(@BeanParam CoachPrecontractRecordVo vo){
+	@Path("getLatestRrecontractRecordSize")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getLatestRrecontractRecordSize(@BeanParam CoachPrecontractRecordVo vo){
 		try{
-			return Response.status(200).entity(service.getOrder01Size(vo)).build();
+			return Response.status(200).entity(service.getLatestRrecontractRecordSize(vo)).build();
 		}catch(Exception e){
 			e.printStackTrace();
-			return Response
-					.status(500)
-					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
-							GlobalConstant.SELECT_FAIL)).build();
+			return Response.status(500).entity(-1).build();
+		}
+	}
+	
+	@GET
+	@Path("getLastestCancelRecordSize")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getLastestCancelRecordSize(@BeanParam CoachPrecontractRecordVo vo){
+		try{
+			System.out.println("********** in orderRecordResource" + vo.getLastQueryTime());
+			return Response.status(200).entity(service.getLastestCancelRecordSize(vo)).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(-1).build();
 		}
 	}
 	
@@ -136,4 +147,46 @@ public class OrderRecordResource extends
 			return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
+	
+	@GET
+	@Path("getCoachFinanceSumInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCoachFinanceSumInfo(@QueryParam("coach_id") Integer coach_id){
+		try{
+			double totalIncome = 0;
+			int VIPStudentNumbers = 0;
+			int teachingTimes = 0;
+			int subject2TeachingTimes = 0;
+			int subject3TeachingTimes = 0;
+			double freezeAmount = 0;
+			List<CoachFianceSummarizing> list = service.getCoachFinanceSumInfo(coach_id);
+			for(int i=0;i<list.size(); ++i){
+				if(list.get(i).getOrder_status() == 2)
+					freezeAmount += list.get(i).getOrder_amount();
+				else if(list.get(i).getOrder_status() == 3)
+					totalIncome += list.get(i).getOrder_amount();
+				if(list.get(i).getCourse_status() == 2)
+					++subject2TeachingTimes;
+				else if(list.get(i).getCourse_status() == 3)
+					++subject3TeachingTimes;
+				if(list.get(i).getStudent_level() != 0)
+					++VIPStudentNumbers;
+			}
+			teachingTimes = subject2TeachingTimes + subject3TeachingTimes;
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("totalIncome", totalIncome);
+			resultMap.put("VIPStudentNumbers", VIPStudentNumbers);
+			resultMap.put("teachingTimes", teachingTimes);
+			resultMap.put("subject2TeachingTimes", subject2TeachingTimes);
+			resultMap.put("subject3TeachingTimes", subject3TeachingTimes);
+			resultMap.put("freezeAmount", freezeAmount);
+			resultMap.put("coach_id", list.get(0).getCoach_id());
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
 }

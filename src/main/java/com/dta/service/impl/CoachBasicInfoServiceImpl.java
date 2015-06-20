@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dta.bean.CoachBasicInfo;
+import com.dta.bean.CoachInfo;
 import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.service.ICoachBasicInfoService;
 import com.dta.vo.CoachBasicInfoVo;
@@ -44,6 +45,13 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 	@Override
 	public int globalSearchSize(CoachBasicInfoVo vo) {
 		return dao.globalSearchSize(vo);
+	}
+
+	@Override
+	public CoachInfo getCoachInfo(Integer coach_id) {
+		if(coach_id == null)
+			throw new IllegalArgumentException("获取教练个人信息时 coach_id为null");
+		return dao.getCoachInfo(coach_id);	
 	}
 	
 }

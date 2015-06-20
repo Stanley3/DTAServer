@@ -22,13 +22,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.CoachEvaluationInfo;
 import com.dta.bean.EvaluationAndOrderInfo;
 import com.dta.bean.EvaluationRecord;
+import com.dta.bean.MapBean;
 import com.dta.bean.ResultBean;
 import com.dta.service.IEvaluationRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 import com.dta.vo.AllEvaluationRecordVo;
+import com.dta.vo.CoachEvaluationInfoVo;
 import com.dta.vo.EvaluationRecordVo;
 
 @Path("evaluationRecord")
@@ -99,6 +102,47 @@ public class EvaluationRecordResource extends BaseAllResource<EvaluationRecord, 
 		}catch(Exception e){
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+	
+	@GET
+	@Path("getCoachEvaluationInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCoachEvaluationInfo(@BeanParam CoachEvaluationInfoVo vo){
+		try{
+			int size = service.getCoachEvaluationInfoSize(vo);
+			int goodEvaluationSize = 0;
+			int badEvaluationSize = 0;
+			int midEvaluationSize = 0;
+			List<CoachEvaluationInfo> resultList = new ArrayList<CoachEvaluationInfo>();
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("total", size);
+			if(size != 0){
+				resultList = service.getCoachEvaluationInfo(vo);
+				List<MapBean> mapBean = service.getEvaluationSize(vo.getCoach_id());
+				for(int i=0; i<mapBean.size(); ++i){
+					switch(Integer.valueOf(mapBean.get(i).getKey())){
+						case 0:
+							badEvaluationSize = Integer.valueOf(mapBean.get(i).getValue());
+							break;
+						case 1:
+							midEvaluationSize = Integer.valueOf(mapBean.get(i).getValue());
+							break;
+						case 2:
+							goodEvaluationSize = Integer.valueOf(mapBean.get(i).getValue());
+							break;						
+					}
+				}
+			}
+			resultMap.put("badEvaluationSize", badEvaluationSize);
+			resultMap.put("midEvaluationSize", midEvaluationSize);
+			resultMap.put("goodEvaluationSize", goodEvaluationSize);
+			resultMap.put("data", resultList);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
 }

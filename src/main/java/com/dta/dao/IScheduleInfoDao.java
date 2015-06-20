@@ -4,4 +4,5 @@ import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.ScheduleInfoVo;
 import com.dta.bean.ScheduleInfo;
 public interface IScheduleInfoDao extends IBaseAllDao<ScheduleInfo, ScheduleInfoVo> {
+	
 }

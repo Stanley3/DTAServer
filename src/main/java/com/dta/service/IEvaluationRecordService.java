@@ -3,9 +3,12 @@ package com.dta.service;
 import java.util.List;
 
 import com.dta.bean.AllEvaluationRecord;
+import com.dta.bean.CoachEvaluationInfo;
 import com.dta.bean.EvaluationAndOrderInfo;
 import com.dta.bean.EvaluationRecord;
+import com.dta.bean.MapBean;
 import com.dta.vo.AllEvaluationRecordVo;
+import com.dta.vo.CoachEvaluationInfoVo;
 import com.dta.vo.EvaluationRecordVo;
 
 public interface IEvaluationRecordService extends IBaseAllService<EvaluationRecord, EvaluationRecordVo>{
@@ -49,4 +52,28 @@ public interface IEvaluationRecordService extends IBaseAllService<EvaluationReco
 	 * @throws Exception 
 	 */
 	public EvaluationAndOrderInfo getEvaAndOrdById(Integer evaluation_record_id) throws Exception;
+	
+	/**
+	 * 
+	 * @param  CoachEvaluationInfoVo vo
+	 * @return List<CoachEvaluationInfo>
+	 * <p>App端获取教练评价信息
+	 */
+	public List<CoachEvaluationInfo> getCoachEvaluationInfo(CoachEvaluationInfoVo vo);
+	
+	/**
+	 * 
+	 * @param CoachEvaluationInfoVo vo
+	 * @return int
+	 * <p>App端获取教练评价信息总数
+	 */
+	public int getCoachEvaluationInfoSize(CoachEvaluationInfoVo vo);
+	
+	/**
+	 * 
+	 * @param coach_id
+	 * @return List<MapBean>
+	 * <p>App端评价个数汇总
+	 */
+	public List<MapBean> getEvaluationSize(Integer coach_id);
 }

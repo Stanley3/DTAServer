@@ -34,6 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="school_id != null and school_id != 0">
 			school_id = #{school_id},
 		</if>
+		<if test="student_level != null">
+			student_level = #{student_level},
+		</if>
 		register_date = now()
 	</set>
 </insert>
@@ -219,6 +222,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="register_date != null and register_date != ''">
 			register_date = #{register_date},
+		</if>
+		<if test="student_level != null ">
+			student_level = #{student_level},
+			<if test="student_level != 0">
+				begin_vip_date = DATE(now())
+			</if>
 		</if>
 	</set>
 	where student_id =  #{student_id}

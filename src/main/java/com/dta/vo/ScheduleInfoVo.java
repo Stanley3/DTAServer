@@ -24,12 +24,15 @@ public class ScheduleInfoVo extends PageParam implements Serializable{
 	private String student_toplimit;
 	@QueryParam("student_attribute")
 	private String student_attribute;
-	@QueryParam("schedule_date")
-	private String schedule_date;
+	@QueryParam("start_schedule_date")
+	private String startScheduleDate;
+	@QueryParam("end_schedule_date")
+	private String endScheduleDate;
 	@QueryParam("device_attribude")
 	private Integer device_attribude;
 	@QueryParam("validation")
 	private Integer validation;
+	
 	public void setSchedule_id(Integer schedule_id){
 		this.schedule_id = schedule_id;
 	}
@@ -78,11 +81,17 @@ public class ScheduleInfoVo extends PageParam implements Serializable{
 	public String getStudent_attribute() {
 		return student_attribute;
 	}
-	public void setSchedule_date(String schedule_date){
-		this.schedule_date = schedule_date;
+	public String getStartScheduleDate() {
+		return startScheduleDate;
 	}
-	public String getSchedule_date() {
-		return schedule_date;
+	public void setStartScheduleDate(String startScheduleDate) {
+		this.startScheduleDate = startScheduleDate;
+	}
+	public String getEndScheduleDate() {
+		return endScheduleDate;
+	}
+	public void setEndScheduleDate(String endScheduleDate) {
+		this.endScheduleDate = endScheduleDate;
 	}
 	public void setDevice_attribude(Integer device_attribude){
 		this.device_attribude = device_attribude;

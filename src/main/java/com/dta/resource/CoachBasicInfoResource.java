@@ -243,4 +243,17 @@ public class CoachBasicInfoResource extends
 		}else
 			return super.getPage(vo);
 	}
+	
+	@GET
+	@Path("getCoachInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCoachInfo(@QueryParam("coach_id")Integer coach_id){
+		try{
+			return Response.status(200).entity(service.getCoachInfo(coach_id)).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
 }

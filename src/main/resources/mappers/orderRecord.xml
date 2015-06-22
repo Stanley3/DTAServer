@@ -591,4 +591,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getCoachFinanceSumInfo" resultType="CoachFianceSummarizing" parameterType="int">
 	call coachFianceSummarizing(#{coach_id})
 </select>
+<select id="getCoachTeachRecord" resultType="CoachTeachRecord" parameterType="CoachTeachRecordVo">
+	select * 
+	from coachTeachRecord
+	where coach_id = #{coach_id}
+	<if test="rows != 0 and rows != null">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="getCoachTeachRecordSize" resultType="int" parameterType="CoachTeachRecordVo">
+	select count(order_id)
+	from coachTeachRecord
+	where coach_id = #{coach_id}
+</select>
+<select id="getCoachSomedayPrecontractInfo" resultType="string" parameterType="map">
+	call getCoachSomedayPrecontractInfo(#{coach_id}, #{startTime}, #{endTime})
+</select>
+<select id="getStudentConsumeAmount" resultType="Double" parameterType="Integer">
+	call studentConsumeAmount(#{student_id})
+</select>
 </mapper>

@@ -41,12 +41,28 @@ public class OrderRecord implements Serializable{
 	private String operation;
 	@FormParam("operator")
 	private Integer operator;
+	@FormParam("scheduleDateStr")
+	private String scheduleDateStr;//以 | 分隔不同的日期
+	@FormParam("precontractContentStr")
+	private String precontractContentStr; //以 | 分隔不同日期的时间段，每个日期的时间段用24个0或1字符串表示，0表示不预约该时间段，1表示预约
 	private String coach_name;
 	private String phone;
 	private String school_address;
 	private Integer havePhoto;
 	
 	
+	public String getScheduleDateStr() {
+		return scheduleDateStr;
+	}
+	public void setScheduleDateStr(String scheduleDateStr) {
+		this.scheduleDateStr = scheduleDateStr;
+	}
+	public String getPrecontractContentStr() {
+		return precontractContentStr;
+	}
+	public void setPrecontractContentStr(String precontractContentStr) {
+		this.precontractContentStr = precontractContentStr;
+	}
 	public String getOperation() {
 		return operation;
 	}

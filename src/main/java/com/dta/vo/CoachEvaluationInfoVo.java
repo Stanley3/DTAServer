@@ -12,7 +12,15 @@ public class CoachEvaluationInfoVo extends PageParam {
 	private Integer coach_id;
 	@QueryParam("evaluation")//评价
 	private Integer evaluation;
+	@QueryParam("course_status")
+	private Integer course_status;
 	
+	public Integer getCourse_status() {
+		return course_status;
+	}
+	public void setCourse_status(Integer course_status) {
+		this.course_status = course_status;
+	}
 	public Integer getCoach_id() {
 		return coach_id;
 	}

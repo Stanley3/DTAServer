@@ -308,4 +308,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</where>
 </select>
+<select id="getStudentDepositAmount" resultType="Double">
+	call studentDepositAmount(#{student_id})
+</select>
 </mapper>

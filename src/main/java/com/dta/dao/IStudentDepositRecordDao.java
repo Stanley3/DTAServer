@@ -45,4 +45,12 @@ public interface IStudentDepositRecordDao extends IBaseAllDao<StudentDepositReco
 	 * <p>App端获取教练名下VIP学员的总数
 	 */
 	public int getVIPStudentOfCoachInfoSize(VIPStudentOfCoachInfoVo vo);
+	
+	/**
+	 * 
+	 * @param student_id
+	 * @return Double
+	 * <p>获取学员的充值总额
+	 */
+	public Double getStudentDepositAmount(Integer student_id);
 }

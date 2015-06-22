@@ -160,9 +160,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="prepaid != null and prepaid != '' ">
 			and prepaid = #{prepaid}
 		</if>
-		<if test="prepaid != null and prepaid != '' ">
-			and prepaid = #{prepaid}
-		</if>
 	</where>
 	<if test="sort != null and sort != ''">
 		order by ${sort} ${order}
@@ -405,5 +402,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		S.school_id = #{school_id} and 
 		S.validation = 1 and 
 		C.validation = 1
+</select>
+<select id="getSchoolDistanceInfo" resultType="SchoolInfoBasedDistance" parameterType="SchoolInfoBasedDistanceVo">
+	select * 
+	from getSchoolDistanceInfo
+</select>
+<select id="getSchoolDistanceInfoSize" resultType="int" parameterType="SchoolInfoBasedDistanceVo">
+	select count(school_id)
+	from getSchoolDistanceInfo
 </select>
 </mapper>

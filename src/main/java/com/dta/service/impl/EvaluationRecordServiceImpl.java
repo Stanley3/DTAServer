@@ -75,9 +75,9 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 	}
 
 	@Override
-	public List<MapBean> getEvaluationSize(Integer coach_id) {
-		if(coach_id == null)
+	public List<MapBean> getEvaluationSize(CoachEvaluationInfoVo vo) {
+		if(vo.getCoach_id() == null)
 			throw new IllegalArgumentException("获取教练的评价个数时coach_id为null");
-		return dao.getEvaluationSize(coach_id);
+		return dao.getEvaluationSize(vo);
 	}
 }

@@ -119,7 +119,7 @@ public class EvaluationRecordResource extends BaseAllResource<EvaluationRecord, 
 			resultMap.put("total", size);
 			if(size != 0){
 				resultList = service.getCoachEvaluationInfo(vo);
-				List<MapBean> mapBean = service.getEvaluationSize(vo.getCoach_id());
+				List<MapBean> mapBean = service.getEvaluationSize(vo);
 				for(int i=0; i<mapBean.size(); ++i){
 					switch(Integer.valueOf(mapBean.get(i).getKey())){
 						case 0:

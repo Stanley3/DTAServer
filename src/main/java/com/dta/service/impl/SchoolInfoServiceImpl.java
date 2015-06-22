@@ -1,16 +1,19 @@
 package com.dta.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.SchoolInfo;
+import com.dta.bean.SchoolInfoBasedDistance;
 import com.dta.bean.SysUser;
 import com.dta.dao.ISchoolInfoDao;
 import com.dta.dao.ISysUserDao;
 import com.dta.service.ISchoolInfoService;
+import com.dta.vo.SchoolInfoBasedDistanceVo;
 import com.dta.vo.SchoolInfoVo;
 
 @Service
@@ -75,5 +78,18 @@ public class SchoolInfoServiceImpl extends BaseAllServiceImpl<SchoolInfo, School
 	
 	public int getAvaiableCoachNumbers(int school_id){
 		return dao.getAvaiableCoachNumbers(school_id);
+	}
+
+	@Override
+	public List<SchoolInfoBasedDistance> getSchoolDistanceInfo(
+			SchoolInfoBasedDistanceVo vo) {
+		// TODO Auto-generated method stub
+		return dao.getSchoolDistanceInfo(vo);
+	}
+
+	@Override
+	public int getSchoolDistanceInfoSize(SchoolInfoBasedDistanceVo vo) {
+		// TODO Auto-generated method stub
+		return dao.getSchoolDistanceInfoSize(vo);	
 	}
 }

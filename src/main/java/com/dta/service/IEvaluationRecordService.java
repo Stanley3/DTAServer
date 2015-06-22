@@ -75,5 +75,5 @@ public interface IEvaluationRecordService extends IBaseAllService<EvaluationReco
 	 * @return List<MapBean>
 	 * <p>App端评价个数汇总
 	 */
-	public List<MapBean> getEvaluationSize(Integer coach_id);
+	public List<MapBean> getEvaluationSize(CoachEvaluationInfoVo vo);
 }

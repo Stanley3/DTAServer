@@ -500,8 +500,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		E.evaluation_record_id = #{evaluation_record_id}
 	</where>
 </select>
-<select id="getEvaluationSize" resultType="MapBean" parameterType="int">
-	call evaluation_type_size(#{coach_id})
+<select id="getEvaluationSize" resultType="MapBean" parameterType="CoachEvaluationInfoVo">
+	call evaluation_type_size(#{coach_id}, #{course_status})
 </select>
 <select id="getCoachEvaluationInfo" resultType="CoachEvaluationInfo" parameterType="CoachEvaluationInfoVo">
 	select * 
@@ -512,6 +512,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="evaluation != null">
 			and evaluation = #{evaluation}
+		</if>
+		<if test="course_status != null">
+			and course_status = #{course_status}
 		</if>
 	</where>
 	<if test="sort != null">
@@ -530,6 +533,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="evaluation != null">
 			and evaluation = #{evaluation}
+		</if>
+		<if test="course_status != null">
+			and course_status = #{course_status}
 		</if>
 	</where>
 </select>

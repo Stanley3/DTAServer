@@ -2,6 +2,7 @@ package com.dta.service.impl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,18 @@ import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachPrecontractRecord;
+import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
+import com.dta.bean.SchoolInfo;
 import com.dta.bean.TrainingRecord;
 import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.dao.IOrderRecordDao;
+import com.dta.dao.ISchoolInfoDao;
+import com.dta.dao.IStudentDepositRecordDao;
 import com.dta.service.IOrderRecordService;
 import com.dta.vo.CoachPrecontractRecordVo;
+import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
@@ -28,11 +34,51 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	private IOrderRecordDao dao;
 	@Autowired
 	private ICoachBasicInfoDao coachDao;
-	
+	@Autowired
+	private ISchoolInfoDao schoolDao;
+	@Autowired
+	private IStudentDepositRecordDao depositDao;
 	public void init(){
 		super.setDao(dao);
 	}
 	
+	@Override
+	@Transactional
+	public int addObject(OrderRecord po){
+		String[] scheduleDateArray = po.getScheduleDateStr().split("|");
+		String[] precontractContentArray = po.getPrecontractContentStr().split("|");
+		int orderNumber = 0;
+		for(int i=0; i<po.getPrecontractContentStr().length(); ++i)
+			if(po.getPrecontractContentStr().charAt(i) == '1')
+				++orderNumber;
+		SchoolInfo schoolInfo = schoolDao.getObjectById(po.getSchool_id());
+		double orderTotalAmount = 0;
+		if(po.getCourse_status() == 2)
+			orderTotalAmount = orderNumber * schoolInfo.getSubject_2_fee();
+		else if(po.getCourse_status() == 3)
+			orderTotalAmount = orderNumber * schoolInfo.getSubject_3_fee();
+		Double studentDepositAmount = depositDao.getStudentDepositAmount(po.getStudent_id());
+		if(studentDepositAmount == null)
+			studentDepositAmount = 0.00;
+		Double studentConsumeAmount = dao.getStudentConsumeAmount(po.getSchool_id());
+		if(studentConsumeAmount == null)
+			studentConsumeAmount = 0.00;
+		if(orderTotalAmount > (studentDepositAmount - studentConsumeAmount))
+			return -1;//余额不足
+		int result = 0;
+		for(int i=0; i<scheduleDateArray.length; ++i){
+			for(int j=0; j<precontractContentArray[i].length(); ++i){
+				if(precontractContentArray[i].charAt(j) == '0')
+					break; // 0 表示该时间段没有被预约
+				String startTime = scheduleDateArray[i] + " " + (j < 10 ? "0" + j : j) + "00:00";
+				String endTime = scheduleDateArray[i] + " " + (j + 1 < 10 ? "0" + (j+1) : j+1) + "00:00";
+				po.setTraining_end_time(endTime);
+				po.setTraining_start_time(startTime);
+				result += dao.addObject(po);
+			}
+		}
+		return result;
+	}
 	
 	@Transactional
 	public int updateObjectById(OrderRecord po) throws Exception {
@@ -130,5 +176,27 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(coach_id == null)
 			throw new IllegalArgumentException("获取教练财务信息时 coach_id 不能为null");
 		return dao.getCoachFinanceSumInfo(coach_id);
+	}
+
+
+	@Override
+	public List<CoachTeachRecord> getCoachTeachRecord(CoachTeachRecordVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练授课记录时 coach_id 不能为null");
+		return dao.getCoachTeachRecord(vo);
+	}
+
+
+	@Override
+	public int getCoachTeachRecordSize(CoachTeachRecordVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练授课记录时 coach_id 不能为null");
+		return dao.getCoachTeachRecordSize(vo);	
+	}
+
+
+	@Override
+	public List<String> getCoachSomedayPrecontractInfo(Map<String, Object> map) {
+		return dao.getCoachSomedayPrecontractInfo(map);
 	}
 }

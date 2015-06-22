@@ -1,14 +1,17 @@
 package com.dta.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachPrecontractRecord;
+import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.TrainingRecord;
 import com.dta.vo.CoachPrecontractRecordVo;
+import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
@@ -77,4 +80,28 @@ public interface IOrderRecordService extends IBaseAllService<OrderRecord, OrderR
 	 * <p>App端获取教练财务信息
 	 */
 	public List<CoachFianceSummarizing> getCoachFinanceSumInfo(Integer coach_id);
+	
+	/**
+	 * 
+	 * @param CoachTeachRecordVo vo
+	 * @return List<CoachTeachRecord>
+	 * <p>App端获取教练的授课记录
+	 */
+	public List<CoachTeachRecord> getCoachTeachRecord(CoachTeachRecordVo vo);
+	
+	/**
+	 * 
+	 * @param CoachTeachRecordVo vo
+	 * @return List<CoachTeachRecord>
+	 * <p>App端获取教练授课记录的总数
+	 */
+	public int getCoachTeachRecordSize(CoachTeachRecordVo vo);
+	
+	/**
+	 * 
+	 * @param Map<String, Object> map
+	 * @return List<String>
+	 * <p>获取某个教练某天的预约信息，用于学员预约教练时间段界面
+	 */
+	public List<String> getCoachSomedayPrecontractInfo(Map<String, Object> map);
 }

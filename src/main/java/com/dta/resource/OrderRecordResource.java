@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.dta.bean.CoachFianceSummarizing;
+import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.ResultBean;
@@ -25,6 +26,7 @@ import com.dta.service.IOrderRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 import com.dta.vo.CoachPrecontractRecordVo;
+import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
@@ -189,4 +191,45 @@ public class OrderRecordResource extends
 		}
 	}
 	
+	@GET
+	@Path("getCoachTeachRecord")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCoachTeachRecord(@BeanParam CoachTeachRecordVo vo){
+		try{
+			int size = service.getCoachTeachRecordSize(vo);
+			List<CoachTeachRecord> list = new ArrayList<CoachTeachRecord>();
+			if(size != 0)
+				list = service.getCoachTeachRecord(vo);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("total", size);
+			resultMap.put("data", list);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
+	@Override
+	public Response add(@BeanParam OrderRecord po){
+		try{
+			int result = service.addObject(po);
+			switch(result){
+			case 0:
+				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
+						GlobalConstant.INSERT_FAIL)).build();
+			case -1:
+				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
+						GlobalConstant.NOTSUFFICIENTFUNDS)).build();
+			default:
+				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, 
+						GlobalConstant.SUCCESSPRECONTRACT)).build();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
 }

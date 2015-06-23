@@ -5,6 +5,8 @@ import java.util.List;
 import com.dta.bean.ShowDepositRecord;
 import com.dta.bean.StudentDepositRecord;
 import com.dta.bean.VIPStudentOfCoachInfo;
+import com.dta.resource.DisplayStudentDepositReocrd;
+import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
 import com.dta.vo.VIPStudentOfCoachInfoVo;
@@ -45,4 +47,20 @@ public interface IStudentDepositRecordService extends IBaseAllService<StudentDep
 	 * <p>App端获取教练名下VIP学员的总数
 	 */
 	public int getVIPStudentOfCoachInfoSize(VIPStudentOfCoachInfoVo vo);
+	
+	/**
+	 * 
+	 * @param DisplayStudentDepositRecordVo vo
+	 * @return List<DisplayStudentDepositReocrd>
+	 * <p>App学员端 获取学员的充值记录
+	 */
+	public List<DisplayStudentDepositReocrd> displayStudentDepositRecord(DisplayStudentDepositRecordVo vo);
+	
+	/**
+	 * 
+	 * @param DisplayStudentDepositRecordVo vo
+	 * @return List<DisplayStudentDepositReocrd>
+	 * <p>App学员端 获取学员充值记录的总数
+	 */
+	public int displayStudentDepositRecordSize(DisplayStudentDepositRecordVo vo);
 }

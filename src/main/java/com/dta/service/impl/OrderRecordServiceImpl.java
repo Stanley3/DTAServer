@@ -13,6 +13,7 @@ import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.CoachTeachRecord;
+import com.dta.bean.MyOrderRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.SchoolInfo;
@@ -24,6 +25,7 @@ import com.dta.dao.IStudentDepositRecordDao;
 import com.dta.service.IOrderRecordService;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
+import com.dta.vo.MyOrderRecordVo;
 import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
@@ -198,5 +200,23 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	@Override
 	public List<String> getCoachSomedayPrecontractInfo(Map<String, Object> map) {
 		return dao.getCoachSomedayPrecontractInfo(map);
+	}
+
+	@Override
+	public List<MyOrderRecord> getStudentOrderRecord(MyOrderRecordVo vo) {
+		if(vo.getStudent_id() == null)
+			throw new IllegalArgumentException("获取学员预约记录或练习记录时，学员id student_id 为null");
+		if(vo.getOption() == null)
+			throw new IllegalArgumentException("获取学员预约记录或练习记录时，选项 option 为null");
+		return dao.getStudentOrderRecord(vo);
+	}
+
+	@Override
+	public int getStudentOrderRecordSize(MyOrderRecordVo vo) {
+		if(vo.getStudent_id() == null)
+			throw new IllegalArgumentException("获取学员预约记录或练习记录时，学员id student_id 为null");
+		if(vo.getOption() == null)
+			throw new IllegalArgumentException("获取学员预约记录或练习记录时，选项 option 为null");
+		return dao.getStudentOrderRecordSize(vo);
 	}
 }

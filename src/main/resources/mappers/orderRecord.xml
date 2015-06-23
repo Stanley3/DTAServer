@@ -610,4 +610,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getStudentConsumeAmount" resultType="Double" parameterType="Integer">
 	call studentConsumeAmount(#{student_id})
 </select>
-</mapper>
+<select id="getStudentOrderRecord" resultType="MyOrderRecord" parameterType="MyOrderRecordVo">
+	select * 
+	from sutdentOrderRecord
+	<where>
+		<if test="student_id != null">
+			student_id = #{student_id}
+		</if>
+		<choose>
+			<when test="option == 1">
+				and order_status = 0
+			</when>
+			<when test="option == 2">
+				and order_status in (2,3)
+			</when>
+		</choose>
+	</where>
+	<if test="sort != null">
+		order by ${sort} ${order}
+	</if>
+	<if test="rows != 0 and rows != null">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="getStudentOrderRecordSize" resultType="int" parameterType="MyOrderRecordVo">
+	select count(order_id) 
+	from sutdentOrderRecord
+	<where>
+		<if test="student_id != null">
+			student_id = #{student_id}
+		</if>
+		<choose>
+			<when test="option == 1">
+				and order_status = 0
+			</when>
+			<when test="option == 2">
+				and order_status in (2,3)
+			</when>
+		</choose>
+	</where>
+</select>
+ </mapper>

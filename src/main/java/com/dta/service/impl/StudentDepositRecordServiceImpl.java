@@ -12,7 +12,9 @@ import com.dta.bean.StudentDepositRecord;
 import com.dta.bean.VIPStudentOfCoachInfo;
 import com.dta.dao.IStudentBasicInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
+import com.dta.resource.DisplayStudentDepositReocrd;
 import com.dta.service.IStudentDepositRecordService;
+import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
 import com.dta.vo.VIPStudentOfCoachInfoVo;
@@ -79,5 +81,20 @@ public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentD
 		if(vo.getCoach_id() == null)
 			throw new IllegalArgumentException("获取教练名下VIP学员列表时 coach_id 为null");
 		return dao.getVIPStudentOfCoachInfoSize(vo);	
+	}
+
+	@Override
+	public List<DisplayStudentDepositReocrd> displayStudentDepositRecord(
+			DisplayStudentDepositRecordVo vo) {
+		if(vo.getStudent_id() == null)
+			throw new IllegalArgumentException("学员端获取学员充值记录时，学员id student_id 为null");
+		return dao.displayStudentDepositRecord(vo);
+	}
+
+	@Override
+	public int displayStudentDepositRecordSize(DisplayStudentDepositRecordVo vo) {
+		if(vo.getStudent_id() == null)
+			throw new IllegalArgumentException("学员端获取学员充值记录时，学员id student_id 为null");
+		return dao.displayStudentDepositRecordSize(vo);
 	}
 }

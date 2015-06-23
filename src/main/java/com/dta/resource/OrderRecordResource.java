@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachTeachRecord;
+import com.dta.bean.MyOrderRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.ResultBean;
@@ -27,6 +28,7 @@ import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
+import com.dta.vo.MyOrderRecordVo;
 import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
@@ -232,4 +234,25 @@ public class OrderRecordResource extends
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
+	
+	@GET
+	@Path("getStudentOrderRecord")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getStudentOrderRecord(@BeanParam MyOrderRecordVo vo){
+		try{
+			int size = service.getStudentOrderRecordSize(vo);
+			List<MyOrderRecord> list = new ArrayList<MyOrderRecord>();
+			if(size != 0)
+				list = service.getStudentOrderRecord(vo);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("total", size);
+			resultMap.put("data", list);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
 }

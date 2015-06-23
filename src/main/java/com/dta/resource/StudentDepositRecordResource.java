@@ -24,6 +24,7 @@ import com.dta.bean.VIPStudentOfCoachInfo;
 import com.dta.service.IStudentDepositRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
 import com.dta.vo.VIPStudentOfCoachInfoVo;
@@ -91,6 +92,28 @@ public class StudentDepositRecordResource extends
 			List<VIPStudentOfCoachInfo> list = new ArrayList<VIPStudentOfCoachInfo>();
 			if(size != 0)
 				list = service.getVIPStudentOfCoachInfo(vo);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("total", size);
+			resultMap.put("data", list);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response
+					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
+	@GET
+	@Path("getStudentDepositRecord")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getStudentDepositRecord(@BeanParam DisplayStudentDepositRecordVo vo){
+		try{
+			int size = service.displayStudentDepositRecordSize(vo);
+			List<DisplayStudentDepositReocrd> list = new ArrayList<DisplayStudentDepositReocrd>();
+			if(size != 0)
+				list = service.displayStudentDepositRecord(vo);
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("total", size);
 			resultMap.put("data", list);

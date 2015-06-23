@@ -311,4 +311,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getStudentDepositAmount" resultType="Double">
 	call studentDepositAmount(#{student_id})
 </select>
+<select id="displayStudentDepositRecord" resultType="DisplayStudentDepositReocrd" parameterType="DisplayStudentDepositRecordVo">
+	select 
+		student_deposit_id,
+		deposit_date,
+		deposit_amount,
+		deposit_way,
+		deposit_type
+	from
+		student_deposit_record
+	<where>
+		<if test="student_id != null">
+			student_id = #{student_id}
+		</if>
+	</where>
+	order by deposit_date desc
+	<if test="rows != 0 and rows != null">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="displayStudentDepositRecordSize" resultType="int" parameterType="DisplayStudentDepositRecordVo">
+	select count(student_deposit_id)
+	from student_deposit_record
+	<where>
+		<if test="student_id != null">
+			student_id = #{student_id}
+		</if>
+	</where>
+</select>
 </mapper>

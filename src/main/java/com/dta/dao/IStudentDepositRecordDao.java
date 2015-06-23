@@ -3,6 +3,8 @@ package com.dta.dao;
 import java.util.List;
 
 import com.dta.dao.base.IBaseAllDao;
+import com.dta.resource.DisplayStudentDepositReocrd;
+import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
 import com.dta.vo.VIPStudentOfCoachInfoVo;
@@ -53,4 +55,20 @@ public interface IStudentDepositRecordDao extends IBaseAllDao<StudentDepositReco
 	 * <p>获取学员的充值总额
 	 */
 	public Double getStudentDepositAmount(Integer student_id);
+	
+	/**
+	 * 
+	 * @param DisplayStudentDepositRecordVo vo
+	 * @return List<DisplayStudentDepositReocrd>
+	 * <p>App学员端 获取学员的充值记录
+	 */
+	public List<DisplayStudentDepositReocrd> displayStudentDepositRecord(DisplayStudentDepositRecordVo vo);
+	
+	/**
+	 * 
+	 * @param DisplayStudentDepositRecordVo vo
+	 * @return List<DisplayStudentDepositReocrd>
+	 * <p>App学员端 获取学员充值记录的总数
+	 */
+	public int displayStudentDepositRecordSize(DisplayStudentDepositRecordVo vo);
 }

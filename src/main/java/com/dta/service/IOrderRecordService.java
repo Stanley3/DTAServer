@@ -7,11 +7,13 @@ import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.CoachTeachRecord;
+import com.dta.bean.MyOrderRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
 import com.dta.bean.TrainingRecord;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
+import com.dta.vo.MyOrderRecordVo;
 import com.dta.vo.OrderInfoVo;
 import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
@@ -104,4 +106,20 @@ public interface IOrderRecordService extends IBaseAllService<OrderRecord, OrderR
 	 * <p>获取某个教练某天的预约信息，用于学员预约教练时间段界面
 	 */
 	public List<String> getCoachSomedayPrecontractInfo(Map<String, Object> map);
+	
+	/**
+	 * 
+	 * @param MyOrderRecordVo vo
+	 * @return List<MyOrderRecord>
+	 * <p>App学员端 获取学员已经预约和练习记录
+	 */
+	public List<MyOrderRecord> getStudentOrderRecord(MyOrderRecordVo vo);
+	
+	/**
+	 * 
+	 * @param MyOrderRecordVo vo
+	 * @return int
+	 * <p>App学员端 获取学员已经预约或练习记录的总数
+	 */
+	public int getStudentOrderRecordSize(MyOrderRecordVo vo);
 }

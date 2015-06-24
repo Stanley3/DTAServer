@@ -1,9 +1,12 @@
 package com.dta.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dta.bean.GatherStudentInfo;
 import com.dta.bean.StudentBasicInfo;
 import com.dta.bean.StudentLoginInfo;
 import com.dta.dao.IStudentBasicInfoDao;
@@ -64,6 +67,13 @@ public class StudentBasicInfoServiceImpl extends BaseAllServiceImpl<StudentBasic
 	public Integer getStuByIDCard(String identity_card_no) {
 		// TODO Auto-generated method stub
 		return dao.getStuByIDCard(identity_card_no);
+	}
+
+	@Override
+	public List<GatherStudentInfo> gatherStudentInfo(Integer student_id) {
+		if(student_id == null)
+			throw new IllegalArgumentException("学员端显示统计信息时 student_id 为null");
+		return dao.gatherStudentInfo(student_id);
 	}
 	
 }

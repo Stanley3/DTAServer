@@ -19,7 +19,14 @@ public class CoachEvaluationInfo {
 	private Integer evaluation_type;
 	private Integer evaluation;	
 	private Integer course_status;
+	private String queryTime;
 	
+	public String getQueryTime() {
+		return queryTime;
+	}
+	public void setQueryTime(String queryTime) {
+		this.queryTime = queryTime;
+	}
 	public Integer getCourse_status() {
 		return course_status;
 	}

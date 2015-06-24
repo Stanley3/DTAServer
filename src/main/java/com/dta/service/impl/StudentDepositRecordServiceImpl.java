@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dta.bean.DisplayStudentDepositReocrd;
 import com.dta.bean.ShowDepositRecord;
 import com.dta.bean.StudentBasicInfo;
 import com.dta.bean.StudentDepositRecord;
 import com.dta.bean.VIPStudentOfCoachInfo;
 import com.dta.dao.IStudentBasicInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
-import com.dta.resource.DisplayStudentDepositReocrd;
 import com.dta.service.IStudentDepositRecordService;
 import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;

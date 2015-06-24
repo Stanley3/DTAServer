@@ -238,4 +238,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getStuByIDCard" resultType="Integer">
 	select student_id from student_basic_info where identity_card_no = #{identity_card_no} and validation = 1
 </select>
+<select id="gatherStudentInfo" resultType="GatherStudentInfo">
+	call gatherStudentInfo(#{student_id})
+</select>
 </mapper>

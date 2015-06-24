@@ -3,11 +3,11 @@ package com.dta.dao;
 import java.util.List;
 
 import com.dta.dao.base.IBaseAllDao;
-import com.dta.resource.DisplayStudentDepositReocrd;
 import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
 import com.dta.vo.VIPStudentOfCoachInfoVo;
+import com.dta.bean.DisplayStudentDepositReocrd;
 import com.dta.bean.ShowDepositRecord;
 import com.dta.bean.StudentDepositRecord;
 import com.dta.bean.VIPStudentOfCoachInfo;

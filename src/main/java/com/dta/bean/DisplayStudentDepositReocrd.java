@@ -1,4 +1,4 @@
-package com.dta.resource;
+package com.dta.bean;
 
 public class DisplayStudentDepositReocrd {
 	private Integer student_deposit_id;

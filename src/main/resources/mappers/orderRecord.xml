@@ -337,7 +337,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		O.student_id = S.student_id
 	<where>
 		O.coach_id = #{coach_id} and
-		S.validation = 1
+		S.validation = 1 
+		<if test="order_status != null">
+			order_status = #{order_status}
+		</if>
 	</where>
 	<if test="sort != null and order != null">
 		order by ${sort}  ${order}

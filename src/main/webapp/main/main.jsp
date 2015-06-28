@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html;charset=utf-8" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -19,11 +21,11 @@
 
 
 
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<!-- <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
 	<meta content="" name="description" />
 
-	<meta content="" name="author" />
+	<meta content="" name="author" /> -->
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
@@ -66,7 +68,9 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-
+<%
+	String username = org.apache.shiro.SecurityUtils.getSubject().getPrincipal().toString();
+%>
 <body class="page-header-fixed">
 
 	<!-- BEGIN HEADER -->
@@ -217,7 +221,7 @@
 
 					
 
-						<span class="username">超级管理员：丁海伟</span>
+						<span class="username">超级管理员：<%=username%></span>
 
 						<i class="icon-angle-down"></i>
 

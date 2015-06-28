@@ -48,14 +48,18 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                window.location.href = "main/main.html";
+	                //window.location.href = "main/main.html";
+	            	submit(form);
+	            	//form.submit();
 	            }
 	        });
 
 	        $('.login-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.login-form').validate().form()) {
-	                    window.location.href = "main.html";
+	                   // window.location.href = "main/main.html";
+	                	//$('.login-form').ajaxSumit();
+	                	submit(e.target);
 	                }
 	                return false;
 	            }
@@ -163,6 +167,7 @@ var Login = function () {
 	            success: function (label) {
 	                label.closest('.control-group').removeClass('error');
 	                label.remove();
+	                window.location.href = "main/main.html";
 	            },
 
 	            errorPlacement: function (error, element) {
@@ -174,7 +179,7 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                window.location.href = "main/main.html";
+	                
 	            }
 	        });
 
@@ -192,3 +197,33 @@ var Login = function () {
     };
 
 }();
+
+function submit(form){
+	var paramArray = $(form).serializeArray();
+	var obj = new Object();
+	obj.name = 'source';
+	obj.value = 'android';
+	paramArray[paramArray.length] = obj;
+	console.log(paramArray);
+	$.ajax({
+		url: 'rest/studentLoginInfo/login',
+		type: 'post',
+		data: paramArray,
+		dataType: 'text',
+		success: function(data){
+			//alert(data);
+			//window.location.href = "main/main.html";
+			alert(data);
+			console.log(data);
+			try{
+				data = JSON.parse(data);
+				alert(data.desc);
+			}catch(err){
+				alert(err);
+			}
+		},
+		error: function(xhr, msg){
+			alert('error:' + msg);
+		}
+	});
+}

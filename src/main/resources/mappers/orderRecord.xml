@@ -336,10 +336,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on 
 		O.student_id = S.student_id
 	<where>
-		O.coach_id = #{coach_id} and
-		S.validation = 1 
+		O.coach_id = #{coach_id} 
+		and S.validation = 1 
 		<if test="order_status != null">
-			order_status = #{order_status}
+			and	order_status = #{order_status}
 		</if>
 	</where>
 	<if test="sort != null and order != null">
@@ -468,7 +468,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		C.coach_id,
 		C.coach_name,
 		C.phone as coach_phone,
-		SC.school_id,
+		SC.school_id,getCoachTeachRecord
 		SC.school_name,
 		SB.student_level
 	from 
@@ -489,7 +489,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="order_status != null ">
 			and order_status = #{order_status}
 		</if>
-		<if test="search != null and search != ''">
+		<if test="search != null and search != ''">getCoachTeachRecord
 			or SB.student_name like "%"#{search}"%"
 			or SB.student_phone like "%"#{search}"%"
 			or C.coach_name like "%"#{search}"%"

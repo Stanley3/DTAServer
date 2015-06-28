@@ -72,4 +72,44 @@
 	</bean>
 	
 	<context:component-scan base-package="com.dta.service.*"/>
+	
+	<!-- shiro configure -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="filterChainDefinitions">
+			<!-- <value>
+			    /index.jsp = anon
+			    /error.jsp = anon
+				/** = authc
+			</value> -->
+			<value>
+				/logout = logout
+				/home.jsp = anon
+				/index.html = anon
+				/media/** = anon
+				/** =  authc
+			</value>
+		</property>
+		<property name="loginUrl" value="/login.jsp" />
+		<property name="successUrl" value="/main/main.jsp" />
+		<property name="unauthorizedUrl" value="/error.jsp" />
+	</bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- Single realm app. If you have multiple realms, use the 'realms' property 
+			instead. -->
+		<property name="realm" ref="myRealm" />
+		<!-- By default the servlet container sessions will be used. Uncomment 
+			this line to use shiro's native sessions (see the JavaDoc for more): -->
+		<!-- <property name="sessionMode" value="native"/> -->
+		<!-- <property name="cacheManager" ref="cacheManager" /> -->
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<bean id="myRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+		<property name="dataSource" ref="dataSource" />
+		<property name="authenticationQuery" value="${shiro.authenticationQuery}"/>
+		<property name="userRolesQuery" value="${shiro.userRolesQuery}" />
+		<property name="permissionsQuery" value="${shiro.permissionsQuery}"/>
+		<property name="permissionsLookupEnabled" value="true"/>
+	</bean>
+	<bean id="displayUrlFilter" class="com.dta.servlet.DisplayUrlFilter" />
 </beans>

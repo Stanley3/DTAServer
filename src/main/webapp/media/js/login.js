@@ -49,8 +49,9 @@ var Login = function () {
 
 	            submitHandler: function (form) {
 	                //window.location.href = "main/main.html";
-	            	submit(form);
+	            	//submit(form);
 	            	//form.submit();
+	            	form.submit();
 	            }
 	        });
 
@@ -59,7 +60,7 @@ var Login = function () {
 	                if ($('.login-form').validate().form()) {
 	                   // window.location.href = "main/main.html";
 	                	//$('.login-form').ajaxSumit();
-	                	submit(e.target);
+	                	e.target.submit();
 	                }
 	                return false;
 	            }

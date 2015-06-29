@@ -173,4 +173,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</set>
 	where login_id =  #{login_id}
 </update>
+<select id="getStudentLoginSuccessInfo" resultType="StudentLoginSuccessInfo">
+	select 
+		SL.student_id,
+		login_id,
+		student_name,
+		subject
+	from
+		student_login_info as SL
+	join
+		student_basic_info as SB
+	on 
+		SL.student_id = SB.student_id
+	where 
+		login_name = #{login_name}
+</select>
 </mapper>

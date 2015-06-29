@@ -84,13 +84,13 @@
 			</value> -->
 			<value>
 				/logout = logout
-				/home.jsp = anon
-				/index.html = anon
+				/rest/studentLoginInfo/login = anon
 				/media/** = anon
+				/index.html = authc
 				/** =  authc
 			</value>
 		</property>
-		<property name="loginUrl" value="/login.jsp" />
+		<property name="loginUrl" value="/index.html" />
 		<property name="successUrl" value="/main/main.jsp" />
 		<property name="unauthorizedUrl" value="/error.jsp" />
 	</bean>

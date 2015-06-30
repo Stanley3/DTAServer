@@ -716,7 +716,8 @@ var App = function () {
 
         //main function to initiate template pages
         init: function () {
-
+        	//load navigation bar
+        	$('.navbar-inner').load('../media/nav.jsp #nav');
             //IMPORTANT!!!: Do not modify the core handlers call order.
 
             //core handlers

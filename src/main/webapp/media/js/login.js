@@ -55,12 +55,13 @@ var Login = function () {
 	            }
 	        });
 
-	        $('.login-form input').keypress(function (e) {
+	        $('.login-form ').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.login-form').validate().form()) {
 	                   // window.location.href = "main/main.html";
 	                	//$('.login-form').ajaxSumit();
-	                	e.target.submit();
+	                	console.log(e);
+	                	document.getElementsByTagName('form')[0].submit();
 	                }
 	                return false;
 	            }

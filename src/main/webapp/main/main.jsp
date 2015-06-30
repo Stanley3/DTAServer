@@ -1,3 +1,5 @@
+<%@page import="org.apache.shiro.subject.Subject"%>
+<%@page import="org.apache.shiro.SecurityUtils"%>
 <%@ page language="java" contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -70,6 +72,7 @@
 <!-- BEGIN BODY -->
 <%
 	String username = org.apache.shiro.SecurityUtils.getSubject().getPrincipal().toString();
+	Subject subject = SecurityUtils.getSubject();
 %>
 <body class="page-header-fixed">
 
@@ -81,7 +84,7 @@
 
 		<div class="navbar-inner">
 
-			<div class="container-fluid">
+			<%-- <div class="container-fluid">
 
 				<!-- BEGIN LOGO -->
 
@@ -221,7 +224,7 @@
 
 					
 
-						<span class="username">超级管理员：<%=username%></span>
+						<span class="username">超级管理员：<shiro:principal /></span>
 
 						<i class="icon-angle-down"></i>
 
@@ -236,7 +239,7 @@
 
 							<li><a href="extra_lock.html"><i class="icon-lock"></i> 锁定屏幕</a></li>
 
-							<li><a href="login.html"><i class="icon-key"></i> 退出</a></li>
+							<li><a href="../logout"><i class="icon-key"></i> 退出</a></li>
 
 						</ul>
 
@@ -248,8 +251,8 @@
 
 				<!-- END TOP NAVIGATION MENU --> 
 
-			</div>
-
+			</div> --%>
+			<a href="../media/nav.jsp #nav"></a>
 		</div>
 
 		<!-- END TOP NAVIGATION BAR -->

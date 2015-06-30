@@ -1,5 +1,5 @@
 document.writeln("  <ul class=\"page-sidebar-menu\"> ");
-document.writeln("   <li class=\"start active\"> <a href=\"main.html\"><span class=\"title\">管理主页</span> </a> </li> ");
+document.writeln("   <li class=\"start active\"> <a href=\"main.jsp\"><span class=\"title\">管理主页</span> </a> </li> ");
 document.writeln("   <li class=\"\"> <a href=\"javascript:;\"><span class=\"title\">系统设置</span></a> ");
 document.writeln("    <ul class=\"sub-menu\"> ");
 document.writeln("     <li> <a href=\"layout_horizontal_sidebar_menu.html\">系统参数设置</a> </li> ");

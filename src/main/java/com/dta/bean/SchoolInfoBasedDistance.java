@@ -3,6 +3,8 @@ package com.dta.bean;
 public class SchoolInfoBasedDistance {
 	private Integer school_id;
 	private String school_name;
+	private String school_address;
+	private String school_type;
 	private Integer device_2_status;
 	private Integer device_3_status;
 	private Integer subject_2_number;
@@ -13,6 +15,18 @@ public class SchoolInfoBasedDistance {
 	private  Double longitude; //经度
 	private Double latitude; //纬度
 	
+	public String getSchool_address() {
+		return school_address;
+	}
+	public void setSchool_address(String school_address) {
+		this.school_address = school_address;
+	}
+	public String getSchool_type() {
+		return school_type;
+	}
+	public void setSchool_type(String school_type) {
+		this.school_type = school_type;
+	}
 	public Double getLongitude() {
 		return longitude;
 	}

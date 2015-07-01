@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -25,10 +26,17 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.realm.jdbc.JdbcRealm;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.ResultBean;
+import com.dta.bean.StudentLoginSuccessInfo;
 import com.dta.service.ICoachBasicInfoService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
@@ -40,7 +48,9 @@ public class CoachBasicInfoResource extends
 		BaseAllResource<CoachBasicInfo, CoachBasicInfoVo> {
 	private ICoachBasicInfoService service = (ICoachBasicInfoService) ServiceProvider
 			.getBean("coachBasicInfoServiceImpl");
-
+	@Autowired
+	public JdbcRealm myRealm;
+	
 	public CoachBasicInfoResource() {
 		super.setService(service);
 		super.setMianId(GlobalConstant.COACHBASICINFO);
@@ -255,5 +265,42 @@ public class CoachBasicInfoResource extends
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
+	}
+	
+	@POST
+	@Path("login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response login(@FormParam("username")String username, 
+							@FormParam("password")String password,
+							@FormParam("source")String source){
+		try{
+			if(myRealm == null)
+				System.out.println("myRealm is null");
+			else
+				System.out.println("myRealm is not null and getAuthenticationCacheName is " + myRealm.getAuthenticationCacheName());
+			myRealm.setAuthenticationQuery("select login_pwd from coach_basic_info where phone = ?");
+			myRealm.setUserRolesQuery("select role_name from sys_role as R join user_roles as UR on R.role_id = UR.role_id join coach_basic_info as C on UR.user_id = C.coach_id where UR.flag = 2 and phone = ?");
+			//myRealm.setPermissionsQuery("select permission_name from sys_permission as P join sys_role as R on P.role_id = R.role_id where role_name = ?");
+			UsernamePasswordToken token = new UsernamePasswordToken();
+			token.setPassword(password.toCharArray());
+			token.setUsername(username);
+			Subject subject = SecurityUtils.getSubject();
+			subject.login(token);
+			System.out.println("JSESSIONID = " + subject.getSession().getId());
+			Integer coach_id = service.getCoachInfoByName(username);
+			//return Response.status(200).entity(new ResultBean(1, subject.getPrincipal().toString())).build();
+			return Response.status(200).entity(new ResultBean(1, String.valueOf(coach_id))).build();
+		}catch(AuthenticationException ae){
+			return Response.status(200).entity(new ResultBean(2, "用户名或密码错误")).build();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}finally{
+			myRealm.setAuthenticationQuery("select user_pwd from sys_user where user_name = ?");
+			myRealm.setUserRolesQuery("select role_name from sys_role as R join user_roles as UR on R.role_id = UR.role_id join sys_user as U on UR.user_id = U.user_id where flag = 0 and user_name = ?");
+		}
+		
 	}
 }

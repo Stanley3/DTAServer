@@ -53,5 +53,11 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 			throw new IllegalArgumentException("获取教练个人信息时 coach_id为null");
 		return dao.getCoachInfo(coach_id);	
 	}
+
+	@Override
+	public Integer getCoachInfoByName(String loginName) {
+		// TODO Auto-generated method stub
+		return dao.getCoachInfoByName(loginName);
+	}
 	
 }

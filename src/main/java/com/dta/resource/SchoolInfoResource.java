@@ -74,6 +74,8 @@ public class SchoolInfoResource extends
 		try{
 			if(vo.getLatitude() == null || vo.getLatitude() == null)
 				throw new IllegalArgumentException("未知的经纬度");
+			int start = vo.getPage();
+			int length = vo.getRows();
 			int size = service.getSchoolDistanceInfoSize(vo);
 			List<SchoolInfoBasedDistance> schoolList = new ArrayList<SchoolInfoBasedDistance>();
 			if(size != 0){
@@ -86,7 +88,10 @@ public class SchoolInfoResource extends
 			}
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("total", size);
-			resultMap.put("data", schoolList);
+			if(length == 0)
+				resultMap.put("data", schoolList);
+			else
+				resultMap.put("data", schoolList.subList(start, (start + length)>=schoolList.size()? schoolList.size()-1 : (start + length)));
 			return Response.status(200).entity(resultMap).build();
 		}catch(Exception e){
 			e.printStackTrace();

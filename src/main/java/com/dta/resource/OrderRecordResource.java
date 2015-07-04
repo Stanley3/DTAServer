@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.dta.bean.CoachFianceSummarizing;
+import com.dta.bean.CoachIncomeRecord;
 import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
 import com.dta.bean.OrderInfo;
@@ -26,6 +27,7 @@ import com.dta.bean.TrainingRecord;
 import com.dta.service.IOrderRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.vo.CoachIncomeRecordVo;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.MyOrderRecordVo;
@@ -255,4 +257,23 @@ public class OrderRecordResource extends
 		}
 	}
 	
+	@GET
+	@Path("getCoachIncomeRecord")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCoachIncomeRecord(@BeanParam CoachIncomeRecordVo vo){
+		try{
+			int size = service.getCoachIncomeRecordSize(vo);
+			List<CoachIncomeRecord> list = new ArrayList<CoachIncomeRecord>();
+			if(size != 0)
+				list = service.getCoachIncomeRecord(vo);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("total", size);
+			resultMap.put("data", list);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
 }

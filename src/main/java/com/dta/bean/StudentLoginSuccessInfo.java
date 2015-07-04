@@ -4,7 +4,7 @@ public class StudentLoginSuccessInfo {
 	private Integer student_id;
 	private Integer login_id;
 	private String student_name;
-	private Integer subject;
+	private Integer subject; //科目 2表示科目二 3表示科目三
 	private Integer code;
 	
 	public Integer getCode() {

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachFianceSummarizing;
+import com.dta.bean.CoachIncomeRecord;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
@@ -23,6 +24,7 @@ import com.dta.dao.IOrderRecordDao;
 import com.dta.dao.ISchoolInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
 import com.dta.service.IOrderRecordService;
+import com.dta.vo.CoachIncomeRecordVo;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.MyOrderRecordVo;
@@ -218,5 +220,23 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(vo.getOption() == null)
 			throw new IllegalArgumentException("获取学员预约记录或练习记录时，选项 option 为null");
 		return dao.getStudentOrderRecordSize(vo);
+	}
+
+	@Override
+	public List<CoachIncomeRecord> getCoachIncomeRecord(CoachIncomeRecordVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练收入列表时，教练id coach_id 为null");
+		if(vo.getOrder_status() == null)
+			throw new IllegalArgumentException("获取教练收入列表时， 科目状态 order_status 为null");
+		return dao.getCoachIncomeRecord(vo);
+	}
+
+	@Override
+	public int getCoachIncomeRecordSize(CoachIncomeRecordVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("获取教练收入列表时，教练id coach_id 为null");
+		if(vo.getOrder_status() == null)
+			throw new IllegalArgumentException("获取教练收入列表时， 科目状态 order_status 为null");
+		return dao.getCoachIncomeRecordSize(vo);
 	}
 }

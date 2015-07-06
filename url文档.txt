@@ -1,0 +1,260 @@
+一、教练端
+1. 我的预约界面
+	resoucejava: OrderRecordResource.java
+	url: orderRecord/getCoachPrecontractedRecord
+	请求方式：get
+	参数bean: CoachPrecontractRecordVo.java  
+	详细参数：教练id coach_id
+	          订单状态：order_status (0表示已经预约; 1表示取消预约; 2.3表示训练完成)
+			  排序方式：order_time desc
+	返回参数bean :CoachPrecontractRecord.java 增添当前时间
+		
+2. 我的评价界面
+   resoucejava: EvaluationRecordResource.java
+   url: evaluationRecord/getCoachEvaluationInfo
+   请求方式：get
+   参数bean：CoachEvaluationInfoVo.java
+   详细参数：coach_id 
+             evaluation (0 差评；1 中评； 2 好评；无表示全部)
+			 排序参数："sort":evaluation_time, "order":desc
+			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
+	返回参数bean：CoachEvaluationInfo.java
+	返回参数格式：{"total":0, "badEvaluation":0, "midEvaluation":, "goodEvaluation":0, "data":[]}
+				(total 表示全部评价的个数，badEvaluationSize 表示差评的个数，midEvaluationSize 表示中评的个数 goodEvaluationSize 表示好评的个数, data 表示评价的具体信息，即参数beanCoachEvaluationInfo.java的list)
+3. 财务信息
+	3.1 个人财务信息汇总
+	   resoucejava: OrderRecordResource.java
+	   url: orderRecord/getCoachFinanceSumInfo
+       请求方式：get
+       参数bean：CoachFianceSummarizingVo.java
+       详细参数：教练id coach_id 
+	   返回参数bean：无
+	   返回参数格式：{"totalIncome":0.00, "VIPStudentNumbers":0, "teachingTimes":0, "subject2TeachingTimes":0, "subject3TeachingTimes":0, "freezeAmount":0.00, "coach_id":0}
+					 ("totalIncome" 表示总收入, "VIPStudentNumbers" 表示VIP学员的个数， "teachingTimes" 表示授课记录总数, "subject2TeachingTimes" 表示科目二授课次数，
+						"subject3TeachingTimes" 表示科目三授课次数，"freezeAmount" 表示冻结的金额, "coach_id" 表示教练id) 
+
+	3.2 VIP学员汇总信息
+	    resoucejava: StudentDepositRecordResource.java
+	    url: studentDepositRecord/getVIPStudentOfCoachInfo
+        请求方式：get
+        参数bean：VIPStudentOfCoachInfoVo.java
+        详细参数：教练Id coach_id 
+				  排序参数："sort": "begin_vip_date" "dir":"desc"
+				  分页参数："start"：0|10|20|..., "length":10
+	    返回参数bean：VIPStudentOfCoachInfo.java
+		返回参数格式：{"total":0, "data":[]}(total 表示返回信息的总数 data 表示一页的信息)
+	3.3 授课记录
+	    resoucejava: OrderRecordResource.java
+	    url: orderRecord/getCoachTeachRecord
+        请求方式：get
+        参数bean：CoachTeachRecordVo.java
+        详细参数：教练Id coach_id 
+				  分页参数："start"：0|10|20|..., "length":10
+				  排序方式 后台已指定为先按VIP信息递减排序（VIP学员排在前面，student_level为0表示普通学员，其它均为VIP学员），再按训练日期递减排序，再按学员姓名递增排序
+	    返回参数bean：CoachTeachRecord.java
+		返回参数格式：{"total":0, "data":[]}(total 表示返回信息的总数 data 表示一页的信息)
+	3.4 收入记录
+	    resoucejava: OrderRecord.java
+	    url: orderRecord/getCoachIncomeRecord
+        请求方式：get
+        参数bean：CoachIncomeRecordVo.java
+        详细参数：教练id coach_id 
+				  订单状态 order_status 3(此处order_status 必须为3，这样才能表示教练的收入)
+				  分页参数："start"：0|10|20|..., "length":10
+				  排序方式：后台已定位先按是否vip排序（vip在前，普通学员在后），再按订单结束时间或订单冻结时间递减排序，app不再需要发排序参数
+	    返回参数bean：CoachIncomeRecord.java
+		详细参数: {"total":1,"data":[{"coach_id":23,"student_id":16,"student_name":"张楠","course_status":2,"student_phone":"15528298065",
+					"order_dead_time":"2015-06-20","student_level":3,"order_amount":0.0,"order_id":5,"order_freeze_time":null}]}
+					(total表示表示数据的总数，用于判断时候还需要加载更多；data表示请求到的一页数据，order_dead_time表示订单结束的时间，在收入列表界面使用该参数，
+						order_freeze_time表示订单被冻结的时间，在冻结列表使用该参数，course_status表示科目，2表示科目二，3表示科目三)
+    3.5 冻结记录
+        resoucejava: OrderRecord.java
+	    url: orderRecord/getCoachIncomeRecord
+        请求方式：get
+        参数bean：CoachIncomeRecordVo.java
+        详细参数：教练id coach_id 
+				  订单状态 order_status 3(此处order_status 必须为2，这样才能表示教练被冻结的资金)
+				  分页参数："start"：0|10|20|..., "length":10
+				  排序方式：后台已定位先按是否vip排序（vip在前，普通学员在后），再按订单结束时间或订单冻结时间递减排序，app不再需要发排序参数
+	    返回参数bean：CoachIncomeRecord.java
+		详细参数: {"total":1,"data":[{"coach_id":23,"student_id":16,"student_name":"张楠","course_status":2,"student_phone":"15528298065",
+					"order_dead_time":"2015-06-20","student_level":3,"order_amount":0.0,"order_id":5,"order_freeze_time":null}]}
+					(total表示表示数据的总数，用于判断时候还需要加载更多；data表示请求到的一页数据，order_dead_time表示订单结束的时间，在收入列表界面使用该参数，
+						order_freeze_time表示订单被冻结的时间，在冻结列表使用该参数，course_status表示科目，2表示科目二，3表示科目三)	
+
+4. 排班信息
+    resoucejava: ScheduleInfoResource.java
+	url: scheduleInfo/getAll
+    请求方式：get
+    参数bean：ScheduleInfoVo.java
+    详细参数：教练id coach_id 
+			  排班开始日期（即今天） startScheduleDate (格式 "2015-06-20")
+			  排班结束日期(若一次排4天班，就加在开始日期上加4) endScheduleDate (格式 "2015-06-24") 
+			  注意：按以上格式获取的信息是6月20号，21号，22号，23号的排班信息。
+	返回参数bean：ScheduleInfo.java（排班信息用24个0或1 表示，1表示该时间段工作，0表示休息）
+	返回参数格式：[{},{},{}...]
+				  注意：返回的个数不一定等于请求的日期数，比如请求4天的排班信息，可能只返回3天的排班信息，因为教练其中某天可能休息，哪天休息对比日期即可获得；
+
+5. 个人中心
+    resoucejava: CoachBasicInfoResource.java
+    url: coachBasicInfo/getCoachInfo
+    请求方式：get
+    参数bean：无
+    详细参数：教练id coach_id 
+	返回参数bean：CoachInfo.java
+	返回参数格式：{"coach_id":0, "coach_name":"xxx", "school_name":"xxx", "star":1, "validation":1, "phone":"15528254083", "teaching_age":1, "teachingTimes":0}
+				  (star 表示星级， validation 表示暂停（0）还是有效（1）)
+
+6. 获取最新预约、取消预约和评价的个数
+	resoucejava: GlobalResource.java
+	url: global/getLatestNumber
+	请求方式：get
+	参数bean：LatestNumberVo.java
+	详细参数：教练id coach_id
+			  上次预约查询时间 astQueryPrecontractTime
+			  上次取消预约查询时间 lastQueryCancelTime
+			  上次评价查询时间lastQueryEvaluationTime
+	返回参数bean：LatestNumber.java
+	返回参数格式：{"newPrecotractNumber":0,"newCancelNumber":1,"newEvaluationNumber":4}
+				  (newPrecotractNumber 表示最新预约的个数, newCancelNumber 表示最新取消预约的个数, newEvaluationNumber 表示最新评价的个数)
+	
+7. 登录
+	resoucejava: CoachBasicInfoResource.java
+	url: coachBasicInfo/login
+	请求方式：post
+	参数bean：无
+	详细参数: 用户名 username
+			  密码 password
+			  来源 source(android端为'android', ios端为'ios')
+	返回参数: 登录成功 code 1， desc coach_id 
+			  登录失败 code 2， desc：用户名或密码错误
+			  登录异常 code 3， desc：服务异常
+	备注：登录成功后返回的参数暂为coach_id 若需修改，请及时提出（账号：15528298065， 密码：123456）
+	
+二、学员端
+1. 登录
+   resourcejava：StudentLoginInfoResource.java
+   url: studentLoginInfo/login
+   请求方式：post
+   参数bean：无
+   详细参数： 用户名 username
+			  密码 password
+			  来源 source(android端为'android'，ios端为'ios')
+   返回参数： 登录成功bean StudentLoginSuccessInfo.java 其中code为1
+              登录失败：code：2， desc：用户名或密码错误；code：3， desc：服务异常
+	备注：登录成功在相应(HttpResponse)的头部可以获取到JSESSIONID，相应头部中的键为'Set-Cookie',值为'JSESSIONID=xxxxxxxx';
+		  之后再发请求时，应把JSSESSIONID封装到HttpRequest中，相应头部的键位'Cookie'， 值为'JSESSIONID=xxxxxxxx'。（账号：15528254083，密码：123456）
+
+2. 按距离查看
+	resourcejava：SchoolInfoResource.java
+	url: schoolInfo/getSchoolInfoByDistance
+	请求方式：get
+	参数bean：SchoolInfoBasedDistanceVo.java
+	详细参数：经度：longitude
+              纬度：latitude	
+	返回参数bean：SchoolInfoBasedDistance.java
+	返回参数格式: {"total":0, "data":[]} (total 表示驾校的总数，data 表示一页的驾校信息（已按距离递增排序）)
+
+3. 选择教练界面
+    resourcejava：ScheduleInfoResource.java
+	url: scheduleInfo/selectCoach
+	请求方式：get
+	参数bean：SelectCoachVo.java
+	详细参数：驾校id  school_id
+			  学员当前科目 subject
+	          排序方式：待咨询（综合排序，人气优先，常用教练）
+			  分页参数："start"：0|10|20|..., "length":10
+    返回参数bean：SelectCoach.java
+	返回参数格式：{"total":0, "data":[]} (total 表示教练的总数，data 表示一页的教练信息)
+	
+4. 教练的评价信息
+   resoucejava: EvaluationRecordResource.java
+   url: evaluationRecord/getCoachEvaluationInfo
+   请求方式：get
+   参数bean：CoachEvaluationInfoVo.java
+   详细参数：coach_id 
+             evaluation (0 差评；1 中评； 2 好评；无表示全部)
+			 科目 course_status(必须， 否在预约科目二的教练时会显示该教练科目三的评价信息)
+			 排序参数："sort":evaluation_time, "order":desc
+			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
+	返回参数bean：CoachEvaluationInfo.java
+	返回参数格式：{"total":0, "badEvaluation":0, "midEvaluation":, "goodEvaluation":0, "data":[]}
+				(total 表示全部评价的个数，badEvaluationSize 表示差评的个数，midEvaluationSize 表示中评的个数 goodEvaluationSize 表示好评的个数, data 表示评价的具体信息，即参数beanCoachEvaluationInfo.java的list)
+
+5. 教练排班信息
+   resoucejava: ScheduleInfoResource.java
+   url：scheduleInfo/getCoachSomedayTeachInfo
+   请求方式：get
+   参数bean：无
+   详细参数：教练id coach_id
+			 排班日期 schedule_date(表示给哪天排的班, 格式必须为 YYYY-MM-DD)
+			 科目： subject(2 表示科目二， 3 表示科目三)
+   返回bean：DisplayCoachScheduleInfo.java
+   返回参数格式：{"coach_id":1,"subject":3,"content":"000000001111001111000000","student_toplimit":"000000001111001111000000","student_attribute":"00000001111001111000000","schedule_date":"2015-05-12","isOnDuty":1,"scheduleInfo":"000000000100100000000000"}
+                 (subject 表示科目，student_toplimit 表示每个时间段的学员上限 暂定为1，student_attribute 表示每个事件端的学员属性 0表示VIP学员可选 1表示普通学员可选
+					schedule_date 表示给哪天排的班，isOnDuty 表示该天是否已经排班 0 表示未排班 1表示排班 若为0表示教练该天休息 应该先判断这个值 为0时其它字段没有意义
+					scheduleInfo表示当天已经被预约的情况 每个字符串表示该时间段被预约的次数 应和student_toplimit一起判断该时间段是否还可以预约)
+		
+6. 提交预约
+   resourcejava：OrderRecordResource.java
+   请求方式：post
+   参数bean：OrderRecord
+   详细参数：驾校id school_id
+             教练id coach_id
+			 学员id student_id
+			 预约日期字符串；scheduleDateStr (以 | 分隔不同的日期)
+			 预约时间段字符串: precontractContentStr(以 | 分隔不同日期的时间段，每个日期的时间段用24个0或1字符串表示，0表示不预约该时间段，1表示预约) 
+   返回参数：预约成功：code 1，desc 预约成功；code 2，预约失败；code 2, 余额不足，预约失败;
+   
+7. 我的预约界面 
+   resourcejava：OrderRecordResource.java
+   url: orderRecord/getStudentOrderRecord
+   请求方式：get
+   参数bean：MyOrderRecordVo.java
+   详细参数：学员id student_id
+			 选项 option （1表示已经预约，2表示练习记录）
+             排序参数："sort":evaluation_time, "order":desc
+			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
+   返回参数bean：MyOrderRecord.java
+   返回参数格式：{"total":0, "data":[]}(total表示共有多少信息，data表示一页信息)
+
+8. 提交评价
+	resoucejava: EvaluationRecordResource.java
+	url：evaluationRecord/add
+	请求方式：post
+	参数bean：EvaluationRecord.java
+	详细参数：订单id order_id
+			  评价内容 content
+			  技能分 skill （满分10分）
+			  服务态度分 service_attitude （满分10分）
+			  卫生分 hygiene （满分10分）
+			  评价类型 evaluation_type（0投诉 1评价 2建议）
+			  评价 evaluation （0 差评 1 中评 2 好评）
+	返回参数bean：无
+	返回参数格式：{"code":1, "desc":"增添成功"} 或 {"code":2, "desc":"增添失败"} 或 {"code":3, "desc":"系统异常"}
+	
+9. 个人财务信息 充值记录：
+    resourcejava：StudentDepositRecordResource.java
+	url: studentDepositRecord/getStudentDepositRecord
+	请求方式：get
+	参数bean：DisplayStudentDepositReocrdVo.java
+	详细参数：学员id studnet_id
+			  分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
+	          后台默认排序方式为 充值日期 desc 故不需要再发送排序参数
+	返回参数bean：DisplayStudentDepositReocrd.java
+	返回参数格式：{"total":0, "data":[]}(total表示共有多少信息，data表示一页信息)
+
+10. 统计信息
+   resourcejava：StudentBasicInfoResource.java
+   url：studentBasicInfo/gatherStudentInfo
+   请求方式：get
+   参数bean：无
+   详细参数： 学员id student_id
+   返回参数bean：无
+   返回参数格式：{"subject_3_used_day":43,"subject_3_passed":0,"subject_2_used_course":1,"subject_3_used_course":3,"subject_2_used_day":13,"subject_2_passed":0}
+				  (subject_2_used_day 表示科目二已用的天数，subject_2_passed,表示科目二是否过关0表示未过关 1表示过关，subject_2_used_course已用的课时数 )
+	
+ 
+ 
+
+

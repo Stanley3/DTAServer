@@ -64,7 +64,7 @@ public class StudentLoginInfoResource extends BaseAllResource<StudentLoginInfo, 
 			//return Response.status(200).entity(new ResultBean(1, subject.getPrincipal().toString())).build();
 			return Response.status(200).entity(studentLoginSuccessInfo).build();
 		}catch(AuthenticationException ae){
-			return Response.status(200).entity(new ResultBean(2, "wrong username or password")).build();
+			return Response.status(200).entity(new ResultBean(2, "用户名或密码错误")).build();
 		}
 		catch(Exception e){
 			e.printStackTrace();

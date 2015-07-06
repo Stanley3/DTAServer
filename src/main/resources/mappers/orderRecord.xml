@@ -653,4 +653,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</where>
 </select>
+<select id="getCoachIncomeRecord" resultType="CoachIncomeRecord" parameterType="CoachIncomeRecordVo">
+	select *
+	from coachincomerecord
+	where
+		coach_id = #{coach_id}
+		and order_status = #{order_status}
+	<if test="order_status == 3">
+		order by student_level desc, order_dead_time desc
+	</if>
+	<if test="order_status == 2">
+		order by student_level desc, order_freeze_time desc
+	</if>
+	<if test="rows != 0 and rows != null">
+		limit #{page}, #{rows}
+	</if>
+</select>
+<select id="getCoachIncomeRecordSize" resultType="Integer" parameterType="CoachIncomeRecordVo">
+	select count(*)
+	from coachincomerecord
+	where 
+		coach_id = #{coach_id}
+		and order_status = #{order_status}
+</select>
  </mapper>

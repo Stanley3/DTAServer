@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dta.dao.base.IBaseAllDao;
+import com.dta.vo.CoachIncomeRecordVo;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.MyOrderRecordVo;
@@ -12,6 +13,7 @@ import com.dta.vo.OrderRecordVo;
 import com.dta.vo.TrainingRecordVo;
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachFianceSummarizing;
+import com.dta.bean.CoachIncomeRecord;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
@@ -130,5 +132,20 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	 * <p>App学员端 获取学员已经预约或练习记录的总数
 	 */
 	public int getStudentOrderRecordSize(MyOrderRecordVo vo);
+	
+	/**
+	 * 
+	 * @param CoachIncomeRecordVo vo
+	 * @return List<CoachIncomeRecord>
+	 * <p>App教练端获取教练的收入记录
+	 */
+	public List<CoachIncomeRecord> getCoachIncomeRecord(CoachIncomeRecordVo vo);
+	/**
+	 * 
+	 * @param CoachIncomeRecordVo vo
+	 * @return List<CoachIncomeRecord>
+	 * <p>App教练端获取教练收入记录的总数
+	 */
+	public int getCoachIncomeRecordSize(CoachIncomeRecordVo vo);
 }
 

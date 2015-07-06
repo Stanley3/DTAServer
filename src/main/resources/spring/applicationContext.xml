@@ -77,10 +77,11 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/index.html" />
-		<property name="successUrl" value="main/main.jsp" />
+		<property name="successUrl" value="/main/main.jsp" />
 		<property name="unauthorizedUrl" value="/error.jsp" />
 		<property name="filterChainDefinitions">
 			<value>
+				/index.jsp = anon
 				/logout = logout
 				/rest/studentLoginInfo/login = anon
 				/media/** = anon

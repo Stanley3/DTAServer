@@ -129,7 +129,7 @@
 	返回参数: 登录成功 code 1， desc coach_id 
 			  登录失败 code 2， desc：用户名或密码错误
 			  登录异常 code 3， desc：服务异常
-	备注：登录成功后返回的参数暂为coach_id 若需修改，请及时提出
+	备注：登录成功后返回的参数暂为coach_id 若需修改，请及时提出（账号：15528298065， 密码：123456）
 	
 二、学员端
 1. 登录
@@ -143,7 +143,7 @@
    返回参数： 登录成功bean StudentLoginSuccessInfo.java 其中code为1
               登录失败：code：2， desc：用户名或密码错误；code：3， desc：服务异常
 	备注：登录成功在相应(HttpResponse)的头部可以获取到JSESSIONID，相应头部中的键为'Set-Cookie',值为'JSESSIONID=xxxxxxxx';
-		  之后再发请求时，应把JSSESSIONID封装到HttpRequest中，相应头部的键位'Cookie'， 值为'JSESSIONID=xxxxxxxx'。
+		  之后再发请求时，应把JSSESSIONID封装到HttpRequest中，相应头部的键位'Cookie'， 值为'JSESSIONID=xxxxxxxx'。（账号：15528254083，密码：123456）
 
 2. 按距离查看
 	resourcejava：SchoolInfoResource.java

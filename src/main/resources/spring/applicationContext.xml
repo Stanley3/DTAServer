@@ -81,11 +81,11 @@
 		<property name="unauthorizedUrl" value="/error.jsp" />
 		<property name="filterChainDefinitions">
 			<value>
-				/index.jsp = anon
 				/logout = logout
 				/rest/studentLoginInfo/login = anon
+				/rest/coachBasicInfo/login = anon
 				/media/** = anon
-				/index.html = authc
+				/error.jsp = anon
 				/** =  authc
 			</value>
 		</property>
@@ -107,8 +107,12 @@
 		<property name="permissionsQuery" value="${shiro.permissionsQuery}"/>
 		<property name="permissionsLookupEnabled" value="true"/>
 	</bean>
-	<!-- <bean id="displayUrlFilter" class="com.dta.servlet.DisplayUrlFilter" /> -->
+	<bean id="displayUrlFilter" class="com.dta.servlet.DisplayUrlFilter" />
 	<bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 		<property name="redirectUrl" value="/index.html"/>
+	</bean>
+	<bean id="authc" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+		<property name="successUrl" value="/main/main.jsp" />
+		<property name="loginUrl" value="/index.html" />
 	</bean>
 </beans>

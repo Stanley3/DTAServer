@@ -35,9 +35,11 @@ public class DisplayUrlFilter implements Filter{
 		String url = httpRequest.getRequestURI();
 		if(!url.contains("media")){
 			System.out.println("*****execute DisplayUrlFilter.*****");
-			System.out.println("*****the request url is " + url + "*****");
+			System.out.println("*****the request uri is " + url + "*****");
+			System.out.println("*****the request url is " + httpRequest.getRequestURL().toString() + "*****");
+			//httpResponse.sendRedirect(httpRequest.getRequestURL().toString().split(";")[0]);
 		}
-		String source = httpRequest.getParameter("source");
+		/*String source = httpRequest.getParameter("source");
 		if(source != null && (source.equalsIgnoreCase("android") || source.equalsIgnoreCase("ios"))){
 			System.out.println("***** in *****");
 			UsernamePasswordToken token = new UsernamePasswordToken();
@@ -64,7 +66,7 @@ public class DisplayUrlFilter implements Filter{
 				print.print(exception);
 				print.flush();
 			}
-		}
+		}*/
 		filterChain.doFilter(request, response);
 	}
 

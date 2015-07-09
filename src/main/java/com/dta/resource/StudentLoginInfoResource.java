@@ -46,6 +46,7 @@ public class StudentLoginInfoResource extends BaseAllResource<StudentLoginInfo, 
 							@FormParam("password")String password,
 							@FormParam("source")String source){
 		try{
+			//System.out.println("username=" + username + " password=" + password + " source=" + source);
 			if(myRealm == null)
 				System.out.println("myRealm is null");
 			else

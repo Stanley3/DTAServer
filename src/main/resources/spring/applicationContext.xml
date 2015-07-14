@@ -86,7 +86,8 @@
 				/rest/coachBasicInfo/login = anon
 				/media/** = anon
 				/error.jsp = anon
-				/** =  authc
+				/index.jsp = anon
+				/** =   displayUrlFilter, authc
 			</value>
 		</property>
 	</bean>

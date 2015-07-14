@@ -1,3 +1,3 @@
 
 <% response.sendRedirect(response.encodeRedirectURL(request.getContextPath() +
-        "/index.html")); %>
+        "/main/main.jsp")); %>

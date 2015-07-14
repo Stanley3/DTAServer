@@ -313,7 +313,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <select id="displayStudentDepositRecord" resultType="DisplayStudentDepositReocrd" parameterType="DisplayStudentDepositRecordVo">
 	select 
-		student_deposit_id,
+		deposit_record_id,
 		deposit_date,
 		deposit_amount,
 		deposit_way,
@@ -331,7 +331,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
 </select>
 <select id="displayStudentDepositRecordSize" resultType="int" parameterType="DisplayStudentDepositRecordVo">
-	select count(student_deposit_id)
+	select count(deposit_record_id)
 	from student_deposit_record
 	<where>
 		<if test="student_id != null">

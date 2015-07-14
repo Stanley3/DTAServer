@@ -1,18 +1,19 @@
 package com.dta.bean;
 
 public class DisplayStudentDepositReocrd {
-	private Integer student_deposit_id;
+	private Integer deposit_record_id;
 	private String deposit_date;
 	private String deposit_address;//暂时为null
 	private Double deposit_amount;
 	private Integer deposit_way;
 	private Integer deposit_type;
 	
-	public Integer getStudent_deposit_id() {
-		return student_deposit_id;
+	
+	public Integer getDeposit_record_id() {
+		return deposit_record_id;
 	}
-	public void setStudent_deposit_id(Integer student_deposit_id) {
-		this.student_deposit_id = student_deposit_id;
+	public void setDeposit_record_id(Integer deposit_record_id) {
+		this.deposit_record_id = deposit_record_id;
 	}
 	public String getDeposit_date() {
 		return deposit_date;

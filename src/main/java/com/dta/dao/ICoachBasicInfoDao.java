@@ -4,6 +4,7 @@ import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.CoachBasicInfoVo;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachInfo;
+import com.dta.bean.CoachLoginSuccessInfo;
 public interface ICoachBasicInfoDao extends IBaseAllDao<CoachBasicInfo, CoachBasicInfoVo> {
 	public CoachBasicInfo downloadPhoto(int id);
 	
@@ -19,7 +20,7 @@ public interface ICoachBasicInfoDao extends IBaseAllDao<CoachBasicInfo, CoachBas
 	 * 
 	 * @param loginName//暂定手机号为登录名
 	 * @return coach_id
-	 * <p>根据coach_
+	 * <p>根据loginName获取学员的相关信息
 	 */
-	public Integer getCoachInfoByName(String loginName);
+	public CoachLoginSuccessInfo getCoachInfoByName(String loginName);
 }

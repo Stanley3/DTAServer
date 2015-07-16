@@ -372,7 +372,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getCoachInfo" resultType="CoachInfo" parameterType="int">
 	call coachInfo(#{coach_id})
 </select>
-<select id="getCoachInfoByName" resultType="int">
-	select coach_id from coach_basic_info where phone = #{loginName}
+<select id="getCoachInfoByName" resultType="CoachLoginSuccessInfo">
+	select 
+		coach_id,
+		C.validation,
+		coach_name,
+		star,
+		school_name,
+		phone,
+		teaching_age,
+		service_count 
+	from 
+		coach_basic_info as C
+	join	
+		school_info as S
+	 on
+	 	C.school_id = S.school_id
+	where phone = #{loginName}
 </select>
 </mapper>

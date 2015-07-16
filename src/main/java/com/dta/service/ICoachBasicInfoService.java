@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachInfo;
+import com.dta.bean.CoachLoginSuccessInfo;
 import com.dta.vo.CoachBasicInfoVo;
 
 public interface ICoachBasicInfoService extends IBaseAllService<CoachBasicInfo, CoachBasicInfoVo>{
@@ -25,5 +26,5 @@ public interface ICoachBasicInfoService extends IBaseAllService<CoachBasicInfo, 
 	 * @return coach_id
 	 * <p>根据coach_
 	 */
-	public Integer getCoachInfoByName(String loginName);
+	public CoachLoginSuccessInfo getCoachInfoByName(String loginName);
 }

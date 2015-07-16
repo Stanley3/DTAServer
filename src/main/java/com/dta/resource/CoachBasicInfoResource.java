@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 
 import com.dta.bean.CoachBasicInfo;
+import com.dta.bean.CoachLoginSuccessInfo;
 import com.dta.bean.ResultBean;
 import com.dta.bean.StudentLoginSuccessInfo;
 import com.dta.service.ICoachBasicInfoService;
@@ -287,9 +288,10 @@ public class CoachBasicInfoResource extends
 			Subject subject = SecurityUtils.getSubject();
 			subject.login(token);
 			System.out.println("JSESSIONID = " + subject.getSession().getId());
-			Integer coach_id = service.getCoachInfoByName(username);
+			CoachLoginSuccessInfo coachInfo = service.getCoachInfoByName(username);
+			coachInfo.setCode(1);
 			//return Response.status(200).entity(new ResultBean(1, subject.getPrincipal().toString())).build();
-			return Response.status(200).entity(new ResultBean(1, String.valueOf(coach_id))).build();
+			return Response.status(200).entity(coachInfo).build();
 		}catch(AuthenticationException ae){
 			return Response.status(200).entity(new ResultBean(2, "用户名或密码错误")).build();
 		}

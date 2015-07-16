@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachInfo;
+import com.dta.bean.CoachLoginSuccessInfo;
 import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.service.ICoachBasicInfoService;
 import com.dta.vo.CoachBasicInfoVo;
@@ -55,7 +56,7 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 	}
 
 	@Override
-	public Integer getCoachInfoByName(String loginName) {
+	public CoachLoginSuccessInfo getCoachInfoByName(String loginName) {
 		// TODO Auto-generated method stub
 		return dao.getCoachInfoByName(loginName);
 	}

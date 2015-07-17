@@ -197,11 +197,13 @@
 		
 6. 提交预约
    resourcejava：OrderRecordResource.java
+   url: orderRecord/add
    请求方式：post
    参数bean：OrderRecord
    详细参数：驾校id school_id
              教练id coach_id
 			 学员id student_id
+			 科目 course_status(2表示科目二，3表示科目三）
 			 预约日期字符串；scheduleDateStr (以 | 分隔不同的日期)
 			 预约时间段字符串: precontractContentStr(以 | 分隔不同日期的时间段，每个日期的时间段用24个0或1字符串表示，0表示不预约该时间段，1表示预约) 
    返回参数：预约成功：code 1，desc 预约成功；code 2，预约失败；code 2, 余额不足，预约失败;
@@ -213,7 +215,7 @@
    参数bean：MyOrderRecordVo.java
    详细参数：学员id student_id
 			 选项 option （1表示已经预约，2表示练习记录）
-             排序参数："sort":evaluation_time, "order":desc
+             排序参数："sort":用来排序的字段名, "order"：排序方式(desc | asc)
 			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
    返回参数bean：MyOrderRecord.java
    返回参数格式：{"total":0, "data":[]}(total表示共有多少信息，data表示一页信息)

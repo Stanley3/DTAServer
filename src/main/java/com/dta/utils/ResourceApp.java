@@ -9,5 +9,6 @@ public class ResourceApp extends ResourceConfig{
 		register(RequestContextFilter.class);
 		register(JacksonFeature.class);
 		packages("com.dta.resource");
+		new BatchOperation().run();
 	}
 }

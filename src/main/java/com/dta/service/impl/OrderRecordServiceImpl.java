@@ -70,10 +70,10 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(orderTotalAmount > (studentDepositAmount - studentConsumeAmount))
 			return -1;//余额不足
 		int result = 0;
-		for(int i=0; i<scheduleDateArray.length; ++i){
-			for(int j=0; j<precontractContentArray[i].length(); ++i){
+		for(int i=0; i<scheduleDateArray.length && !scheduleDateArray[i].isEmpty(); ++i){
+			for(int j=0; j<precontractContentArray[i].length(); ++j){
 				if(precontractContentArray[i].charAt(j) == '0')
-					break; // 0 表示该时间段没有被预约
+					continue; // 0 表示该时间段没有被预约
 				String startTime = scheduleDateArray[i] + " " + (j < 10 ? "0" + j : j) + "00:00";
 				String endTime = scheduleDateArray[i] + " " + (j + 1 < 10 ? "0" + (j+1) : j+1) + "00:00";
 				po.setTraining_end_time(endTime);

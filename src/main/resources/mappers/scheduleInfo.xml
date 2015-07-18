@@ -247,4 +247,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="displayCoachScheduleInfo" resultType="DisplayCoachScheduleInfo" parameterType="map">
 	call DisplayCoachScheduleInfo(#{coach_id}, #{subject}, #{schedule_date})
 </select>
+<!-- 后台批量为每个教练生成4天的排班信息 -->
+<insert id="batchGenerateScheduleInfo" parameterType="Integer">
+	call insertSchdeuleInfo(#{coach_id})
+</insert>
 </mapper>

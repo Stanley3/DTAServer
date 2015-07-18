@@ -31,14 +31,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evaluation_time != null and evaluation_time != ''">
 			evaluation_time = #{evaluation_time},
 		</if>
-		<if test="evalution_type != null and evalution_type != ''">
-			evalution_type = #{evalution_type},
+		<if test="evaluation_type != null and evaluation_type != ''">
+			evaluation_type = #{evaluation_type},
 		</if>
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
-		<if test="evalution != null">
-			evalution = #{evalution},
+		<if test="evaluation != null">
+			evaluation = #{evaluation},
 		</if>
 	</set>
 </insert>
@@ -171,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evaluation_time != null and evaluation_time != '' ">
 			and evaluation_time like "%"#{evaluation_time}"%"
 		</if>
-		<if test="evaluation_type != null and evalution_type != '' ">
+		<if test="evaluation_type != null and evaluation_type != '' ">
 			and evaluation_type = #{evaluation_type}
 		</if>
 		<if test="validation != null and validation != '' ">
@@ -227,8 +227,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="evaluation_time != null and evaluation_time != '' ">
 			and evaluation_time like "%"#{evaluation_time}"%"
 		</if>
-		<if test="evalution_type != null and evalution_type != '' ">
-			and evalution_type = #{evalution_type}
+		<if test="evaluation_type != null and evaluation_type != '' ">
+			and evaluation_type = #{evaluation_type}
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}

@@ -27,4 +27,11 @@ public interface ICoachBasicInfoService extends IBaseAllService<CoachBasicInfo, 
 	 * <p>根据coach_
 	 */
 	public CoachLoginSuccessInfo getCoachInfoByName(String loginName);
+	
+	/**
+	 * 
+	 * @return List<Integer>
+	 * <p>返回所有的教练id
+	 */
+	public List<Integer> getAllCoachID();
 }

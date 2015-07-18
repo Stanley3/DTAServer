@@ -60,5 +60,10 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 		// TODO Auto-generated method stub
 		return dao.getCoachInfoByName(loginName);
 	}
+
+	@Override
+	public List<Integer> getAllCoachID() {
+		return dao.getAllCoachID();
+	}
 	
 }

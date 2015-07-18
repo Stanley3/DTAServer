@@ -33,4 +33,12 @@ public interface IScheduleInfoService extends IBaseAllService<ScheduleInfo, Sche
 	 * <p>App学员端获取教练某天的排班信息
 	 */
 	public List<DisplayCoachScheduleInfo> displayCoachScheduleInfo(Map<String, Object>map);
+	
+	/**
+	 * 
+	 * @param coach_id
+	 * @return int
+	 * <p>批量生成教练的4天的排班信息，科目按最近一天设置，无则设为科目二
+	 */
+	public int batchGenerateScheduleInfo(Integer coach_id);
 }

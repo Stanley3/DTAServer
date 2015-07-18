@@ -63,4 +63,11 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 			throw new IllegalArgumentException("学员端选择教练界面 显示教练排班信息时未知subject");
 		return dao.displayCoachScheduleInfo(map);
 	}
+
+	@Override
+	public int batchGenerateScheduleInfo(Integer coach_id) {
+		if(coach_id == null)
+			throw new IllegalArgumentException("自动生成教练排班信息时，教练coach_id为nul");
+		return dao.batchGenerateScheduleInfo(coach_id);
+	}
 }

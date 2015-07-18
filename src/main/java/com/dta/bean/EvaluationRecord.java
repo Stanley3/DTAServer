@@ -146,4 +146,5 @@ public class EvaluationRecord extends PageParam implements Serializable{
 	public void setEvaluation_type(Integer evaluation_type) {
 		this.evaluation_type = evaluation_type;
 	}
+	
 }

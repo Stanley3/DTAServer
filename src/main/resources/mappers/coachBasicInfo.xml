@@ -390,4 +390,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	C.school_id = S.school_id
 	where phone = #{loginName}
 </select>
+<!-- 获取所有教练的id -->
+<select id="getAllCoachID" resultType="Integer">
+	call getAllCoachID();
+</select>
 </mapper>

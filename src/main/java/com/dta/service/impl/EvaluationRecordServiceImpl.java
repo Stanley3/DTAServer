@@ -80,4 +80,21 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 			throw new IllegalArgumentException("获取教练的评价个数时coach_id为null");
 		return dao.getEvaluationSize(vo);
 	}
+	
+	@Override
+	public int addObject(EvaluationRecord po){
+		int skill, service_attitude, hygiene;
+		skill = po.getSkill() != null ? po.getSkill() : 0;
+		service_attitude = po.getService_attitude() != null ? po.getService_attitude() : 0;
+		hygiene = po.getHygiene() != null ? po.getHygiene() : 0;
+		int sum = skill + service_attitude + hygiene;
+		if(sum <= 10)
+			po.setEvaluation(0);
+		else if(sum <=20)
+			po.setEvaluation(1);
+		else
+			po.setEvaluation(2);
+		//以上是根据评分计算好中差评，计算公式未知，暂如上计算。
+		return super.addObject(po);
+	}
 }

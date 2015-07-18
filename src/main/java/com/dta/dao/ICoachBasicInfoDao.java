@@ -1,5 +1,7 @@
 package com.dta.dao;
 
+import java.util.List;
+
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.CoachBasicInfoVo;
 import com.dta.bean.CoachBasicInfo;
@@ -23,4 +25,11 @@ public interface ICoachBasicInfoDao extends IBaseAllDao<CoachBasicInfo, CoachBas
 	 * <p>根据loginName获取学员的相关信息
 	 */
 	public CoachLoginSuccessInfo getCoachInfoByName(String loginName);
+	
+	/**
+	 * 
+	 * @return List<Integer>
+	 * <p>返回所有的教练id
+	 */
+	public List<Integer> getAllCoachID();
 }

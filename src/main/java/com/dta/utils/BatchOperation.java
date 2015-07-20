@@ -1,6 +1,5 @@
 package com.dta.utils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,6 +7,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class BatchOperation {
 	private IScheduleInfoService scheduleInfoService;
 	@Autowired
 	private ICoachBasicInfoService coachBasicInfoServiceImpl;
-	
+	Logger logger = LoggerFactory.getLogger("com.dta.utils.BatchOperation");
 	public BatchOperation(){
 		System.err.println("**********执行************");
 		scheduleInfoService = (IScheduleInfoService)ServiceProvider.getBean("scheduleInfoServiceImpl");
@@ -35,7 +36,9 @@ public class BatchOperation {
 		calendar.setTime(new Date());
 		calendar.add(Calendar.DAY_OF_MONTH, 1);
 		calendar.set(Calendar.HOUR_OF_DAY, 1);
+		//calendar.add(Calendar.MINUTE, 1);
 		beginTime = calendar.getTime();
+		logger.debug("开启定时器");
 		timer.schedule(new TimerTask(){
 			@Override
 			public void run() {
@@ -47,6 +50,7 @@ public class BatchOperation {
 						scheduleInfoService.batchGenerateScheduleInfo(coachIDList.get(i));
 					}
 				}
+				logger.debug("定时器得到执行");
 			}
 			
 		}, beginTime, 24 * 60 * 60 * 1000);

@@ -88,8 +88,8 @@
     请求方式：get
     参数bean：ScheduleInfoVo.java
     详细参数：教练id coach_id 
-			  排班开始日期（即今天） startScheduleDate (格式 "2015-06-20")
-			  排班结束日期(若一次排4天班，就加在开始日期上加4) endScheduleDate (格式 "2015-06-24") 
+			  排班开始日期（即今天） start_schedule_date (格式 "2015-06-20")
+			  排班结束日期(若一次排4天班，就加在开始日期上加4) end_schedule_date (格式 "2015-06-24") 
 			  注意：按以上格式获取的信息是6月20号，21号，22号，23号的排班信息。
 	返回参数bean：ScheduleInfo.java（排班信息用24个0或1 表示，1表示该时间段工作，0表示休息）
 	返回参数格式：[{},{},{}...]
@@ -129,7 +129,12 @@
 	返回参数: 登录成功 code 1， desc coach_id 
 			  登录失败 code 2， desc：用户名或密码错误
 			  登录异常 code 3， desc：服务异常
-	备注：登录成功后返回的参数暂为coach_id 若需修改，请及时提出（账号：15528298065， 密码：123456）
+	备注：登录成功后返回的参数暂为coach_id 若需修改，请及时提出（账号：15528254083， 密码：123456）
+8. 退出登录
+	url: http://x.x.x.x/DTAServer/logout
+	请求方式：get
+	返回参数：无
+	备注：该url不返回任何信息。App端点击退出登录后，发送该请求后，只需实现App端的退出逻辑即可。
 	
 二、学员端
 1. 登录
@@ -255,6 +260,11 @@
    返回参数bean：无
    返回参数格式：{"subject_3_used_day":43,"subject_3_passed":0,"subject_2_used_course":1,"subject_3_used_course":3,"subject_2_used_day":13,"subject_2_passed":0}
 				  (subject_2_used_day 表示科目二已用的天数，subject_2_passed,表示科目二是否过关0表示未过关 1表示过关，subject_2_used_course已用的课时数 )
+11. 退出登录
+	url: http://x.x.x.x/DTAServer/logout
+	请求方式：get
+	返回参数：无
+	备注：该url不返回任何信息。App端点击退出登录后，发送该请求后，只需实现App端的退出逻辑即可。
 	
  
  

@@ -12,9 +12,9 @@
 2. 我的评价界面
    resoucejava: EvaluationRecordResource.java
    url: evaluationRecord/getCoachEvaluationInfo
-   请求方式：get
-   参数bean：CoachEvaluationInfoVo.java
-   详细参数：coach_id 
+       请求方式：get
+       参数bean：CoachEvaluationInfoVo.java
+       详细参数：coach_id 
              evaluation (0 差评；1 中评； 2 好评；无表示全部)
 			 排序参数："sort":evaluation_time, "order":desc
 			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
@@ -126,10 +126,12 @@
 	详细参数: 用户名 username
 			  密码 password
 			  来源 source(android端为'android', ios端为'ios')
-	返回参数: 登录成功 code 1， desc coach_id 
+	返回参数: 登录成功 code为1， 返回CoachLoginSuccessInfo.java 
 			  登录失败 code 2， desc：用户名或密码错误
 			  登录异常 code 3， desc：服务异常
-	备注：登录成功后返回的参数暂为coach_id 若需修改，请及时提出（账号：15528254083， 密码：123456）
+	备注：登录成功后返回的参数暂为CoachLoginSuccessInfo转换的json格式数据 若需修改（账号：15528254083， 密码：123456）
+		登录成功在相应(HttpResponse)的头部可以获取到JSESSIONID，相应头部中的键为'Set-Cookie',值为'JSESSIONID=xxxxxxxx';
+		  之后再发请求时，应把JSSESSIONID封装到HttpRequest中，相应头部的键位'Cookie'， 值为'JSESSIONID=xxxxxxxx'。
 8. 退出登录
 	url: http://x.x.x.x/DTAServer/logout
 	请求方式：get

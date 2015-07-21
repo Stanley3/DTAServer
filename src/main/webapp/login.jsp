@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html;charset=utf-8" %>
 <!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -34,6 +35,10 @@
 </head>
 
 <body class="login">
+<%
+	Cookie[] c = request.getCookies();
+	
+%>
 <div class="logo">
 
 		
@@ -48,7 +53,7 @@
 
 		<!-- BEGIN LOGIN FORM -->
 
-	  <form class="form-vertical login-form" action="index.html" method="post">
+	  <form class="form-vertical login-form" action="login.jsp" method="post">
 
 			<h3 class="form-title">驾考联盟管理后台</h3>
 
@@ -150,11 +155,8 @@
 	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--[if lt IE 9]>
-
 	<script src="media/js/excanvas.min.js"></script>
-
 	<script src="media/js/respond.min.js"></script>  
-
 	<![endif]-->   
 
 	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
@@ -182,15 +184,10 @@
 	<!-- END PAGE LEVEL SCRIPTS --> 
 
 	<script>
-
 		jQuery(document).ready(function() {     
-
 		  App.init();
-
 		  Login.init();
-
 		});
-
 	</script>
 
 	<!-- END JAVASCRIPTS -->

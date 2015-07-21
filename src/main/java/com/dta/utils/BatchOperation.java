@@ -24,6 +24,7 @@ public class BatchOperation {
 	Logger logger = LoggerFactory.getLogger("com.dta.utils.BatchOperation");
 	public BatchOperation(){
 		System.err.println("**********执行************");
+		logger.info("定时器执行");
 		scheduleInfoService = (IScheduleInfoService)ServiceProvider.getBean("scheduleInfoServiceImpl");
 		coachBasicInfoServiceImpl = (ICoachBasicInfoService)ServiceProvider.getBean("coachBasicInfoServiceImpl");
 	}

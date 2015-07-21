@@ -17,13 +17,15 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DisplayUrlFilter implements Filter{
-
+	private Logger logger = LoggerFactory.getLogger("com.dta.servlet.DisplayUrlFilter");
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		System.out.println("*****DisplayUrlFilter is destoryed.*****");
+		logger.info("DisplayUrlFilter is destoryed.");
 	}
 
 	@Override
@@ -34,46 +36,16 @@ public class DisplayUrlFilter implements Filter{
 		HttpServletResponse httpResponse = (HttpServletResponse)response;
 		String url = httpRequest.getRequestURI();
 		if(!url.contains("media")){
-			System.out.println("*****execute DisplayUrlFilter.*****");
-			System.out.println("*****the request uri is " + url + "*****");
-			System.out.println("*****the request url is " + httpRequest.getRequestURL().toString() + "*****");
+			logger.info("the request uri is {}", url);
 			//httpResponse.sendRedirect(httpRequest.getRequestURL().toString().split(";")[0]);
 		}
-		/*String source = httpRequest.getParameter("source");
-		if(source != null && (source.equalsIgnoreCase("android") || source.equalsIgnoreCase("ios"))){
-			System.out.println("***** in *****");
-			UsernamePasswordToken token = new UsernamePasswordToken();
-			token.setHost(httpRequest.getRemoteHost());
-			token.setPassword(httpRequest.getParameter("password").toCharArray());
-			token.setRememberMe(false);
-			token.setUsername(httpRequest.getParameter("username"));
-			SecurityUtils.setSecurityManager(org.apache.shiro.util.ThreadContext.getSecurityManager());
-			Subject subject = SecurityUtils.getSubject();
-			try{
-				subject.login(token);
-				System.out.println("*****subject is validate :" + subject.isAuthenticated() + ".*****");
-				Session session = subject.getSession();
-				System.out.println("*****session id is :" + session.getId() + ".*****");
-				System.out.println("*****http session id is: " + httpRequest.getSession().getId() + ".*****");
-				PrintWriter print = httpResponse.getWriter();
-				String result = "{\"code\":" + 1 + ", \"desc\":\"" + subject.getPrincipal().toString() + "\"}";
-				print.print(result);
-				print.flush();
-			}catch(AuthenticationException ae){
-				System.out.println("***** AuthenticationException *****");
-				PrintWriter print = httpResponse.getWriter();
-				String exception = "{\"code\":" + 2 + ", \"desc\":\"exceptioin\"}"; 
-				print.print(exception);
-				print.flush();
-			}
-		}*/
 		filterChain.doFilter(request, response);
 	}
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("*****DisplayUrlFilter is init.*****");
+		logger.info("DisplayUrlFilter is init.");
 	}
 
 }

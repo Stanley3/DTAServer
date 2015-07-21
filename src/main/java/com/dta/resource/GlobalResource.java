@@ -22,6 +22,10 @@ public class GlobalResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getLastestNumber(@BeanParam LatestNumberVo vo){
 		try{
+			System.out.println(vo.getCoach_id());
+			System.out.println(vo.getLastQueryCancelTime());
+			System.out.println(vo.getLastQueryEvaluationTime());
+			System.out.println(vo.getLastQueryPrecontractTime());
 			return Response.status(200).entity(service.getLatestNumber(vo)).build();
 		}catch(Exception e){
 			e.printStackTrace();

@@ -22,6 +22,7 @@
 	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
 	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="media/css/mycss.css" rel="stylesheet" type="text/css">
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
@@ -36,8 +37,7 @@
 
 <body class="login">
 <%
-	Cookie[] c = request.getCookies();
-	
+	String loginFailure = (String)request.getAttribute("shiroLoginFailure");
 %>
 <div class="logo">
 
@@ -56,7 +56,13 @@
 	  <form class="form-vertical login-form" action="login.jsp" method="post">
 
 			<h3 class="form-title">驾考联盟管理后台</h3>
-
+			<%if(loginFailure != null)
+			{
+				%>
+				<div class="login-msg error">
+					<p class="error">用户名或密码错误</p>
+				</div>
+				<%} %>
 			<div class="alert alert-error hide">
 
 				<button class="close" data-dismiss="alert"></button>

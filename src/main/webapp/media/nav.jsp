@@ -149,7 +149,7 @@
 
 					
 
-						<span class="username">超级管理员：<shiro:principal /></span>
+						<span class="username">超级管理员：<span id="username"><shiro:principal /></span></span>
 
 						<i class="icon-angle-down"></i>
 

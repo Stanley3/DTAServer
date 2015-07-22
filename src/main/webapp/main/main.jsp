@@ -18,11 +18,6 @@
 
 	<title>驾考联盟后台管理系统</title>
 
-
-
-
-
-
 	<!-- <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
 	<meta content="" name="description" />
@@ -238,7 +233,7 @@
 
 									<div class="number">
 
-										1349
+										<span id="studentName">0</span>
 
 									</div>
 
@@ -272,7 +267,7 @@
 
 								<div class="details">
 
-									<div class="number">549</div>
+									<div class="number"><span id="todayOrderNumber">0</span></div>
 
 									<div class="desc">今日预约数</div>
 
@@ -300,7 +295,7 @@
 
 								<div class="details">
 
-									<div class="number">135</div>
+									<div class="number"><span id="coachName">0</span></div>
 
 									<div class="desc">教练员总数</div>
 
@@ -328,7 +323,7 @@
 
 								<div class="details">
 
-									<div class="number">108,520元</div>
+									<div class="number"><span id="balanceAmount">0</span>元</div>
 
 									<div class="desc">现余资金</div>
 
@@ -691,7 +686,9 @@
 	<script>
 
 		jQuery(document).ready(function() {    
-
+		   
+		  // getStaticInfo();
+		   
 		   App.init(); // initlayout and core plugins
 
 		   Index.init();
@@ -711,7 +708,35 @@
 		   Index.initIntro();
 
 		});
-
+	function getStaticInfo(){
+		var username = $('#username').html();
+		$.ajax({
+			url: '../rest/webMainPage/getStaticInfo',
+			type: 'get',
+			dataType: 'json',
+			data: {username: username},
+			success: function(data){
+				$('#studentName').html(data.studentSum);
+				$('#todayOrderNumber').html(data.todayOrderSum);
+				$('#coachName').html(data.coachSum);
+				$('#balanceAmount').html(data.balanceAmount);
+			},
+			error: function(error){
+				alert(error.responseText);
+			}
+		});
+	}
+	/*
+	window.onload： 
+	当一个文档完全下载到浏览器中时，才会触发window.onload事件。这意味着页面上的全部元素对js而言都是可以操作的，
+	也就是说页面上的所有元素加载完毕才会执行。这种情况对编写功能性代码非常有利，因为无需考虑加载的次序。
+	$(document).ready{ }： 
+	会在DOM完全就绪并可以使用时调用。虽然这也意味着所有元素对脚本而言都是可以访问的，
+	但是，并不意味着所有关联的文件都已经下载完毕。换句话说，当HMTL下载完成并解析为DOM树之后，代码就会执行。 
+	*/
+	window.onload = function(){
+		getStaticInfo();
+	}
 	</script>    
 
 

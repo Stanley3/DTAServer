@@ -16,6 +16,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -59,8 +60,11 @@ public class StudentLoginInfoResource extends BaseAllResource<StudentLoginInfo, 
 			token.setUsername(username);
 			Subject subject = SecurityUtils.getSubject();
 			subject.login(token);
-			System.out.println("JSESSIONID = " + subject.getSession().getId());
+			Session session = subject.getSession(false);
+			System.out.println("JSESSIONID = " + session.getId());
+			session.setAttribute("source", "student");
 			StudentLoginSuccessInfo studentLoginSuccessInfo = service.getStudentLoginSuccessInfo(username);
+			session.setAttribute("school_id", studentLoginSuccessInfo.getSchool_id());
 			studentLoginSuccessInfo.setCode(Integer.valueOf(1));
 			//return Response.status(200).entity(new ResultBean(1, subject.getPrincipal().toString())).build();
 			return Response.status(200).entity(studentLoginSuccessInfo).build();

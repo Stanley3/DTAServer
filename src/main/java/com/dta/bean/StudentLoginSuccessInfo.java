@@ -9,7 +9,14 @@ public class StudentLoginSuccessInfo {
 	private String identity_card_no;
 	private Integer student_level;//学员状态  0表示普通学员 其他表示vip
 	private Integer code;
+	private Integer school_id;
 	
+	public Integer getSchool_id() {
+		return school_id;
+	}
+	public void setSchool_id(Integer school_id) {
+		this.school_id = school_id;
+	}
 	public Integer getCode() {
 		return code;
 	}

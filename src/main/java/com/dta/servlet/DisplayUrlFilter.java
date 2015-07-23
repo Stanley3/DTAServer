@@ -39,6 +39,7 @@ public class DisplayUrlFilter implements Filter{
 			logger.info("the request uri is {}", url);
 			//httpResponse.sendRedirect(httpRequest.getRequestURL().toString().split(";")[0]);
 		}
+		System.out.println("是否登录失败:" + request.getAttribute("shiroLoginFailure") == null);
 		filterChain.doFilter(request, response);
 	}
 

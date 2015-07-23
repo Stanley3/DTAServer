@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.MidiDevice.Info;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -30,6 +31,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
@@ -287,8 +289,11 @@ public class CoachBasicInfoResource extends
 			token.setUsername(username);
 			Subject subject = SecurityUtils.getSubject();
 			subject.login(token);
-			System.out.println("JSESSIONID = " + subject.getSession().getId());
+			Session session = subject.getSession(false);
+			System.out.println("JSESSIONID = " + session.getId());
+			session.setAttribute("source", "coach");
 			CoachLoginSuccessInfo coachInfo = service.getCoachInfoByName(username);
+			session.setAttribute("school_id", coachInfo.getSchool_id());
 			coachInfo.setCode(1);
 			//return Response.status(200).entity(new ResultBean(1, subject.getPrincipal().toString())).build();
 			return Response.status(200).entity(coachInfo).build();

@@ -10,7 +10,14 @@ public class CoachLoginSuccessInfo {
 	private String phone;
 	private Integer tecahing_age;
 	private Integer service_count;
+	private Integer school_id;
 	
+	public Integer getSchool_id() {
+		return school_id;
+	}
+	public void setSchool_id(Integer school_id) {
+		this.school_id = school_id;
+	}
 	public Integer getService_count() {
 		return service_count;
 	}

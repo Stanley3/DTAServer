@@ -1,5 +1,7 @@
 package com.dta.resource;
 
+import java.util.Map;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,6 +21,8 @@ import com.dta.utils.ServiceProvider;
 public class WebMainPageResource {
 	Logger logger = LoggerFactory.getLogger("com.dta.resource.WebMainPageResource");
 	private IWebMainPageService service = (IWebMainPageService)ServiceProvider.getBean("webMainPageServiceImpl");
+	public WebMainPageResource(){
+	}
 	
 	@GET
 	@Path("getStaticInfo")
@@ -32,5 +36,20 @@ public class WebMainPageResource {
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
+	}
+	
+	public Map<String, Integer> getStaticInfoByUsername(String username){
+		try{
+			Map<String, Integer> map = service.getStaticInfo(username);
+			return map;
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			return null;
+		}
+	}
+	
+	public Map<String, Integer>getNumbers(String sessionId){
+		return null;
 	}
 }

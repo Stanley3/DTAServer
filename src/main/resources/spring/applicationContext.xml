@@ -88,7 +88,7 @@
 				/media/** = anon
 				/error.jsp = anon
 				/index.jsp = anon
-				/** =   displayUrlFilter, authc
+				/** =  authc, displayUrlFilter
 			</value>
 		</property>
 	</bean>
@@ -101,6 +101,7 @@
 		<!-- <property name="sessionMode" value="native"/> -->
 		<!-- <property name="cacheManager" ref="cacheManager" /> -->
 		<property name="rememberMeManager" ref="cookieRememberMeManager"/>
+		<property name="sessionManager" ref="sessionManager"/>
 	</bean>
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 	<bean id="myRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
@@ -126,4 +127,8 @@
 		<property name="maxAge" value="86400" />
 		<property name="name" value="rememberMe" />
 	</bean>
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager" >
+		<property name="sessionListeners" ref="sessionListener"/>
+	</bean>
+	<bean id="sessionListener" class="com.dta.servlet.SessionListener"/>
 </beans>

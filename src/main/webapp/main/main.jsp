@@ -1,5 +1,7 @@
 <%@page import="org.apache.shiro.subject.Subject"%>
 <%@page import="org.apache.shiro.SecurityUtils"%>
+<%@page import="com.dta.resource.WebMainPageResource" %>
+<%@page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -68,6 +70,15 @@
 <%
 	String username = org.apache.shiro.SecurityUtils.getSubject().getPrincipal().toString();
 	Subject subject = SecurityUtils.getSubject();
+	WebMainPageResource pageInfo = new WebMainPageResource();
+	Map<String, Integer> map = pageInfo.getStaticInfoByUsername(username);
+	int evaluationSum = map.get("goodEvaluationSum") + map.get("midEvaluationSum") + map.get("badEvaluationSum");
+	float goodEvaluationRate = 0, midEvaluationRate = 0, badEvaluationRate = 0;
+	if(evaluationSum != 0){
+		goodEvaluationRate = Math.round(map.get("goodEvaluationSum") * 100.0 / evaluationSum );
+		midEvaluationRate = Math.round(map.get("midEvaluationSum") * 100.0 / evaluationSum );
+		badEvaluationRate = Math.round(map.get("badEvaluationSum") * 100.0 / evaluationSum);
+	}
 %>
 <body class="page-header-fixed">
 
@@ -233,7 +244,8 @@
 
 									<div class="number">
 
-										<span id="studentName">0</span>
+										<!-- <span id="studentName">0</span> -->
+										<%=map.get("studentSum") %>
 
 									</div>
 
@@ -267,7 +279,10 @@
 
 								<div class="details">
 
-									<div class="number"><span id="todayOrderNumber">0</span></div>
+									<div class="number">
+									<!-- <span id="todayOrderNumber">0</span> -->
+									<%=map.get("todayOrderSum") %>
+									</div>
 
 									<div class="desc">今日预约数</div>
 
@@ -295,7 +310,10 @@
 
 								<div class="details">
 
-									<div class="number"><span id="coachName">0</span></div>
+									<div class="number">
+									<!-- <span id="coachName">0</span> -->
+									<%=map.get("coachSum") %>
+									</div>
 
 									<div class="desc">教练员总数</div>
 
@@ -323,7 +341,10 @@
 
 								<div class="details">
 
-									<div class="number"><span id="balanceAmount">0</span>元</div>
+									<div class="number">
+									<!-- <span id="balanceAmount">0</span> -->
+									<%=map.get("balanceAmount") %>
+									元</div>
 
 									<div class="desc">现余资金</div>
 
@@ -455,7 +476,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number visits"  data-percent="55"><span>+90</span>%</div>
+												<div class="number visits"  data-percent="<%=goodEvaluationRate %>"><span>+<%=goodEvaluationRate %></span>%</div>
 
 												<a class="title" href="#">好评率 <i class="m-icon-swapright"></i></a>
 
@@ -469,7 +490,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number transactions"  data-percent="85"><span>+6</span>%</div>
+												<div class="number transactions"  data-percent="<%=midEvaluationRate %>"><span>+<%=midEvaluationRate %></span>%</div>
 
 												<a class="title" href="#">中评率 <i class="m-icon-swapright"></i></a>
 
@@ -483,7 +504,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number bounce"  data-percent="46"><span>+4</span>%</div>
+												<div class="number bounce"  data-percent="<%=badEvaluationRate %>"><span>+<%=badEvaluationRate %></span>%</div>
 
 												<a class="title" href="#">差评率<i class="m-icon-swapright"></i></a>
 
@@ -735,7 +756,8 @@
 	但是，并不意味着所有关联的文件都已经下载完毕。换句话说，当HMTL下载完成并解析为DOM树之后，代码就会执行。 
 	*/
 	window.onload = function(){
-		getStaticInfo();
+		//getStaticInfo();
+		
 	}
 	</script>    
 

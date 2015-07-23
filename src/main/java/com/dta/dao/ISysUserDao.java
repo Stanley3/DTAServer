@@ -9,4 +9,12 @@ public interface ISysUserDao extends IBaseAllDao<SysUser, SysUserVo> {
 	public SysUser downloadPhoto(Serializable id);
 	
 	public SysUser getUserByFK(Serializable fk);
+	
+	/**
+	 * 
+	 * @param username
+	 * @return 
+	 * <p>用户的驾校id，总后台用户的驾校id为0
+	 */
+	public Integer getSchoolIdByUsername(String username);
 }

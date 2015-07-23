@@ -381,7 +381,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		school_name,
 		phone,
 		teaching_age,
-		service_count 
+		service_count,
+		C.school_id 
 	from 
 		coach_basic_info as C
 	join	

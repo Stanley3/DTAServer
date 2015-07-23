@@ -181,7 +181,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		subject,
 		student_phone,
 		student_level,
-		identity_card_no
+		identity_card_no,
+		school_id
 	from
 		student_login_info as SL
 	join

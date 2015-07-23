@@ -16,7 +16,7 @@ public class SessionUtil {
 		Set<String> set = map.keySet();
 		for(String key : set){
 			session = (Session)map.get(key);
-			if(schoolId == session.getAttribute("school_id"));
+			if(schoolId == session.getAttribute("school_id"))
 				if("master".equalsIgnoreCase((String)session.getAttribute("source")))
 					++masterNumbers;
 				else if("coach".equalsIgnoreCase((String)session.getAttribute("source")))

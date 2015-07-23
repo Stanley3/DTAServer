@@ -21,4 +21,11 @@ public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUserVo> i
 	public SysUser downloadPhoto(int id){
 		return dao.downloadPhoto(id);
 	}
+
+	@Override
+	public Integer getSchoolIdByUsername(String username) {
+		if(username == null)
+			throw new IllegalArgumentException("根据登录用户名获取用户id时 用户名为null");
+		return dao.getSchoolIdByUsername(username);
+	}
 }

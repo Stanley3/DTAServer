@@ -129,6 +129,7 @@
 	</bean>
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager" >
 		<property name="sessionListeners" ref="sessionListener"/>
+		<!-- <property name="sessionValidationInterval" value="30000"/> -->
 	</bean>
 	<bean id="sessionListener" class="com.dta.servlet.SessionListener"/>
 </beans>

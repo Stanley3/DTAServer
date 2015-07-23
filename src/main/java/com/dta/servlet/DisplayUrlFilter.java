@@ -2,6 +2,7 @@ package com.dta.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,9 +20,16 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
+import com.dta.service.ISysUserService;
+import com.dta.service.impl.SysUserServiceImpl;
+import com.dta.utils.ServiceProvider;
 
 public class DisplayUrlFilter implements Filter{
 	private Logger logger = LoggerFactory.getLogger("com.dta.servlet.DisplayUrlFilter");
+	//private ISysUserService sysService = (ISysUserService)ServiceProvider.getBean("sysUserServiceImpl");
+	//private ISysUserService sysService = new SysUserServiceImpl();
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -32,6 +40,7 @@ public class DisplayUrlFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
+		ISysUserService sysService = (ISysUserService)ServiceProvider.getBean("sysUserServiceImpl");
 		HttpServletRequest httpRequest = (HttpServletRequest)request; 
 		HttpServletResponse httpResponse = (HttpServletResponse)response;
 		String url = httpRequest.getRequestURI();
@@ -39,7 +48,22 @@ public class DisplayUrlFilter implements Filter{
 			logger.info("the request uri is {}", url);
 			//httpResponse.sendRedirect(httpRequest.getRequestURL().toString().split(";")[0]);
 		}
-		System.out.println("是否登录失败:" + request.getAttribute("shiroLoginFailure") == null);
+		boolean loginFailure = request.getAttribute("shiroLoginFailure") != null;
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession(false);
+		boolean needSetAttribute = true;
+		if(loginFailure || session == null || (session != null && session.getAttribute("school_id") != null))
+			needSetAttribute = false;
+		if(needSetAttribute){
+			String username = (String)subject.getPrincipal();
+			if(StringUtils.hasText(username)){
+				try{
+					session.setAttribute("school_id", sysService.getSchoolIdByUsername(username));
+				}catch(Exception e){
+					logger.error(e.getMessage());
+				}
+			}
+		}
 		filterChain.doFilter(request, response);
 	}
 

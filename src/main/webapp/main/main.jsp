@@ -79,6 +79,13 @@
 		midEvaluationRate = Math.round(map.get("midEvaluationSum") * 100.0 / evaluationSum );
 		badEvaluationRate = Math.round(map.get("badEvaluationSum") * 100.0 / evaluationSum);
 	}
+	Map<String, Integer> numbersMap = pageInfo.getNumbers((String)subject.getSession(false).getId());
+	int numbers = numbersMap.get("studentNumbers") + numbersMap.get("coachNumbers") + numbersMap.get("masterNumbers");
+	float studentRate = 0, coachRate = 0;
+	if(numbers != 0){
+		studentRate = Math.round(numbersMap.get("studentNumbers") * 100 / numbers);
+		coachRate = Math.round(numbersMap.get("coachNumbers") * 100 / numbers);
+	}
 %>
 <body class="page-header-fixed">
 
@@ -537,7 +544,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number visits"  data-percent="55"><span>+70</span>%</div>
+												<div class="number visits"  data-percent="<%=studentRate %>"><span>+<%=studentRate %></span>%</div>
 
 												<a class="title" >学员APP</a>
 
@@ -551,7 +558,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number transactions"  data-percent="85"><span>+95</span>%</div>
+												<div class="number transactions"  data-percent="<%=coachRate %>"><span>+<%=coachRate %></span>%</div>
 
 												<a class="title" >教练APP </a>
 
@@ -567,9 +574,9 @@
 
 												
 
-											  <a class="title">学员在线：965人</a>
-                                                <a class="title">教练在线：100人</a>
-                                                <a class="title">校长在线：100人</a>
+											  <a class="title">学员在线：<%=numbersMap.get("studentNumbers") %>人</a>
+                                                <a class="title">教练在线：<%=numbersMap.get("coachNumbers") %>人</a>
+                                                <a class="title">校长在线：<%=numbersMap.get("masterNumbers") %>人</a>
 
 
 										  </div>

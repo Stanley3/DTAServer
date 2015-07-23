@@ -16,6 +16,7 @@ import com.dta.bean.ResultBean;
 import com.dta.service.IWebMainPageService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.utils.SessionUtil;
 
 @Path("webMainPage")
 public class WebMainPageResource {
@@ -50,6 +51,6 @@ public class WebMainPageResource {
 	}
 	
 	public Map<String, Integer>getNumbers(String sessionId){
-		return null;
+		return SessionUtil.getNumbers(sessionId);
 	}
 }

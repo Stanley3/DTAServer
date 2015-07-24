@@ -764,7 +764,7 @@
 	*/
 	window.onload = function(){
 		//getStaticInfo();
-		
+		alert($('#school_id').val());
 	}
 	</script>    
 

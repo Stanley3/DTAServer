@@ -22,6 +22,7 @@ import javax.ws.rs.Path;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -50,6 +51,8 @@ public class StudentBasicInfoResource extends BaseAllResource<StudentBasicInfo, 
 		super.setService(service);
 		super.setMianId(GlobalConstant.STUDENTBASICINFO);
 	}
+	@Context
+	private HttpServletRequest request;
 	
 	@POST
 	@Path("handleWithPhoto")

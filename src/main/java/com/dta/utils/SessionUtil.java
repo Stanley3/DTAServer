@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 
 public class SessionUtil {
 	public static Map<String, Session> map = new HashMap<String, Session>();
@@ -29,5 +33,9 @@ public class SessionUtil {
 		map.put("coachNumbers", coachNumbers);
 		map.put("masterNumbers", masterNumbers);
 		return map;
+	}
+	
+	public static Integer getSchoolIdByRequest(HttpServletRequest request){
+		return (Integer) map.get(request.getSession(false).getId()).getAttribute("school_id");
 	}
 }

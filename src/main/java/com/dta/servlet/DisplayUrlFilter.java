@@ -48,9 +48,12 @@ public class DisplayUrlFilter implements Filter{
 			logger.info("the request uri is {}", url);
 			//httpResponse.sendRedirect(httpRequest.getRequestURL().toString().split(";")[0]);
 		}
+		System.out.println("用request获取的sessionid为：" + httpRequest.getSession().getId());
+		
 		boolean loginFailure = request.getAttribute("shiroLoginFailure") != null;
 		Subject subject = SecurityUtils.getSubject();
 		Session session = subject.getSession(false);
+		System.out.println("用subject获取的sessionid为：" + session.getId());
 		boolean needSetAttribute = true;
 		if(loginFailure || session == null || (session != null && session.getAttribute("school_id") != null))
 			needSetAttribute = false;

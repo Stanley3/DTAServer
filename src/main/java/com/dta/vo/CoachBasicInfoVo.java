@@ -108,11 +108,11 @@ public class CoachBasicInfoVo extends PageParam implements Serializable{
 	public byte[] getPhoto() {
 		return photo;
 	}
-	public void setSchool_id(Integer school_id){
-		this.school_id = school_id;
-	}
 	public Integer getSchool_id() {
 		return school_id;
+	}
+	public void setSchool_id(Integer school_id) {
+		this.school_id = school_id;
 	}
 	public void setRegister_date(String register_date){
 		this.register_date = register_date;

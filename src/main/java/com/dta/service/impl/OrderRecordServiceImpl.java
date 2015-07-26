@@ -12,6 +12,7 @@ import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachIncomeRecord;
+import com.dta.bean.CoachOrderById;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
@@ -25,6 +26,7 @@ import com.dta.dao.ISchoolInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
 import com.dta.service.IOrderRecordService;
 import com.dta.vo.CoachIncomeRecordVo;
+import com.dta.vo.CoachOrderByIdVo;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.MyOrderRecordVo;
@@ -200,8 +202,10 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 
 
 	@Override
-	public List<String> getCoachSomedayPrecontractInfo(Map<String, Object> map) {
-		return dao.getCoachSomedayPrecontractInfo(map);
+	public List<String> getStudentSomedayPrecontractInfo(Map<String, Object> map) {
+		if(map.get("student_id") == null)
+			throw new IllegalArgumentException("学员端请求教练的排班信息时，学员idstudent_id为null");
+		return dao.getStudentSomedayPrecontractInfo(map);
 	}
 
 	@Override
@@ -238,5 +242,19 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(vo.getOrder_status() == null)
 			throw new IllegalArgumentException("获取教练收入列表时， 科目状态 order_status 为null");
 		return dao.getCoachIncomeRecordSize(vo);
+	}
+
+	@Override
+	public List<CoachOrderById> getCoachOrderById(CoachOrderByIdVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("web界面通过教练id获取教练的订单信息时，coach_id为null");
+		return dao.getCoachOrderById(vo);
+	}
+
+	@Override
+	public int getCoachOrderByIdSize(CoachOrderByIdVo vo) {
+		if(vo.getCoach_id() == null)
+			throw new IllegalArgumentException("web界面通过教练id获取教练的订单信息时，coach_id为null");
+		return dao.getCoachOrderByIdSize(vo);
 	}
 }

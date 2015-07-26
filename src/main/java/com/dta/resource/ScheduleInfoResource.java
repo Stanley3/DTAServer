@@ -65,7 +65,8 @@ public class ScheduleInfoResource extends BaseAllResource<ScheduleInfo, Schedule
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response displayCoachScheduleInfo(@QueryParam("coach_id")Integer coach_id,
 											@QueryParam("schedule_date")String schedule_date,
-											@QueryParam("subject")Integer subject){
+											@QueryParam("subject")Integer subject,
+											@QueryParam("student_id")Integer student_id){
 		try{
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("coach_id", coach_id);
@@ -81,8 +82,8 @@ public class ScheduleInfoResource extends BaseAllResource<ScheduleInfo, Schedule
 				Map<String, Object> trainingTimeMap = new HashMap<String, Object>();
 				trainingTimeMap.put("startTime", startTime);
 				trainingTimeMap.put("endTime", endTime);
-				trainingTimeMap.put("coach_id", coach_id);
-				List<String> trainingTimeList =  orderService.getCoachSomedayPrecontractInfo(trainingTimeMap);
+				trainingTimeMap.put("student_id", student_id);
+				List<String> trainingTimeList =  orderService.getStudentSomedayPrecontractInfo(trainingTimeMap);
 				for(int i=0;  trainingTimeList != null && i<trainingTimeList.size(); ++i){
 					String tmep = trainingTimeList.get(i);
 					int index = Integer.valueOf(tmep.split(" ")[1].split(":")[0]);
@@ -97,7 +98,7 @@ public class ScheduleInfoResource extends BaseAllResource<ScheduleInfo, Schedule
 		}catch(Exception e){
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
-					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+					e.getMessage())).build();
 		}
 	}
 }

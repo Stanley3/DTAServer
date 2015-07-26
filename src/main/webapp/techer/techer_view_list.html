@@ -523,18 +523,17 @@
 			           		 }
 			             },
 			             {
-			            	 'data': null,
-			            	 'defaultContent':'暂未实现'
+			            	 'data': 'service_count'
 			             },
 			             {
-			            	 'data': null,
-			            	 'defaultContent': '暂未实现'
+			            	 'data': 'vip'
 			             },
 			             {
 			            	 'data': 'coach_id',
 			            	 'render': function(data, type, row, meta) {
 			            		 if(type == 'display'){
-			            			 return '<a href=\'techer_view_info.html?coach_id=' + data + '\'>查看</a>';
+			            			 var search = encodeURIComponent('coach_id=' + data);
+			            			 return '<a href=\'techer_view_info.html?'+ search + '\'>查看</a>';
 			            		 }
 			            		 return data;
 			            	 }

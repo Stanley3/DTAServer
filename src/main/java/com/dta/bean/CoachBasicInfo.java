@@ -47,8 +47,15 @@ public class CoachBasicInfo implements Serializable{
 	private String obligate_code;
 	private Integer havePhoto;
 	private String school_name;
+	private Integer vip;
 	
 	
+	public Integer getVip() {
+		return vip;
+	}
+	public void setVip(Integer vip) {
+		this.vip = vip;
+	}
 	public String getObligate_code() {
 		return obligate_code;
 	}

@@ -284,37 +284,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		C.coach_id,
 		O.course_status,
 		O.order_id,
+		O.student_level,
 		E.evaluation,
 		E.evaluation_type,
 		E.evaluation_record_id,
 		SB.student_name,
+		SB.student_phone,
 		SC.school_type,
 		SB.student_id,
 		SC.school_id
 	from 
 		evaluation_record as E
-	join
-		coach_basic_info as C
-	on 
-		E.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
 		E.order_id = O.order_id
+	join
+		coach_basic_info as C
+	on 
+		O.coach_id = C.coach_id
 	join 
 		student_basic_info SB
 	on 
-		E.student_id = SB.student_id
+		O.student_id = SB.student_id
 	join 
 		school_info as SC
 	on 
 		O.school_id = SC.school_id
 	<where>
 		<if test="student_id != null and sutdent_id != 0">
-			and E.student_id = #{student_id}
+			and O.student_id = #{student_id}
 		</if>
 		<if test="coach_id != null and coach_id != 0">
-			and E.coach_id = #{coach_id} 
+			and O.coach_id = #{coach_id} 
 		</if>
 		<if test="evaluation != null">
 			 and E.evaluation = #{evaluation}  
@@ -338,28 +340,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		count(*)
 	from 
 		evaluation_record as E
-	join
-		coach_basic_info as C
-	on 
-		E.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
 		E.order_id = O.order_id
-	join 
-		student_basic_info SB
+	join
+		coach_basic_info as C
 	on 
-		E.student_id = SB.student_id
+		O.coach_id = C.coach_id
+	join 
+		student_basic_info as SB
+	on 
+		O.student_id = SB.student_id
 	join 
 		school_info as SC
 	on 
 		O.school_id = SC.school_id
 	<where>
 		<if test="student_id != null and sutdent_id != 0">
-			and E.student_id = #{student_id}
+			and O.student_id = #{student_id}
 		</if>
 		<if test="coach_id != null and coach_id != 0">
-			and E.coach_id = #{coach_id}
+			and O.coach_id = #{coach_id}
 		</if>
 		<if test="evaluation != null and evaluation != ''">
 			and E.evaluation = #{evaluation} 

@@ -126,9 +126,9 @@
      <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="viewComment"><i class="icon-hospital" style="margin-right:5px;"></i>评价汇总</a> 
      <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="allComment"><i class="icon-hospital" style="margin-right:5px;"></i>所有评价</a> 
      <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="goodComment"><i class=" icon-user-md" style="margin-right:5px;"></i>好评列表</a> 
-     <a class=" btn purple" href="javascript:void(0);" style="margin-bottom:10px;" id="midComment"><i class=" icon-male" style="margin-right:5px;"></i>中评列表</a> 
+     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="midComment"><i class=" icon-male" style="margin-right:5px;"></i>中评列表</a> 
      <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="badComment"><i class="icon-hospital" style="margin-right:5px;"></i>差评列表</a> 
-     <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="complain"><i class="icon-hospital" style="margin-right:5px;"></i>投诉列表</a> 
+     <a class=" btn purple" href="javascript:void(0);" style="margin-bottom:10px;" id="complain"><i class="icon-hospital" style="margin-right:5px;"></i>投诉列表</a> 
      <a class=" btn blue" href="javascript:void(0);" style="margin-bottom:10px;" id="advise"><i class="icon-hospital" style="margin-right:5px;"></i>建议列表</a> 
      <div class="portlet box blue"> 
       <div class="portlet-title"> 
@@ -229,8 +229,23 @@
 				              {'data': 'evaluation_time'},
 				              {'data': 'student_name'},
 				              {
-				            	  'data': null,
-				            	  'defaultContent': '<span style="color:red;">暂未实现</span>'
+				            	  'data': 'student_level',
+				            	  'render': function(data, type, row, meta){
+				            		  console.log(data);
+				            		  if(type == 'display'){
+				            			  switch(data){
+				            			  case 0:
+				            				  return '普通';
+				            			  case 1:
+				            			  case 2:
+				            			  case 3:
+				            				  return '<span class="label label-important"><i class=" icon-ok-sign" ></i></span>';
+			            				  default:
+			            					  return '未知';
+				            			  }
+				            		  }
+				            		  return data;
+				            	  }
 				              },
 				              {'data': 'coach_name'},
 				              {

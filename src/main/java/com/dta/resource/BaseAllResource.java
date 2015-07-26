@@ -1,15 +1,11 @@
 package com.dta.resource;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BeanParam;
@@ -68,10 +64,16 @@ import javax.ws.rs.core.Response;
 
 
 
+
+
+
+
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.CoachBasicInfo;
@@ -86,6 +88,7 @@ import com.dta.service.ICoachBasicInfoService;
 import com.dta.service.impl.CoachBasicInfoServiceImpl;
 import com.dta.service.impl.NewsInfoServiceImpl;
 import com.dta.utils.GlobalConstant;
+import com.dta.utils.SessionUtil;
 import com.dta.vo.CoachBasicInfoVo;
 import com.esotericsoftware.reflectasm.MethodAccess;
 
@@ -97,6 +100,13 @@ public class BaseAllResource<T, V>{
 	private  HttpServletRequest request;
 	@Context 
 	private HttpServletResponse response;
+	private Integer school_id;
+	private Logger logger = LoggerFactory.getLogger("com.dta.resource.BaseAllResource");
+	
+	@PostConstruct
+	public void init(){
+		school_id = SessionUtil.getSchoolIdByRequest(request);
+	}
 	@POST
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -234,6 +244,7 @@ public class BaseAllResource<T, V>{
 			int page = (Integer)access.invoke(vo, "getPage");
 			int draw = (Integer)access.invoke(vo, "getDraw");
 			int rows = (Integer)access.invoke(vo, "getRows");
+			access.invoke(vo, "setSchool_id", school_id);
 			if(page >= 0 && draw >= 0){
 				/*access.invoke(vo, "setPage", (page-1)*rows);*/
 				List<T> resultList = null;
@@ -255,6 +266,7 @@ public class BaseAllResource<T, V>{
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, 
 					GlobalConstant.SELECT_FAIL)).build();
 		}catch(Exception e){
+			logger.error(e.getMessage());
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
@@ -266,11 +278,6 @@ public class BaseAllResource<T, V>{
 	@Produces(MediaType.APPLICATION_JSON)
 	//@Produces(MediaType.APPLICATION_XML)
 	public Response getObjectById(@PathParam("id")int id){
-		System.out.println(id);
-		if(service != null){
-			System.out.println("serive is not null");
-			System.out.println(service instanceof NewsInfoServiceImpl );
-		}
 		try{
 			T po = service.getObjectById(id);
 			//return Response.status(200).entity("{\"code\":1, \"desc\":\"success\"}").build();
@@ -319,5 +326,10 @@ public class BaseAllResource<T, V>{
 
 	public HttpServletRequest getRequest() {
 		return request;
+	}
+	
+	@Context
+	public void setRequest(HttpServletRequest request){
+		this.request = request;
 	}
 }

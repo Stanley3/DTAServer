@@ -718,6 +718,7 @@ var App = function () {
         init: function () {
         	//load navigation bar
         	$('.navbar-inner').load('../media/nav.jsp #nav');
+        	$('.page-sidebar').load('../media/left.jsp #leftNav');
             //IMPORTANT!!!: Do not modify the core handlers call order.
 
             //core handlers

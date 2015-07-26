@@ -33,6 +33,8 @@ public class StudentBasicInfoVo extends PageParam implements Serializable{
 	@QueryParam("register_date")
 	private String register_date;
 	private String school_name;
+	@QueryParam("student_level")
+	private String student_level;
 	
 	// 学员列表页面使用的字段
 	private Integer subject_2_number;
@@ -42,6 +44,12 @@ public class StudentBasicInfoVo extends PageParam implements Serializable{
 	private Integer vip_number;
 		
 	
+	public String getStudent_level() {
+		return student_level;
+	}
+	public void setStudent_level(String student_level) {
+		this.student_level = student_level;
+	}
 	public Integer getSubject_2_number() {
 		return subject_2_number;
 	}

@@ -229,8 +229,23 @@
 				              {'data': 'evaluation_time'},
 				              {'data': 'student_name'},
 				              {
-				            	  'data': null,
-				            	  'defaultContent': '<span style="color:red;">暂未实现</span>'
+				            	  'data': 'student_level',
+				            	  'render': function(data, type, row, meta){
+				            		  console.log(data);
+				            		  if(type == 'display'){
+				            			  switch(data){
+				            			  case 0:
+				            				  return '普通';
+				            			  case 1:
+				            			  case 2:
+				            			  case 3:
+				            				  return '<span class="label label-important"><i class=" icon-ok-sign" ></i></span>';
+			            				  default:
+			            					  return '未知';
+				            			  }
+				            		  }
+				            		  return data;
+				            	  }
 				              },
 				              {'data': 'coach_name'},
 				              {

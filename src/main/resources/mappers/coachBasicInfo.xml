@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="CoachBasicInfo" parameterType="CoachBasicInfo">
 	select 
-		coach_id,
+		C.coach_id,
 		coach_name,
 		identity_card_no,
 		phone,
@@ -83,8 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		star,
 		online,
 		IF((PHOTO IS NULL), 0, 1) AS havePhoto ,
-		school_name
-	from coach_basic_info as C join school_info as S on C.school_id = S.school_id 
+		school_name,
+		count(student_level) as vip
+	from coach_basic_info as C join school_info as S on C.school_id = S.school_id left join order_record as R on (C.coach_id = R.coach_id and student_level > 0) 
 	<where>
 		<!-- C.validation = 1 
 		and S.validation = 1 -->
@@ -103,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="photo != null and photo != '' ">
 			and photo like "%"#{photo}"%"
 		</if>
-		<if test="school_id != null and school_id != '' ">
+		<if test="school_id != null and school_id != 0 ">
 			and C.school_id = #{school_id}
 		</if>
 		<if test="register_date != null and register_date != '' ">
@@ -131,6 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and online = #{online}
 		</if>
 	</where>
+	group by C.coach_id
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="CoachBasicInfo" parameterType="int">
@@ -156,7 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- **********获取一页对象********** -->
 <select id="getPage" resultType="CoachBasicInfo" parameterType="CoachBasicInfo">
 	select 
-		coach_id,
+		C.coach_id,
 		coach_name,
 		identity_card_no,
 		phone,
@@ -168,11 +170,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		star,
 		online,
 		IF((PHOTO IS NULL), 0, 1) AS havePhoto,
-		school_name
-	from coach_basic_info as C join school_info as S on C.school_id = S.school_id 
+		school_name,
+		count(student_level) as vip
+	from 
+		coach_basic_info as C 
+	join 
+		school_info as S 
+	on 
+		C.school_id = S.school_id
+	left join
+		order_record as R
+	on	
+		C.coach_id = R.coach_id and student_level > 0
 	<where>
 		<!-- C.validation = 1 
 		and S.validation = 1 -->
+		
 		<if test="coach_id != null and coach_id != '' ">
 			and coach_id = #{coach_id}
 		</if>
@@ -188,8 +201,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="photo != null and photo != '' ">
 			and photo like "%"#{photo}"%"
 		</if>
-		<if test="school_id != null and school_id != '' ">
-			and school_id = #{school_id}
+		<if test="school_id != null and school_id != 0 ">
+			and C.school_id = #{school_id}
 		</if>
 		<if test="register_date != null and register_date != '' ">
 			and register_date like "%"#{register_date}"%"
@@ -216,10 +229,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and online = #{online}
 		</if>
 	</where>
+	group by coach_id
 	<if test="sort != null">
 		order by ${sort} ${order}
 	</if>
-	LIMIt #{page}, #{rows}
+	LIMIt #{page}, #{rows}  
 </select>
 <!-- **********获取总数********* -->
 <select id="getSize" resultType="int" parameterType="CoachBasicInfoVo">
@@ -252,6 +266,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="star != null and star != 0 ">
 			and star = #{star}
+		</if>
+		<if test="school_id != null and school_id != 0">
+			school_id = #{school_id}
 		</if>
 	</where>
 </select>

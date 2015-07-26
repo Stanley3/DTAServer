@@ -470,8 +470,8 @@
 		   var id = window.location.search.match(/\d+/);
 		   if(id != null){
 			   $('#schoolInfo').attr('href', 'school_view_info.html?school_id=' + id);
-			   $('#studentInfo').attr('href', 'school_view_students.html?school_id' + id);
-			   $('#financeInfo').attr('href', 'school_view_money.html?school_id' + id);
+			   $('#studentInfo').attr('href', 'school_view_students.html?school_id=' + id);
+			   $('#financeInfo').attr('href', 'school_view_money.html?school_id=' + id);
 		   }
 		   $('#sample_2').DataTable({
 			   'processing': true,
@@ -479,8 +479,9 @@
 				   'url': '../rest/coachBasicInfo/getAll',
 				   'type': 'get',
 				   'data': function(data){
-					   if(id != null)
-					   		data.school_id = id;
+					   if(id != null){
+					   		data.school_id = parseInt(id);
+					   }   		
 				   },
 				   'dataSrc': ''
 			   },
@@ -492,6 +493,16 @@
 			              {'data': 'service_count'},
 			              {'data': 'subject'},
 			              {'data': 'star'},
+			              {'data': 'vip'},
+			              {
+				            	 'data': 'coach_id',
+				            	 'render': function(data, type, row, meta) {
+				            		 if(type == 'display'){
+				            			 return '<a href=\'../techer/techer_view_info.html?coach_id=' + data + '\'>查看</a>';
+				            		 }
+				            		 return data;
+				            	 }
+				             }
 			           ],
              'language':{
 				'url': '../media/json/lang.json'

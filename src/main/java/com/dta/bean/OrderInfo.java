@@ -13,7 +13,7 @@ public class OrderInfo{
 	private Integer student_id;
 	private Integer coach_id;
 	private String order_time;
-	private String order_amount;
+	private Double order_amount;
 	private Integer order_status;
 	private String training_start_time;
 	private String training_end_time;
@@ -82,10 +82,10 @@ public class OrderInfo{
 	public void setOrder_time(String order_time) {
 		this.order_time = order_time;
 	}
-	public String getOrder_amount() {
+	public Double getOrder_amount() {
 		return order_amount;
 	}
-	public void setOrder_amount(String order_amount) {
+	public void setOrder_amount(Double order_amount) {
 		this.order_amount = order_amount;
 	}
 	public Integer getOrder_status() {

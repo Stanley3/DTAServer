@@ -70,7 +70,7 @@
 
 				<!-- BEGIN LOGO -->
 
-				<a class="brand"  style="margin-left:10px; " href="../index.html">
+				<a class="brand"  style="margin-left:10px; " href="../main/main.jsp">
 
 				驾考联盟后台管理系统
 
@@ -253,7 +253,7 @@
 
 			<!-- 开始 左侧通用 菜单 -->        
 
-			<script src="../left.js" type="text/javascript"></script>
+			<!-- <script src="../left.js" type="text/javascript"></script> -->
 
 			<!-- END SIDEBAR MENU -->
 
@@ -371,10 +371,10 @@
 
 
 
-    <a class=" btn blue"  href="techer_view_info.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>教练信息</a>
-    <a class=" btn purple"  href="techer_view_money.html" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>订单记录</a>
-    <a class=" btn blue"  href="techer_view_students.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>名下学员</a>
-    <a class=" btn blue"  href="techer_view_pingjia.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>获得评价</a> 
+    <a class=" btn blue"  href="techer_view_info.html" id="teachInfo" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>教练信息</a>
+    <a class=" btn purple"  href="techer_view_money.html" id="orderRecord" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>订单记录</a>
+    <a class=" btn blue"  href="techer_view_students.html" id="studentInfo" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>名下学员</a>
+    <a class=" btn blue"  href="techer_view_pingjia.html" id="evaluationInfo" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>获得评价</a> 
     
 
 
@@ -425,183 +425,7 @@
 
 									<tbody>
 
-										<tr>
-
-											<td>2015-04-17 </td>
-
-											<td>张全蛋</td>
-
-											<td class="hidden-480">15137000067</td>
-
-										  <td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign" ></i></span></td>
-										  <td class="hidden-480">科二</td>
-
-											<td class="hidden-480">0</td>
-											<td class="hidden-480">结束</td>
-										  <td class="hidden-480">
-                                          
-                                            <!--以下为点结算以后弹出的界面开始-->
-                                          <a href="#myModal1" role="button" data-toggle="modal">详细</a>
-                                          
-                                          <div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-
-									<div class="modal-header">
-
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-
-										<h3 id="myModalLabel1">德信驾校-提现900元结算操作</h3>
-
-									</div>
-
-									<div class="modal-body">
-
-										<iframe src="../money/money_jisuan.html?id=1001" width=100% height=315 frameborder=0 scrolling=no></iframe>
-
-									</div>
-
-									<div class="modal-footer">
-
-										<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-
-										<button class="btn yellow">结算</button>
-
-									</div>
-
-								</div>
-  <!--以下为点击操作人以后弹出的界面开始-->
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          </td>
-
-										</tr>
-
-										<tr >
-
-											<td>2015-04-16</td>
-
-											<td>张全福</td>
-
-											<td class="hidden-480">18937000000</td>
-
-											<td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign" ></i></span></td>
-											<td class="hidden-480">科二</td>
-
-											<td class="hidden-480">0</td>
-											<td class="hidden-480">结束</td>
-											<td class="hidden-480">
-                                            
-                                             <!--以下为点结算以后弹出的界面开始-->
-                                          <a href="#myModal2" role="button" data-toggle="modal">详细</a>
-                                          
-                                          <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-
-									<div class="modal-header">
-
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-
-										<h3 id="myModalLabel1">虞城科三考场-考场-提现800元结算操作</h3>
-
-									</div>
-
-									<div class="modal-body">
-
-										<iframe src="../money/money_jisuan.html?id=1001" width=100% height=315 frameborder=0 scrolling=no></iframe>
-
-									</div>
-
-									<div class="modal-footer">
-
-										<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-
-										<button class="btn yellow">结算</button>
-
-									</div>
-
-								</div>
-  <!--以下为点击操作人以后弹出的界面开始-->
-                                          
-                                            
-                                            </td>
-
-										</tr>
-
-										<tr >
-
-											<td>2015-04-15</td>
-
-											<td>张全禄</td>
-
-											<td class="hidden-480">13781551504</td>
-
-											<td class="hidden-480">普通</td>
-											<td class="hidden-480">科二</td>
-
-											<td class="hidden-480">80</td>
-											<td class="hidden-480">取消</td>
-											<td class="hidden-480">详细</td>
-
-										</tr>
-
-										<tr >
-
-											<td>2015-04-14</td>
-
-											<td>张全寿</td>
-
-											<td class="hidden-480">18137000067</td>
-
-											<td class="hidden-480">普通</td>
-											<td class="hidden-480">科二</td>
-
-											<td class="hidden-480">80</td>
-											<td class="hidden-480">冻结</td>
-											<td class="hidden-480">详细</td>
-
-										</tr>
-
-										<tr >
-
-											<td>2015-04-13</td>
-
-											<td>张全喜</td>
-
-											<td class="hidden-480">15137000067</td>
-
-											<td class="hidden-480">普通</td>
-											<td class="hidden-480">科二</td>
-
-											<td class="hidden-480">80</td>
-											<td class="hidden-480">预约</td>
-											<td class="hidden-480">详细</td>
-
-										</tr>
-										<tr >
-										  <td>2015-05-16</td>
-										  <td>张全文</td>
-										  <td class="hidden-480">16137000000</td>
-										  <td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign" ></i></span></td>
-										  <td class="hidden-480">科二</td>
-										  <td class="hidden-480">0</td>
-										  <td class="hidden-480">练习</td>
-										  <td class="hidden-480">详细</td>
-									  </tr>
-										<tr >
-										  <td>2015-05-11</td>
-										  <td>张全武</td>
-										  <td class="hidden-480">13100000000</td>
-										  <td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign" ></i></span></td>
-										  <td class="hidden-480">科二</td>
-										  <td class="hidden-480">0</td>
-										  <td class="hidden-480">待确认</td>
-										  <td class="hidden-480">详细</td>
-									  </tr>
+										
 
 									</tbody>
 
@@ -706,7 +530,109 @@
 
 		   App.init();
 
-		   TableAdvanced.init();
+		   //TableAdvanced.init();
+		   var id = decodeURIComponent(window.location.search).match(/\d+/);
+		   try{
+			   id = parseInt(id);
+			   $('#teachInfo').attr('href', 'techer_view_info.html?' + encodeURIComponent('coach_id=' + id));
+			   $('#orderRecord').attr('href', 'techer_view_money.html?' + encodeURIComponent('coach_id=' + id));
+			   $('#studentInfo').attr('href', 'techer_view_students.html?' + encodeURIComponent('coach_id=' + id));
+			   $('#evaluationInfo').attr('href', 'techer_view_pingjia.html?' + encodeURIComponent('coach_id=' + id));
+		   }catch(err){}
+		   $('#sample_2').DataTable({
+				 'processing': true,
+				 'serverSide': true,
+				 'ajax': {
+					'url': '../rest/orderRecord/getCoachOrderById',
+					'type': 'get',
+					'data': function(data, setting){
+						  var index = data.order[0].column;
+						  data.sort = data.columns[index].data;
+						  data.dir = data.order[0].dir;
+						  data.search = data.search.value;
+						  try{
+							  	data.coach_id = parseInt(id);
+							  }catch(err){
+							  }
+					  }
+				 },
+				 'columns': [
+				             {'data': 'order_time'},
+				             {'data': 'student_name'},
+				             {'data': 'student_phone'},
+				             {
+				            	 'data': 'student_level',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 switch(data){
+				            			 case 0:
+				            				 return '普通';
+				            			 case 1:
+				            			 case 2:
+				            			 case 3:
+				            				 return '<span class="label label-important"><i class=" icon-ok-sign"></i></span>';
+				            			 default:
+				            				 return '未知';
+				            			 }
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'course_status',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 switch(data){
+				            			 case 2:
+				            				 return '科目二';
+				            			 case 3:
+				            				 return '科目三';
+			            				 default: 
+			            					 return '未知';
+				            			 }
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {'data': 'order_amount'},
+				             {
+				            	 'data': 'order_status',
+				            	 'render': function(data, type, row, meta){
+				            		/*  var content = row.order_id + '|' + row.training_start_time + '|' + row.training_end_time + '|' + row.order_amount+ '|' 
+				            		 	+ row.student_name + '|' + row.student_level + '|' + row.coach_name + '|' + row.course_status + '|' + row.student_phone + '|'
+				            		 	+ row.coach_phone + '|' + row.order_status + '' */
+				            		 var content = JSON.stringify(row);
+				            		 if(type == 'display'){
+				            			 switch(data){
+				            			 case 0:
+				            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">预约</a>';
+				            			 case 1:
+				            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">取消</a>';
+				            			 case 2: 
+				            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">冻结</a>';
+				            			 case 3:
+				            				 return '<a href="order_edit.html?content=' + encodeURIComponent(content) + '">完成</a>';
+			            				 default:
+			            					 return '未知';
+				            			 }
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'order_id',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display')
+				            			 return window.location.href + ' #myModal';
+				            		 return data;
+				            	 }
+				             }
+				             ],
+	             'language':{
+					   'url': '../media/json/lang.json'
+				   },
+				   'lengthMenu': [ [10, 25, 50, -1], [10, 25, 50, '全部'] ]
+			  });
 
 		});
 

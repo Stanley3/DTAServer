@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.CoachIncomeRecordVo;
+import com.dta.vo.CoachOrderByIdVo;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.MyOrderRecordVo;
@@ -14,6 +15,7 @@ import com.dta.vo.TrainingRecordVo;
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachIncomeRecord;
+import com.dta.bean.CoachOrderById;
 import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
@@ -105,9 +107,9 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	 * 
 	 * @param Map<String, Object> map
 	 * @return List<String>
-	 * <p>获取某个教练某天的预约信息，用于学员预约教练时间段界面
+	 * <p>获取某个学员某天的预约信息，用于学员预约教练时间段界面
 	 */
-	public List<String> getCoachSomedayPrecontractInfo(Map<String, Object> map);
+	public List<String> getStudentSomedayPrecontractInfo(Map<String, Object> map);
 	
 	/**
 	 * 
@@ -147,5 +149,21 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	 * <p>App教练端获取教练收入记录的总数
 	 */
 	public int getCoachIncomeRecordSize(CoachIncomeRecordVo vo);
+	
+	/**
+	 * 
+	 * @param CoachOrderByIdVo vo
+	 * @return List<CoachOrderById>
+	 * <p>web界面通过教练的id获取教练的订单记录
+	 */
+	public List<CoachOrderById> getCoachOrderById(CoachOrderByIdVo vo);
+	
+	/**
+	 * 
+	 * @param CoachOrderByIdVo vo
+	 * @return int
+	 * <p>web界面通过教练的id获取教练订单记录的总数
+	 */
+	public int getCoachOrderByIdSize(CoachOrderByIdVo vo);
 }
 

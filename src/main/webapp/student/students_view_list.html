@@ -97,7 +97,7 @@
 
 			<!-- 开始 左侧通用 菜单 -->
 
-			<script src="../media/left.js" type="text/javascript"></script>
+			<!-- <script src="../media/left.js" type="text/javascript"></script> -->
 
 			<!-- END SIDEBAR MENU -->
 
@@ -367,6 +367,12 @@
 					  data.sort = data.columns[index].data;
 					  data.dir = data.order[0].dir;
 					  data.search = data.search.value;
+					  var search = window.location.search;
+					  if( search.length != 0){
+						  search = decodeURIComponent(search);
+						  var level = search.match(/\d+/);
+						  data.student_level = parseInt(level);
+					  }
 				  }
 			  },
 			  'columnDefs':[
@@ -381,20 +387,54 @@
 			             {'data': 'student_phone'},
 			             {'data': 'school_name'},
 			             {
-			            	 'data': null,
-			            	 'defaultContent': '暂未实现'
+			            	 'data': 'subject_2_number',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 if(data == null)
+			            				 return '0次';
+			            			 else
+			            				 return data + '次';
+			            		 }
+			            		 return data;
+			            	 }
 			             },
 			             {
-			            	 'data': null,
-			            	 'defaultContent': '暂未实现'
+			            	 'data': 'subject_3_number',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 if(data == null)
+			            				 return '0次';
+			            			 else
+			            				 return data + '次';
+			            		 }
+			            		 return data;
+			            	 }
 			             },
 			             {
-			            	 'data': null,
-			            	 'defaultContent': '暂未实现'
+			            	 'data': 'amount',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 if(data == null)
+			            				 return '<span class="label label-warning"><i class=" icon-remove-sign" ></i></span>';
+			            			else
+			            				return data;
+			            		 }
+			            		 return data;
+			            	 }
 			             },
 			             {
-			            	 'data': null,
-			            	 'defaultContent': '暂未实现'
+			            	 'data': 'school_id',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 if(data == 0)
+			            				 return '后台';
+			            			 else if(data != 0 && data != null)
+			            				 return '驾校';
+			            			 else
+			            				 return '未知';
+			            		 }
+			            		 return data;
+			            	 }
 			             },
 			             {
 			            	 'data': 'subject',
@@ -421,8 +461,16 @@
 			            	 }
 			             },
 			             {
-			            	 'data': null,
-			            	 'defaultContent': '暂未实现'
+			            	 'data': 'student_level',
+			            	 'render': function(data, type, row, meta){
+			            		 if(type == 'display'){
+			            			 if(data == 0)
+			            				 return '普通';
+			            			 else 
+			            				 return '<span class="label label-important"><i class=" icon-ok-sign" ></i></span>';
+			            		 }
+			            		 return data;
+			            	 }
 			             },
 			             {
 			            	 'data': 'validation',

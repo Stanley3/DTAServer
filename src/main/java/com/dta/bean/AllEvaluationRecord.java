@@ -8,7 +8,8 @@ package com.dta.bean;
 public class AllEvaluationRecord {
 	private String evaluation_time;
 	private String student_name;
-	private String stuedent_level;//学员是否是vip
+	private Integer student_level;//学员是否是vip
+	private String student_phone;
 	private String coach_name;
 	private Integer school_type;
 	private Integer course_status;
@@ -21,6 +22,12 @@ public class AllEvaluationRecord {
 	private Integer school_id;
 	private String school_name;
 	
+	public String getStudent_phone() {
+		return student_phone;
+	}
+	public void setStudent_phone(String student_phone) {
+		this.student_phone = student_phone;
+	}
 	public String getSchool_name() {
 		return school_name;
 	}
@@ -39,11 +46,11 @@ public class AllEvaluationRecord {
 	public void setStudent_name(String student_name) {
 		this.student_name = student_name;
 	}
-	public String getStuedent_level() {
-		return stuedent_level;
+	public Integer getStudent_level() {
+		return student_level;
 	}
-	public void setStuedent_level(String stuedent_level) {
-		this.stuedent_level = stuedent_level;
+	public void setStudent_level(Integer student_level) {
+		this.student_level = student_level;
 	}
 	public String getCoach_name() {
 		return coach_name;

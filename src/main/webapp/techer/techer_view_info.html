@@ -312,14 +312,14 @@
 
 
 
-				<a class=" btn purple" href="techer_view_info.html"
+				<a class=" btn purple" href="techer_view_info.html" id="teachInfo"
 					style="margin-bottom:10px;"><i class="icon-hospital"
-					style="margin-right:5px;"></i>教练信息</a> <a class=" btn blue"
+					style="margin-right:5px;"></i>教练信息</a> <a class=" btn blue" id="orderRecord"
 					href="techer_view_money.html" style="margin-bottom:10px;"><i
-					class=" icon-user-md" style="margin-right:5px;"></i>订单记录</a> <a
+					class=" icon-user-md" style="margin-right:5px;"></i>订单记录</a> <a id="studentInfo"
 					class=" btn blue" href="techer_view_students.html"
 					style="margin-bottom:10px;"><i class=" icon-male"
-					style="margin-right:5px;"></i>名下学员</a> <a class=" btn blue"
+					style="margin-right:5px;"></i>名下学员</a> <a class=" btn blue" id="evaluationInfo"
 					href="techer_view_pingjia.html" style="margin-bottom:10px;"><i
 					class="icon-hospital" style="margin-right:5px;"></i>获得评价</a>
 
@@ -616,9 +616,15 @@
 		   //TableAdvanced.init();
 		   $('#selectCoachStar').select2();
 		   $('#form').validationEngine();
-		   var coach_id = window.location.search.match(/\d+/);
+		   var coach_id = decodeURIComponent(window.location.search).match(/\d+/);
 		   loadPageInfo(coach_id);
-
+		   try{
+			   coach_id = parseInt(coach_id);
+			   $('#teachInfo').attr('href', 'techer_view_info.html?' + encodeURIComponent('coach_id=' + coach_id));
+			   $('#orderRecord').attr('href', 'techer_view_money.html?' + encodeURIComponent('coach_id=' + coach_id));
+			   $('#studentInfo').attr('href', 'techer_view_students.html?' + encodeURIComponent('coach_id=' + coach_id));
+			   $('#evaluationInfo').attr('href', 'techer_view_pingjia.html?' + encodeURIComponent('coach_id=' + coach_id));
+		   }catch(err){alert(err);}
 		});
 		function displayCoachNumbers(id){
 			$.ajax({

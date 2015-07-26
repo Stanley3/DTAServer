@@ -123,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SL.validation = 1
 </select>
 <!-- **********获取一页对象********** -->
-<select id="getPage" resultType="StudentBasicInfo" parameterType="StudentBasicInfo">
+<select id="getPage" resultType="StudentBasicInfo" parameterType="StudentBasicInfoVo">
 	select 
 		 ST.register_date,
 		 ST.student_id,
@@ -132,14 +132,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 ST.subject,
 		 ST.validation,
 		 ST.school_id,
-		 SC.school_name
+		 SC.school_name,
+		 ST.student_level,
+		 sum(deposit_amount) as amount,
+		 R.subject_2_number,
+		 R.subject_3_number 
 	from 
 		student_basic_info as ST
 	left join 
 		school_info as SC
 	on 
 		ST.school_id = SC.school_id
+	left join
+		student_deposit_record as SDR
+	on
+		SDR.student_id = ST.student_id
+	left join
+		getstudentcoursecount as R
+	on 
+		ST.student_id = R.student_id
 	<where>
+		ST.validation = 1
 		<if test="student_id != null and student_id != '' ">
 			and student_id = #{student_id}
 		</if>
@@ -158,14 +171,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != '' ">
 			and ST.validation = #{validation}
 		</if>
+		<if test="school_id != null and school_id != 0">
+			and ST.school_id = #{school_id}
+		</if>
+		<if test="student_level != null">
+			and ST.student_level = #{student_level}
+		</if>
 	</where>
+	group by student_id
 	<if test="sort != null and order != null">
 		order by ${sort} ${order}
 	</if>
 	LIMIt #{page}, #{rows}
 </select>
 <!-- **********获取总数********* -->
-<select id="getSize" resultType="int" parameterType="StudentBasicInfo">
+<select id="getSize" resultType="int" parameterType="StudentBasicInfoVo">
 	select count(*) from student_basic_info
 	<where>
 		validation = 1
@@ -186,6 +206,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
+		</if>
+		<if test="school_id != null and school_id != 0">
+			and school_id = #{school_id}
+		</if>
+		<if test="student_level != null">
+			and student_level = #{student_level}
 		</if>
 	</where>
 </select>

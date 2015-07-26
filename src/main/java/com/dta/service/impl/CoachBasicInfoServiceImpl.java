@@ -65,5 +65,4 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 	public List<Integer> getAllCoachID() {
 		return dao.getAllCoachID();
 	}
-	
 }

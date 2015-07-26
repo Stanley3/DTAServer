@@ -113,12 +113,10 @@
 
 		<!-- 开始 左侧菜单 -->
 
-		<div class="page-sidebar nav-collapse collapse">
+		<div class="page-sidebar nav-collapse collapse" id="sideNav">
 
 			<!-- 开始 左侧通用 菜单 -->        
-
-				<script src="../media/left.js" type="text/javascript"></script>
-
+				<!-- <script src="../media/left.js" type="text/javascript"></script> -->
 			<!-- END SIDEBAR MENU -->
 
 		</div>
@@ -764,8 +762,9 @@
 	*/
 	window.onload = function(){
 		//getStaticInfo();
-		alert($('#school_id').val());
-	}
+		//alert($('#school_id').val());
+		
+	};
 	</script>    
 
 

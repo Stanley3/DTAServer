@@ -196,6 +196,7 @@
    详细参数：教练id coach_id
 			 排班日期 schedule_date(表示给哪天排的班, 格式必须为 YYYY-MM-DD)
 			 科目： subject(2 表示科目二， 3 表示科目三)
+			 学员id: student_id
    返回bean：DisplayCoachScheduleInfo.java
    返回参数格式：{"coach_id":1,"subject":3,"content":"000000001111001111000000","student_toplimit":"000000001111001111000000","student_attribute":"00000001111001111000000","schedule_date":"2015-05-12","isOnDuty":1,"scheduleInfo":"000000000100100000000000"}
                  (subject 表示科目，student_toplimit 表示每个时间段的学员上限 暂定为1，student_attribute 表示每个事件端的学员属性 0表示VIP学员可选 1表示普通学员可选

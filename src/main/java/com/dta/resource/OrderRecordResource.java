@@ -16,8 +16,12 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachIncomeRecord;
+import com.dta.bean.CoachOrderById;
 import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
 import com.dta.bean.OrderInfo;
@@ -28,6 +32,7 @@ import com.dta.service.IOrderRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
 import com.dta.vo.CoachIncomeRecordVo;
+import com.dta.vo.CoachOrderByIdVo;
 import com.dta.vo.CoachPrecontractRecordVo;
 import com.dta.vo.CoachTeachRecordVo;
 import com.dta.vo.MyOrderRecordVo;
@@ -41,7 +46,8 @@ public class OrderRecordResource extends
 	// @Autowired
 	public IOrderRecordService service = (IOrderRecordService) ServiceProvider
 			.getBean("orderRecordServiceImpl");
-
+	private Logger logger = LoggerFactory.getLogger("com.dta.resource.OrderRecordResource");
+	
 	public OrderRecordResource() {
 		super.setService(service);
 		super.setMianId(GlobalConstant.ORDERRECORD);
@@ -273,6 +279,32 @@ public class OrderRecordResource extends
 		}catch(Exception e){
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
+					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
+	@GET
+	@Path("getCoachOrderById")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCoachOrderById(@BeanParam CoachOrderByIdVo vo){
+		try{
+			if(vo.getRows() == -1)
+				vo.setRows(0);
+			int draw = vo.getDraw();
+			int size = service.getCoachOrderByIdSize(vo);
+			List<CoachOrderById> listResult = new ArrayList<CoachOrderById>();
+			if(size != 0)
+				listResult = service.getCoachOrderById(vo);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("draw", draw);
+			resultMap.put("recordsTotal", size);
+			resultMap.put("recordsFiltered", size);
+			resultMap.put("data", listResult);
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}

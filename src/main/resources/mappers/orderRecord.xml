@@ -468,7 +468,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		C.coach_id,
 		C.coach_name,
 		C.phone as coach_phone,
-		SC.school_id,getCoachTeachRecord
+		SC.school_id,
 		SC.school_name,
 		SB.student_level
 	from 
@@ -607,8 +607,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from coachTeachRecord
 	where coach_id = #{coach_id}
 </select>
-<select id="getCoachSomedayPrecontractInfo" resultType="string" parameterType="map">
-	call getCoachSomedayPrecontractInfo(#{coach_id}, #{startTime}, #{endTime})
+<select id="getStudentSomedayPrecontractInfo" resultType="string" parameterType="map">
+	call getStudentSomedayPrecontractInfo(#{student_id}, #{startTime}, #{endTime})
 </select>
 <select id="getStudentConsumeAmount" resultType="Double" parameterType="Integer">
 	call studentConsumeAmount(#{student_id})
@@ -675,5 +675,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where 
 		coach_id = #{coach_id}
 		and order_status = #{order_status}
+</select>
+<!-- web界面通过教练id获取教练的订单信息 -->
+<select id="getCoachOrderById" resultType="CoachOrderById" parameterType="CoachOrderByIdVo">
+	select 
+		student_name,
+		S.student_id,
+		student_phone,
+		R.student_level,
+		R.course_status,
+		order_amount,
+		order_status,
+		order_id,
+		order_time
+	from
+		order_record as R
+	join 
+		student_basic_info as S
+	on 
+		R.student_id = S.student_id
+	<where>
+		<if test="coach_id != null">
+			coach_id = #{coach_id}
+		</if>
+		<if test="search != null and search != ''">
+			and (
+				student_name like "%"#{search}"%"
+				or student_phone like "%"#{search}"%"
+				or date_format(order_time, '%Y-%m-%d') like "%"#{search}"%"
+			)
+		</if>
+	</where>
+	<if test="order != null">
+		order by #{sort} #{order}
+	</if>
+	<if test="rows != null and rows != 0">
+		limit page, rows
+	</if>
+</select>
+<select id="getCoachOrderByIdSize" resultType="int" parameterType="CoachOrderByIdVo">
+	select count(*)
+	from
+		order_record as R
+	join 
+		student_basic_info as S
+	on 
+		R.student_id = S.student_id
+	<where>
+		<if test="coach_id != null">
+			coach_id = #{coach_id}
+		</if>
+		<if test="search != null and search != ''">
+			and (
+				student_name like "%"#{search}"%"
+				or student_phone like "%"#{search}"%"
+				or date_format(order_time, '%Y-%m-%d') like "%"#{search}"%"
+			)
+		</if>
+	</where>
 </select>
  </mapper>

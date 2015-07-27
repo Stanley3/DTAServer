@@ -244,7 +244,11 @@ public class BaseAllResource<T, V>{
 			int page = (Integer)access.invoke(vo, "getPage");
 			int draw = (Integer)access.invoke(vo, "getDraw");
 			int rows = (Integer)access.invoke(vo, "getRows");
-			access.invoke(vo, "setSchool_id", school_id);
+			try{
+				access.invoke(vo, "setSchool_id", school_id);
+			}catch(IllegalArgumentException e){
+				
+			}
 			if(page >= 0 && draw >= 0){
 				/*access.invoke(vo, "setPage", (page-1)*rows);*/
 				List<T> resultList = null;

@@ -12,6 +12,7 @@ import com.dta.bean.EvaluationRecord;
 import com.dta.bean.MapBean;
 import com.dta.dao.IEvaluationRecordDao;
 import com.dta.service.IEvaluationRecordService;
+import com.dta.service.IOrderRecordService;
 import com.dta.vo.AllEvaluationRecordVo;
 import com.dta.vo.CoachEvaluationInfoVo;
 import com.dta.vo.EvaluationRecordVo;
@@ -20,7 +21,8 @@ import com.dta.vo.EvaluationRecordVo;
 public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRecord, EvaluationRecordVo> implements IEvaluationRecordService{
 	@Autowired
 	private IEvaluationRecordDao dao;
-	
+	@Autowired
+	private IOrderRecordService orderRecordService;
 	public void init(){
 		super.setDao(dao);
 	}
@@ -81,6 +83,13 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 		return dao.getEvaluationSize(vo);
 	}
 	
+	/**
+	 * @param EvaluationRecord po
+	 * @return 0 或 1
+	 * <p> 0表示添加评价失败，1表示添加评价成功
+	 * <p>添加一条评价记录，暂默认为增添评价时表明订单已完成，应修改订单的状态为3；
+	 * 修改订单的状态为3时，应修改财务信息记录表的收入总额字段
+	 */
 	@Override
 	public int addObject(EvaluationRecord po){
 		int skill, service_attitude, hygiene;
@@ -95,7 +104,9 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 		else
 			po.setEvaluation(2);
 		//以上是根据评分计算好中差评，计算公式未知，暂如上计算。
-		
-		return super.addObject(po);
+		if(orderRecordService.completeOrder(po.getOrder_id()))	
+			return super.addObject(po);
+		else
+			return 0;
 	}
 }

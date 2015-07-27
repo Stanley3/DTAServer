@@ -198,10 +198,12 @@
 			 科目： subject(2 表示科目二， 3 表示科目三)
 			 学员id: student_id
    返回bean：DisplayCoachScheduleInfo.java
-   返回参数格式：{"coach_id":1,"schedule_id":2, "subject":3,"content":"000000001111001111000000","student_toplimit":"000000001111001111000000","student_attribute":"00000001111001111000000","schedule_date":"2015-05-12","isOnDuty":1,"scheduleInfo":"000000000100100000000000"}
+   返回参数格式：{"coach_id":1,"schedule_id":2, "subject":3,"content":"000000001111001111000000","student_toplimit":"000000001111001111000000","student_attribute":"00000001111001111000000","schedule_date":"2015-05-12","isOnDuty":1,"scheduleInfo":"000000000100100000000000",
+   				"procontranct_info":"000000000000000000000000"}
                  (subject 表示科目，student_toplimit 表示每个时间段的学员上限 暂定为1，student_attribute 表示每个事件端的学员属性 0表示VIP学员可选 1表示普通学员可选
 					schedule_date 表示给哪天排的班，isOnDuty 表示该天是否已经排班 0 表示未排班 1表示排班 若为0表示教练该天休息 应该先判断这个值 为0时其它字段没有意义, schedule_id表示当前排班的id
-					scheduleInfo表示当天已经被预约的情况 每个字符串表示该时间段被预约的次数 应和student_toplimit一起判断该时间段是否还可以预约)
+					scheduleInfo表示学员当天预约的情况 每个字符对应该每个时间段预约的情况  precontranct_info表示该教练当天被预约的情况 
+					应和student_toplimit一起判断该时间段是否还可以预约)
 		
 6. 提交预约
    resourcejava：OrderRecordResource.java

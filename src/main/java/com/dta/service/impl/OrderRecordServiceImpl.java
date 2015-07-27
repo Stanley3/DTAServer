@@ -61,19 +61,25 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	@Override
 	@Transactional
 	public int addObject(OrderRecord po){
-		String[] scheduleDateArray = po.getScheduleDateStr().split("|");
-		String[] precontractContentArray = po.getPrecontractContentStr().split("|");
-		String[] scheduleIDArray = po.getScheduleIDStr().split("|");
+		String[] scheduleDateArray = po.getScheduleDateStr().split("\\|");
+		String[] precontractContentArray = po.getPrecontractContentStr().split("\\|");
+		//String[] scheduleIDArray = po.getScheduleIDStr().split("|");
 		int orderNumber = 0;
 		for(int i=0; i<po.getPrecontractContentStr().length(); ++i)
 			if(po.getPrecontractContentStr().charAt(i) == '1')
 				++orderNumber;
 		SchoolInfo schoolInfo = schoolDao.getObjectById(po.getSchool_id());
 		double orderTotalAmount = 0;
-		if(po.getCourse_status() == 2)
-			orderTotalAmount = orderNumber * schoolInfo.getSubject_2_fee();
-		else if(po.getCourse_status() == 3)
-			orderTotalAmount = orderNumber * schoolInfo.getSubject_3_fee();
+		double subject_2_fee = 0 ;
+		double subject_3_fee = 0;
+		if(po.getCourse_status() == 2){
+			subject_2_fee = schoolInfo.getSubject_2_fee();
+			orderTotalAmount = orderNumber * subject_2_fee;
+		}
+		else if(po.getCourse_status() == 3){
+			subject_3_fee = schoolInfo.getSubject_3_fee();
+			orderTotalAmount = orderNumber * subject_3_fee;
+		}
 		/*Double studentDepositAmount = depositDao.getStudentDepositAmount(po.getStudent_id());
 		if(studentDepositAmount == null)
 			studentDepositAmount = 0.00;
@@ -83,18 +89,27 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(orderTotalAmount > (studentDepositAmount - studentConsumeAmount))
 			return -1;//余额不足*/
 		Double studentAccountBalance = studentFinanceDao.getStudentBalanceById(po.getStudent_id());
+		if(studentAccountBalance == null)	
+			studentAccountBalance = 0.0;
 		if(studentAccountBalance < orderTotalAmount)
 			return -1; //余额不足
 		int result = 0;
+		Integer schedule_id;
 		for(int i=0; i<scheduleDateArray.length && !scheduleDateArray[i].isEmpty(); ++i){
+			schedule_id = scheduleInfoService.getScheduleIdByCoachIdAndDate(po.getCoach_id(), scheduleDateArray[i]);
 			for(int j=0; j<precontractContentArray[i].length(); ++j){
 				if(precontractContentArray[i].charAt(j) == '0')
 					continue; // 0 表示该时间段没有被预约
-				String startTime = scheduleDateArray[i] + " " + (j < 10 ? "0" + j : j) + "00:00";
-				String endTime = scheduleDateArray[i] + " " + (j + 1 < 10 ? "0" + (j+1) : j+1) + "00:00";
+				String startTime = scheduleDateArray[i] + " " + (j < 10 ? "0" + j : j) + ":00";
+				String endTime = scheduleDateArray[i] + " " + (j + 1 < 10 ? "0" + (j+1) : j+1) + ":00";
 				po.setTraining_end_time(endTime);
 				po.setTraining_start_time(startTime);
-				if(scheduleInfoService.isScheduled(Integer.valueOf(scheduleIDArray[j]), j))
+				po.setOrder_status(0);
+				if(po.getCourse_status() == 2)
+					po.setOrder_amount(subject_2_fee);
+				else if(po.getCourse_status() == 3)
+					po.setOrder_amount(subject_3_fee);
+				if(scheduleInfoService.isScheduled(schedule_id, j))
 					result += dao.addObject(po);
 			}
 		}
@@ -276,16 +291,18 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	@Override
 	@Transactional
 	public boolean completeOrder(Integer order_id) {
-		if(order_id == null)
+		if (order_id == null)
 			throw new IllegalArgumentException("完成一个订单时，订单order_id为null");
-		boolean  result = false;
+		boolean result = false;
 		OrderRecord orderRecord = dao.getObjectById(order_id);
 		orderRecord.setOrder_status(3);
-		if(dao.updateObjectById(orderRecord) == 1){
+		if (dao.updateObjectById(orderRecord) == 1) {
 			CoachFinanceRecord coachFinanceRecord = new CoachFinanceRecord();
 			coachFinanceRecord.setOrder_amount(orderRecord.getOrder_amount());
 			coachFinanceRecord.setCoach_id(orderRecord.getCoach_id());
-			coachFinaceRecordService.addOrUpdateCoachIncomeAmount(coachFinanceRecord);
+			result = coachFinaceRecordService.addOrUpdateCoachIncomeAmount(
+					orderRecord.getCoach_id(), orderRecord.getOrder_amount()) != 0 ? true
+					: false;
 		}
 		return result;
 	}

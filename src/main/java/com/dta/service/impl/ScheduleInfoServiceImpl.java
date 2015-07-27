@@ -1,5 +1,6 @@
 package com.dta.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,5 +95,12 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 				result = true;
 		}
 		return result;
+	}
+	
+	public Integer getScheduleIdByCoachIdAndDate(Integer coach_id, String date){
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("coach_id", coach_id);
+		map.put("schedule_date", date);
+		return dao.getScheduleIdByCoachIdAndDate(map);
 	}
 }

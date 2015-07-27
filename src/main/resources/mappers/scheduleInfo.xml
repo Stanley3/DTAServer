@@ -106,8 +106,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where schedule_id = #{schedule_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
-<select id="getPage" resultType="ScheduleInfo" parameterType="ScheduleInfo">
-	select * from schedule_info
+<select id="getPage" resultType="ScheduleInfo" parameterType="ScheduleInfoVo">
+	select
+		schedule_id,
+		content,
+		subject,
+		coach_id,
+		date_format(schedule_date, '%Y-%m-%d %w') as schedule_date
+	 from schedule_info
 	<where>
 		validation = 1
 		<if test="schedule_id != null and schedule_id != '' ">
@@ -134,23 +140,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_attribute != null and student_attribute != '' ">
 			and student_attribute like "%"#{student_attribute}"%"
 		</if>
-		<if test="schedule_date != null and schedule_date != '' ">
-			and schedule_date like "%"#{schedule_date}"%"
-		</if>
 		<if test="device_attribude != null and device_attribude != '' ">
 			and device_attribude = #{device_attribude}
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
 		</if>
+		<if test="search != null and search != ''">
+			and(
+				date_format(schedule_date, '%Y-%m-%d') like "%"#{search}"%"
+				or subject like "%"#{search}"%"
+			)
+		</if>
 	</where>
 	<if test="sort != null">
-		order by #{sort} #{order}
+		order by ${sort} ${order}
 	</if>
-	LIMIt #{page}, #{rows}
+	<if test="rows != null and rows != 0">
+		LIMIt #{page}, #{rows}
+	</if>
 </select>
 <!-- **********获取总数********* -->
-<select id="getSize" resultType="int" parameterType="ScheduleInfo">
+<select id="getSize" resultType="int" parameterType="ScheduleInfoVo">
 	select count(*) from schedule_info
 	<where>
 		validation = 1
@@ -178,14 +189,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_attribute != null and student_attribute != '' ">
 			and student_attribute like "%"#{student_attribute}"%"
 		</if>
-		<if test="schedule_date != null and schedule_date != '' ">
-			and schedule_date like "%"#{schedule_date}"%"
-		</if>
 		<if test="device_attribude != null and device_attribude != '' ">
 			and device_attribude = #{device_attribude}
 		</if>
 		<if test="validation != null and validation != '' ">
 			and validation = #{validation}
+		</if>
+		<if test="search != null and search != ''">
+			and(
+				date_format(schedule_date, '%Y-%m-%d') like "%"#{search}"%"
+				or subject like "%"#{search}"%"
+			)
 		</if>
 	</where>
 </select>
@@ -223,6 +237,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
+		<if test="precontranct_info != null and precontranct_info != ''">
+			precontranct_info = #{precontranct_info},
+		</if>
 	</set>
 	where schedule_id =  #{schedule_id}
 </update>
@@ -251,4 +268,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="batchGenerateScheduleInfo" parameterType="Integer">
 	call insertSchdeuleInfo(#{coach_id})
 </insert>
+<!-- 根据排班时间和学员id获取排班id -->
+<select id="getScheduleIdByCoachIdAndDate" resultType="integer" parameterType="map">
+	select 
+		schedule_id
+	from 
+		schedule_info
+	where
+		schedule_date = #{schedule_date}
+		and coach_id = #{coach_id}
+</select>
 </mapper>

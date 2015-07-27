@@ -5,6 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.dta.dao.IStudentFinanceInfoDao">
 <!-- 根据学员id获取学员余额 -->
 <select id="getStudentBalanceById" resultType="Double" >
-	select student_account_balance from student_finance_info where student_finance_id = #{id}
+	select student_account_balance from student_finance_info where student_id = #{id}
 </select>
 </mapper>

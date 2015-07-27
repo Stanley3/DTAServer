@@ -120,17 +120,13 @@ public class OrderRecord implements Serializable{
 		return order_status;
 	}
 	public String getTraining_start_time() {
-		if(training_start_time != null)
-			return training_start_time.substring(0, training_start_time.lastIndexOf('.'));
-		return null;
+		return training_start_time;
 	}
 	public void setTraining_start_time(String training_start_time) {
 		this.training_start_time = training_start_time;
 	}
 	public String getTraining_end_time() {
-		if(training_end_time != null)
-			return training_end_time.substring(0, training_end_time.lastIndexOf('.'));
-		return null;
+		return training_end_time;
 	}
 	public void setTraining_end_time(String training_end_time) {
 		this.training_end_time = training_end_time;

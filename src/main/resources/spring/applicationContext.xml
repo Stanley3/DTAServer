@@ -85,6 +85,7 @@
 				/logout = logout
 				/rest/studentLoginInfo/login = anon
 				/rest/coachBasicInfo/login = anon
+				/rest/orderRecord/add = anon
 				/media/** = anon
 				/error.jsp = anon
 				/index.jsp = anon

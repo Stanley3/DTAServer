@@ -50,4 +50,6 @@ public interface IScheduleInfoService extends IBaseAllService<ScheduleInfo, Sche
 	 * <p>预约是否成功
 	 */
 	public boolean isScheduled(Integer schedule_id, int index);
+	
+	public Integer getScheduleIdByCoachIdAndDate(Integer coach_id, String date);
 }

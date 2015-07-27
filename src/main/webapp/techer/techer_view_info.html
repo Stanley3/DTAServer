@@ -53,14 +53,17 @@
 
 <!-- <link rel="stylesheet" type="text/css"
 	href="../media/css/select2_metro.css" /> -->
-<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"
+	rel="stylesheet" />
 
 <link rel="stylesheet" href="../media/css/DT_bootstrap.css" />
 
 <!-- END PAGE LEVEL STYLES -->
 
 <link rel="shortcut icon" href="../media/image/favicon.ico" />
-<link href="../media/css/validationEngine.jquery.css" rel="stylesheet" type="text/css">
+<link href="../media/css/validationEngine.jquery.css" rel="stylesheet"
+	type="text/css">
 </head>
 
 <!-- END HEAD -->
@@ -314,14 +317,19 @@
 
 				<a class=" btn purple" href="techer_view_info.html" id="teachInfo"
 					style="margin-bottom:10px;"><i class="icon-hospital"
-					style="margin-right:5px;"></i>教练信息</a> <a class=" btn blue" id="orderRecord"
-					href="techer_view_money.html" style="margin-bottom:10px;"><i
-					class=" icon-user-md" style="margin-right:5px;"></i>订单记录</a> <a id="studentInfo"
+					style="margin-right:5px;"></i>教练信息</a> <a class=" btn blue"
+					id="orderRecord" href="techer_view_money.html"
+					style="margin-bottom:10px;"><i class=" icon-user-md"
+					style="margin-right:5px;"></i>订单记录</a> <a id="studentInfo"
 					class=" btn blue" href="techer_view_students.html"
 					style="margin-bottom:10px;"><i class=" icon-male"
-					style="margin-right:5px;"></i>名下学员</a> <a class=" btn blue" id="evaluationInfo"
-					href="techer_view_pingjia.html" style="margin-bottom:10px;"><i
-					class="icon-hospital" style="margin-right:5px;"></i>获得评价</a>
+					style="margin-right:5px;"></i>名下学员</a> <a class=" btn blue"
+					id="evaluationInfo" href="techer_view_pingjia.html"
+					style="margin-bottom:10px;"><i class="icon-hospital"
+					style="margin-right:5px;"></i>获得评价</a><a class=" btn blue"
+					id="scheduleInfo" href="techer_view_paiban.html"
+					style="margin-bottom:10px;"><i class="icon-hospital"
+					style="margin-right:5px;"></i>教练排班</a>
 
 
 				<div class="portlet box blue">
@@ -348,8 +356,8 @@
 
 					<div class="portlet-body">
 						<h3 class="form-section">教练基本信息</h3>
-						<form class="form-horizontal" id="form" enctype="multipart/form-data" 
-							method="post" target="formIframe">
+						<form class="form-horizontal" id="form"
+							enctype="multipart/form-data" method="post" target="formIframe">
 
 							<div class="control-group">
 
@@ -357,10 +365,11 @@
 
 								<div class="controls">
 
-									<select  class="medium m-wrap" tabindex="1" id="selectSchool" name="school_id" onchange="displayCoachNumbers(this.value);">
-									</select>
-									 <span class="btn red disabled">还可增加<span id="remainCoachNumbers">0</span>位教练！</span><span
-										class="help-inline"> 注：在选择驾校后此处显示还可以增加多少位教练</span>
+									<select class="medium m-wrap" tabindex="1" id="selectSchool"
+										name="school_id" onchange="displayCoachNumbers(this.value);">
+									</select> <span class="btn red disabled">还可增加<span
+										id="remainCoachNumbers">0</span>位教练！
+									</span><span class="help-inline"> 注：在选择驾校后此处显示还可以增加多少位教练</span>
 								</div>
 							</div>
 
@@ -370,9 +379,9 @@
 
 								<div class="controls">
 
-									<input type="text" placeholder="教练姓名" class="validate[required, maxSize[10]] m-wrap medium" name="coach_name" />
-
-									<span class="help-inline">教练姓名</span>
+									<input type="text" placeholder="教练姓名"
+										class="validate[required, maxSize[10]] m-wrap medium"
+										name="coach_name" /> <span class="help-inline">教练姓名</span>
 
 								</div>
 
@@ -383,7 +392,9 @@
 
 								<div class="controls">
 
-									<input type="text" class="validate[required, maxSize[19]] m-wrap medium" name="identity_card_no" />
+									<input type="text"
+										class="validate[required, maxSize[19]] m-wrap medium"
+										name="identity_card_no" />
 								</div>
 
 							</div>
@@ -393,7 +404,8 @@
 
 								<div class="controls">
 
-									<input type="text" placeholder="从业年数" class="validate[max[100]] m-wrap small" name="teaching_age" /><span
+									<input type="text" placeholder="从业年数"
+										class="validate[max[100]] m-wrap small" name="teaching_age" /><span
 										class="help-inline"> 年</span>
 								</div>
 
@@ -407,8 +419,8 @@
 
 								<div class="controls">
 
-									<label class="radio"> <input type="radio"
-										name="gender" value="0" checked /> 男
+									<label class="radio"> <input type="radio" name="gender"
+										value="0" checked /> 男
 									</label> <label class="radio"> <input type="radio"
 										name="gender" value="1" /> 女
 
@@ -431,13 +443,15 @@
 
 									<div class="fileupload-new thumbnail"
 										style="width: 200px; height: 200px;">
-										<img src="../media/image/profile.jpg" alt="教练头像" id="photo" style="width:100%;height:100%;" >
+										<img src="../media/image/profile.jpg" alt="教练头像" id="photo"
+											style="width:100%;height:100%;">
 									</div>
 
 
 
 
-									<input type="file" style="margin-top:10px;" class="default" name="photo" />
+									<input type="file" style="margin-top:10px;" class="default"
+										name="photo" />
 
 								</div>
 
@@ -450,7 +464,8 @@
 
 								<div class="controls">
 
-									<select class="medium m-wrap" tabindex="1" id="selectCoachStar" name="star">
+									<select class="medium m-wrap" tabindex="1" id="selectCoachStar"
+										name="star">
 										<option value="1" selected>一星级教练</option>
 										<option value="2">二星级教练</option>
 										<option value="3">三星级教练</option>
@@ -467,8 +482,9 @@
 
 									<div class="controls">
 
-										<input type="text" class="validate[required, custom[phone]] span6 m-wrap" name="phone" /> <span
-											class="help-inline">手机号为用户名</span>
+										<input type="text"
+											class="validate[required, custom[phone]] span6 m-wrap"
+											name="phone" /> <span class="help-inline">手机号为用户名</span>
 
 									</div>
 
@@ -480,8 +496,9 @@
 
 									<div class="controls">
 
-										<input type="password" class="validate[required, maxSize[20], minSize[6]] span6 m-wrap" name="login_pwd"
-											id="password" /> <span class="help-inline">输入密码</span>
+										<input type="password"
+											class="validate[required, maxSize[20], minSize[6]] span6 m-wrap"
+											name="login_pwd" id="password" /> <span class="help-inline">输入密码</span>
 
 									</div>
 
@@ -493,7 +510,8 @@
 
 									<div class="controls">
 
-										<input type="password" class="validate[equals[password]] span6 m-wrap" id="repwd"/>
+										<input type="password"
+											class="validate[equals[password]] span6 m-wrap" id="repwd" />
 
 										<span class="help-inline">再输入一次</span>
 
@@ -507,17 +525,19 @@
 
 									<div class="controls">
 
-										<input type="text" class="validate[required] span6 m-wrap" name="obligate_code" /> <span
-											class="help-inline">输入您的预留码</span>
+										<input type="text" class="validate[required] span6 m-wrap"
+											name="obligate_code" /> <span class="help-inline">输入您的预留码</span>
 
 									</div>
 
 								</div>
 
 							</div>
-							<button type="submit" style="margin-left:100px;" class="btn blue" id="submit">添加</button>
+							<button type="submit" style="margin-left:100px;" class="btn blue"
+								id="submit">添加</button>
 							<!-- <a href="javascript:void(0)" class="btn blue" style="margin-left:100px;" onclick="add()" id="submit">添加</a> -->
-							<button type="reset" class="btn" onclick="$('#form').validationEngine('hideAll')">取消</button>
+							<button type="reset" class="btn"
+								onclick="$('#form').validationEngine('hideAll')">取消</button>
 						</form>
 					</div>
 
@@ -592,7 +612,8 @@
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
 	<!-- <script type="text/javascript" src="../media/js/select2.min.js"></script> -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 	<script type="text/javascript"
 		src="../media/js/jquery.dataTables.min.js"></script>
 
@@ -605,119 +626,151 @@
 	<script src="../media/js/app.js"></script>
 
 	<script src="../media/js/table-advanced.js"></script>
-	<script type="text/javascript" src="../media/js/jquery.validationEngine-zh_CN.js"></script>
-	<script type="text/javascript" src="../media/js/jquery.validationEngine.js"></script>
+	<script type="text/javascript"
+		src="../media/js/jquery.validationEngine-zh_CN.js"></script>
+	<script type="text/javascript"
+		src="../media/js/jquery.validationEngine.js"></script>
 	<script>
+		jQuery(document).ready(
+				function() {
 
-		jQuery(document).ready(function() {       
+					//App.init();
 
-		   //App.init();
-
-		   //TableAdvanced.init();
-		   $('#selectCoachStar').select2();
-		   $('#form').validationEngine();
-		   var coach_id = decodeURIComponent(window.location.search).match(/\d+/);
-		   loadPageInfo(coach_id);
-		   try{
-			   coach_id = parseInt(coach_id);
-			   $('#teachInfo').attr('href', 'techer_view_info.html?' + encodeURIComponent('coach_id=' + coach_id));
-			   $('#orderRecord').attr('href', 'techer_view_money.html?' + encodeURIComponent('coach_id=' + coach_id));
-			   $('#studentInfo').attr('href', 'techer_view_students.html?' + encodeURIComponent('coach_id=' + coach_id));
-			   $('#evaluationInfo').attr('href', 'techer_view_pingjia.html?' + encodeURIComponent('coach_id=' + coach_id));
-		   }catch(err){alert(err);}
-		});
-		function displayCoachNumbers(id){
+					//TableAdvanced.init();
+					$('#selectCoachStar').select2();
+					$('#form').validationEngine();
+					var coach_id = decodeURIComponent(window.location.search)
+							.match(/\d+/);
+					loadPageInfo(coach_id);
+					try {
+						coach_id = parseInt(coach_id);
+						$('#teachInfo').attr(
+								'href',
+								'techer_view_info.html?'
+										+ encodeURIComponent('coach_id='
+												+ coach_id));
+						$('#orderRecord').attr(
+								'href',
+								'techer_view_money.html?'
+										+ encodeURIComponent('coach_id='
+												+ coach_id));
+						$('#studentInfo').attr(
+								'href',
+								'techer_view_students.html?'
+										+ encodeURIComponent('coach_id='
+												+ coach_id));
+						$('#evaluationInfo').attr(
+								'href',
+								'techer_view_pingjia.html?'
+										+ encodeURIComponent('coach_id='
+												+ coach_id));
+						$('#scheduleInfo').attr('href', 'techer_view_paiban.html?' +encodeURIComponent('coach_id=' + coach_id));
+					} catch (err) {
+						alert(err);
+					}
+				});
+		function displayCoachNumbers(id) {
 			$.ajax({
-				url: '../rest/schoolInfo/getAvaiableCoachNumbers',
-				type: 'get',
-				dataType: 'json',
-				data: {
-					school_id: id
-				},
-				complete: function(xhr, err){
-					if(xhr.status == 200){
-						var number = parseInt(JSON.parse(xhr.responseText).desc);
-						$('#remainCoachNumbers').html(number);
-						if(number == 0){
-							alert('不能选择教练');
-							document.getElementById('submit').disabled = true;
+						url : '../rest/schoolInfo/getAvaiableCoachNumbers',
+						type : 'get',
+						dataType : 'json',
+						data : {
+							school_id : id
+						},
+						complete : function(xhr, err) {
+							if (xhr.status == 200) {
+								var number = parseInt(JSON
+										.parse(xhr.responseText).desc);
+								$('#remainCoachNumbers').html(number);
+								if (number == 0) {
+									alert('不能选择教练');
+									document.getElementById('submit').disabled = true;
+								}
+							} else if (xhr.status == 500) {
+								alert(JSON.parse(xhr.responseText).desc + ', '
+										+ err);
+							} else
+								alert('网络错误');
 						}
-					}else if(xhr.status == 500){
-						alert(JSON.parse(xhr.responseText).desc + ', ' + err);
-					}else
-						alert('网络错误');
-				}
-			});
+					});
 		}
-		function loadSchoolInfo(id){
-			 var dataArray = new Array();
-			   $.ajax({
-				   url: '../rest/schoolInfo/getAll',
-				   type: 'get',
-				   dataType: 'json',
-				   success: function(data){
-					   if(data.length != 0){
-						   for(i in data){
-								 dataArray[i]  = new Object();
-								 dataArray[i].id = data[i].school_id;
-								 dataArray[i].text = data[i].school_name;
-							 }
-					   }else{
-						   dataArray[0] = new Object();
-						   dataArray[0].id = -1;
-						   dataArray[0].text = '没有数据';
-					   }
-				   },
-				   complete: function(xhr, ts){
-					   if(dataArray.length == 0){
-						   dataArray[0] = new Object();
-						   dataArray[0].id = -1;
-						   dataArray[0].text = '没有数据';
-					   }
-					   $('#selectSchool').select2({
-						  placeholder: '请选择驾校',
-						  data: dataArray
-					   });
-					   if(dataArray[0].id != -1){
-						   $('#selectSchool').val(id);
-						   $('#selectSchool').change();
-					   		displayCoachNumbers($('#selectSchool').val());
-					   		
-					   	}
-				   }
-			   });
-		}
-		function loadPageInfo(coach_id){
+		function loadSchoolInfo(id) {
+			var dataArray = new Array();
 			$.ajax({
-				url: '../rest/coachBasicInfo/' + coach_id,
-				type: 'get',
-				dataType: 'json',
-				success: function(data){
-					$('#form').attr('action', '../rest/coachBasicInfo/updateWithPhoto/' + data.coach_id);
-					document.getElementsByName('coach_name')[0].value = data.coach_name;
-					document.getElementsByName('identity_card_no')[0].value = data.identity_card_no;
-					document.getElementsByName('teaching_age')[0].value = data.teaching_age;
-					document.getElementsByName('gender')[data.gender].checked = true;
-					/* document.getElementsByName('star')[0].value= data.star;
-					document.getElementsByName('star')[0].onchange(); */
-					$('#selectCoachStar').val(data.star);
-					$('#selectCoachStar').change();
-					document.getElementsByName('phone')[0].value = data.phone;
-					document.getElementsByName('login_pwd')[0].value = data.login_pwd;
-					$('#repwd').val(data.login_pwd);
-					document.getElementsByName('obligate_code')[0].value = data.obligate_code;
-					loadSchoolInfo(data.school_id);
-					if(data.havePhoto == 1){
-						$('#photo').attr('src', '../rest/coachBasicInfo/downloadPhoto?id=' + data.coach_id);
+				url : '../rest/schoolInfo/getAll',
+				type : 'get',
+				dataType : 'json',
+				success : function(data) {
+					if (data.length != 0) {
+						for (i in data) {
+							dataArray[i] = new Object();
+							dataArray[i].id = data[i].school_id;
+							dataArray[i].text = data[i].school_name;
+						}
+					} else {
+						dataArray[0] = new Object();
+						dataArray[0].id = -1;
+						dataArray[0].text = '没有数据';
 					}
 				},
-				error: function(xhr, err){
-					alert(xhr.responseText + ', ' + err + 'rrorrororrororo');
-				},
-				complete: function(xhr, ts){
-					App.init();
+				complete : function(xhr, ts) {
+					if (dataArray.length == 0) {
+						dataArray[0] = new Object();
+						dataArray[0].id = -1;
+						dataArray[0].text = '没有数据';
+					}
+					$('#selectSchool').select2({
+						placeholder : '请选择驾校',
+						data : dataArray
+					});
+					if (dataArray[0].id != -1) {
+						$('#selectSchool').val(id);
+						$('#selectSchool').change();
+						displayCoachNumbers($('#selectSchool').val());
+
+					}
 				}
 			});
+		}
+		function loadPageInfo(coach_id) {
+			$
+					.ajax({
+						url : '../rest/coachBasicInfo/' + coach_id,
+						type : 'get',
+						dataType : 'json',
+						success : function(data) {
+							$('#form').attr(
+									'action',
+									'../rest/coachBasicInfo/updateWithPhoto/'
+											+ data.coach_id);
+							document.getElementsByName('coach_name')[0].value = data.coach_name;
+							document.getElementsByName('identity_card_no')[0].value = data.identity_card_no;
+							document.getElementsByName('teaching_age')[0].value = data.teaching_age;
+							document.getElementsByName('gender')[data.gender].checked = true;
+							/* document.getElementsByName('star')[0].value= data.star;
+							document.getElementsByName('star')[0].onchange(); */
+							$('#selectCoachStar').val(data.star);
+							$('#selectCoachStar').change();
+							document.getElementsByName('phone')[0].value = data.phone;
+							document.getElementsByName('login_pwd')[0].value = data.login_pwd;
+							$('#repwd').val(data.login_pwd);
+							document.getElementsByName('obligate_code')[0].value = data.obligate_code;
+							loadSchoolInfo(data.school_id);
+							if (data.havePhoto == 1) {
+								$('#photo').attr(
+										'src',
+										'../rest/coachBasicInfo/downloadPhoto?id='
+												+ data.coach_id);
+							}
+						},
+						error : function(xhr, err) {
+							alert(xhr.responseText + ', ' + err
+									+ 'rrorrororrororo');
+						},
+						complete : function(xhr, ts) {
+							App.init();
+						}
+					});
 		}
 	</script>
 

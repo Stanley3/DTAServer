@@ -5,9 +5,8 @@ import java.sql.Date;
 
 import javax.ws.rs.FormParam;
 
-import com.dta.vo.PageParam;
 
-public class ScheduleInfo extends PageParam implements Serializable{
+public class ScheduleInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@FormParam("schedule_id")
 	private Integer schedule_id;
@@ -31,6 +30,14 @@ public class ScheduleInfo extends PageParam implements Serializable{
 	private Integer device_attribude;
 	@FormParam("validation")
 	private Integer validation;
+	private String precontranct_info;
+	
+	public String getPrecontranct_info() {
+		return precontranct_info;
+	}
+	public void setPrecontranct_info(String precontranct_info) {
+		this.precontranct_info = precontranct_info;
+	}
 	public void setSchedule_id(Integer schedule_id){
 		this.schedule_id = schedule_id;
 	}

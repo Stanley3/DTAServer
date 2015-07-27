@@ -14,13 +14,21 @@ public class CoachFinanceRecord extends PageParam implements Serializable{
 	@FormParam("coach_id")
 	private Integer coach_id;
 	@FormParam("income_amount")
-	private String income_amount;
+	private Double income_amount;
 	@FormParam("payed_amount")
-	private String payed_amount;
+	private Double payed_amount;
 	@FormParam("record_time")
 	private Date record_time;
 	@FormParam("validation")
 	private Integer validation;
+	private Double order_amount;
+	
+	public Double getOrder_amount() {
+		return order_amount;
+	}
+	public void setOrder_amount(Double order_amount) {
+		this.order_amount = order_amount;
+	}
 	public void setFinance_record_id(Integer finance_record_id){
 		this.finance_record_id = finance_record_id;
 	}
@@ -33,17 +41,19 @@ public class CoachFinanceRecord extends PageParam implements Serializable{
 	public Integer getCoach_id() {
 		return coach_id;
 	}
-	public void setIncome_amount(String income_amount){
-		this.income_amount = income_amount;
-	}
-	public String getIncome_amount() {
+	
+	public Double getIncome_amount() {
 		return income_amount;
 	}
-	public void setPayed_amount(String payed_amount){
-		this.payed_amount = payed_amount;
+	public void setIncome_amount(Double income_amount) {
+		this.income_amount = income_amount;
 	}
-	public String getPayed_amount() {
+
+	public Double getPayed_amount() {
 		return payed_amount;
+	}
+	public void setPayed_amount(Double payed_amount) {
+		this.payed_amount = payed_amount;
 	}
 	public void setRecord_time(Date record_time){
 		this.record_time = record_time;

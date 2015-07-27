@@ -10,7 +10,14 @@ public class DisplayCoachScheduleInfo {
 	private String procontract_info; //教练该天的预约信息
 	private Integer isOnDuty;//0 表示该天休息，不上班；1表示上班
 	private String scheduleInfo;//学员该天的预约信息,24个字符串，每个字符串的值代表该时间段已经被预约了多少次
+	private Integer schedule_id;
 	
+	public Integer getSchedule_id() {
+		return schedule_id;
+	}
+	public void setSchedule_id(Integer schedule_id) {
+		this.schedule_id = schedule_id;
+	}
 	public String getProcontract_info() {
 		return procontract_info;
 	}

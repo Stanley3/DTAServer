@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachBasicInfo;
 import com.dta.bean.CoachFianceSummarizing;
+import com.dta.bean.CoachFinanceRecord;
 import com.dta.bean.CoachIncomeRecord;
 import com.dta.bean.CoachOrderById;
 import com.dta.bean.CoachPrecontractRecord;
@@ -24,7 +25,10 @@ import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.dao.IOrderRecordDao;
 import com.dta.dao.ISchoolInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
+import com.dta.dao.IStudentFinanceInfoDao;
+import com.dta.service.ICoachFinanceRecordService;
 import com.dta.service.IOrderRecordService;
+import com.dta.service.IScheduleInfoService;
 import com.dta.vo.CoachIncomeRecordVo;
 import com.dta.vo.CoachOrderByIdVo;
 import com.dta.vo.CoachPrecontractRecordVo;
@@ -44,6 +48,12 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	private ISchoolInfoDao schoolDao;
 	@Autowired
 	private IStudentDepositRecordDao depositDao;
+	@Autowired
+	private IStudentFinanceInfoDao studentFinanceDao;
+	@Autowired
+	private IScheduleInfoService scheduleInfoService;
+	@Autowired
+	private ICoachFinanceRecordService coachFinaceRecordService;
 	public void init(){
 		super.setDao(dao);
 	}
@@ -53,6 +63,7 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	public int addObject(OrderRecord po){
 		String[] scheduleDateArray = po.getScheduleDateStr().split("|");
 		String[] precontractContentArray = po.getPrecontractContentStr().split("|");
+		String[] scheduleIDArray = po.getScheduleIDStr().split("|");
 		int orderNumber = 0;
 		for(int i=0; i<po.getPrecontractContentStr().length(); ++i)
 			if(po.getPrecontractContentStr().charAt(i) == '1')
@@ -63,14 +74,17 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 			orderTotalAmount = orderNumber * schoolInfo.getSubject_2_fee();
 		else if(po.getCourse_status() == 3)
 			orderTotalAmount = orderNumber * schoolInfo.getSubject_3_fee();
-		Double studentDepositAmount = depositDao.getStudentDepositAmount(po.getStudent_id());
+		/*Double studentDepositAmount = depositDao.getStudentDepositAmount(po.getStudent_id());
 		if(studentDepositAmount == null)
 			studentDepositAmount = 0.00;
 		Double studentConsumeAmount = dao.getStudentConsumeAmount(po.getSchool_id());
 		if(studentConsumeAmount == null)
 			studentConsumeAmount = 0.00;
 		if(orderTotalAmount > (studentDepositAmount - studentConsumeAmount))
-			return -1;//余额不足
+			return -1;//余额不足*/
+		Double studentAccountBalance = studentFinanceDao.getStudentBalanceById(po.getStudent_id());
+		if(studentAccountBalance < orderTotalAmount)
+			return -1; //余额不足
 		int result = 0;
 		for(int i=0; i<scheduleDateArray.length && !scheduleDateArray[i].isEmpty(); ++i){
 			for(int j=0; j<precontractContentArray[i].length(); ++j){
@@ -80,7 +94,8 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 				String endTime = scheduleDateArray[i] + " " + (j + 1 < 10 ? "0" + (j+1) : j+1) + "00:00";
 				po.setTraining_end_time(endTime);
 				po.setTraining_start_time(startTime);
-				result += dao.addObject(po);
+				if(scheduleInfoService.isScheduled(Integer.valueOf(scheduleIDArray[j]), j))
+					result += dao.addObject(po);
 			}
 		}
 		return result;
@@ -256,5 +271,22 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(vo.getCoach_id() == null)
 			throw new IllegalArgumentException("web界面通过教练id获取教练的订单信息时，coach_id为null");
 		return dao.getCoachOrderByIdSize(vo);
+	}
+
+	@Override
+	@Transactional
+	public boolean completeOrder(Integer order_id) {
+		if(order_id == null)
+			throw new IllegalArgumentException("完成一个订单时，订单order_id为null");
+		boolean  result = false;
+		OrderRecord orderRecord = dao.getObjectById(order_id);
+		orderRecord.setOrder_status(3);
+		if(dao.updateObjectById(orderRecord) == 1){
+			CoachFinanceRecord coachFinanceRecord = new CoachFinanceRecord();
+			coachFinanceRecord.setOrder_amount(orderRecord.getOrder_amount());
+			coachFinanceRecord.setCoach_id(orderRecord.getCoach_id());
+			coachFinaceRecordService.addOrUpdateCoachIncomeAmount(coachFinanceRecord);
+		}
+		return result;
 	}
 }

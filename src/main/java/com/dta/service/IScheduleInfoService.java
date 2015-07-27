@@ -41,4 +41,13 @@ public interface IScheduleInfoService extends IBaseAllService<ScheduleInfo, Sche
 	 * <p>批量生成教练的4天的排班信息，科目按最近一天设置，无则设为科目二
 	 */
 	public int batchGenerateScheduleInfo(Integer coach_id);
+	
+	/**
+	 * 
+	 * @param Integer schedule_id 排班id
+	 * @param Integer index 表示24个时间段中的索引 
+	 * @return 
+	 * <p>预约是否成功
+	 */
+	public boolean isScheduled(Integer schedule_id, int index);
 }

@@ -42,4 +42,6 @@ public interface IScheduleInfoDao extends IBaseAllDao<ScheduleInfo, ScheduleInfo
 	 * <p>批量生成教练的4天的排班信息，科目按最近一天设置，无则设为科目二
 	 */
 	public int batchGenerateScheduleInfo(Integer coach_id);
+	
+	
 }

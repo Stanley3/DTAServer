@@ -70,4 +70,29 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 			throw new IllegalArgumentException("自动生成教练排班信息时，教练coach_id为nul");
 		return dao.batchGenerateScheduleInfo(coach_id);
 	}
+
+	@Override
+	public boolean isScheduled(Integer schedule_id, int index) {
+		// TODO Auto-generated method stub
+		if(schedule_id == null)
+			throw new IllegalArgumentException("提交预约信息时，排班id(schedule_id)为null");
+		boolean result = false;
+		ScheduleInfo scheduleInfo = dao.getObjectById(schedule_id);
+		String content = scheduleInfo.getContent();
+		String student_toplimit = scheduleInfo.getStudent_toplimit();
+		String precontract_info = scheduleInfo.getPrecontranct_info();
+		int toplimit = Integer.valueOf(student_toplimit.substring(index, index+1));
+		int hasPrecontractNumbers = Integer.valueOf(precontract_info.substring(index, index+1));
+		int hasScheduled = Integer.valueOf(content.substring(index, index+1));
+		if(hasScheduled != 0 && toplimit - hasPrecontractNumbers > 0){
+			++hasPrecontractNumbers;
+			String new_precontract_info = precontract_info.substring(0, index) + hasPrecontractNumbers + precontract_info.substring(index+1, 24);
+			ScheduleInfo po = new ScheduleInfo();
+			po.setPrecontranct_info(new_precontract_info);
+			po.setSchedule_id(schedule_id);
+			if(dao.updateObjectById(po) == 1)
+				result = true;
+		}
+		return result;
+	}
 }

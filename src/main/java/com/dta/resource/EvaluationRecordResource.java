@@ -145,4 +145,5 @@ public class EvaluationRecordResource extends BaseAllResource<EvaluationRecord, 
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
+	
 }

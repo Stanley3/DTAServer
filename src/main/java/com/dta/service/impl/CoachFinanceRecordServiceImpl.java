@@ -16,4 +16,32 @@ public class CoachFinanceRecordServiceImpl extends BaseAllServiceImpl<CoachFinan
 	public void init(){
 		super.setDao(dao);
 	}
+
+	@Override
+	public int addOrUpdateCoachIncomeAmount(Integer coach_id, double amount) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		Integer fincance_record_id = getFinanceIdByCoachId(coach_id);
+		CoachFinanceRecord coachFinanceRecord;
+		if(fincance_record_id == 0){
+			coachFinanceRecord = new CoachFinanceRecord();
+			coachFinanceRecord.setCoach_id(coach_id);
+			coachFinanceRecord.setIncome_amount(amount);
+			coachFinanceRecord.setPayed_amount(0.0);
+			result = dao.addObject(coachFinanceRecord);
+		}else{
+			coachFinanceRecord = dao.getObjectById(fincance_record_id);
+			if(coachFinanceRecord != null){
+				coachFinanceRecord.setIncome_amount(amount + coachFinanceRecord.getIncome_amount());
+				result = dao.updateObjectById(coachFinanceRecord);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public Integer getFinanceIdByCoachId(Integer coach_id) {
+		// TODO Auto-generated method stub
+		return dao.getFinanceIdByCoachId(coach_id);
+	}
 }

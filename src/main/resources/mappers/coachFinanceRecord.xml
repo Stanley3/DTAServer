@@ -143,4 +143,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</set>
 	where finance_record_id =  #{finance_record_id}
 </update>
+
+<!-- 根据教练id返回主键id，若不存在则返回0 -->
+<select id="getFinanceIdByCoachId" resultType="int">
+	select 
+		if((finance_record_id is null), 0, finance_record_id) as finance_record_id
+	from 
+		coach_finance_record
+	where 
+		coach_id = #{coach_id}
+</select>
 </mapper>

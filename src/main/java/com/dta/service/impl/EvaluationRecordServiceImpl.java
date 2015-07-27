@@ -95,6 +95,7 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 		else
 			po.setEvaluation(2);
 		//以上是根据评分计算好中差评，计算公式未知，暂如上计算。
+		
 		return super.addObject(po);
 	}
 }

@@ -157,4 +157,13 @@ public interface IOrderRecordService extends IBaseAllService<OrderRecord, OrderR
 	 * <p>web界面通过教练的id获取教练订单记录的总数
 	 */
 	public int getCoachOrderByIdSize(CoachOrderByIdVo vo);
+	
+	/**
+	 * 
+	 * @param Integer order_id
+	 * @return 
+	 * <p>完成一个订单，即修改订单的状态为3
+	 * <p>订单正常结束后，应该修改教练财务记录表的总收入字段，此字段加上这个订单的金额
+	 */
+	public boolean completeOrder(Integer order_id);
 }

@@ -22,7 +22,7 @@ public class OrderRecord implements Serializable{
 	@FormParam("order_time")
 	private Date order_time;
 	@FormParam("order_amount")
-	private String order_amount;
+	private Double order_amount;
 	@FormParam("order_status")
 	private Integer order_status;
 	@FormParam("training_start_time")
@@ -45,12 +45,20 @@ public class OrderRecord implements Serializable{
 	private String scheduleDateStr;//以 | 分隔不同的日期
 	@FormParam("precontractContentStr")
 	private String precontractContentStr; //以 | 分隔不同日期的时间段，每个日期的时间段用24个0或1字符串表示，0表示不预约该时间段，1表示预约
+	@FormParam("scheduleIDStr")
+	private String scheduleIDStr; //以|分隔不同的排班id
 	private String coach_name;
 	private String phone;
 	private String school_address;
 	private Integer havePhoto;
 	
 	
+	public String getScheduleIDStr() {
+		return scheduleIDStr;
+	}
+	public void setScheduleIDStr(String scheduleIDStr) {
+		this.scheduleIDStr = scheduleIDStr;
+	}
 	public String getScheduleDateStr() {
 		return scheduleDateStr;
 	}
@@ -104,12 +112,6 @@ public class OrderRecord implements Serializable{
 	}
 	public Date getOrder_time() {
 		return order_time;
-	}
-	public void setOrder_amount(String order_amount){
-		this.order_amount = order_amount;
-	}
-	public String getOrder_amount() {
-		return order_amount;
 	}
 	public void setOrder_status(Integer order_status){
 		this.order_status = order_status;
@@ -183,4 +185,11 @@ public class OrderRecord implements Serializable{
 	public void setSchool_address(String school_address) {
 		this.school_address = school_address;
 	}
+	public Double getOrder_amount() {
+		return order_amount;
+	}
+	public void setOrder_amount(Double order_amount) {
+		this.order_amount = order_amount;
+	}
+	
 }

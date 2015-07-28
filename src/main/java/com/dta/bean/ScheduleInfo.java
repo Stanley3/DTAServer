@@ -30,6 +30,7 @@ public class ScheduleInfo implements Serializable{
 	private Integer device_attribude;
 	@FormParam("validation")
 	private Integer validation;
+	@FormParam("device_type")
 	private Integer device_type;
 	private String precontract_info;
 	private Integer remnant_device_numbers; 

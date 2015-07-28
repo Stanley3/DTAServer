@@ -598,7 +598,8 @@
 				            	 'data': 'schedule_id',
 				            	 'render': function(data, type, row, meta){
 				            		 if(type == 'display'){
-				            			 return '<a href="techer_view_paiban_info.html?' + encodeURIComponent('schedule_id=' + data + '&coach_id=' + row.coach_id) + '">修改</a>';
+				            			 return '<a href="techer_view_paiban_info.html?' + encodeURIComponent('schedule_id=' + 
+				            					 data + '&coach_id=' + row.coach_id + '&schedul_date=' + row.schedule_date) + '">修改</a>';
 				            		 }
 				            		return data;
 				            	 }

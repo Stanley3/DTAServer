@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="coach_id != null and coach_id != ''">
 			coach_id = #{coach_id},
 		</if>
-		<if test="income_amount != null and income_amount != ''">
+		<if test="income_amount != null">
 			income_amount = #{income_amount},
 		</if>
 		<if test="payed_amount != null">

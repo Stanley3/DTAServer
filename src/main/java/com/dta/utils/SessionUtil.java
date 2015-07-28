@@ -22,7 +22,7 @@ public class SessionUtil {
 		Set<String> set = map.keySet();
 		for(String key : set){
 			session = (Session)map.get(key);
-			if(schoolId == session.getAttribute("school_id"))
+			if(schoolId == 0 || schoolId == session.getAttribute("school_id"))
 				if("master".equalsIgnoreCase((String)session.getAttribute("source")))
 					++masterNumbers;
 				else if("coach".equalsIgnoreCase((String)session.getAttribute("source")))
@@ -44,8 +44,13 @@ public class SessionUtil {
 		}
 		return result;*/
 		 HttpSession session = request.getSession(false);
-		 if(session != null)
-			 return (Integer)session.getAttribute("school_id");
-		 return 0;
+		 Integer result = 0;
+		 String id;
+		 if(session != null){
+			 result =  (Integer)session.getAttribute("school_id");
+			 id= session.getId();
+			 System.out.println(id);
+		 }
+		 return result;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachEvaluationInfo;
@@ -91,6 +92,7 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 	 * 修改订单的状态为3时，应修改财务信息记录表的收入总额字段
 	 */
 	@Override
+	@Transactional
 	public int addObject(EvaluationRecord po){
 		int skill, service_attitude, hygiene;
 		skill = po.getSkill() != null ? po.getSkill() : 0;

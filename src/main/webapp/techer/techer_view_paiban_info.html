@@ -286,7 +286,7 @@ dd {
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-cogs"></i>2015-05-20 星期天</div>
+								<div class="caption"><i class="icon-cogs"></i><span id="dateInfo"></span></div>
 
 	<div class="actions" style="margin-left:15px;"></div>			<div class="tools">
 
@@ -294,9 +294,6 @@ dd {
 
 									<a href="javascript:;" class="reload"></a>
                                     
-
-								
-
 								</div>
 
 							</div>
@@ -307,14 +304,14 @@ dd {
               <td width="400" height="35" align="left">  
               <dt>是否上班</dt>
                 <dd>
-                  <label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label>
+                  <label class="iosCheck"><input type="checkbox" checked="checked" id="isOnDuty" onclick="isOnDuty(this)"><i></i></label>
               </dd> </td>
               <td></td>
               <td>所教科目:
                 <select name="select" id="select" class="select_mycss">
-                  <option value="0">科二</option>
-                  <option value="1">科三</option>
-              </select>
+                  <option value="2">科二</option>
+                  <option value="3">科三</option>
+              	</select>
               </td>
               <td>
               	车型:
@@ -331,33 +328,29 @@ dd {
           </table>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td height="50" align="left">
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px;margin-bottom:10px;">06:00-07:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">07:00-08:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">08:00-09:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">09:00-10:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">10:00-11:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">11:00-12:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn red big" style="margin-right:5px; height:80px; margin-bottom:10px;">12:00-13:00<label class="iosCheck"><input type="checkbox" ><i></i></label></a>
-              <a href="#" class="btn red big" style="margin-right:5px; height:80px; margin-bottom:10px;">13:00-14:00<label class="iosCheck"><input type="checkbox" ><i></i></label></a>
-              </td>
-              </tr>
-              <tr>
-              <td height="50" align="left">
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">14:00-15:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">15:00-16:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">16:00-17:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn red big" style="margin-right:5px; height:80px; margin-bottom:10px;">17:00-18:00<label class="iosCheck"><input type="checkbox" ><i></i></label></a>    
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">18:00-19:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">19:00-20:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">20:00-21:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">21:00-22:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>          
+              <td height="50" align="left" >
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px;margin-bottom:10px;">06:00-07:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">07:00-08:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">08:00-09:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">09:00-10:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">10:00-11:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">11:00-12:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn red big" style="margin-right:5px; height:80px; margin-bottom:10px;">12:00-13:00<label class="iosCheck"><input type="checkbox" ><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">13:00-14:00<label class="iosCheck"><input type="checkbox" checked ><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">14:00-15:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">15:00-16:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">16:00-17:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn red big" style="margin-right:5px; height:80px; margin-bottom:10px;">17:00-18:00<label class="iosCheck"><input type="checkbox" ><i></i></label></a>    
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">18:00-19:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">19:00-20:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">20:00-21:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
+              <a href="javascript:void(0);" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">21:00-22:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>          
               </td>
             </tr>
             </table>
 
-          <button type="submit" class="btn blue" >修改</button>
-			<button type="button" class="btn">取消</button>
+          <button type="submit" class="btn blue" onclick="edit()">修改</button>
+			<button type="button" class="btn" onclick="window.history(-1);">返回</button>
           </div>
 	
 		  </div>
@@ -447,16 +440,27 @@ dd {
 
 	<script src="../media/js/table-advanced.js"></script>     
 	<script>
-
+		var infoArray, weekArray;
+		var schedule_id;
 		jQuery(document).ready(function() {       
-
+		   $('.big').each(function(index, element){
+			  $(this).bind('click', function(){
+				  var input = $(this).find('input')[0];
+				  if(input.checked){
+					  $(this).removeClass('red').addClass('blue');
+				  }else{
+					  $(this).removeClass('blue').addClass('red');
+				  }
+			  }) ;
+		   });
 		   
-		   var idArray = decodeURIComponent(window.location.search).match(/\d+/g);
-		   var schedule_id;
+		   infoArray = decodeURIComponent(window.location.search).match(/\d+/g);
 		   var coach_id;
+		   weekArray = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
 		   try {
-			   	schedule_id =  parseInt(idArray[0]);
-				coach_id = parseInt(idArray[1]);
+			    console.log(infoArray);
+			   	schedule_id =  parseInt(infoArray[0]);
+				coach_id = parseInt(infoArray[1]);
 				$('#teachInfo').attr(
 						'href',
 						'techer_view_info.html?'
@@ -493,6 +497,23 @@ dd {
 				dataType: 'json',
 				success: function(data){
 					console.log(data);
+					$('#dateInfo').html(infoArray[2] + '-' + infoArray[3] + '-' 
+							+ infoArray[4] + ' ' + weekArray[infoArray[5]]);
+					$('#select').val(data.subject);
+					if(data.device_type != null)
+						$('vehicleShape').val(data.device_type);
+					else
+						$('#vehicleShape').val(1);
+					$('.big').each(function(index, element){
+						if(data.content.charAt(index+6) == '1'){
+							$(this).removeClass('red').addClass('blue');
+							$(this).find('input')[0].checked = true;
+						}
+						else{
+							$(this).removeClass('blue').addClass('red');
+							$(this).find('input')[0].checked = false;
+						}
+					});
 				},
 				error: function(xhr, err){
 					alert(err);
@@ -502,6 +523,47 @@ dd {
 				}
 			});
 		}
+	}
+	function isOnDuty(element){
+		if(element.checked){
+			$('.big').each(function(index, element){
+				$(this).removeClass('red').addClass('blue');
+				$(this).find('input')[0].checked = true;
+			});
+		}else{
+			$('.big').each(function(index, element){
+				$(this).removeClass('blue').addClass('red');
+				$(this).find('input')[0].checked = false;
+			});
+		}
+	}
+	function edit(){
+		var content = '000000';
+		$('.big').each(function(index, element){
+			var input = $(this).find('input')[0];
+			if(input.checked)
+				content += '1';
+			else
+				content += '0';
+		});
+		content += '00';
+		$.ajax({
+			url: '../rest/scheduleInfo/editScheduleInfo',
+			type: 'post',
+			dataType: 'json',
+			data: {
+				content: content,
+				subject: $('#select').val(),
+				device_type: $('#vehicleShape').val(),
+				schedule_id: schedule_id
+			},
+			success: function(data){
+				alert(data.desc);
+			},
+			error: function(xhr, err){
+				alert(err);
+			}
+		});
 	}
 	</script>
     

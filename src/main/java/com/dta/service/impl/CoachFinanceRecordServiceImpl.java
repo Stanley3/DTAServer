@@ -2,6 +2,7 @@ package com.dta.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.bean.CoachFinanceRecord;
 import com.dta.dao.ICoachFinanceRecordDao;
@@ -18,12 +19,13 @@ public class CoachFinanceRecordServiceImpl extends BaseAllServiceImpl<CoachFinan
 	}
 
 	@Override
+	@Transactional
 	public int addOrUpdateCoachIncomeAmount(Integer coach_id, double amount) {
 		// TODO Auto-generated method stub
 		int result = 0;
 		Integer fincance_record_id = getFinanceIdByCoachId(coach_id);
 		CoachFinanceRecord coachFinanceRecord;
-		if(fincance_record_id == 0){
+		if(fincance_record_id == null || fincance_record_id == 0){
 			coachFinanceRecord = new CoachFinanceRecord();
 			coachFinanceRecord.setCoach_id(coach_id);
 			coachFinanceRecord.setIncome_amount(amount);

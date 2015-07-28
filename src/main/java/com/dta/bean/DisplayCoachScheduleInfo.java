@@ -7,7 +7,7 @@ public class DisplayCoachScheduleInfo {
 	private String student_toplimit;
 	private String student_attribute;
 	private String schedule_date;
-	private String precontranct_info; //教练该天的预约信息
+	private String precontract_info; //教练该天的预约信息
 	private Integer isOnDuty;//0 表示该天休息，不上班；1表示上班
 	private String scheduleInfo;//学员该天的预约信息,24个字符串，每个字符串的值代表该时间段已经被预约了多少次
 	private Integer schedule_id;
@@ -19,11 +19,11 @@ public class DisplayCoachScheduleInfo {
 		this.schedule_id = schedule_id;
 	}
 	
-	public String getPrecontranct_info() {
-		return precontranct_info;
+	public String getPrecontract_info() {
+		return precontract_info;
 	}
-	public void setPrecontranct_info(String precontranct_info) {
-		this.precontranct_info = precontranct_info;
+	public void setPrecontract_info(String precontract_info) {
+		this.precontract_info = precontract_info;
 	}
 	public Integer getCoach_id() {
 		return coach_id;

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dta.bean.DisplayCoachScheduleInfo;
+import com.dta.bean.EditScheduleInfo;
 import com.dta.bean.ResultBean;
 import com.dta.bean.ScheduleInfo;
 import com.dta.bean.SelectCoach;
@@ -35,6 +40,7 @@ public class ScheduleInfoResource extends BaseAllResource<ScheduleInfo, Schedule
 	//@Autowired
 	public IScheduleInfoService service = (IScheduleInfoService)ServiceProvider.getBean("scheduleInfoServiceImpl");
 	public IOrderRecordService orderService = (IOrderRecordService)ServiceProvider.getBean("orderRecordServiceImpl");
+	private Logger logger = LoggerFactory.getLogger("com.dta.resource.ScheduleInfoResource");
 	public ScheduleInfoResource(){
 		super.setService(service);
 		super.setMianId(GlobalConstant.SCHEDULEINFO);
@@ -99,6 +105,30 @@ public class ScheduleInfoResource extends BaseAllResource<ScheduleInfo, Schedule
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
 					e.getMessage())).build();
+		}
+	}
+	
+	@POST
+	@Path("editScheduleInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editScheduleInfo(@BeanParam ScheduleInfo scheduleInfo){
+		try{
+			/*ScheduleInfo scheduleInfo = new ScheduleInfo();
+			scheduleInfo.setSchedule_id(po.getSchedule_id());
+			scheduleInfo.setContent(po.getContent());
+			scheduleInfo.setSubject(po.getSubject());
+			scheduleInfo.setStudent_attribute(po.getStudent_attribute());
+			scheduleInfo.setStudent_toplimit(po.getStudent_toplimit());
+			scheduleInfo.setDevice_attribude(po.getDevice_attribute());
+			scheduleInfo.setDevice_type(po.getDevice_type());*/
+			if(service.updateObjectById(scheduleInfo) == 1)
+				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, GlobalConstant.UPDATE_SUCCESS)).build();
+			else
+				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, GlobalConstant.UPDATE_FAIL)).build();
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, e.getMessage())).build();
 		}
 	}
 }

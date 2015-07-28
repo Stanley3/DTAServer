@@ -4,7 +4,7 @@ import com.dta.bean.StudentLoginInfo;
 import com.dta.bean.StudentLoginSuccessInfo;
 import com.dta.vo.StudentLoginInfoVo;
 
-public interface IStudentLoginInfoService extends IBaseAllService<StudentLoginInfo, StudentLoginInfoVo>{
+public interface IStudentLoginInfoService {
 	
 	/**
 	 * 

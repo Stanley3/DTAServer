@@ -73,15 +73,18 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 	}
 
 	@Override
-	public boolean isScheduled(Integer schedule_id, int index) {
+	public boolean isScheduled(Integer coach_id, String schedule_date, int index) {
 		// TODO Auto-generated method stub
-		if(schedule_id == null)
+		if(coach_id == null)
 			throw new IllegalArgumentException("提交预约信息时，排班id(schedule_id)为null");
 		boolean result = false;
-		ScheduleInfo scheduleInfo = dao.getObjectById(schedule_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("coach_id", coach_id);
+		map.put("schedule_date", schedule_date);
+		ScheduleInfo scheduleInfo = dao.getObjectByCoachIdAndScheduleDate(map);
 		String content = scheduleInfo.getContent();
 		String student_toplimit = scheduleInfo.getStudent_toplimit();
-		String precontract_info = scheduleInfo.getPrecontranct_info();
+		String precontract_info = scheduleInfo.getPrecontract_info();
 		int toplimit = Integer.valueOf(student_toplimit.substring(index, index+1));
 		int hasPrecontractNumbers = Integer.valueOf(precontract_info.substring(index, index+1));
 		int hasScheduled = Integer.valueOf(content.substring(index, index+1));
@@ -89,18 +92,18 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 			++hasPrecontractNumbers;
 			String new_precontract_info = precontract_info.substring(0, index) + hasPrecontractNumbers + precontract_info.substring(index+1, 24);
 			ScheduleInfo po = new ScheduleInfo();
-			po.setPrecontranct_info(new_precontract_info);
-			po.setSchedule_id(schedule_id);
+			po.setPrecontract_info(new_precontract_info);
+			po.setSchedule_id(scheduleInfo.getSchedule_id());
 			if(dao.updateObjectById(po) == 1)
 				result = true;
 		}
 		return result;
 	}
-	
-	public Integer getScheduleIdByCoachIdAndDate(Integer coach_id, String date){
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("coach_id", coach_id);
-		map.put("schedule_date", date);
-		return dao.getScheduleIdByCoachIdAndDate(map);
+
+	@Override
+	public boolean isScheduled(Integer schedule_id, int index) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+	
 }

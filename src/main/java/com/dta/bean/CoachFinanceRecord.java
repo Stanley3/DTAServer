@@ -7,7 +7,7 @@ import javax.ws.rs.FormParam;
 
 import com.dta.vo.PageParam;
 
-public class CoachFinanceRecord extends PageParam implements Serializable{
+public class CoachFinanceRecord implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@FormParam("finance_record_id")
 	private Integer finance_record_id;

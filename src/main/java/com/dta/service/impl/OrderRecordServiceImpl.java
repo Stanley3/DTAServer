@@ -96,7 +96,6 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		int result = 0;
 		Integer schedule_id;
 		for(int i=0; i<scheduleDateArray.length && !scheduleDateArray[i].isEmpty(); ++i){
-			schedule_id = scheduleInfoService.getScheduleIdByCoachIdAndDate(po.getCoach_id(), scheduleDateArray[i]);
 			for(int j=0; j<precontractContentArray[i].length(); ++j){
 				if(precontractContentArray[i].charAt(j) == '0')
 					continue; // 0 表示该时间段没有被预约
@@ -109,7 +108,7 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 					po.setOrder_amount(subject_2_fee);
 				else if(po.getCourse_status() == 3)
 					po.setOrder_amount(subject_3_fee);
-				if(scheduleInfoService.isScheduled(schedule_id, j))
+				if(scheduleInfoService.isScheduled(po.getCoach_id(), scheduleDateArray[i], j))
 					result += dao.addObject(po);
 			}
 		}

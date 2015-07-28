@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="income_amount != null and income_amount != ''">
 			income_amount = #{income_amount},
 		</if>
-		<if test="payed_amount != null and payed_amount != ''">
+		<if test="payed_amount != null">
 			payed_amount = #{payed_amount},
 		</if>
 		<if test="record_time != null and record_time != ''">

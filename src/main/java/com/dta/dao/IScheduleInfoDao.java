@@ -43,5 +43,5 @@ public interface IScheduleInfoDao extends IBaseAllDao<ScheduleInfo, ScheduleInfo
 	 */
 	public int batchGenerateScheduleInfo(Integer coach_id);
 	
-	public Integer getScheduleIdByCoachIdAndDate(Map<String,Object>map);
+	public ScheduleInfo getObjectByCoachIdAndScheduleDate(Map<String,Object>map);
 }

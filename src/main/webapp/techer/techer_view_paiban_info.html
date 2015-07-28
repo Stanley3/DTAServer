@@ -37,6 +37,7 @@
 	<link href="../media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
 	<link href="../media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="../media/css/mycss.css" type="text/css"/>
     
      <!-- <script src="../media/jquery.js" type="text/javascript"></script>  -->
      
@@ -127,176 +128,7 @@ dd {
 		<!-- BEGIN TOP NAVIGATION BAR -->
 
 		<div class="navbar-inner">
-
-			<div class="container-fluid">
-
-				<!-- BEGIN LOGO -->
-
-				<a class="brand"  style="margin-left:10px; " href="../index.html">
-
-				驾考联盟后台管理系统
-
-				</a>
-
-				<!-- END LOGO -->
-
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-
-				<img src="../media/image/menu-toggler.png" alt="" />
-
-				</a>          
-
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-
-				<ul class="nav pull-right">
-
-				
-						
-
-					<!-- BEGIN INBOX DROPDOWN -->
-
-					<li class="dropdown" id="header_inbox_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-envelope"></i>
-
-						<span class="badge">5</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended inbox">
-
-							<li>
-
-								<p>有 5 条未处理投诉</p>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-								<span class="subject">
-
-								<span class="from">学员：张四</span>
-
-								<span class="time">刚刚</span>
-
-								</span>
-
-								<span class="message">
-
-								真是受不了啦还号称服务第一呢啥服务
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-
-								<span class="subject">
-
-								<span class="from">学员：王五</span>
-
-								<span class="time">16 分钟前</span>
-
-								</span>
-
-								<span class="message">
-
-								我去了让我等了半个小时都不让我开始...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-								<span class="subject">
-
-								<span class="from">学员：张三</span>
-
-								<span class="time">2小时前</span>
-
-								</span>
-
-								<span class="message">
-
-								你们的教练实在是太气人了都不好好教!
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="../inbox.html">查看所有投诉信息<i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- 结束全站顶部投诉信息 -->
-
-
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-					
-
-						<span class="username">超级管理员：丁海伟</span>
-
-						<i class="icon-angle-down"></i>
-
-						</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="../extra_profile.html"><i class="icon-user"></i> 修改资料</a></li>
-
-							
-							<li class="divider"></li>
-
-							<li><a href="../extra_lock.html"><i class="icon-lock"></i> 锁定屏幕</a></li>
-
-							<li><a href="../login.html"><i class="icon-key"></i> 退出</a></li>
-
-						</ul>
-
-					</li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
-
+	
 		</div>
 
 		<!-- END TOP NAVIGATION BAR -->
@@ -314,8 +146,6 @@ dd {
 		<div class="page-sidebar nav-collapse collapse">
 
 			<!-- 开始 左侧通用 菜单 -->        
-
-			<script src="../media/left.js" type="text/javascript"></script>
 
 			<!-- END SIDEBAR MENU -->
 
@@ -407,7 +237,7 @@ dd {
 
 								<i class="icon-home"></i>
 
-								<a href="../main.html">后台首页</a> 
+								<a href="../main.jsp">后台首页</a> 
 
 								<i class="icon-angle-right"></i>
 
@@ -433,11 +263,21 @@ dd {
 
 
 
-    <a class=" btn blue"  href="techer_view_info.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>教练信息</a>
-    <a class=" btn blue"  href="techer_view_money.html" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>订单记录</a>
-    <a class=" btn blue"  href="techer_view_students.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>名下学员</a>
-    <a class=" btn blue"  href="techer_view_pingjia.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>获得评价</a> 
-    <a class=" btn purple"  href="techer_view_paiban.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>教练排班</a> 
+   <a class=" btn blue" href="techer_view_info.html" id="teachInfo"
+					style="margin-bottom:10px;"><i class="icon-hospital"
+					style="margin-right:5px;"></i>教练信息</a> <a class=" btn blue"
+					id="orderRecord" href="techer_view_money.html"
+					style="margin-bottom:10px;"><i class=" icon-user-md"
+					style="margin-right:5px;"></i>订单记录</a> <a id="studentInfo"
+					class=" btn blue" href="techer_view_students.html"
+					style="margin-bottom:10px;"><i class=" icon-male"
+					style="margin-right:5px;"></i>名下学员</a> <a class=" btn blue"
+					id="evaluationInfo" href="techer_view_pingjia.html"
+					style="margin-bottom:10px;"><i class="icon-hospital"
+					style="margin-right:5px;"></i>获得评价</a><a class=" btn purple"
+					id="scheduleInfo" href="techer_view_paiban.html"
+					style="margin-bottom:10px;"><i class="icon-hospital"
+					style="margin-right:5px;"></i>教练排班</a>
     
 
 
@@ -462,7 +302,6 @@ dd {
 							</div>
 
 		  <div class="portlet-body">
-          <!-- 开始订单记录列表-->
           <table width="100%" border="0" style="margin-bottom:10px;"  cellspacing="0" cellpadding="0">
             <tr>
               <td width="400" height="35" align="left">  
@@ -471,18 +310,29 @@ dd {
                   <label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label>
               </dd> </td>
               <td></td>
-              <td>所教科目<label for="select"></label>
-                <select name="select" id="select">
+              <td>所教科目:
+                <select name="select" id="select" class="select_mycss">
                   <option value="0">科二</option>
                   <option value="1">科三</option>
-              </select></td>
+              </select>
+              </td>
+              <td>
+              	车型:
+              	<select name="vehicleShape" id="vehicleShape" class="select_mycss">
+              		<option value="0">新捷达</option>
+              		<option value="1">其它</option>
+              	</select>
+              </td>
+              <td>
+              	设备
+              	
+              </td>
             </tr>
           </table>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td height="50" align="left">
-              <a href="#" class="btn blue big" style="margin-right:5px; height:80px;margin-bottom:10px;">06:00-07:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label>
-</a>
+              <a href="#" class="btn blue big" style="margin-right:5px; height:80px;margin-bottom:10px;">06:00-07:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
               <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">07:00-08:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
               <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">08:00-09:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
               <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">09:00-10:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
@@ -490,6 +340,10 @@ dd {
               <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">11:00-12:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
               <a href="#" class="btn red big" style="margin-right:5px; height:80px; margin-bottom:10px;">12:00-13:00<label class="iosCheck"><input type="checkbox" ><i></i></label></a>
               <a href="#" class="btn red big" style="margin-right:5px; height:80px; margin-bottom:10px;">13:00-14:00<label class="iosCheck"><input type="checkbox" ><i></i></label></a>
+              </td>
+              </tr>
+              <tr>
+              <td height="50" align="left">
               <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">14:00-15:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
               <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">15:00-16:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
               <a href="#" class="btn blue big" style="margin-right:5px; height:80px; margin-bottom:10px;">16:00-17:00<label class="iosCheck"><input type="checkbox" checked="checked"><i></i></label></a>
@@ -503,15 +357,10 @@ dd {
             </table>
 
           <button type="submit" class="btn blue" >修改</button>
-
-										<button type="button" class="btn">取消</button>
+			<button type="button" class="btn">取消</button>
           </div>
 	
-    
-    
-    
-    
-			  </div>
+		  </div>
 
 				<!-- END PAGE CONTENT-->
 
@@ -593,25 +442,71 @@ dd {
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-
+	<script src='js/jquery.js'></script>
 	<script src="../media/js/app.js"></script>
 
 	<script src="../media/js/table-advanced.js"></script>     
-
 	<script>
 
 		jQuery(document).ready(function() {       
 
-		   App.init();
-
-		   TableAdvanced.init();
-
+		   
+		   var idArray = decodeURIComponent(window.location.search).match(/\d+/g);
+		   var schedule_id;
+		   var coach_id;
+		   try {
+			   	schedule_id =  parseInt(idArray[0]);
+				coach_id = parseInt(idArray[1]);
+				$('#teachInfo').attr(
+						'href',
+						'techer_view_info.html?'
+								+ encodeURIComponent('coach_id='
+										+ coach_id));
+				$('#orderRecord').attr(
+						'href',
+						'techer_view_money.html?'
+								+ encodeURIComponent('coach_id='
+										+ coach_id));
+				$('#studentInfo').attr(
+						'href',
+						'techer_view_students.html?'
+								+ encodeURIComponent('coach_id='
+										+ coach_id));
+				$('#evaluationInfo').attr(
+						'href',
+						'techer_view_pingjia.html?'
+								+ encodeURIComponent('coach_id='
+										+ coach_id));
+				$('#scheduleInfo').attr('href', 'techer_view_paiban.html?' +encodeURIComponent('coach_id=' + coach_id));
+			} catch (err) {
+				coach_id=0;
+				schedule_id = 0;
+			}
+		   //TableAdvanced.init();
+		loadPageInfo(schedule_id);
 		});
-
+	function loadPageInfo(schedule_id){
+		if(schedule_id != 0){
+			$.ajax({
+				url: '../rest/scheduleInfo/' + schedule_id,
+				type:'get',
+				dataType: 'json',
+				success: function(data){
+					console.log(data);
+				},
+				error: function(xhr, err){
+					alert(err);
+				},
+				complete: function(){
+					App.init();
+				}
+			});
+		}
+	}
 	</script>
     
- <!-- <script src='js/jquery.js'></script> -->
-<script src="../media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+ 
+<!-- <script src="../media/js/jquery-1.10.1.min.js" type="text/javascript"></script> -->
 </body>
 
 <!-- END BODY -->

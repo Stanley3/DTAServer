@@ -29,16 +29,16 @@ import com.dta.utils.ServiceProvider;
 import com.dta.vo.StudentLoginInfoVo;
 
 @Path("studentLoginInfo")
-public class StudentLoginInfoResource extends BaseAllResource<StudentLoginInfo, StudentLoginInfoVo>{
+public class StudentLoginInfoResource {
 	//@Autowired
 	public IStudentLoginInfoService service = (IStudentLoginInfoService)ServiceProvider.getBean("studentLoginInfoServiceImpl");
 	@Autowired
 	public JdbcRealm myRealm;
 	
-	public StudentLoginInfoResource(){
+	/*public StudentLoginInfoResource(){
 		super.setService(service);
 		super.setMianId(GlobalConstant.STUDENTLOGININFO);
-	}
+	}*/
 	
 	@POST
 	@Path("login")

@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -36,6 +38,14 @@ public class SessionUtil {
 	}
 	
 	public static Integer getSchoolIdByRequest(HttpServletRequest request){
-		return (Integer) map.get(request.getSession(false).getId()).getAttribute("school_id");
+		//return (Integer) map.get(request.getSession(false).getId()).getAttribute("school_id");
+		/*if(session != null){
+			result = (Integer)map.get(session.getId()).getAttribute("school_id");
+		}
+		return result;*/
+		 HttpSession session = request.getSession(false);
+		 if(session != null)
+			 return (Integer)session.getAttribute("school_id");
+		 return 0;
 	}
 }

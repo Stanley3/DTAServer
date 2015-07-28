@@ -51,5 +51,13 @@ public interface IScheduleInfoService extends IBaseAllService<ScheduleInfo, Sche
 	 */
 	public boolean isScheduled(Integer schedule_id, int index);
 	
-	public Integer getScheduleIdByCoachIdAndDate(Integer coach_id, String date);
+	/**
+	 * 
+	 * @param coach_id
+	 * @param schedule_date
+	 * @param index
+	 * @return
+	 * <p>根据coach_id和schedule_date可以定位到某个排班的具体内容，index表示24个时间段中的索引
+	 */
+	public boolean isScheduled(Integer coach_id, String schedule_date, int index);
 }

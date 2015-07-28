@@ -30,13 +30,27 @@ public class ScheduleInfo implements Serializable{
 	private Integer device_attribude;
 	@FormParam("validation")
 	private Integer validation;
-	private String precontranct_info;
+	private Integer device_type;
+	private String precontract_info;
+	private Integer remnant_device_numbers; 
 	
-	public String getPrecontranct_info() {
-		return precontranct_info;
+	public Integer getRemnant_device_numbers() {
+		return remnant_device_numbers;
 	}
-	public void setPrecontranct_info(String precontranct_info) {
-		this.precontranct_info = precontranct_info;
+	public void setRemnant_device_numbers(Integer remnant_device_numbers) {
+		this.remnant_device_numbers = remnant_device_numbers;
+	}
+	public Integer getDevice_type() {
+		return device_type;
+	}
+	public void setDevice_type(Integer device_type) {
+		this.device_type = device_type;
+	}
+	public String getPrecontract_info() {
+		return precontract_info;
+	}
+	public void setPrecontract_info(String precontract_info) {
+		this.precontract_info = precontract_info;
 	}
 	public void setSchedule_id(Integer schedule_id){
 		this.schedule_id = schedule_id;

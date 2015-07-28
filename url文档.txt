@@ -150,7 +150,7 @@
    返回参数： 登录成功bean StudentLoginSuccessInfo.java 其中code为1
               登录失败：code：2， desc：用户名或密码错误；code：3， desc：服务异常
 	备注：登录成功在相应(HttpResponse)的头部可以获取到JSESSIONID，相应头部中的键为'Set-Cookie',值为'JSESSIONID=xxxxxxxx';
-		  之后再发请求时，应把JSSESSIONID封装到HttpRequest中，相应头部的键位'Cookie'， 值为'JSESSIONID=xxxxxxxx'。（账号：15528254083，密码：123456）
+		  之后再发请求时，应把JSSESSIONID封装到HttpRequest中，相应头部的键位'Cookie'， 值为'JSESSIONID=xxxxxxxx'。（账号：15528298065，密码：123456）
 
 2. 按距离查看
 	resourcejava：SchoolInfoResource.java
@@ -216,7 +216,6 @@
 			 科目 course_status(2表示科目二，3表示科目三）
 			 预约日期字符串；scheduleDateStr (以 | 分隔不同的日期)
 			 预约时间段字符串: precontractContentStr(以 | 分隔不同日期的时间段，每个日期的时间段用24个0或1字符串表示，0表示不预约该时间段，1表示预约)
-			 排班id: scheduleIDStr (以 | 分隔不同的id) 
    返回参数：预约成功：code 1，desc 预约成功；code 2，预约失败；code 2, 余额不足，预约失败;
    
 7. 我的预约界面 
@@ -242,7 +241,6 @@
 			  服务态度分 service_attitude （满分10分）
 			  卫生分 hygiene （满分10分）
 			  评价类型 evaluation_type（0投诉 1评价 2建议）
-			  评价 evaluation （0 差评 1 中评 2 好评）
 	返回参数bean：无
 	返回参数格式：{"code":1, "desc":"增添成功"} 或 {"code":2, "desc":"增添失败"} 或 {"code":3, "desc":"系统异常"}
 	

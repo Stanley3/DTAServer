@@ -237,8 +237,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != ''">
 			validation = #{validation},
 		</if>
-		<if test="precontranct_info != null and precontranct_info != ''">
-			precontranct_info = #{precontranct_info},
+		<if test="precontract_info != null and precontract_info != ''">
+			precontract_info = #{precontract_info},
 		</if>
 	</set>
 	where schedule_id =  #{schedule_id}
@@ -269,9 +269,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	call insertSchdeuleInfo(#{coach_id})
 </insert>
 <!-- 根据排班时间和学员id获取排班id -->
-<select id="getScheduleIdByCoachIdAndDate" resultType="integer" parameterType="map">
+<select id="getObjectByCoachIdAndScheduleDate" resultType="ScheduleInfo" parameterType="map">
 	select 
-		schedule_id
+		schedule_id,
+		content,
+		student_toplimit,
+		precontract_info
 	from 
 		schedule_info
 	where

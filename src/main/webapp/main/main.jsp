@@ -209,7 +209,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="main.html">管理首页</a> 
+								<a href="main.jsp">管理首页</a> 
 
 								<i class="icon-angle-right"></i>
 

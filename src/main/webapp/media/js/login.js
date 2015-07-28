@@ -48,7 +48,7 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                //window.location.href = "main/main.html";
+	                //window.location.href = "main/main.jsp";
 	            	//submit(form);
 	            	//form.submit();
 	            	form.submit();
@@ -58,7 +58,7 @@ var Login = function () {
 	        $('.login-form ').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.login-form').validate().form()) {
-	                   // window.location.href = "main/main.html";
+	                   // window.location.href = "main/main.jsp";
 	                	//$('.login-form').ajaxSumit();
 	                	console.log(e);
 	                	document.getElementsByTagName('form')[0].submit();
@@ -104,14 +104,14 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                window.location.href = "main.html";
+	                window.location.href = "main.jsp";
 	            }
 	        });
 
 	        $('.forget-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.forget-form').validate().form()) {
-	                    window.location.href = "main/main.html";
+	                    window.location.href = "main/main.jsp";
 	                }
 	                return false;
 	            }
@@ -169,7 +169,7 @@ var Login = function () {
 	            success: function (label) {
 	                label.closest('.control-group').removeClass('error');
 	                label.remove();
-	                window.location.href = "main/main.html";
+	                window.location.href = "main/main.jsp";
 	            },
 
 	            errorPlacement: function (error, element) {
@@ -214,7 +214,7 @@ function submit(form){
 		dataType: 'text',
 		success: function(data){
 			//alert(data);
-			//window.location.href = "main/main.html";
+			//window.location.href = "main/main.jsp";
 			alert(data);
 			console.log(data);
 			try{

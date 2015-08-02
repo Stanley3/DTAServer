@@ -90,10 +90,11 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 	 * <p> 0表示添加评价失败，1表示添加评价成功
 	 * <p>添加一条评价记录，暂默认为增添评价时表明订单已完成，应修改订单的状态为3；
 	 * 修改订单的状态为3时，应修改财务信息记录表的收入总额字段
+	 * @throws Exception 
 	 */
 	@Override
 	@Transactional
-	public int addObject(EvaluationRecord po){
+	public int addObject(EvaluationRecord po) throws Exception{
 		int skill, service_attitude, hygiene;
 		skill = po.getSkill() != null ? po.getSkill() : 0;
 		service_attitude = po.getService_attitude() != null ? po.getService_attitude() : 0;
@@ -106,9 +107,13 @@ public class EvaluationRecordServiceImpl extends BaseAllServiceImpl<EvaluationRe
 		else
 			po.setEvaluation(2);
 		//以上是根据评分计算好中差评，计算公式未知，暂如上计算。
-		if(orderRecordService.completeOrder(po.getOrder_id()))	
-			return super.addObject(po);
-		else
-			return 0;
+		if(po.getEvaluation_record_id() == null){//新增评价
+			if(orderRecordService.completeOrder(po.getOrder_id()))	
+				return super.addObject(po);
+			else
+				return 0;
+		}
+		else //修改评价
+			return super.updateObjectById(po);
 	}
 }

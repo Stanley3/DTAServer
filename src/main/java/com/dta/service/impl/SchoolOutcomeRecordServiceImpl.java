@@ -23,7 +23,7 @@ public class SchoolOutcomeRecordServiceImpl extends BaseAllServiceImpl<SchoolOut
 	}
 	
 	@Transactional
-	public int addObject(SchoolOutcomeRecord po){
+	public int addObject(SchoolOutcomeRecord po) throws Exception{
 		int superResult = super.addObject(po);
 		CoachWithdrawRecord withdrawBean = new CoachWithdrawRecord();
 		withdrawBean.setWithdraw_amount(po.getAmount());

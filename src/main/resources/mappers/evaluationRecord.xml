@@ -239,7 +239,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="updateObjectById" parameterType="EvaluationRecord">
 	update evaluation_record
 	<set>
-		validation = #{validation},
+		<if test="validation != null">
+			validation = #{validation},
+		</if>
 		<if test="student_id != null and student_id != ''">
 			student_id = #{student_id},
 		</if>
@@ -271,7 +273,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			operation = #{operation},
 		</if>
 		<if test="operator != null and operator != ''">
-			operator = #{operator}
+			operator = #{operator},
+		</if>
+		<if test="evaluation != null">
+			evaluation = #{evaluation}
 		</if>
 	</set>
 	where evaluation_record_id =  #{evaluation_record_id}

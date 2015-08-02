@@ -26,7 +26,7 @@ public class StudentBasicInfoServiceImpl extends BaseAllServiceImpl<StudentBasic
 	}
 	
 	@Transactional
-	public int addObject(StudentBasicInfo po){
+	public int addObject(StudentBasicInfo po) throws Exception{
 		if(po.getSchool_id() == 0)
 			po.setSchool_id(null);
 		int superResult = super.addObject(po);

@@ -612,21 +612,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	call studentConsumeAmount(#{student_id})
 </select>
 <select id="getStudentOrderRecord" resultType="MyOrderRecord" parameterType="MyOrderRecordVo">
-	select * 
-	from sutdentOrderRecord
-	<where>
-		<if test="student_id != null">
-			student_id = #{student_id}
-		</if>
-		<choose>
-			<when test="option == 1">
+	<choose>
+		<when test="option == 1">
+			select * from studentprecontractrecord
+			<where>
+				<if test="student_id != null">
+					and student_id = #{student_id}
+				</if>
 				and order_status = 0
-			</when>
-			<when test="option == 2">
-				and order_status in (2,3)
-			</when>
-		</choose>
-	</where>
+				and scanned = 0
+			</where>
+		</when>
+		<when test="option == 2">
+			select * from studenttranedorder
+			<where>
+				<if test="student_id != null">
+					student_id = #{student_id}
+				</if>
+				and order_status != 1
+				and scanned = 1
+			</where>
+		</when>
+	</choose>
 	<if test="sort != null">
 		order by ${sort} ${order}
 	</if>
@@ -635,21 +642,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
 </select>
 <select id="getStudentOrderRecordSize" resultType="int" parameterType="MyOrderRecordVo">
-	select count(order_id) 
-	from sutdentOrderRecord
-	<where>
-		<if test="student_id != null">
-			student_id = #{student_id}
-		</if>
-		<choose>
-			<when test="option == 1">
+	<choose>
+		<when test="option == 1">
+			select count(*) from studentprecontractrecord
+			<where>
+				<if test="student_id != null">
+					and student_id = #{student_id}
+				</if>
 				and order_status = 0
-			</when>
-			<when test="option == 2">
-				and order_status in (2,3)
-			</when>
-		</choose>
-	</where>
+				and scanned = 0
+			</where>
+		</when>
+		<when test="option == 2">
+			select count(*) from studenttranedorder
+			<where>
+				<if test="student_id != null">
+					student_id = #{student_id}
+				</if>
+				and order_status != 1
+				and scanned = 1
+			</where>
+		</when>
+	</choose>
 </select>
 <select id="getCoachIncomeRecord" resultType="CoachIncomeRecord" parameterType="CoachIncomeRecordVo">
 	select *

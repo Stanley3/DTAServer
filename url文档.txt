@@ -6,7 +6,7 @@
 	参数bean: CoachPrecontractRecordVo.java  
 	详细参数：教练id coach_id
 	          订单状态：order_status (0表示已经预约; 1表示取消预约; 2.3表示训练完成)
-			  排序方式：order_time desc
+			  排序方式：sort: order_time  dir:desc
 	返回参数bean :CoachPrecontractRecord.java 增添当前时间
 		
 2. 我的评价界面
@@ -16,7 +16,7 @@
        参数bean：CoachEvaluationInfoVo.java
        详细参数：coach_id 
              evaluation (0 差评；1 中评； 2 好评；无表示全部)
-			 排序参数："sort":evaluation_time, "order":desc
+			 排序参数："sort":evaluation_time, "dir":desc
 			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
 	返回参数bean：CoachEvaluationInfo.java
 	返回参数格式：{"total":0, "badEvaluation":0, "midEvaluation":, "goodEvaluation":0, "data":[]}
@@ -158,7 +158,8 @@
 	请求方式：get
 	参数bean：SchoolInfoBasedDistanceVo.java
 	详细参数：经度：longitude
-              纬度：latitude	
+                            纬度：latitude	
+                            分页参数："start"：0|10|20|..., "length":10
 	返回参数bean：SchoolInfoBasedDistance.java
 	返回参数格式: {"total":0, "data":[]} (total 表示驾校的总数，data 表示一页的驾校信息（已按距离递增排序）)
 
@@ -182,7 +183,7 @@
    详细参数：coach_id 
              evaluation (0 差评；1 中评； 2 好评；无表示全部)
 			 科目 course_status(必须， 否在预约科目二的教练时会显示该教练科目三的评价信息)
-			 排序参数："sort":evaluation_time, "order":desc
+			 排序参数："sort":evaluation_time, "dir":desc
 			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
 	返回参数bean：CoachEvaluationInfo.java
 	返回参数格式：{"total":0, "badEvaluation":0, "midEvaluation":, "goodEvaluation":0, "data":[]}
@@ -219,16 +220,17 @@
    返回参数：预约成功：code 1，desc 预约成功；code 2，预约失败；code 2, 余额不足，预约失败;
    
 7. 我的预约界面 
-   resourcejava：OrderRecordResource.java
+   resourcejava：OrderRecorResource.java
    url: orderRecord/getStudentOrderRecord
    请求方式：get
    参数bean：MyOrderRecordVo.java
    详细参数：学员id student_id
 			 选项 option （1表示已经预约，2表示练习记录）
-             排序参数："sort":用来排序的字段名, "order"：排序方式(desc | asc)
+             排序参数："sort":用来排序的字段名, "dir"：排序方式(desc | asc)
 			 分页参数: "start": 0|10|20|..., "length": 10(start 表示从第几条数据开始查询，length表示查询多少数据)
    返回参数bean：MyOrderRecord.java
    返回参数格式：{"total":0, "data":[]}(total表示共有多少信息，data表示一页信息)
+ 备注：在练习记录界面需要判断evaluation_record_id的值，该值用来表示该订单是否已经评价
 
 8. 提交评价
 	resoucejava: EvaluationRecordResource.java
@@ -241,6 +243,7 @@
 			  服务态度分 service_attitude （满分10分）
 			  卫生分 hygiene （满分10分）
 			  评价类型 evaluation_type（0投诉 1评价 2建议）
+			 评价id evaluation_record_id （null表示新的评价，用返回的值表明修改评价）
 	返回参数bean：无
 	返回参数格式：{"code":1, "desc":"增添成功"} 或 {"code":2, "desc":"增添失败"} 或 {"code":3, "desc":"系统异常"}
 	

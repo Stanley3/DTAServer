@@ -56,7 +56,7 @@ public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentD
 	
 	@Override
 	@Transactional
-	public int addObject(StudentDepositRecord po){
+	public int addObject(StudentDepositRecord po) throws Exception{
 		int result = 0;
 		if(po.getDeposit_type() != null){
 			StudentBasicInfo studentBasicInfo = new StudentBasicInfo();

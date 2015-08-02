@@ -15,7 +15,14 @@ public class MyOrderRecord {
 	private Integer order_status;
 	private Integer order_id;
 	private Integer student_id;
+	private Integer evaluation_record_id;
 	
+	public Integer getEvaluation_record_id() {
+		return evaluation_record_id;
+	}
+	public void setEvaluation_record_id(Integer evaluation_record_id) {
+		this.evaluation_record_id = evaluation_record_id;
+	}
 	public Integer getStudent_id() {
 		return student_id;
 	}

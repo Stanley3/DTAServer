@@ -82,7 +82,7 @@ public class ScheduleInfoResource extends BaseAllResource<ScheduleInfo, Schedule
 			byte[] precontractedDurationInfo = new byte[24];
 			for(int i=0; i<24; ++i)
 				precontractedDurationInfo[i] = 0;
-			if(list != null && list.get(0).getIsOnDuty() != 0){
+			if(list != null && list.size() > 0 &&  list.get(0).getIsOnDuty() != 0){
 				String startTime = schedule_date + " 00:00:00";
 				String endTime = schedule_date + " 23:59:59";
 				Map<String, Object> trainingTimeMap = new HashMap<String, Object>();

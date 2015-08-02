@@ -16,7 +16,7 @@ public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
 		
 	}
 	@Transactional
-	public int addObject(T po)  {
+	public int addObject(T po) throws Exception  {
 		// TODO Auto-generated method stub
 		System.out.println("父类的添加方法得到执行");
 		return dao.addObject(po);

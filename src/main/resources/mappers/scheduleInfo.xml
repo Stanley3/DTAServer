@@ -278,7 +278,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from 
 		schedule_info
 	where
-		schedule_date = #{schedule_date}
+		schedule_date = date_format(#{schedule_date}, '%Y-%m-%d')
 		and coach_id = #{coach_id}
 </select>
 </mapper>

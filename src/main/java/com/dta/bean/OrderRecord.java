@@ -47,12 +47,35 @@ public class OrderRecord implements Serializable{
 	private String precontractContentStr; //以 | 分隔不同日期的时间段，每个日期的时间段用24个0或1字符串表示，0表示不预约该时间段，1表示预约
 	@FormParam("scheduleIDStr")
 	private String scheduleIDStr; //以|分隔不同的排班id
+	@FormParam("scanned")
+	private Integer scanned;
+	private Integer student_level;
+	private Integer device_type;
+	
 	private String coach_name;
 	private String phone;
 	private String school_address;
 	private Integer havePhoto;
 	
 	
+	public Integer getDevice_type() {
+		return device_type;
+	}
+	public void setDevice_type(Integer device_type) {
+		this.device_type = device_type;
+	}
+	public Integer getStudent_level() {
+		return student_level;
+	}
+	public void setStudent_level(Integer student_level) {
+		this.student_level = student_level;
+	}
+	public Integer getScanned() {
+		return scanned;
+	}
+	public void setScanned(Integer scanned) {
+		this.scanned = scanned;
+	}
 	public String getScheduleIDStr() {
 		return scheduleIDStr;
 	}

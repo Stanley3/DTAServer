@@ -15,6 +15,10 @@ public class GlobalConstant{
 	public static final String NOFILE = "表单中不存在文件";
 	public static final String NOTSUFFICIENTFUNDS = "余额不足，请充值";
 	public static final String SUCCESSPRECONTRACT = "预约成功";
+	public static final String COACHSCANNEDFAIL = "扫码失败";
+	public static final String COACHSCANNEDSUCCESS = "扫码成功";
+	public static final String CACELPRECONTRACTFAIL = "取消预约失败";
+	public static final String CACELPRECONTRACTSUCCESS = "取消预约成功";
 	
 	public static final String COACHBASICINFO = "coach_id";
 	public static final String COACHFINANCERECORD = "finance_record_id";

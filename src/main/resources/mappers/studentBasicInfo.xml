@@ -107,6 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SB.school_id,
 		SB.driving_license_type,
 		SB.validation,
+		SB.student_level,
 		SL.login_pwd,
 		SL.obligate_code,
 		SL.login_id,

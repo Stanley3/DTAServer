@@ -82,25 +82,28 @@ public class ScheduleInfoResource extends BaseAllResource<ScheduleInfo, Schedule
 			byte[] precontractedDurationInfo = new byte[24];
 			for(int i=0; i<24; ++i)
 				precontractedDurationInfo[i] = 0;
-			if(list != null && list.size() > 0 &&  list.get(0).getIsOnDuty() != 0){
-				String startTime = schedule_date + " 00:00:00";
-				String endTime = schedule_date + " 23:59:59";
-				Map<String, Object> trainingTimeMap = new HashMap<String, Object>();
-				trainingTimeMap.put("startTime", startTime);
-				trainingTimeMap.put("endTime", endTime);
-				trainingTimeMap.put("student_id", student_id);
-				List<String> trainingTimeList =  orderService.getStudentSomedayPrecontractInfo(trainingTimeMap);
-				for(int i=0;  trainingTimeList != null && i<trainingTimeList.size(); ++i){
-					String tmep = trainingTimeList.get(i);
-					int index = Integer.valueOf(tmep.split(" ")[1].split(":")[0]);
-					++precontractedDurationInfo[index];
+			if(list != null && list.size() > 0){
+			if(list.get(0).getIsOnDuty() != 0){
+					String startTime = schedule_date + " 00:00:00";
+					String endTime = schedule_date + " 23:59:59";
+					Map<String, Object> trainingTimeMap = new HashMap<String, Object>();
+					trainingTimeMap.put("startTime", startTime);
+					trainingTimeMap.put("endTime", endTime);
+					trainingTimeMap.put("student_id", student_id);
+					List<String> trainingTimeList =  orderService.getStudentSomedayPrecontractInfo(trainingTimeMap);
+					for(int i=0;  trainingTimeList != null && i<trainingTimeList.size(); ++i){
+						String tmep = trainingTimeList.get(i);
+						int index = Integer.valueOf(tmep.split(" ")[1].split(":")[0]);
+						++precontractedDurationInfo[index];
+					}
 				}
-			}
-			StringBuilder tmp = new StringBuilder();
-			for(int i=0;i<24; ++i)
-				tmp.append(precontractedDurationInfo[i]);
-			list.get(0).setScheduleInfo(tmp.toString());
-			return Response.status(200).entity(list.get(0)).build();
+				StringBuilder tmp = new StringBuilder();
+				for(int i=0;i<24; ++i)
+					tmp.append(precontractedDurationInfo[i]);
+				list.get(0).setScheduleInfo(tmp.toString());
+				return Response.status(200).entity(list.get(0)).build();
+			}else
+				return Response.status(200).entity(null).build();
 		}catch(Exception e){
 			e.printStackTrace();
 			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 

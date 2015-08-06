@@ -1,12 +1,17 @@
 package com.dta.resource;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.BeanParam;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,7 @@ import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachIncomeRecord;
@@ -306,6 +312,59 @@ public class OrderRecordResource extends
 			e.printStackTrace();
 			return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
 					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+		}
+	}
+	
+	@POST
+	@Path("coachScanned")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response coachScanned(@FormParam("order_id")Integer order_id){
+		try{
+			boolean rightTime = false;
+			if(order_id == null)
+				throw new Exception("教练扫描二维码时 订单id为null");
+			OrderRecord po = service.getObjectById(order_id);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			if(StringUtils.hasText(po.getTraining_start_time())){
+				Date date = format.parse(format.format(po.getTraining_start_time()));
+				long tweleveHoursToMs = 12 * 60 * 60 * 1000;
+				if(System.currentTimeMillis() > (date.getTime() - tweleveHoursToMs) 
+						&& System.currentTimeMillis() < (date.getTime() + tweleveHoursToMs))
+					rightTime = true;
+			}
+			if(rightTime){
+				OrderRecord orderRecord = new OrderRecord();
+				orderRecord.setScanned(1);
+				orderRecord.setOrder_id(order_id);
+				if(service.updateObjectById(orderRecord) == 1)
+					return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, GlobalConstant.COACHSCANNEDSUCCESS)).build();
+			}
+			return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, GlobalConstant.COACHSCANNEDFAIL)).build();
+			
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, e.getMessage())).build();
+		}
+	}
+	
+	@POST
+	@Path("cancelPrecontract")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cacelPrcontract(@FormParam("order_id")Integer order_id){
+		try{
+			if(order_id == null)
+				throw new Exception("取消预约时 订单id为null");
+			OrderRecord orderRecord = new OrderRecord();
+			orderRecord.setOrder_status(1);
+			orderRecord.setOrder_id(order_id);
+			if(service.updateObjectById(orderRecord) != 1)
+				return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_FAIL, GlobalConstant.CACELPRECONTRACTFAIL)).build();
+			return Response.status(200).entity(new ResultBean(GlobalConstant.OPERATION_SUCCESS, GlobalConstant.CACELPRECONTRACTSUCCESS)).build();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, e.getMessage())).build();
 		}
 	}
 }

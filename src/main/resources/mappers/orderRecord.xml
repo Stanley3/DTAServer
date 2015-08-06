@@ -133,7 +133,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="OrderRecord" parameterType="int">
-	select * from order_record
+	select 
+		order_id, 
+		student_id,
+		coach_id,
+		school_id, 
+		order_time, 
+		order_amount, 
+		order_status, 
+		date_format(training_start_time, '%Y-%m-%d %H:%i:%s') as training_start_time, 
+		date_format(training_end_time, '%Y-%m-%d %H:%i:%s') as  training_end_time,
+		order_dead_time, 
+		order_memo, 
+		validation, 
+		course_status, 
+		operation, 
+		operator, 
+		scanned, 
+		student_level, 
+		device_type
+	from order_record
 	where order_id = #{order_id} and validation = 1
 </select>
 <!-- **********获取一页对象********** -->
@@ -308,6 +327,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="operator != null and operator != ''">
 			operator = #{operator},
+		</if>
+		<if test="scanned != null">
+			scanned = #{scanned}
 		</if>
 	</set>
 	where order_id =  #{order_id}

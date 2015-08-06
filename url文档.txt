@@ -137,6 +137,16 @@
 	请求方式：get
 	返回参数：无
 	备注：该url不返回任何信息。App端点击退出登录后，发送该请求后，只需实现App端的退出逻辑即可。
+9. 教练扫面二维码
+	resourceJava: OrderRecordResource.java
+	url: orderRecord/coachScanned
+	请求方式：post
+	参数bean：OrderRecord.java
+	详细参数：订单id order_id
+	返回参数：code：1， desc：扫码成功
+			code：2，desc：扫码失败
+			code：3，desc：（系统异常，返回信息不定）
+	返回bean：无	
 	
 二、学员端
 1. 登录
@@ -203,7 +213,7 @@
    				"procontranct_info":"000000000000000000000000"}
                  (subject 表示科目，student_toplimit 表示每个时间段的学员上限 暂定为1，student_attribute 表示每个事件端的学员属性 0表示VIP学员可选 1表示普通学员可选
 					schedule_date 表示给哪天排的班，isOnDuty 表示该天是否已经排班 0 表示未排班 1表示排班 若为0表示教练该天休息 应该先判断这个值 为0时其它字段没有意义, schedule_id表示当前排班的id
-					scheduleInfo表示学员当天预约的情况 每个字符对应该每个时间段预约的情况  precontranct_info表示该教练当天被预约的情况 
+					scheduleInfo表示学员当天预约的情况 每个字符对应该每个时间段预约的情况  precontract_info表示该教练当天被预约的情况 
 					应和student_toplimit一起判断该时间段是否还可以预约)
 		
 6. 提交预约
@@ -272,6 +282,16 @@
 	请求方式：get
 	返回参数：无
 	备注：该url不返回任何信息。App端点击退出登录后，发送该请求后，只需实现App端的退出逻辑即可。
+12. 取消预约
+	resourceJava: OrderRecord.java
+	url: orderRecord/cancelPrecontract
+	请求方式：post
+	参数bean：OrderRecord.java
+	详细参数：订单id order_id
+	返回参数bean：无
+	返回参数：code：1， desc：取消成功
+		   code：2， desc：取消失败
+		   code：4，desc：（系统异常，返回信息不定）
 	
  
  

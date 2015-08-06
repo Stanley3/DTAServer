@@ -1,12 +1,17 @@
 package com.dta.service.impl;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachBasicInfo;
@@ -19,11 +24,15 @@ import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
 import com.dta.bean.OrderInfo;
 import com.dta.bean.OrderRecord;
+import com.dta.bean.ScheduleInfo;
 import com.dta.bean.SchoolInfo;
+import com.dta.bean.StudentBasicInfo;
 import com.dta.bean.TrainingRecord;
 import com.dta.dao.ICoachBasicInfoDao;
 import com.dta.dao.IOrderRecordDao;
+import com.dta.dao.IScheduleInfoDao;
 import com.dta.dao.ISchoolInfoDao;
+import com.dta.dao.IStudentBasicInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
 import com.dta.dao.IStudentFinanceInfoDao;
 import com.dta.service.ICoachFinanceRecordService;
@@ -54,6 +63,10 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	private IScheduleInfoService scheduleInfoService;
 	@Autowired
 	private ICoachFinanceRecordService coachFinaceRecordService;
+	@Autowired
+	private IScheduleInfoDao scheduleInfoDao;
+	@Autowired
+	private IStudentBasicInfoDao studentBasicInfoDao;
 	public void init(){
 		super.setDao(dao);
 	}
@@ -94,16 +107,23 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		if(studentAccountBalance < orderTotalAmount)
 			return -1; //余额不足
 		int result = 0;
-		Integer schedule_id;
 		for(int i=0; i<scheduleDateArray.length && !scheduleDateArray[i].isEmpty(); ++i){
 			for(int j=0; j<precontractContentArray[i].length(); ++j){
 				if(precontractContentArray[i].charAt(j) == '0')
 					continue; // 0 表示该时间段没有被预约
+				StudentBasicInfo studentBasicInfo = studentBasicInfoDao.getObjectById(po.getStudent_id());
+				if(studentBasicInfo == null)
+					throw new RuntimeException("学员预约订单时，获取学员信息失败");
+				CoachBasicInfo coachBasicInfo = coachDao.getObjectById(po.getCoach_id());
+				if(coachBasicInfo == null)
+					throw new RuntimeException("学员预约订单时，获取教练信息失败");
 				String startTime = scheduleDateArray[i] + " " + (j < 10 ? "0" + j : j) + ":00";
 				String endTime = scheduleDateArray[i] + " " + (j + 1 < 10 ? "0" + (j+1) : j+1) + ":00";
 				po.setTraining_end_time(endTime);
 				po.setTraining_start_time(startTime);
 				po.setOrder_status(0);
+				po.setStudent_level(studentBasicInfo.getStudent_level());
+				po.setDevice_type(coachBasicInfo.getDevice_type());
 				if(po.getCourse_status() == 2)
 					po.setOrder_amount(subject_2_fee);
 				else if(po.getCourse_status() == 3)
@@ -120,6 +140,8 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		System.out.println("子类的更新方法得到执行");
 		Integer status = po.getOrder_status();
 		if(status != null && status == 3){
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			po.setOrder_dead_time(format.format(new Date()));
 			int count = coachDao.getObjectById(po.getCoach_id()).getService_count();
 			CoachBasicInfo coach = new CoachBasicInfo();
 			coach.setService_count(count + 1);
@@ -127,6 +149,26 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 			int result = coachDao.updateObjectById(coach);
 			if(result != 1)
 				throw new Exception("订单完成后，更新教练服务次数失败。");
+		}else if(status != null && status == 1){ //表示取消一个订单，要释放该订单占由的排班信息
+			boolean updateScheduleInfoSuccess = false;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			OrderRecord orderRecord = dao.getObjectById(po.getOrder_id());
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("coach_id", orderRecord.getCoach_id());
+			map.put("schedule_date", orderRecord.getTraining_start_time().split(" ")[0]);
+			ScheduleInfo scheduleInfo = scheduleInfoDao.getObjectByCoachIdAndScheduleDate(map);
+			String precontract_info = scheduleInfo.getPrecontract_info();
+			if(StringUtils.hasText(precontract_info)){
+				Calendar calendar = format.getCalendar();
+				calendar.setTime(format.parse(orderRecord.getTraining_start_time()));
+				int hour = calendar.get(Calendar.HOUR_OF_DAY);
+				precontract_info = precontract_info.substring(0, hour) + "0" + precontract_info.substring(hour+1);
+				scheduleInfo.setPrecontract_info(precontract_info);
+				if(scheduleInfoDao.updateObjectById(scheduleInfo) == 1)
+					updateScheduleInfoSuccess = true;
+			}
+			if(!updateScheduleInfoSuccess)
+				return 0;
 		}
 		String operation = po.getOperation();
 		if(operation != null && operation.length() > 50)

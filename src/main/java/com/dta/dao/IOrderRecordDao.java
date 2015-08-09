@@ -165,5 +165,14 @@ public interface IOrderRecordDao extends IBaseAllDao<OrderRecord, OrderRecordVo>
 	 * <p>web界面通过教练的id获取教练订单记录的总数
 	 */
 	public int getCoachOrderByIdSize(CoachOrderByIdVo vo);
+	
+	/**
+	 * 
+	 * @param school_id
+	 * @return
+	 * <p>扫描订单表，获取某个驾校名下所有学员的消费总额（order_status = 3), 冻结总额(order_status = 0,2);
+	 * 若驾校id为0，则获取所有学员的消费总额和冻结总额
+	 */
+	public List<Map<String, Object>> getAmountGroupByOrderStatus(Map<String, Object> map);
 }
 

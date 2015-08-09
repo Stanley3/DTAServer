@@ -151,7 +151,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		gender,
 		online,
 		obligate_code,
-		device_type,
 		IF((PHOTO IS NULL), 0, 1) AS havePhoto
 	from coach_basic_info as C join school_info as S on C.school_id = S.school_id
 	where coach_id = #{coach_id} and C.validation = 1 and S.validation = 1

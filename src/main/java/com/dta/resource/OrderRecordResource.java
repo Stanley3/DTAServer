@@ -28,6 +28,7 @@ import org.springframework.util.StringUtils;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachIncomeRecord;
 import com.dta.bean.CoachOrderById;
+import com.dta.bean.CoachPrecontractRecord;
 import com.dta.bean.CoachTeachRecord;
 import com.dta.bean.MyOrderRecord;
 import com.dta.bean.OrderInfo;
@@ -66,9 +67,10 @@ public class OrderRecordResource extends
 		try {
 			int page = vo.getPage();
 			int rows = vo.getRows();
-			if (rows != 0)
-				vo.setPage((page + 1) * rows - rows);
-			return Response.status(200).entity(service.getCoPreRecord(vo))
+			/*if (rows != 0)
+				vo.setPage((page + 1) * rows - rows);*/
+			List<CoachPrecontractRecord> resultList = service.getCoPreRecord(vo);
+			return Response.status(200).entity(resultList)
 					.build();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -187,7 +189,7 @@ public class OrderRecordResource extends
 					++subject2TeachingTimes;
 				else if(list.get(i).getCourse_status() == 3)
 					++subject3TeachingTimes;
-				if(list.get(i).getStudent_level() != 0)
+				if(list.get(i).getStudent_level() != null && list.get(i).getStudent_level() != 0)
 					++VIPStudentNumbers;
 			}
 			teachingTimes = subject2TeachingTimes + subject3TeachingTimes;
@@ -326,7 +328,7 @@ public class OrderRecordResource extends
 			OrderRecord po = service.getObjectById(order_id);
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			if(StringUtils.hasText(po.getTraining_start_time())){
-				Date date = format.parse(format.format(po.getTraining_start_time()));
+				Date date = format.parse(po.getTraining_start_time());
 				long tweleveHoursToMs = 12 * 60 * 60 * 1000;
 				if(System.currentTimeMillis() > (date.getTime() - tweleveHoursToMs) 
 						&& System.currentTimeMillis() < (date.getTime() + tweleveHoursToMs))

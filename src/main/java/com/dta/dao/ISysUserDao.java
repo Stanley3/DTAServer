@@ -1,6 +1,7 @@
 package com.dta.dao;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.SysUserVo;
@@ -16,5 +17,6 @@ public interface ISysUserDao extends IBaseAllDao<SysUser, SysUserVo> {
 	 * @return 
 	 * <p>用户的驾校id，总后台用户的驾校id为0
 	 */
-	public Integer getSchoolIdByUsername(String username);
+	public Map<String, Object> getSchoolIdByUsername(String username);
+	
 }

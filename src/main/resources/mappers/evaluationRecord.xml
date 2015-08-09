@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join
 		coach_basic_info as C
 	on 
-		E.coach_id = C.coach_id
+		O.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
@@ -84,9 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_id != null and student_id != '' ">
 			and E.student_id = #{student_id}
 		</if>
-		<if test="coach_id != null and coach_id != '' ">
+		<!-- <if test="coach_id != null and coach_id != '' ">
 			and E.coach_id = #{coach_id}
-		</if>
+		</if> -->
 		<if test="order_id != null and order_id != '' ">
 			and E.order_id = #{order_id}
 		</if>
@@ -138,7 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join
 		coach_basic_info as C
 	on 
-		E.coach_id = C.coach_id
+		O.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
@@ -150,9 +150,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_id != null and student_id != '' ">
 			and E.student_id = #{student_id}
 		</if>
-		<if test="coach_id != null and coach_id != '' ">
+		<!-- <if test="coach_id != null and coach_id != '' ">
 			and E.coach_id = #{coach_id}
-		</if>
+		</if> -->
 		<if test="order_id != null and order_id != '' ">
 			and E.order_id = #{order_id}
 		</if>
@@ -194,7 +194,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join
 		coach_basic_info as C
 	on 
-		E.coach_id = C.coach_id
+		O.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
@@ -206,9 +206,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_id != null and student_id != '' ">
 			and E.student_id = #{student_id}
 		</if>
-		<if test="coach_id != null and coach_id != '' ">
+		<!-- <if test="coach_id != null and coach_id != '' ">
 			and E.coach_id = #{coach_id}
-		</if>
+		</if> -->
 		<if test="order_id != null and order_id != '' ">
 			and E.order_id = #{order_id}
 		</if>
@@ -399,7 +399,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join
 		coach_basic_info as C
 	on 
-		E.coach_id = C.coach_id
+		O.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
@@ -407,7 +407,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join 
 		student_basic_info SB
 	on 
-		E.student_id = SB.student_id
+		O.student_id = SB.student_id
 	join 
 		school_info as SC
 	on 
@@ -438,7 +438,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join
 		coach_basic_info as C
 	on 
-		E.coach_id = C.coach_id
+		O.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
@@ -446,7 +446,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join 
 		student_basic_info SB
 	on 
-		E.student_id = SB.student_id
+		O.student_id = SB.student_id
 	join 
 		school_info as SC
 	on 
@@ -498,11 +498,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	join 
 		student_basic_info as SB
 	on 
-		E.student_id = SB.student_id
+		O.student_id = SB.student_id
 	join 
 		coach_basic_info as C
 	on 
-		E.coach_id = C.coach_id
+		O.coach_id = C.coach_id
 	<where>
 		E.evaluation_record_id = #{evaluation_record_id}
 	</where>

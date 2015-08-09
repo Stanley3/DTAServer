@@ -717,7 +717,8 @@ var App = function () {
         //main function to initiate template pages
         init: function () {
         	//load navigation bar
-        	$('.navbar-inner').load('../media/nav.jsp #nav');
+        	var timestamp = (new Date()).valueOf();
+        	$('.navbar-inner').load('../media/nav.jsp?timestamp=' + timestamp + ' #nav');
         	//load sidebar
         	$('.page-sidebar').load('../media/left.jsp #leftNav');
             //IMPORTANT!!!: Do not modify the core handlers call order.

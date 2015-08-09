@@ -1,3 +1,4 @@
+<%@page import="com.dta.page.MoneyPage"%>
 <%@page import="org.apache.shiro.subject.Subject"%>
 <%@page import="org.apache.shiro.SecurityUtils"%>
 <%@page import="com.dta.resource.WebMainPageResource" %>
@@ -86,6 +87,8 @@
 		studentRate = Math.round(numbersMap.get("studentNumbers") * 100 / numbers);
 		coachRate = Math.round(numbersMap.get("coachNumbers") * 100 / numbers);
 	}
+	MoneyPage moneyPage = new MoneyPage((Integer)request.getSession(false).getAttribute("school_id"));
+	Map<String, Double> moneyMap = moneyPage.getMoney();
 %>
 <body class="page-header-fixed">
 
@@ -348,7 +351,7 @@
 
 									<div class="number">
 									<!-- <span id="balanceAmount">0</span> -->
-									<%=map.get("balanceAmount") %>
+									<%=moneyMap.get("allBalanceAmount") %>
 									元</div>
 
 									<div class="desc">现余资金</div>

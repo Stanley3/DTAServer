@@ -156,6 +156,7 @@ public class CoachBasicInfoResource extends
 			response.setHeader("Content-Type", "image/jpeg;charset=utf-8");
 			response.setHeader("Content-Disposition",
 					"attachment;filename=\"pic.jpg\"");
+			response.setHeader("Content-Length", po.getPhoto().length + "");
 			try {
 				OutputStream out = response.getOutputStream();
 				out.write(po.getPhoto());

@@ -14,6 +14,7 @@ import com.dta.bean.VIPStudentOfCoachInfo;
 import com.dta.dao.IStudentBasicInfoDao;
 import com.dta.dao.IStudentDepositRecordDao;
 import com.dta.service.IStudentDepositRecordService;
+import com.dta.service.IStudentFinanceInfoService;
 import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
@@ -25,6 +26,8 @@ public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentD
 	private IStudentDepositRecordDao dao;
 	@Autowired
 	private IStudentBasicInfoDao studentDao;
+	@Autowired
+	private IStudentFinanceInfoService studentFinanceInfoService;
 	public void init(){
 		super.setDao(dao);
 	}
@@ -58,13 +61,14 @@ public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentD
 	@Transactional
 	public int addObject(StudentDepositRecord po) throws Exception{
 		int result = 0;
-		if(po.getDeposit_type() != null){
+		if(po.getDeposit_type() != null && po.getDeposit_type() != 0){ //更新学员的状态为vip
 			StudentBasicInfo studentBasicInfo = new StudentBasicInfo();
 			studentBasicInfo.setStudent_level(po.getDeposit_type() - 1);
 			studentBasicInfo.setStudent_id(po.getStudent_id());
 			result = studentDao.updateObjectById(studentBasicInfo);
 		}
 		result = super.addObject(po);
+		result = studentFinanceInfoService.addOrUpdateStudentFinanceInfo(po.getStudent_id(), Double.valueOf(po.getDeposit_amount()));
 		return result;
 	}
 

@@ -2,6 +2,7 @@ package com.dta.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
@@ -45,7 +46,9 @@ public class DisplayUrlFilter implements Filter{
 		HttpServletResponse httpResponse = (HttpServletResponse)response;
 		String url = httpRequest.getRequestURI();
 		if(!url.contains("media")){
-			logger.info("the request uri is {}", url);
+			logger.info("***************************************");
+			logger.info("the request uri is {} ", url);
+			logger.info("***************************************");
 			//httpResponse.sendRedirect(httpRequest.getRequestURL().toString().split(";")[0]);
 		}
 		System.out.println("用request获取的sessionid为：" + httpRequest.getSession().getId());
@@ -61,7 +64,14 @@ public class DisplayUrlFilter implements Filter{
 			String username = (String)subject.getPrincipal();
 			if(StringUtils.hasText(username)){
 				try{
-					session.setAttribute("school_id", sysService.getSchoolIdByUsername(username));
+					Map<String, Object> map = sysService.getSchoolIdByUsername(username);
+					if(map != null){
+						session.setAttribute("school_id", (Integer)map.get("school_id"));
+						session.setAttribute("school_name", (String)map.get("school_name"));
+					}else{
+						logger.error("web端用户登录时，不能根据用户名信息获取用户所在的驾校信息");
+						return;
+					}
 				}catch(Exception e){
 					logger.error(e.getMessage());
 				}

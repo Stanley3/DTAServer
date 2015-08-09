@@ -38,6 +38,7 @@ import com.dta.dao.IStudentFinanceInfoDao;
 import com.dta.service.ICoachFinanceRecordService;
 import com.dta.service.IOrderRecordService;
 import com.dta.service.IScheduleInfoService;
+import com.dta.service.IStudentFinanceInfoService;
 import com.dta.vo.CoachIncomeRecordVo;
 import com.dta.vo.CoachOrderByIdVo;
 import com.dta.vo.CoachPrecontractRecordVo;
@@ -58,7 +59,7 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 	@Autowired
 	private IStudentDepositRecordDao depositDao;
 	@Autowired
-	private IStudentFinanceInfoDao studentFinanceDao;
+	private IStudentFinanceInfoService studentFinanceService;
 	@Autowired
 	private IScheduleInfoService scheduleInfoService;
 	@Autowired
@@ -101,7 +102,7 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 			studentConsumeAmount = 0.00;
 		if(orderTotalAmount > (studentDepositAmount - studentConsumeAmount))
 			return -1;//余额不足*/
-		Double studentAccountBalance = studentFinanceDao.getStudentBalanceById(po.getStudent_id());
+		Double studentAccountBalance = studentFinanceService.getStudentBalanceById(po.getStudent_id());
 		if(studentAccountBalance == null)	
 			studentAccountBalance = 0.0;
 		if(studentAccountBalance < orderTotalAmount)
@@ -149,7 +150,7 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 			int result = coachDao.updateObjectById(coach);
 			if(result != 1)
 				throw new Exception("订单完成后，更新教练服务次数失败。");
-		}else if(status != null && status == 1){ //表示取消一个订单，要释放该订单占由的排班信息
+		}else if(status != null && status == 1){ //表示取消一个订单，要释放该订单占由的排班信息;若取消时间距训练时间大于2h，则全额返现，在2h之内，一半给学员，一半教练。
 			boolean updateScheduleInfoSuccess = false;
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			OrderRecord orderRecord = dao.getObjectById(po.getOrder_id());
@@ -160,12 +161,25 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 			String precontract_info = scheduleInfo.getPrecontract_info();
 			if(StringUtils.hasText(precontract_info)){
 				Calendar calendar = format.getCalendar();
-				calendar.setTime(format.parse(orderRecord.getTraining_start_time()));
+				Date trainingDate = format.parse(orderRecord.getTraining_start_time());
+				calendar.setTime(trainingDate);
 				int hour = calendar.get(Calendar.HOUR_OF_DAY);
 				precontract_info = precontract_info.substring(0, hour) + "0" + precontract_info.substring(hour+1);
 				scheduleInfo.setPrecontract_info(precontract_info);
-				if(scheduleInfoDao.updateObjectById(scheduleInfo) == 1)
+				//if(scheduleInfoDao.updateObjectById(scheduleInfo) == 1)
+				
+				if(scheduleInfoService.synchronizedUpdateObjectById(scheduleInfo) == 1)
 					updateScheduleInfoSuccess = true;
+				if((trainingDate.getTime() - System.currentTimeMillis()) < 2 * 60 * 60 * 1000){
+					//返回一半钱给教练，一半给学员
+					if(coachFinaceRecordService.addOrUpdateCoachIncomeAmount(orderRecord.getCoach_id(), orderRecord.getOrder_amount() / 2) != 1)
+						throw new IllegalArgumentException("学员在两个小时内取消订单时，将一半钱打给教练失败。");
+					if(studentFinanceService.updateBalanceByStudentId(orderRecord.getStudent_id(), orderRecord.getOrder_amount() / 2, 1) != 1)
+						throw new IllegalArgumentException("学员在两个小时内取消订单时，将一半钱返回学员失败。");
+				}else{
+					if(studentFinanceService.updateBalanceByStudentId(orderRecord.getStudent_id(), orderRecord.getOrder_amount(), 1) != 1)
+						throw new IllegalArgumentException("学员在两个小时外取消订单时，将钱给用户钱失败。");
+				}
 			}
 			if(!updateScheduleInfoSuccess)
 				return 0;
@@ -185,6 +199,7 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 		return dao.getCoPreRecord(vo);
 	}
 
+	
 
 	@Override
 	public List<TrainingRecord> getStuTranRecord(TrainingRecordVo vo)
@@ -346,5 +361,14 @@ public class OrderRecordServiceImpl extends BaseAllServiceImpl<OrderRecord, Orde
 					: false;
 		}
 		return result;
+	}
+
+	@Override
+	public List<Map<String, Object>> getAmountGroupByOrderStatus(Integer school_id) {
+		if(school_id == null)
+			throw new IllegalArgumentException("汇总驾校名下学员的消费总额，冻结总额时驾校id为null");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("school_id", school_id);
+		return dao.getAmountGroupByOrderStatus(map);
 	}
 }

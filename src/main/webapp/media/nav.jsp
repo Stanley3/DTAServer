@@ -6,11 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Cache-Control" content="no-coach">
 <title>nav</title>
 </head>
 <body>
 <%
 	Integer school_id = (Integer)request.getSession(false).getAttribute("school_id");
+	String school_name = (String)request.getSession(false).getAttribute("school_name");
 %>
 	<div class="container-fluid" id="nav">
 
@@ -18,7 +20,7 @@
 
 				<a class="brand"  style="margin-left:10px; " href="index.html">
 
-				驾考联盟后台管理系统
+				<%=school_name %>后台管理系统
 
 				</a>
 

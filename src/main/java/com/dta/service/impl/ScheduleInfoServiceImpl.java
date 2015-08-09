@@ -3,6 +3,7 @@ package com.dta.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 	public void init(){
 		super.setDao(dao);
 	}
-	
+	private ReentrantLock lock = new ReentrantLock();
 	@Override
 	public List<ScheduleInfo> getAll(ScheduleInfoVo vo) {
 		if(vo.getCoach_id() == null)
@@ -94,7 +95,8 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 			ScheduleInfo po = new ScheduleInfo();
 			po.setPrecontract_info(new_precontract_info);
 			po.setSchedule_id(scheduleInfo.getSchedule_id());
-			if(dao.updateObjectById(po) == 1)
+			//if(dao.updateObjectById(po) == 1)
+			if(synchronizedUpdateObjectById(po) == 1)
 				result = true;
 		}
 		return result;
@@ -106,4 +108,14 @@ public class ScheduleInfoServiceImpl extends BaseAllServiceImpl<ScheduleInfo, Sc
 		return false;
 	}
 	
+	public int synchronizedUpdateObjectById(ScheduleInfo po){
+		int result = 0;
+		try{
+			lock.lock();
+			result = dao.updateObjectById(po);
+		}finally{
+			lock.unlock();
+		}
+		return result;
+	}
 }

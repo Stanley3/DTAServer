@@ -16,7 +16,14 @@ public class MyOrderRecord {
 	private Integer order_id;
 	private Integer student_id;
 	private Integer evaluation_record_id;
+	private Integer havePhoto;
 	
+	public Integer getHavePhoto() {
+		return havePhoto;
+	}
+	public void setHavePhoto(Integer havePhoto) {
+		this.havePhoto = havePhoto;
+	}
 	public Integer getEvaluation_record_id() {
 		return evaluation_record_id;
 	}

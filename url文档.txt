@@ -146,7 +146,13 @@
 	返回参数：code：1， desc：扫码成功
 			code：2，desc：扫码失败
 			code：3，desc：（系统异常，返回信息不定）
-	返回bean：无	
+	返回bean：无
+10. 下载教练头像
+	resourceJava: CoachBasicInfoResource.java
+	url: coachBasicInfo/downloadPhoto
+	请求方式：get
+	详细参数：id 值是学员id
+	返回：流	
 	
 二、学员端
 1. 登录
@@ -178,8 +184,9 @@
 	url: scheduleInfo/selectCoach
 	请求方式：get
 	参数bean：SelectCoachVo.java
-	详细参数：驾校id  school_id
-			  学员当前科目 subject
+	详细参数： 驾校id  school_id
+		         学员当前科目 subject
+		         学员id student_id
 	          排序方式：待咨询（综合排序，人气优先，常用教练）
 			  分页参数："start"：0|10|20|..., "length":10
     返回参数bean：SelectCoach.java
@@ -253,7 +260,7 @@
 			  服务态度分 service_attitude （满分10分）
 			  卫生分 hygiene （满分10分）
 			  评价类型 evaluation_type（0投诉 1评价 2建议）
-			 评价id evaluation_record_id （null表示新的评价，用返回的值表明修改评价）
+			  评价id evaluation_record_id （null表示新的评价，用返回的值表明修改评价）
 	返回参数bean：无
 	返回参数格式：{"code":1, "desc":"增添成功"} 或 {"code":2, "desc":"增添失败"} 或 {"code":3, "desc":"系统异常"}
 	

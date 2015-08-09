@@ -1,5 +1,7 @@
 package com.dta.service.impl;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +15,7 @@ import com.dta.vo.CoachFinanceRecordVo;
 public class CoachFinanceRecordServiceImpl extends BaseAllServiceImpl<CoachFinanceRecord, CoachFinanceRecordVo> implements ICoachFinanceRecordService{
 	@Autowired
 	private ICoachFinanceRecordDao dao;
-	
+	private ReentrantLock lock = new ReentrantLock();
 	public void init(){
 		super.setDao(dao);
 	}
@@ -23,20 +25,25 @@ public class CoachFinanceRecordServiceImpl extends BaseAllServiceImpl<CoachFinan
 	public int addOrUpdateCoachIncomeAmount(Integer coach_id, double amount) {
 		// TODO Auto-generated method stub
 		int result = 0;
-		Integer fincance_record_id = getFinanceIdByCoachId(coach_id);
-		CoachFinanceRecord coachFinanceRecord;
-		if(fincance_record_id == null || fincance_record_id == 0){
-			coachFinanceRecord = new CoachFinanceRecord();
-			coachFinanceRecord.setCoach_id(coach_id);
-			coachFinanceRecord.setIncome_amount(amount);
-			coachFinanceRecord.setPayed_amount(0.0);
-			result = dao.addObject(coachFinanceRecord);
-		}else{
-			coachFinanceRecord = dao.getObjectById(fincance_record_id);
-			if(coachFinanceRecord != null){
-				coachFinanceRecord.setIncome_amount(amount + coachFinanceRecord.getIncome_amount());
-				result = dao.updateObjectById(coachFinanceRecord);
+		try{
+			lock.lock();
+			Integer fincance_record_id = getFinanceIdByCoachId(coach_id);
+			CoachFinanceRecord coachFinanceRecord;
+			if(fincance_record_id == null || fincance_record_id == 0){
+				coachFinanceRecord = new CoachFinanceRecord();
+				coachFinanceRecord.setCoach_id(coach_id);
+				coachFinanceRecord.setIncome_amount(amount);
+				coachFinanceRecord.setPayed_amount(0.0);
+				result = dao.addObject(coachFinanceRecord);
+			}else{
+				coachFinanceRecord = dao.getObjectById(fincance_record_id);
+				if(coachFinanceRecord != null){
+					coachFinanceRecord.setIncome_amount(amount + coachFinanceRecord.getIncome_amount());
+					result = dao.updateObjectById(coachFinanceRecord);
+				}
 			}
+		}finally{
+			lock.unlock();
 		}
 		return result;
 	}

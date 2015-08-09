@@ -1,3 +1,7 @@
+<%@page import="java.util.Map"%>
+<%@page import="com.dta.page.MoneyPage"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -68,6 +72,15 @@
 <!-- BEGIN BODY -->
 
 <body class="page-header-fixed">
+<%
+	HttpSession session2 = request.getSession(false);
+    Map<String, Double> moneyMap = null;
+	if(session2 != null){
+		Integer school_id = (Integer)session2.getAttribute("school_id");
+		MoneyPage moneyPage = new MoneyPage(school_id);
+		moneyMap = moneyPage.getMoney();
+	}
+%>
 
 	<!-- BEGIN HEADER -->
 
@@ -399,7 +412,7 @@
 
 									<div class="number">
 
-										13,496元
+										<%=moneyMap.get("allDepositAmount") %>元
 
 									</div>
 
@@ -429,9 +442,9 @@
 
 								<div class="details">
 
-									<div class="number">1,549元</div>
+									<div class="number"><%=moneyMap.get("allConsumeAmount") %>元</div>
 
-									<div class="desc">总结算</div>
+									<div class="desc">总消费</div>
 
 								</div>
 
@@ -455,9 +468,9 @@
 
 								<div class="details">
 
-									<div class="number">3,334元</div>
+									<div class="number"><%=moneyMap.get("allFreezeAmount") %>元</div>
 
-									<div class="desc">待结算</div>
+									<div class="desc">总冻结</div>
 
 								</div>
 
@@ -483,7 +496,7 @@
 
 								<div class="details">
 
-									<div class="number">108,520元</div>
+									<div class="number"><%=moneyMap.get("allBalanceAmount") %>元</div>
 
 									<div class="desc">现余资金</div>
 

@@ -41,6 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="course_status != null and course_status != ''">
 			course_status = #{course_status},
 		</if>
+		<if test="student_level != null">
+			student_level = #{student_level},
+		</if>
 	</set>
 </insert>
 <!-- **********删除对象********** -->
@@ -344,9 +347,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		O.order_id,
 		O.school_id,
 		O.course_status,
-		O.order_time,
-		O.training_start_time,
-		O.training_end_time,
+		date_format(O.order_time, '%Y-%m-%d %H:%i:%S') as order_time,
+		date_format(O.training_start_time, '%Y-%m-%d %H:%i:%S') as training_start_time,
+		date_format(O.training_end_time, '%Y-%m-%d %H:%i:%S') as training_end_time,
 		O.order_status,
 		DATE_FORMAT(now(), '%Y-%m-%d %H:%i:%S') as queryTime
 	from 
@@ -767,5 +770,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		</if>
 	</where>
+</select>
+<!-- 扫描订单表，获取某个驾校名下所有学员的消费总额（order_status = 3), 冻结总额(order_status = 0,2); -->
+<select id="getAmountGroupByOrderStatus" resultType="map" parameterType="map">
+	<choose>
+		<when test="school_id == 0">
+			select sum(order_amount) as amount, CONCAT(order_status) as order_status from order_record 
+			where order_status != 1 group by order_status order by order_status asc
+		</when>
+		<otherwise>
+			select sum(order_amount) as amount , CONCAT(order_status) as order_status from 
+			order_record as o
+			join
+			student_basic_info as si
+			on o.student_id = si.student_id
+			where si.school_id = #{school_id}
+			group by order_status 
+			order by order_status asc
+		</otherwise>
+	</choose>
 </select>
  </mapper>

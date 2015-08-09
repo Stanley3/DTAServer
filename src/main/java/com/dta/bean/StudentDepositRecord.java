@@ -14,7 +14,7 @@ public class StudentDepositRecord implements Serializable{
 	@FormParam("student_id")
 	private Integer student_id;
 	@FormParam("deposit_amount")
-	private String deposit_amount;
+	private  String deposit_amount;
 	@FormParam("depositor_name")
 	private String depositor_name;
 	@FormParam("depositor_id")

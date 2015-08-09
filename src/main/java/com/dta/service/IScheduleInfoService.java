@@ -60,4 +60,12 @@ public interface IScheduleInfoService extends IBaseAllService<ScheduleInfo, Sche
 	 * <p>根据coach_id和schedule_date可以定位到某个排班的具体内容，index表示24个时间段中的索引
 	 */
 	public boolean isScheduled(Integer coach_id, String schedule_date, int index);
+	
+	/**
+	 * 
+	 * @param po
+	 * @return
+	 * <p>同步更新排班信息
+	 */
+	public int synchronizedUpdateObjectById(ScheduleInfo po);
 }

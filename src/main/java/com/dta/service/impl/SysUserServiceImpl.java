@@ -1,5 +1,7 @@
 package com.dta.service.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +25,9 @@ public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUserVo> i
 	}
 
 	@Override
-	public Integer getSchoolIdByUsername(String username) {
+	public Map<String, Object> getSchoolIdByUsername(String username) {
 		if(username == null)
-			throw new IllegalArgumentException("根据登录用户名获取用户id时 用户名为null");
+			throw new IllegalArgumentException("根据登录用户名获取驾校信息时 用户名为null");
 		return dao.getSchoolIdByUsername(username);
 	}
 }

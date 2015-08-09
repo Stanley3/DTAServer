@@ -7,4 +7,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getStudentBalanceById" resultType="Double" >
 	select student_account_balance from student_finance_info where student_id = #{id}
 </select>
+<insert id="addObject" parameterType="StudentFinanceInfo" useGeneratedKeys="true" keyColumn="student_finance_id">
+	insert into student_finance_info 
+	<set>
+		<if test="student_id != null">
+			student_id = #{sutdent_id},
+		</if>
+		<if test="student_finance_amount != null">
+			student_finance_amount = #{student_finance_amount},
+		</if>
+		<if test="student_account_balance != null">
+			student_account_balance = #{student_account_balance}
+		</if>
+	</set> 
+</insert>
+<update id="updateObject" parameterType="StudentFinanceInfo">
+	update student_finance_info 
+	<set>
+		<if test="student_id != null">
+			student_id = #{sutdent_id},
+		</if>
+		<if test="student_finance_amount != null">
+			student_finance_amount = #{student_finance_amount},
+		</if>
+		<if test="student_account_balance != null">
+			student_account_balance = #{student_account_balance}
+		</if>
+	</set> 
+	<where>
+		student_finance_id = #{student_finance_id}
+	</where>
+</update>
+<!-- 根据学员id获取学员的财务信息 -->
+<select id="getStudentFinanceInfoById" resultType="StudentFinanceInfo">
+	select * from student_finance_info where student_id = #{student_id}
+</select>
+<!-- 获取某驾校名下所有学员的充值总额；若school_id为0表示获取所有学员的充值总额 -->
+<select id="getAllStudentDespoitAmoutBySchoolId" resultType="double" parameterType="map">
+	<choose>
+		<when test="school_id == 0">
+			select sum(student_finance_amount) from student_finance_info 
+		</when>
+		<when test="school_id != 0">
+			select sum(student_finance_amount) from student_finance_info as sfi
+			join student_basic_info as sbi on sfi.student_id = sbi.student_id 
+			where sbi.school_id = #{school_id}
+		</when>
+	</choose>
+</select>
 </mapper>

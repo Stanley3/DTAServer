@@ -29,11 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<li class="start active"><a href="../main/main.jsp"><span
 					class="title">管理主页</span> </a></li>
-			<li class=""><a href="javascript:;"><span class="title">系统设置</span></a>
+			<!-- <li class=""><a href="javascript:;"><span class="title">系统设置</span></a>
 				<ul class="sub-menu">
 					<li><a href="layout_horizontal_sidebar_menu.html">系统参数设置</a></li>
 					<li><a href="layout_horizontal_menu1.html">赞助商设置</a></li>
-				</ul></li>
+				</ul></li> -->
 
 			<shiro:hasPermission name="superadmin">
 				<li class=""><a href="javascript:;"><span class="title">驾校考场</span></a>
@@ -62,10 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<li><a href="javascript:;"><span class="title">财务管理</span></a>
 				<ul class="sub-menu">
-					<li><a href="../money/money.html">财务汇总</a></li>
+					<li><a href="../money/money.jsp">财务汇总</a></li>
 					<li><a href="../money/money_in_new.html">费用充值</a></li>
-					<li><a href="../money/money_checkout.html">结算费用</a></li>
-					<li><a href="../money/money_feed.html">消费明细</a></li>
+					<!-- <li><a href="../money/money_checkout.html">结算费用</a></li>
+					<li><a href="../money/money_feed.html">消费明细</a></li> -->
 				</ul></li>
 
 			<li><a class="active" href="javascript:;"><span
@@ -78,12 +78,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul class="sub-menu">
 					<li><a href="../order/order_list_yuyue.html">查看订单</a></li>
 				</ul></li>
-			<shiro:hasPermission name="superadmin">
+			<%-- <shiro:hasPermission name="superadmin">
 				<li class=""><a href="javascript:;"><span class="title">超管设置</span></a>
 					<ul class="sub-menu">
 						<li><a href="login_soft.html">网站超管</a></li>
 					</ul></li>
-			</shiro:hasPermission>
+			</shiro:hasPermission> --%>
 		</ul>
 	</div>
 </body>

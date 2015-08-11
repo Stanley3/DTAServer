@@ -47,32 +47,32 @@ public class StudentDepositRecordResource extends
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getStuDepInfo(@BeanParam ShowDepositRecordVo vo) {
 		try {
-			if(vo.getRows() == -1)
+			if (vo.getRows() == -1)
 				vo.setRows(0);
 			int draw = vo.getDraw() == null ? 0 : vo.getDraw();
 			int size = 0;
 			List<ShowDepositRecord> resultList = new ArrayList<ShowDepositRecord>();
 			Map<String, Object> resultMap = new HashMap<String, Object>();
-			if(vo.getSearch() != null && !vo.getSearch().isEmpty()){
+			if (vo.getSearch() != null && !vo.getSearch().isEmpty()) {
 				Pattern pattern = Pattern.compile("^\\d+$");
 				Matcher matcher = pattern.matcher(vo.getSearch());
-				if(matcher.matches())
+				if (matcher.matches())
 					vo.setDeposit_date(vo.getSearch());
 				size = service.globalSerachSize(vo);
-				if(size != 0)
+				if (size != 0)
 					resultList = service.globalSerach(vo);
 				resultMap.put("recordsTotal", size);
-			}
-			else{
+			} else {
 				size = service.getStuDepInfoSize(vo);
-				if(size != 0)
+				if (size != 0)
 					resultList = service.getStuDepInfo(vo);
 				resultMap.put("recordsTotal", size);
 			}
 			resultMap.put("draw", draw);
 			resultMap.put("recordsFiltered", size);
-			/*if(size != 0)
-				resultList= service.getStuDepInfo(vo);*/
+			/*
+			 * if(size != 0) resultList= service.getStuDepInfo(vo);
+			 */
 			resultMap.put("data", resultList);
 			return Response.status(200).entity(resultMap).build();
 		} catch (Exception e) {
@@ -83,21 +83,22 @@ public class StudentDepositRecordResource extends
 							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
-	
+
 	@GET
 	@Path("getVIPStudentOfCoachInfo")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getVIPStudentOfCoachInfo(@BeanParam VIPStudentOfCoachInfoVo vo){
-		try{
+	public Response getVIPStudentOfCoachInfo(
+			@BeanParam VIPStudentOfCoachInfoVo vo) {
+		try {
 			int size = service.getVIPStudentOfCoachInfoSize(vo);
 			List<VIPStudentOfCoachInfo> list = new ArrayList<VIPStudentOfCoachInfo>();
-			if(size != 0)
+			if (size != 0)
 				list = service.getVIPStudentOfCoachInfo(vo);
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("total", size);
 			resultMap.put("data", list);
 			return Response.status(200).entity(resultMap).build();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return Response
 					.status(500)
@@ -105,21 +106,22 @@ public class StudentDepositRecordResource extends
 							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
-	
+
 	@GET
 	@Path("getStudentDepositRecord")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStudentDepositRecord(@BeanParam DisplayStudentDepositRecordVo vo){
-		try{
+	public Response getStudentDepositRecord(
+			@BeanParam DisplayStudentDepositRecordVo vo) {
+		try {
 			int size = service.displayStudentDepositRecordSize(vo);
 			List<DisplayStudentDepositReocrd> list = new ArrayList<DisplayStudentDepositReocrd>();
-			if(size != 0)
+			if (size != 0)
 				list = service.displayStudentDepositRecord(vo);
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("total", size);
 			resultMap.put("data", list);
 			return Response.status(200).entity(resultMap).build();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return Response
 					.status(500)

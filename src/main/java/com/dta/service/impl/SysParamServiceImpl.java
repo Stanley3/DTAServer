@@ -9,11 +9,12 @@ import com.dta.service.ISysParamService;
 import com.dta.vo.SysParamVo;
 
 @Service
-public class SysParamServiceImpl extends BaseAllServiceImpl<SysParam, SysParamVo> implements ISysParamService{
+public class SysParamServiceImpl extends
+		BaseAllServiceImpl<SysParam, SysParamVo> implements ISysParamService {
 	@Autowired
 	private ISysParamDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

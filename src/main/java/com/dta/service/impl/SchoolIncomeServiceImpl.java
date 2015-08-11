@@ -9,11 +9,13 @@ import com.dta.service.ISchoolIncomeService;
 import com.dta.vo.SchoolFinanceVo;
 
 @Service
-public class SchoolIncomeServiceImpl extends BaseAllServiceImpl<SchoolIncome, SchoolFinanceVo> implements ISchoolIncomeService{
+public class SchoolIncomeServiceImpl extends
+		BaseAllServiceImpl<SchoolIncome, SchoolFinanceVo> implements
+		ISchoolIncomeService {
 	@Autowired
 	private ISchoolIncomeDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

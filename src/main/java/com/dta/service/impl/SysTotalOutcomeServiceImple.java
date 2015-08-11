@@ -9,11 +9,13 @@ import com.dta.service.ISysTotalOutcomeService;
 import com.dta.vo.SysTotalOutcomeVo;
 
 @Service
-public class SysTotalOutcomeServiceImple extends BaseAllServiceImpl<SysTotalOutcome, SysTotalOutcomeVo> implements ISysTotalOutcomeService{
+public class SysTotalOutcomeServiceImple extends
+		BaseAllServiceImpl<SysTotalOutcome, SysTotalOutcomeVo> implements
+		ISysTotalOutcomeService {
 	@Autowired
 	private ISysTotalOutcomeDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

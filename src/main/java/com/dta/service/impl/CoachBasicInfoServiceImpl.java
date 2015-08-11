@@ -15,15 +15,17 @@ import com.dta.service.ICoachBasicInfoService;
 import com.dta.vo.CoachBasicInfoVo;
 
 @Service
-public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo, CoachBasicInfoVo> implements ICoachBasicInfoService{
+public class CoachBasicInfoServiceImpl extends
+		BaseAllServiceImpl<CoachBasicInfo, CoachBasicInfoVo> implements
+		ICoachBasicInfoService {
 	@Autowired
 	private ICoachBasicInfoDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
-	
-	public CoachBasicInfo downloadPhoto(int id){
+
+	public CoachBasicInfo downloadPhoto(int id) {
 		return dao.downloadPhoto(id);
 	}
 
@@ -32,13 +34,13 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 		String search = vo.getSearch();
 		Pattern pattern = Pattern.compile("^\\d+$");
 		Matcher matcher = pattern.matcher(search);
-		if(matcher.matches()){
+		if (matcher.matches()) {
 			vo.setRegister_date(search);
 			vo.setPhone(search);
 		}
 		vo.setCoach_name(search);
 		vo.setSchool_name(search);
-		if(vo.getRows() == -1)
+		if (vo.getRows() == -1)
 			vo.setRows(0);
 		return dao.globalSearch(vo);
 	}
@@ -50,9 +52,9 @@ public class CoachBasicInfoServiceImpl extends BaseAllServiceImpl<CoachBasicInfo
 
 	@Override
 	public CoachInfo getCoachInfo(Integer coach_id) {
-		if(coach_id == null)
+		if (coach_id == null)
 			throw new IllegalArgumentException("获取教练个人信息时 coach_id为null");
-		return dao.getCoachInfo(coach_id);	
+		return dao.getCoachInfo(coach_id);
 	}
 
 	@Override

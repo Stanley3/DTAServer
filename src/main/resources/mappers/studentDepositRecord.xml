@@ -339,4 +339,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</where>
 </select>
+<!-- 获取已经充值的学员的总数 -->
+<select id="getDepositedStudentNumbers" resultType="int">
+	<choose>
+		<when test="school_id == 0">
+			select count(distinct student_id) as numbers from student_deposit_record
+		</when>
+		<otherwise>
+			select count(distinct student_id) as numbers
+			from student_deposit_record as sdi join student_basic_info as sbi 
+			on sdi.student_id = sbi.student_id where school_id = #{school_id}
+		</otherwise>
+	</choose>
+</select>
 </mapper>

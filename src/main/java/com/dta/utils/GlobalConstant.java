@@ -1,6 +1,6 @@
 package com.dta.utils;
 
-public class GlobalConstant{
+public class GlobalConstant {
 	public static final int OPERATION_SUCCESS = 1;
 	public static final int OPERATION_FAIL = 2;
 	public static final int OPERATION_EXCEPTION = 3;
@@ -19,7 +19,7 @@ public class GlobalConstant{
 	public static final String COACHSCANNEDSUCCESS = "扫码成功";
 	public static final String CACELPRECONTRACTFAIL = "取消预约失败";
 	public static final String CACELPRECONTRACTSUCCESS = "取消预约成功";
-	
+
 	public static final String COACHBASICINFO = "coach_id";
 	public static final String COACHFINANCERECORD = "finance_record_id";
 	public static final String COACHWITHDRAWRECORD = "withdraw_record_id";

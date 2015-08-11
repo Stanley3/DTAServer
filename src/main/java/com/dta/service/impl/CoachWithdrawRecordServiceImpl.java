@@ -9,11 +9,13 @@ import com.dta.service.ICoachWithdrawRecordService;
 import com.dta.vo.CoachWithdrawRecordVo;
 
 @Service
-public class CoachWithdrawRecordServiceImpl extends BaseAllServiceImpl<CoachWithdrawRecord, CoachWithdrawRecordVo> implements ICoachWithdrawRecordService{
+public class CoachWithdrawRecordServiceImpl extends
+		BaseAllServiceImpl<CoachWithdrawRecord, CoachWithdrawRecordVo>
+		implements ICoachWithdrawRecordService {
 	@Autowired
 	private ICoachWithdrawRecordDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

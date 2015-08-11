@@ -9,11 +9,13 @@ import com.dta.service.ISysNetIncomeService;
 import com.dta.vo.SysNetIncomeVo;
 
 @Service
-public class SysNetIncomeServiceImpl extends BaseAllServiceImpl<SysNetIncome, SysNetIncomeVo> implements ISysNetIncomeService{
+public class SysNetIncomeServiceImpl extends
+		BaseAllServiceImpl<SysNetIncome, SysNetIncomeVo> implements
+		ISysNetIncomeService {
 	@Autowired
 	private ISysNetIncomeDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

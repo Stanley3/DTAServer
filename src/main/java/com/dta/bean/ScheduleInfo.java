@@ -5,8 +5,7 @@ import java.sql.Date;
 
 import javax.ws.rs.FormParam;
 
-
-public class ScheduleInfo implements Serializable{
+public class ScheduleInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@FormParam("schedule_id")
 	private Integer schedule_id;
@@ -33,89 +32,116 @@ public class ScheduleInfo implements Serializable{
 	@FormParam("device_type")
 	private Integer device_type;
 	private String precontract_info;
-	private Integer remnant_device_numbers; 
-	
+	private Integer remnant_device_numbers;
+
 	public Integer getRemnant_device_numbers() {
 		return remnant_device_numbers;
 	}
+
 	public void setRemnant_device_numbers(Integer remnant_device_numbers) {
 		this.remnant_device_numbers = remnant_device_numbers;
 	}
+
 	public Integer getDevice_type() {
 		return device_type;
 	}
+
 	public void setDevice_type(Integer device_type) {
 		this.device_type = device_type;
 	}
+
 	public String getPrecontract_info() {
 		return precontract_info;
 	}
+
 	public void setPrecontract_info(String precontract_info) {
 		this.precontract_info = precontract_info;
 	}
-	public void setSchedule_id(Integer schedule_id){
+
+	public void setSchedule_id(Integer schedule_id) {
 		this.schedule_id = schedule_id;
 	}
+
 	public Integer getSchedule_id() {
 		return schedule_id;
 	}
-	public void setCoach_id(Integer coach_id){
+
+	public void setCoach_id(Integer coach_id) {
 		this.coach_id = coach_id;
 	}
+
 	public Integer getCoach_id() {
 		return coach_id;
 	}
-	public void setOperator_id(Integer operator_id){
+
+	public void setOperator_id(Integer operator_id) {
 		this.operator_id = operator_id;
 	}
+
 	public Integer getOperator_id() {
 		return operator_id;
 	}
-	public void setOperate_time(Date operate_time){
+
+	public void setOperate_time(Date operate_time) {
 		this.operate_time = operate_time;
 	}
+
 	public Date getOperate_time() {
 		return operate_time;
 	}
-	public void setSubject(Integer subject){
+
+	public void setSubject(Integer subject) {
 		this.subject = subject;
 	}
+
 	public Integer getSubject() {
 		return subject;
 	}
-	public void setContent(String content){
+
+	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public String getContent() {
 		return content;
 	}
-	public void setStudent_toplimit(String student_toplimit){
+
+	public void setStudent_toplimit(String student_toplimit) {
 		this.student_toplimit = student_toplimit;
 	}
+
 	public String getStudent_toplimit() {
 		return student_toplimit;
 	}
-	public void setStudent_attribute(String student_attribute){
+
+	public void setStudent_attribute(String student_attribute) {
 		this.student_attribute = student_attribute;
 	}
+
 	public String getStudent_attribute() {
 		return student_attribute;
 	}
-	public void setSchedule_date(String schedule_date){
+
+	public void setSchedule_date(String schedule_date) {
 		this.schedule_date = schedule_date;
 	}
+
 	public String getSchedule_date() {
 		return schedule_date;
 	}
-	public void setDevice_attribude(Integer device_attribude){
+
+	public void setDevice_attribude(Integer device_attribude) {
 		this.device_attribude = device_attribude;
 	}
+
 	public Integer getDevice_attribude() {
 		return device_attribude;
 	}
-	public void setValidation(Integer validation){
+
+	public void setValidation(Integer validation) {
 		this.validation = validation;
 	}
+
 	public Integer getValidation() {
 		return validation;
 	}

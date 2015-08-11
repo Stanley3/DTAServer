@@ -9,21 +9,22 @@ import com.dta.dao.INewsInfoDao;
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.service.IBaseAllService;
 
-public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
+public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V> {
 	private IBaseAllDao<T, V> dao;
 
-	public BaseAllServiceImpl(){
-		
+	public BaseAllServiceImpl() {
+
 	}
+
 	@Transactional
-	public int addObject(T po) throws Exception  {
+	public int addObject(T po) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("父类的添加方法得到执行");
 		return dao.addObject(po);
 	}
 
 	@Transactional
-	public int updateObjectById(T po) throws Exception{
+	public int updateObjectById(T po) throws Exception {
 		System.out.println("父类的更新方法得到执行");
 		return dao.updateObjectById(po);
 	}
@@ -57,17 +58,16 @@ public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
 
 	public T getObjectById(Serializable id) {
 		// TODO Auto-generated method stub
-		System.out.println("dao is a instance of newsInfoDao?" + (dao instanceof INewsInfoDao));
+		System.out.println("dao is a instance of newsInfoDao?"
+				+ (dao instanceof INewsInfoDao));
 		T po = null;
-		if(dao != null)
-			 po = dao.getObjectById(id);
+		if (dao != null)
+			po = dao.getObjectById(id);
 		else
 			System.out.println("dao is null");
 		return po;
 	}
 
-	
-	
 	public IBaseAllDao<T, V> getDao() {
 		return dao;
 	}
@@ -75,5 +75,5 @@ public class BaseAllServiceImpl<T, V> implements IBaseAllService<T, V>{
 	public void setDao(IBaseAllDao<T, V> dao) {
 		this.dao = dao;
 	}
-	
+
 }

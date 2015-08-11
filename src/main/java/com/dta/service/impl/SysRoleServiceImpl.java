@@ -9,11 +9,12 @@ import com.dta.service.ISysRoleService;
 import com.dta.vo.SysRoleVo;
 
 @Service
-public class SysRoleServiceImpl extends BaseAllServiceImpl<SysRole, SysRoleVo> implements ISysRoleService{
+public class SysRoleServiceImpl extends BaseAllServiceImpl<SysRole, SysRoleVo>
+		implements ISysRoleService {
 	@Autowired
 	private ISysRoleDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

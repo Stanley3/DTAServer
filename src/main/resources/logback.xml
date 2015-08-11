@@ -4,9 +4,9 @@
     <!-- <file>logFile.log</file> -->
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>g:/test/log/log-%d{yyyy_MM, aux}/%d.log</fileNamePattern>
+      <!-- <fileNamePattern>d:/log/log-%d{yyyy_MM, aux}/%d.log</fileNamePattern> -->
 	  <!-- <fileNamePattern>/home/myfu/log/log-%d{yyyy_MM, aux}/%d.log</fileNamePattern> -->
-	  <!-- <fileNamePattern>G:/Test/log/log-%d{yyyy_MM, aux}/%d.log</fileNamePattern> -->
+	  <fileNamePattern>G:/Test/log/log-%d{yyyy_MM, aux}/%d.log</fileNamePattern>
       <!-- keep 365 days' worth of history -->
       <maxHistory>365</maxHistory>
     </rollingPolicy>

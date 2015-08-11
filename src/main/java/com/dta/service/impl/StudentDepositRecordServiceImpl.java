@@ -21,21 +21,24 @@ import com.dta.vo.StudentDepositRecordVo;
 import com.dta.vo.VIPStudentOfCoachInfoVo;
 
 @Service
-public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentDepositRecord, StudentDepositRecordVo> implements IStudentDepositRecordService{
+public class StudentDepositRecordServiceImpl extends
+		BaseAllServiceImpl<StudentDepositRecord, StudentDepositRecordVo>
+		implements IStudentDepositRecordService {
 	@Autowired
 	private IStudentDepositRecordDao dao;
 	@Autowired
 	private IStudentBasicInfoDao studentDao;
 	@Autowired
 	private IStudentFinanceInfoService studentFinanceInfoService;
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 
 	@Override
 	public List<ShowDepositRecord> getStuDepInfo(ShowDepositRecordVo vo) {
 		// TODO Auto-generated method stub
-		
+
 		return dao.getStuDepInfo(vo);
 	}
 
@@ -56,49 +59,58 @@ public class StudentDepositRecordServiceImpl extends BaseAllServiceImpl<StudentD
 		// TODO Auto-generated method stub
 		return dao.globalSerachSize(vo);
 	}
-	
+
 	@Override
 	@Transactional
-	public int addObject(StudentDepositRecord po) throws Exception{
+	public int addObject(StudentDepositRecord po) throws Exception {
 		int result = 0;
-		if(po.getDeposit_type() != null && po.getDeposit_type() != 0){ //更新学员的状态为vip
+		if (po.getDeposit_type() != null && po.getDeposit_type() != 0) { // 更新学员的状态为vip
 			StudentBasicInfo studentBasicInfo = new StudentBasicInfo();
 			studentBasicInfo.setStudent_level(po.getDeposit_type() - 1);
 			studentBasicInfo.setStudent_id(po.getStudent_id());
 			result = studentDao.updateObjectById(studentBasicInfo);
 		}
 		result = super.addObject(po);
-		result = studentFinanceInfoService.addOrUpdateStudentFinanceInfo(po.getStudent_id(), Double.valueOf(po.getDeposit_amount()));
+		result = studentFinanceInfoService.addOrUpdateStudentFinanceInfo(
+				po.getStudent_id(), Double.valueOf(po.getDeposit_amount()));
 		return result;
 	}
 
 	@Override
 	public List<VIPStudentOfCoachInfo> getVIPStudentOfCoachInfo(
 			VIPStudentOfCoachInfoVo vo) {
-		if(vo.getCoach_id() == null)
+		if (vo.getCoach_id() == null)
 			throw new IllegalArgumentException("获取教练名下VIP学员列表时 coach_id 为null");
-		return dao.getVIPStudentOfCoachInfo(vo);	
+		return dao.getVIPStudentOfCoachInfo(vo);
 	}
 
 	@Override
 	public int getVIPStudentOfCoachInfoSize(VIPStudentOfCoachInfoVo vo) {
-		if(vo.getCoach_id() == null)
+		if (vo.getCoach_id() == null)
 			throw new IllegalArgumentException("获取教练名下VIP学员列表时 coach_id 为null");
-		return dao.getVIPStudentOfCoachInfoSize(vo);	
+		return dao.getVIPStudentOfCoachInfoSize(vo);
 	}
 
 	@Override
 	public List<DisplayStudentDepositReocrd> displayStudentDepositRecord(
 			DisplayStudentDepositRecordVo vo) {
-		if(vo.getStudent_id() == null)
-			throw new IllegalArgumentException("学员端获取学员充值记录时，学员id student_id 为null");
+		if (vo.getStudent_id() == null)
+			throw new IllegalArgumentException(
+					"学员端获取学员充值记录时，学员id student_id 为null");
 		return dao.displayStudentDepositRecord(vo);
 	}
 
 	@Override
 	public int displayStudentDepositRecordSize(DisplayStudentDepositRecordVo vo) {
-		if(vo.getStudent_id() == null)
-			throw new IllegalArgumentException("学员端获取学员充值记录时，学员id student_id 为null");
+		if (vo.getStudent_id() == null)
+			throw new IllegalArgumentException(
+					"学员端获取学员充值记录时，学员id student_id 为null");
 		return dao.displayStudentDepositRecordSize(vo);
+	}
+
+	@Override
+	public Integer getDepositedStudentNumbers(Integer school_id) {
+		// TODO Auto-generated method stub
+		return dao.getDepositedStudentNumbers(school_id);
 	}
 }

@@ -9,10 +9,13 @@ import com.dta.utils.ServiceProvider;
 import com.dta.vo.CoachFinanceRecordVo;
 
 @Path("coachFinanceRecord")
-public class CoachFinanceRecordResource extends BaseAllResource<CoachFinanceRecord, CoachFinanceRecordVo>{
-	private ICoachFinanceRecordService service = (ICoachFinanceRecordService)ServiceProvider.getBean("coachFinanceRecordServiceImpl");
-	public CoachFinanceRecordResource(){
+public class CoachFinanceRecordResource extends
+		BaseAllResource<CoachFinanceRecord, CoachFinanceRecordVo> {
+	private ICoachFinanceRecordService service = (ICoachFinanceRecordService) ServiceProvider
+			.getBean("coachFinanceRecordServiceImpl");
+
+	public CoachFinanceRecordResource() {
 		super.setService(service);
-		super.setMianId(GlobalConstant.COACHFINANCERECORD);	
+		super.setMianId(GlobalConstant.COACHFINANCERECORD);
 	}
 }

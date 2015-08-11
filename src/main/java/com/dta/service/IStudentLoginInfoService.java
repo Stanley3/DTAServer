@@ -5,12 +5,12 @@ import com.dta.bean.StudentLoginSuccessInfo;
 import com.dta.vo.StudentLoginInfoVo;
 
 public interface IStudentLoginInfoService {
-	
+
 	/**
 	 * 
 	 * @param login_name
 	 * @return StudentLoginSuccessInfo
-	 * <p>
+	 *         <p>
 	 */
 	public StudentLoginSuccessInfo getStudentLoginSuccessInfo(String login_name);
 }

@@ -9,10 +9,13 @@ import com.dta.utils.ServiceProvider;
 import com.dta.vo.SysTotalOutcomeVo;
 
 @Path("sysTotalOutcome")
-public class SysTotalOutcomeResource extends BaseAllResource<SysTotalOutcome, SysTotalOutcomeVo>{
-	private ISysTotalOutcomeService service = (ISysTotalOutcomeService)ServiceProvider.getBean("sysTotalOutcomeServiceImple");
-	public SysTotalOutcomeResource(){
+public class SysTotalOutcomeResource extends
+		BaseAllResource<SysTotalOutcome, SysTotalOutcomeVo> {
+	private ISysTotalOutcomeService service = (ISysTotalOutcomeService) ServiceProvider
+			.getBean("sysTotalOutcomeServiceImple");
+
+	public SysTotalOutcomeResource() {
 		super.setService(service);
-		super.setMianId(GlobalConstant.SYSTOTALOUTCOME);	
+		super.setMianId(GlobalConstant.SYSTOTALOUTCOME);
 	}
 }

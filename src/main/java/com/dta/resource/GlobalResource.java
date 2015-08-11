@@ -15,22 +15,26 @@ import com.dta.vo.LatestNumberVo;
 
 @Path("global")
 public class GlobalResource {
-	private IGlobalService service = (IGlobalService) ServiceProvider.getBean("globalServiceImpl");
-	
+	private IGlobalService service = (IGlobalService) ServiceProvider
+			.getBean("globalServiceImpl");
+
 	@GET
 	@Path("getLatestNumber")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getLastestNumber(@BeanParam LatestNumberVo vo){
-		try{
+	public Response getLastestNumber(@BeanParam LatestNumberVo vo) {
+		try {
 			System.out.println(vo.getCoach_id());
 			System.out.println(vo.getLastQueryCancelTime());
 			System.out.println(vo.getLastQueryEvaluationTime());
 			System.out.println(vo.getLastQueryPrecontractTime());
-			return Response.status(200).entity(service.getLatestNumber(vo)).build();
-		}catch(Exception e){
+			return Response.status(200).entity(service.getLatestNumber(vo))
+					.build();
+		} catch (Exception e) {
 			e.printStackTrace();
-			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
-					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+			return Response
+					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
 }

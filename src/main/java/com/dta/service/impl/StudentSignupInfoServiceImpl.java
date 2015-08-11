@@ -9,11 +9,13 @@ import com.dta.service.IStudentSignupInfoService;
 import com.dta.vo.StudentSignupInfoVo;
 
 @Service
-public class StudentSignupInfoServiceImpl extends BaseAllServiceImpl<StudentSignupInfo, StudentSignupInfoVo> implements IStudentSignupInfoService{
+public class StudentSignupInfoServiceImpl extends
+		BaseAllServiceImpl<StudentSignupInfo, StudentSignupInfoVo> implements
+		IStudentSignupInfoService {
 	@Autowired
 	private IStudentSignupInfoDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

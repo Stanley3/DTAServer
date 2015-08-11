@@ -22,38 +22,45 @@ public class BatchOperation {
 	@Autowired
 	private ICoachBasicInfoService coachBasicInfoServiceImpl;
 	Logger logger = LoggerFactory.getLogger("com.dta.utils.BatchOperation");
-	public BatchOperation(){
+
+	public BatchOperation() {
 		System.err.println("**********执行************");
 		logger.info("定时器执行");
-		scheduleInfoService = (IScheduleInfoService)ServiceProvider.getBean("scheduleInfoServiceImpl");
-		coachBasicInfoServiceImpl = (ICoachBasicInfoService)ServiceProvider.getBean("coachBasicInfoServiceImpl");
+		scheduleInfoService = (IScheduleInfoService) ServiceProvider
+				.getBean("scheduleInfoServiceImpl");
+		coachBasicInfoServiceImpl = (ICoachBasicInfoService) ServiceProvider
+				.getBean("coachBasicInfoServiceImpl");
 	}
-	public void run(){
+
+	public void run() {
 		Timer timer = new Timer();
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-		Date beginTime ;
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"YYYY-MM-dd HH:mm:ss");
+		Date beginTime;
 		Calendar calendar = dateFormat.getCalendar();
 		calendar.setTime(new Date());
 		calendar.add(Calendar.DAY_OF_MONTH, 1);
 		calendar.set(Calendar.HOUR_OF_DAY, 1);
-		//calendar.add(Calendar.MINUTE, 1);
+		// calendar.add(Calendar.MINUTE, 1);
 		beginTime = calendar.getTime();
 		logger.debug("开启定时器");
-		timer.schedule(new TimerTask(){
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				//System.out.println("一秒执行一次" + System.currentTimeMillis());
-				List<Integer> coachIDList = coachBasicInfoServiceImpl.getAllCoachID();
-				if(coachIDList != null){
-					for(int i=0; i<coachIDList.size(); ++i){
-						scheduleInfoService.batchGenerateScheduleInfo(coachIDList.get(i));
+				// System.out.println("一秒执行一次" + System.currentTimeMillis());
+				List<Integer> coachIDList = coachBasicInfoServiceImpl
+						.getAllCoachID();
+				if (coachIDList != null) {
+					for (int i = 0; i < coachIDList.size(); ++i) {
+						scheduleInfoService
+								.batchGenerateScheduleInfo(coachIDList.get(i));
 					}
 				}
 				logger.debug("定时器得到执行");
 			}
-			
+
 		}, beginTime, 24 * 60 * 60 * 1000);
 	}
 }

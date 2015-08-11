@@ -6,7 +6,7 @@ import java.util.List;
 import com.dta.bean.SchoolInfoBasedDistance;
 
 public class CommonUtil {
-	private final static double EARTH_RADIUS = 6378.137; //单位是km
+	private final static double EARTH_RADIUS = 6378.137; // 单位是km
 
 	private static double rad(double d) {
 		return d * Math.PI / 180.0;
@@ -31,12 +31,12 @@ public class CommonUtil {
 				* Math.pow(Math.sin(b / 2), 2)));
 		s = s * EARTH_RADIUS;
 		BigDecimal bigDecimal = new BigDecimal(s);
-		//s = Math.round(s * 10000) / 10000;
+		// s = Math.round(s * 10000) / 10000;
 		return bigDecimal.setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 
-	public static void quickSort(List<SchoolInfoBasedDistance> list,
-			int start, int end) {
+	public static void quickSort(List<SchoolInfoBasedDistance> list, int start,
+			int end) {
 		int i = start, j = end;
 		double key = list.get(start).getDistance();
 		SchoolInfoBasedDistance keySchool = list.get(start);
@@ -70,11 +70,11 @@ public class CommonUtil {
 		list.set(i, keySchool);
 
 		/* 递归调用，把key前面的完成排序 */
-		if(start < i -1)
+		if (start < i - 1)
 			quickSort(list, start, i - 1);
 
 		/* 递归调用，把key后面的完成排序 */
-		if(j+1 < end)
+		if (j + 1 < end)
 			quickSort(list, j + 1, end);
 
 	}

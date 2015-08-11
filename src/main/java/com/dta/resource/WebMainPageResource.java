@@ -20,37 +20,43 @@ import com.dta.utils.SessionUtil;
 
 @Path("webMainPage")
 public class WebMainPageResource {
-	Logger logger = LoggerFactory.getLogger("com.dta.resource.WebMainPageResource");
-	private IWebMainPageService service = (IWebMainPageService)ServiceProvider.getBean("webMainPageServiceImpl");
-	public WebMainPageResource(){
+	Logger logger = LoggerFactory
+			.getLogger("com.dta.resource.WebMainPageResource");
+	private IWebMainPageService service = (IWebMainPageService) ServiceProvider
+			.getBean("webMainPageServiceImpl");
+
+	public WebMainPageResource() {
 	}
-	
+
 	@GET
 	@Path("getStaticInfo")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStaticInfo(@QueryParam("username") String username){
-		try{
-			return Response.status(200).entity(service.getStaticInfo(username)).build();
-		}catch(Exception e){
+	public Response getStaticInfo(@QueryParam("username") String username) {
+		try {
+			return Response.status(200).entity(service.getStaticInfo(username))
+					.build();
+		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
-			return Response.status(500).entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION, 
-					GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
+			return Response
+					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
 	}
-	
-	public Map<String, Integer> getStaticInfoByUsername(String username){
-		try{
+
+	public Map<String, Integer> getStaticInfoByUsername(String username) {
+		try {
 			Map<String, Integer> map = service.getStaticInfo(username);
 			return map;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
 			return null;
 		}
 	}
-	
-	public Map<String, Integer>getNumbers(String sessionId){
+
+	public Map<String, Integer> getNumbers(String sessionId) {
 		return SessionUtil.getNumbers(sessionId);
 	}
 }

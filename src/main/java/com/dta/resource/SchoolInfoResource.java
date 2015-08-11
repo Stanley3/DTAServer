@@ -66,34 +66,41 @@ public class SchoolInfoResource extends
 							GlobalConstant.SELECT_FAIL)).build();
 		}
 	}
-	
+
 	@GET
 	@Path("getSchoolInfoByDistance")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSchoolInfoByDistance(@BeanParam SchoolInfoBasedDistanceVo vo){
-		try{
-			if(vo.getLatitude() == null || vo.getLatitude() == null)
+	public Response getSchoolInfoByDistance(
+			@BeanParam SchoolInfoBasedDistanceVo vo) {
+		try {
+			if (vo.getLatitude() == null || vo.getLatitude() == null)
 				throw new IllegalArgumentException("未知的经纬度");
 			int start = vo.getPage();
 			int length = vo.getRows();
 			int size = service.getSchoolDistanceInfoSize(vo);
 			List<SchoolInfoBasedDistance> schoolList = new ArrayList<SchoolInfoBasedDistance>();
-			if(size != 0){
+			if (size != 0) {
 				schoolList = service.getSchoolDistanceInfo(vo);
-				for(int i=0; i<schoolList.size(); ++i){
-					schoolList.get(i).setDistance(CommonUtil.GetDistance(vo.getLatitude(), vo.getLongitude(), 
-							schoolList.get(i).getLatitude(), schoolList.get(i).getLongitude()));
+				for (int i = 0; i < schoolList.size(); ++i) {
+					schoolList.get(i).setDistance(
+							CommonUtil.GetDistance(vo.getLatitude(), vo
+									.getLongitude(), schoolList.get(i)
+									.getLatitude(), schoolList.get(i)
+									.getLongitude()));
 				}
-				CommonUtil.quickSort(schoolList, 0, schoolList.size()-1);
+				CommonUtil.quickSort(schoolList, 0, schoolList.size() - 1);
 			}
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("total", size);
-			if(length == 0)
+			if (length == 0)
 				resultMap.put("data", schoolList);
 			else
-				resultMap.put("data", schoolList.subList(start, (start + length)>=schoolList.size()? schoolList.size()-1 : (start + length)));
+				resultMap.put("data", schoolList.subList(
+						start,
+						(start + length) >= schoolList.size() ? schoolList
+								.size() - 1 : (start + length)));
 			return Response.status(200).entity(resultMap).build();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return Response
 					.status(500)

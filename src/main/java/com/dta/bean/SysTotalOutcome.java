@@ -7,7 +7,7 @@ import javax.ws.rs.FormParam;
 
 import com.dta.vo.PageParam;
 
-public class SysTotalOutcome extends PageParam implements Serializable{
+public class SysTotalOutcome extends PageParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@FormParam("total_outcome_id")
 	private Integer total_outcome_id;
@@ -21,39 +21,51 @@ public class SysTotalOutcome extends PageParam implements Serializable{
 	private Date time;
 	@FormParam("validation")
 	private Integer validation;
-	public void setTotal_outcome_id(Integer total_outcome_id){
+
+	public void setTotal_outcome_id(Integer total_outcome_id) {
 		this.total_outcome_id = total_outcome_id;
 	}
+
 	public Integer getTotal_outcome_id() {
 		return total_outcome_id;
 	}
-	public void setPayee_id(Integer payee_id){
+
+	public void setPayee_id(Integer payee_id) {
 		this.payee_id = payee_id;
 	}
+
 	public Integer getPayee_id() {
 		return payee_id;
 	}
-	public void setPayee_type(Integer payee_type){
+
+	public void setPayee_type(Integer payee_type) {
 		this.payee_type = payee_type;
 	}
+
 	public Integer getPayee_type() {
 		return payee_type;
 	}
-	public void setAmount(String amount){
+
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
+
 	public String getAmount() {
 		return amount;
 	}
-	public void setTime(Date time){
+
+	public void setTime(Date time) {
 		this.time = time;
 	}
+
 	public Date getTime() {
 		return time;
 	}
-	public void setValidation(Integer validation){
+
+	public void setValidation(Integer validation) {
 		this.validation = validation;
 	}
+
 	public Integer getValidation() {
 		return validation;
 	}

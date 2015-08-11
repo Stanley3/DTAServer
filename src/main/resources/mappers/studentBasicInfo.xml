@@ -268,4 +268,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="gatherStudentInfo" resultType="GatherStudentInfo">
 	call gatherStudentInfo(#{student_id})
 </select>
+<!-- 根据条件获取学员的总数 -->
+<select id="getStudentNumbers" resultType="int" parameterType="map">
+	<choose>
+		<when test="school_id == 0">
+			select count(student_id) from student_basic_info
+			<where>
+				<if test="student_level != null">
+					and student_level = #{student_level}
+				</if>
+				<if test="subject != null">
+					and subject = #{subject}
+				</if>
+			</where>
+		</when>
+		<otherwise>
+			select count(student_id) from student_basic_info
+			<where>
+				<if test="student_level != null">
+					and student_level = #{student_level}
+				</if>
+				<if test="subject != null">
+					and subject = #{subject}
+				</if>
+				and school_id = #{school_id}
+			</where>
+		</otherwise>
+	</choose>
+</select>
 </mapper>

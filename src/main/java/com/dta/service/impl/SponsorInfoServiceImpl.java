@@ -9,11 +9,13 @@ import com.dta.service.ISponsorInfoService;
 import com.dta.vo.SponsorInfoVo;
 
 @Service
-public class SponsorInfoServiceImpl extends BaseAllServiceImpl<SponsorInfo, SponsorInfoVo> implements ISponsorInfoService{
+public class SponsorInfoServiceImpl extends
+		BaseAllServiceImpl<SponsorInfo, SponsorInfoVo> implements
+		ISponsorInfoService {
 	@Autowired
 	private ISponsorInfoDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
 }

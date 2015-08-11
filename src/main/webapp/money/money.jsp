@@ -75,11 +75,31 @@
 <%
 	HttpSession session2 = request.getSession(false);
     Map<String, Double> moneyMap = null;
+    Map<String, Integer> numbersMap = null;
+    float character2Rate = 0, character3Rate = 0 , depositRate = 0;
+    Integer allStudentNumbers = 0,  //所有学员总数
+			allConsumedStudentNumbers = 0, //已消费学员总数
+			allDepositedStudentNumbers = 0, //已充值学员总数
+			allChartered2Numbers = 0, //包科二学员总数
+			allChartered3Numbers = 0, //包科三学员总数
+			allFree2Numbers = 0, //自由科二学员总数
+			allFree3Numbers = 0; //自由科三学员总数
 	if(session2 != null){
 		Integer school_id = (Integer)session2.getAttribute("school_id");
 		MoneyPage moneyPage = new MoneyPage(school_id);
 		moneyMap = moneyPage.getMoney();
+		numbersMap = moneyPage.getStudentNumbers();
+		allStudentNumbers = numbersMap.get("allStudentNumbers");
+		allChartered2Numbers = numbersMap.get("allChartered2Numbers");
+		allChartered3Numbers = numbersMap.get("allChartered3Numbers");
+		if(allStudentNumbers != 0){
+			character2Rate = Math.round(allChartered2Numbers * 100.0 / allStudentNumbers);
+			character3Rate = Math.round(allChartered3Numbers * 100.0 / allStudentNumbers);
+			depositRate = Math.round(numbersMap.get("allDepositedStudentNumbers") * 100 / allStudentNumbers);
+		}
+			
 	}
+	
 %>
 
 	<!-- BEGIN HEADER -->
@@ -539,7 +559,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number visits"  data-percent="90"><span>+90</span>%</div>
+												<div class="number visits"  data-percent="<%=depositRate %>"><span>+<%=depositRate %></span>%</div>
                                                 <!--此处的data-percent=''这个是比例的图示显示的位置，后面的+90是具体数据下同-->
 
 												<a class="title" href="#">充值率 <i class="m-icon-swapright"></i></a>
@@ -601,7 +621,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number visits"  data-percent="70"><span>+70</span>%</div>
+												<div class="number visits"  data-percent="<%=character2Rate%>"><span>+<%=character2Rate%></span>%</div>
 
 												<a class="title" >科二包过</a>
 
@@ -615,7 +635,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number transactions"  data-percent="20"><span>+20</span>%</div>
+												<div class="number transactions"  data-percent="<%=character3Rate%>"><span>+<%=character3Rate%></span>%</div>
 
 												<a class="title" >科三包过 </a>
 
@@ -631,11 +651,10 @@
 
 												
 
-											  <a class="title">科二包过：965</a>
-                                                
-                                                <a class="title">科二自由：100</a>
-                  
-<a class="title">科三包过：100</a>                                                 <a class="title">科三自由：100</a>
+											  <a class="title">科二包过：<%=numbersMap.get("allChartered2Numbers")%></a>
+                                               <a class="title">科二自由：<%=numbersMap.get("allFree2Numbers")%></a>
+											<a class="title">科三包过：<%=numbersMap.get("allChartered3Numbers") %></a>                                                 
+											<a class="title">科三自由：<%=numbersMap.get("allFree3Numbers") %></a>
 
 
 										  </div>

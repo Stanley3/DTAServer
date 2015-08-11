@@ -9,10 +9,12 @@ import com.dta.utils.ServiceProvider;
 import com.dta.vo.NewsInfoVo;
 
 @Path("news")
-public class NewsInfoResource extends BaseAllResource<NewsInfo, NewsInfoVo>{
-	private INewsInfoService service = (INewsInfoService)ServiceProvider.getBean("newsInfoServiceImpl");
-	public NewsInfoResource(){
+public class NewsInfoResource extends BaseAllResource<NewsInfo, NewsInfoVo> {
+	private INewsInfoService service = (INewsInfoService) ServiceProvider
+			.getBean("newsInfoServiceImpl");
+
+	public NewsInfoResource() {
 		super.setService(service);
-		super.setMianId(GlobalConstant.NEWSINFO);	
+		super.setMianId(GlobalConstant.NEWSINFO);
 	}
 }

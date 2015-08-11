@@ -13,5 +13,5 @@ public class CoachOrderByIdVo extends PageParam {
 	public void setCoach_id(Integer coach_id) {
 		this.coach_id = coach_id;
 	}
-	
+
 }

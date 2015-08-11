@@ -12,21 +12,22 @@ import com.dta.service.ISysUserService;
 import com.dta.vo.SysUserVo;
 
 @Service
-public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUserVo> implements ISysUserService{
+public class SysUserServiceImpl extends BaseAllServiceImpl<SysUser, SysUserVo>
+		implements ISysUserService {
 	@Autowired
 	private ISysUserDao dao;
-	
-	public void init(){
+
+	public void init() {
 		super.setDao(dao);
 	}
-	
-	public SysUser downloadPhoto(int id){
+
+	public SysUser downloadPhoto(int id) {
 		return dao.downloadPhoto(id);
 	}
 
 	@Override
 	public Map<String, Object> getSchoolIdByUsername(String username) {
-		if(username == null)
+		if (username == null)
 			throw new IllegalArgumentException("根据登录用户名获取驾校信息时 用户名为null");
 		return dao.getSchoolIdByUsername(username);
 	}

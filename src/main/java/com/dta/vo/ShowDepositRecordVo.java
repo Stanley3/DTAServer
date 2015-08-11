@@ -1,6 +1,5 @@
 package com.dta.vo;
 
-
 public class ShowDepositRecordVo extends PageParam {
 	private String deposit_date;
 
@@ -11,5 +10,5 @@ public class ShowDepositRecordVo extends PageParam {
 	public void setDeposit_date(String deposit_date) {
 		this.deposit_date = deposit_date;
 	}
-	
+
 }

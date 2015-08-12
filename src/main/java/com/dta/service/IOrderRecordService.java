@@ -3,6 +3,7 @@ package com.dta.service;
 import java.util.List;
 import java.util.Map;
 
+
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachIncomeRecord;
@@ -218,4 +219,12 @@ public interface IOrderRecordService extends
 	 */
 	public List<Map<String, Object>> getAmountGroupByOrderStatus(
 			Integer school_id);
+	
+	/**
+	 * 
+	 * @param school_id
+	 * @return
+	 * <p>获取已消费学员的总数
+	 */
+	public int getConsumedStudentNumbers(Integer school_id);
 }

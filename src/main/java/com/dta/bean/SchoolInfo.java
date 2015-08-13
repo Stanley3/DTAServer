@@ -23,9 +23,9 @@ public class SchoolInfo extends PageParam implements Serializable {
 	private String school_name;
 	@FormParam("contract_no")
 	private String contract_no;
-	@FormParam("leader")
+	@FormParam("schoolmaster_name") //校长姓名
 	private String leader;
-	@FormParam("leader_phone")
+	@FormParam("user_name")
 	private String leader_phone;
 	@FormParam("school_address")
 	private String school_address;
@@ -47,8 +47,6 @@ public class SchoolInfo extends PageParam implements Serializable {
 	private String register_time;
 	@FormParam("register_number")
 	private Integer register_number;
-	@FormParam("student_number")
-	private Integer student_number;
 	@FormParam("school_type")
 	private Integer school_type;
 	@FormParam("status")
@@ -73,6 +71,15 @@ public class SchoolInfo extends PageParam implements Serializable {
 	private Integer device_3_status;
 	@FormParam("vehicle_number")
 	private Integer vehicle_number;
+	private Integer studentNumbers;
+
+	public Integer getStudentNumbers() {
+		return studentNumbers;
+	}
+
+	public void setStudentNumbers(Integer studentNumbers) {
+		this.studentNumbers = studentNumbers;
+	}
 
 	public Integer getVehicle_number() {
 		return vehicle_number;
@@ -184,14 +191,6 @@ public class SchoolInfo extends PageParam implements Serializable {
 
 	public Integer getRegister_number() {
 		return register_number;
-	}
-
-	public void setStudent_number(Integer student_number) {
-		this.student_number = student_number;
-	}
-
-	public Integer getStudent_number() {
-		return student_number;
 	}
 
 	public void setSchool_type(Integer school_type) {

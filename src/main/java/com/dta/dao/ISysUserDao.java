@@ -19,5 +19,12 @@ public interface ISysUserDao extends IBaseAllDao<SysUser, SysUserVo> {
 	 *         用户的驾校id，总后台用户的驾校id为0
 	 */
 	public Map<String, Object> getSchoolIdByUsername(String username);
-
+	
+	/**
+	 * 
+	 * @param map
+	 * @return
+	 * <p>总后台添加驾校管理员
+	 */
+	public int addSchoolAdmin(Map<String, Integer>map);
 }

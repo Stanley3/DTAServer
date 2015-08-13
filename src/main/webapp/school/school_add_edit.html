@@ -454,7 +454,7 @@
 										name="device_3_status" value="1" checked /> 无设备
 									</label> <label class="radio"> <input type="radio"
 										name="device_3_status" value="2" /> 路考王专业设备
-									</label> <input class="m-wrap small" type="text" placeholder="路考王设备数" id="subject3Number"
+									</label> <input class="m-wrap small" type="text" placeholder="路考王设备数" id="subject3Number" style="display: none"
 										name="subject_3_number" />
 								</div>
 							</div>
@@ -476,9 +476,9 @@
 								<label class="control-label">当前状态</label>
 								<div class="controls">
 									<label class="radio"> <input type="radio"
-										name="status" value="0" checked /> 暂停
+										name="status" value="0"  /> 暂停
 									</label> <label class="radio"> <input type="radio"
-										name="status" value="1" /> 有效
+										name="status" value="1" checked /> 有效
 									</label>
 								</div>
 							</div>
@@ -698,6 +698,14 @@
 
 			//TableAdvanced.init();
 			$('#form').validationEngine();
+			$('[name=device_3_status]').each(function(){
+				$(this).click(function(){
+					if($(this).val() == 2)
+						$('#subject3Number').css('display', 'inline');
+					else
+						$('#subject3Number').css('display', 'none');
+				});
+			});
 			
 		});
 		function add(){

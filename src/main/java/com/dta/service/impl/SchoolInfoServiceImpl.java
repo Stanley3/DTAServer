@@ -1,7 +1,9 @@
 package com.dta.service.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class SchoolInfoServiceImpl extends
 
 	@Transactional
 	public int addObject(SchoolInfo po) {
+		po.setLeader(po.getSchoolmaster_name());
+		po.setLeader_phone(po.getUser_name());
 		int result = dao.addObject(po);
 		System.out.println("输出添加是设备2的值："
 				+ String.valueOf(po.getDevice_2_status()));
@@ -45,6 +49,11 @@ public class SchoolInfoServiceImpl extends
 		user.setObligate_code(po.getObligate_code());
 		user.setRole_ids("1");
 		result = userDao.addObject(user);
+		Map<String, Integer> userRoleMap = new HashMap<String, Integer>(5);
+		userRoleMap.put("role_id", 1);
+		userRoleMap.put("user_id",user.getUser_id());
+		userRoleMap.put("flag", 0);
+		result = userDao.addSchoolAdmin(userRoleMap);
 		return result;
 	}
 

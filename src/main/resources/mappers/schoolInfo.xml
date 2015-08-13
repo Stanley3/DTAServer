@@ -49,9 +49,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="register_number != null and register_number != ''">
 			register_number = #{register_number},
 		</if>
-		<if test="student_number != null and student_number != ''">
-			student_number = #{student_number},
-		</if>
 		<if test="school_type != null and school_type != ''">
 			school_type = #{school_type},
 		</if>
@@ -100,12 +97,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <!-- **********获取所有对象********* -->
 <select id="getAll" resultType="SchoolInfo" parameterType="SchoolInfoVo">
-	select * from school_info
+	select si.*, count(student_id) as studentNumbers from school_info as si left join student_basic_info as sbi on si.school_id = sbi.school_id
 	<where>
-		validation = 1
-		<if test="school_id != null and school_id != '' ">
-			and school_id = #{school_id}
-		</if>
+		si.validation = 1
+		and si.school_id > 0
 		<if test="school_name != null and school_name != '' ">
 			and school_name like "%"#{school_name}"%"
 		</if>
@@ -148,9 +143,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="register_number != null and register_number != '' ">
 			and register_number = #{register_number}
 		</if>
-		<if test="student_number != null and student_number != '' ">
-			and student_number = #{student_number}
-		</if>
 		<if test="school_type != null and school_type != '' ">
 			and school_type = #{school_type}
 		</if>
@@ -161,9 +153,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and prepaid = #{prepaid}
 		</if>
 	</where>
+	group by si.school_id
 	<if test="sort != null and sort != ''">
 		order by ${sort} ${order}
 	</if>
+	<choose>
+		<when test="sort != null and sort != ''">
+			order by ${sort} ${order}
+		</when>
+		<otherwise>
+			order by register_time desc
+		</otherwise>
+	</choose>
 </select>
 <!-- **********获取一个对象********* -->
 <select id="getObjectById" resultType="SchoolInfo" parameterType="int">
@@ -219,9 +220,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="register_number != null and register_number != '' ">
 			and register_number = #{register_number}
-		</if>
-		<if test="student_number != null and student_number != '' ">
-			and student_number = #{student_number}
 		</if>
 		<if test="school_type != null and school_type != '' ">
 			and school_type = #{school_type}
@@ -288,9 +286,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="register_number != null and register_number != '' ">
 			and register_number = #{register_number}
 		</if>
-		<if test="student_number != null and student_number != '' ">
-			and student_number = #{student_number}
-		</if>
 		<if test="school_type != null and school_type != '' ">
 			and school_type = #{school_type}
 		</if>
@@ -347,9 +342,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="register_number != null and register_number != ''">
 			register_number = #{register_number},
-		</if>
-		<if test="student_number != null and student_number != ''">
-			student_number = #{student_number},
 		</if>
 		<if test="school_type != null and school_type != ''">
 			school_type = #{school_type},

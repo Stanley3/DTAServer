@@ -201,4 +201,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getSchoolIdByUsername" resultType="Map">
 	select school_id, school_name from sys_user su join school_info si on su.user_attribute = si.school_id where user_name = #{username}
 </select>
+<!-- 增添驾校管理员 -->
+<insert id="addSchoolAdmin" parameterType="map">
+	insert into user_roles set role_id = #{role_id}, user_id = #{user_id}, flag = #{flag}
+</insert>
 </mapper>

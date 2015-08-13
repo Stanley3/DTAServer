@@ -50,9 +50,9 @@ public class DisplayUrlFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String url = httpRequest.getRequestURI();
 		if (!url.contains("media")) {
-			logger.info("***************************************");
-			logger.info("the request uri is {} ", url);
-			logger.info("***************************************");
+			logger.error("***************************************");
+			logger.error("the request uri is {} ", url);
+			logger.error("***************************************");
 			// httpResponse.sendRedirect(httpRequest.getRequestURL().toString().split(";")[0]);
 		}
 		System.out.println("用request获取的sessionid为："

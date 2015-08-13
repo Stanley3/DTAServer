@@ -173,12 +173,22 @@
 	url: schoolInfo/getSchoolInfoByDistance
 	请求方式：get
 	参数bean：SchoolInfoBasedDistanceVo.java
-	详细参数：经度：longitude
-                            纬度：latitude	
+	详细参数：{经度：longitude
+                            纬度：latitude	}暂不需要经纬度
+           	学员id student_id
                             分页参数："start"：0|10|20|..., "length":10
 	返回参数bean：SchoolInfoBasedDistance.java
 	返回参数格式: {"total":0, "data":[]} (total 表示驾校的总数，data 表示一页的驾校信息（已按距离递增排序）)
-
+2. 获取驾校信息
+   resourceJava: SchoolInfoResource.java
+   url: schoolInfo/getSchoolInfo
+       请求方式：get
+       参数bean：SchoolInfoVo.java
+       详细参数：学员id student_id
+                     学员科目 subject	
+      	  分页参数："start"：0|10|20|..., "length":10
+       返回bean:SchoolInfo.java
+        返回参数格式：{"total":0, "data":[]}
 3. 选择教练界面
     resourcejava：ScheduleInfoResource.java
 	url: scheduleInfo/selectCoach

@@ -16,6 +16,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dta.bean.ResultBean;
@@ -34,7 +36,7 @@ public class SchoolInfoResource extends
 	// @Autowired
 	public ISchoolInfoService service = (ISchoolInfoService) ServiceProvider
 			.getBean("schoolInfoServiceImpl");
-
+	Logger logger = LoggerFactory.getLogger("com.dta.resource.SchoolInfoResource");
 	/*
 	 * @Autowired private ISchoolInfoService service;
 	 */
@@ -67,7 +69,7 @@ public class SchoolInfoResource extends
 		}
 	}
 
-	@GET
+	/*@GET
 	@Path("getSchoolInfoByDistance")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSchoolInfoByDistance(
@@ -101,6 +103,30 @@ public class SchoolInfoResource extends
 								.size() - 1 : (start + length)));
 			return Response.status(200).entity(resultMap).build();
 		} catch (Exception e) {
+			e.printStackTrace();
+			return Response
+					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}*/
+	
+	@GET
+	@Path("getSchoolInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getSchoolInfo(@BeanParam SchoolInfoVo vo){
+		try{
+			Integer size = service.getSchoolInfoSize(vo.getSubject());
+			if(size == null)
+				size = 1;
+			else
+				size += 1;
+			Map<String, Object> resultMap = new HashMap<String, Object>(3);
+			resultMap.put("total", size);
+			resultMap.put("data", service.getSchoolInfo(vo));
+			return Response.status(200).entity(resultMap).build();
+		}catch(Exception e){
+			logger.error(e.getMessage());
 			e.printStackTrace();
 			return Response
 					.status(500)

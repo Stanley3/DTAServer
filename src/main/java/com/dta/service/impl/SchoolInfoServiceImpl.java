@@ -105,4 +105,20 @@ public class SchoolInfoServiceImpl extends
 		// TODO Auto-generated method stub
 		return dao.getSchoolDistanceInfoSize(vo);
 	}
+
+	@Override
+	public List<SchoolInfoBasedDistance> getSchoolInfo(SchoolInfoVo vo) {
+		if(vo.getStudent_id() == null)
+			throw new IllegalArgumentException("根据学员信息获取驾校信息时，学员id为null");
+		if(vo.getSubject() == null)
+			throw new IllegalArgumentException("根据学员信息获取驾校信息时，学员科目为null");
+		return dao.getSchoolInfo(vo);
+	}
+
+	@Override
+	public int getSchoolInfoSize(Integer subject) {
+		if(subject == null)
+			throw new IllegalArgumentException("根据学员信息获取驾校信息时，学员科目为null");
+		return dao.getSchoolInfoSize(subject);
+	}
 }

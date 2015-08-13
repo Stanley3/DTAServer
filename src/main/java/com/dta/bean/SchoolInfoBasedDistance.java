@@ -11,10 +11,10 @@ public class SchoolInfoBasedDistance {
 	private Integer subject_3_number;
 	private Integer vehicle_number;
 	private Integer register_number;
-	private Double distance;
+	/*private Double distance;
 	private Double longitude; // 经度
 	private Double latitude; // 纬度
-
+*/
 	public String getSchool_address() {
 		return school_address;
 	}
@@ -29,30 +29,6 @@ public class SchoolInfoBasedDistance {
 
 	public void setSchool_type(String school_type) {
 		this.school_type = school_type;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Double getDistance() {
-		return distance;
-	}
-
-	public void setDistance(Double distance) {
-		this.distance = distance;
 	}
 
 	public Integer getSchool_id() {

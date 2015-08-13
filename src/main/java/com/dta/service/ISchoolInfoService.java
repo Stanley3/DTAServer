@@ -31,4 +31,14 @@ public interface ISchoolInfoService extends
 	 *         App端获取驾校的总数
 	 */
 	public int getSchoolDistanceInfoSize(SchoolInfoBasedDistanceVo vo);
+	
+	/**
+	 * 
+	 * @param vo
+	 * @return
+	 * <p>根据学员id和学员科目获取学员驾校和所有和学员科目相符的考场
+	 */
+	public List<SchoolInfoBasedDistance> getSchoolInfo(SchoolInfoVo vo);
+	
+	public int getSchoolInfoSize(Integer subject);
 }

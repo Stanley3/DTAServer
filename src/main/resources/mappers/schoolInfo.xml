@@ -403,4 +403,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select count(school_id)
 	from getSchoolDistanceInfo
 </select>
+<!-- 根据学员id和学员科目获取学员驾校和所有和学员科目相符的考场 -->
+<select id="getSchoolInfo" resultType="SchoolInfoBasedDistance" parameterType="SchoolInfoVo">
+	(select 
+		si.school_id,
+		school_name,
+		school_address,
+		register_number,
+		vehicle_number,
+		device_2_status,
+		device_3_status,
+		school_type
+	from school_info as si join student_basic_info as sbi on sbi.school_id = si.school_id where sbi.student_id = #{student_id})
+		union 
+	(select
+		school_id,
+		school_name,
+		school_address,
+		register_number,
+		vehicle_number,
+		device_2_status,
+		device_3_status,
+		school_type
+	 from school_info where school_type = #{subject} order by school_name asc)
+	 <if test="rows != 0 and rows != null">
+	 	LIMIt #{page}, #{rows}
+	 </if>
+</select>
+<!-- 根据学员id和学员科目获取学员驾校和所有和学员科目相符的考场的总数 -->
+<select id="getSchoolInfoSize" resultType="int">
+	select count(school_id) from school_info where school_type = #{subject}
+</select>
 </mapper>

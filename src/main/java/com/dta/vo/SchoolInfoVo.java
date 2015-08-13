@@ -58,6 +58,26 @@ public class SchoolInfoVo extends PageParam implements Serializable {
 	private String charter_2_fee;
 	@QueryParam("charter_3_fee")
 	private String charter_3_fee;
+	@QueryParam("student_id")
+	private Integer student_id;
+	@QueryParam("subject")
+	private Integer subject;
+	
+	public Integer getStudent_id() {
+		return student_id;
+	}
+
+	public void setStudent_id(Integer student_id) {
+		this.student_id = student_id;
+	}
+
+	public Integer getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Integer subject) {
+		this.subject = subject;
+	}
 
 	public void setSchool_id(Integer school_id) {
 		this.school_id = school_id;

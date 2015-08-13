@@ -69,7 +69,7 @@ public class SchoolInfoServiceImpl extends
 		return schoolInfo;
 	}
 
-	@Transactional
+	/*@Transactional
 	public int updateObjectById(SchoolInfo po) throws Exception {
 		if (po.getSchool_id() == null)
 			throw new Exception("未知驾校id(school_id)");
@@ -88,7 +88,7 @@ public class SchoolInfoServiceImpl extends
 		result = userDao.updateObjectById(user);
 		return result;
 	}
-
+*/
 	public int getAvaiableCoachNumbers(int school_id) {
 		return dao.getAvaiableCoachNumbers(school_id);
 	}

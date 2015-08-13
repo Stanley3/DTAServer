@@ -401,19 +401,21 @@
 							<h3 class="form-section" style="margin-top:15px;">管理员信息</h3>
 							<div class="control-group">
 								<label class="control-label">校长姓名<span class="required">*</span></label>
-								<div class="controls">
+								<label id="schoolmasterName" class="help-inline"></label>
+								<!-- <div class="controls">
 									<input name="schoolmaster_name" type="text" class="validate[required, maxSize[10]] span6 m-wrap"
 										placeholder="校长姓名" id="schoolmasterName" /> <span class="help-inline">校长姓名</span>
-								</div>
+								</div> -->
 							</div>
 							<div class="control-group">
 								<label class="control-label">手机号<span class="required">*</span></label>
-								<div class="controls">
+								<label class="help-inline" id="userName"></label>
+								<!-- <div class="controls">
 									<input type="text" class="validate[required, maxSize[11], custom[phone]] span6 m-wrap" name="user_name" id="userName" placeholder="此为登录用户名" /> <span
 										class="help-inline">手机号为用户名</span>
-								</div>
+								</div> -->
 							</div>
-							<div class="control-group">
+							<!-- <div class="control-group">
 								<label class="control-label">密码<span class="required">*</span></label>
 								<div class="controls">
 									<input type="password" class="validate[required, minSize[6], maxSize[20]] span6 m-wrap" name="user_pwd" id="userPwd"
@@ -426,13 +428,14 @@
 									<input type="password" class="validate[equals[userPwd]] span6 m-wrap" id="rpassword" />
 									<span class="help-inline">再输入一次</span>
 								</div>
-							</div>
+							</div> -->
 							<div>
 								<label class="control-label">预留码<span class="required">*</span></label>
-								<div class="controls">
+								<label class="help-inline" id="obligateCode"></label>
+								<!-- <div class="controls">
 									<input type="text" class="validate[required] span6 m-wrap" name="obligate_code" id="obligateCode"/> <span
 										class="help-inline">输入您的预留码</span>
-								</div>
+								</div> -->
 							</div>
 
 							<!-- <button  style="margin-left:100px;" class="btn blue" onclick="add()">提交修改</button> -->
@@ -575,11 +578,11 @@
 					   $('#charter2Fee').val(data.charter_2_fee);
 					   $('#charter3Fee').val(data.charter_3_fee);
 					   $('#contractNo').val(data.contract_no);
-					   $('#schoolmasterName').val(data.schoolmaster_name);
-					   $('#userName').val(data.user_name);
-					   $('#userPwd').val(data.user_pwd);
-					   $('#rpassword').val(data.user_pwd);
-					   $('#obligateCode').val(data.obligate_code);
+					   $('#schoolmasterName').html(data.schoolmaster_name);
+					   $('#userName').html(data.user_name);
+					   /* $('#userPwd').val(data.user_pwd);
+					   $('#rpassword').val(data.user_pwd); */
+					   $('#obligateCode').html(data.obligate_code);
 					   if(data.device_3_status == 2){
 					   	$('#subject3Number').val(data.subject_3_number);
 					   	$('#subject3Number').css('display', 'inline');

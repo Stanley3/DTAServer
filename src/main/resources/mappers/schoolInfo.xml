@@ -34,10 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="coach_number != null and coach_number != ''">
 			coach_number = #{coach_number},
 		</if>
-		<if test="subject_2_number != null and subject_2_number != ''">
+		<if test="subject_2_number != null and device_2_status == 1">
 			subject_2_number = #{subject_2_number},
 		</if>
-		<if test="subject_3_number != null and subject_3_number != ''">
+		<if test="subject_3_number != null and device_3_status == 1 ">
 			subject_3_number = #{subject_3_number},
 		</if>
 		<if test="validation != null and validation != ''">
@@ -328,10 +328,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="coach_number != null and coach_number != ''">
 			coach_number = #{coach_number},
 		</if>
-		<if test="subject_2_number != null and subject_2_number != ''">
+		<if test="subject_2_number != null and device_2_status == 1">
 			subject_2_number = #{subject_2_number},
 		</if>
-		<if test="subject_3_number != null and subject_3_number != ''">
+		<if test="subject_3_number != null and device_3_status == 1 ">
 			subject_3_number = #{subject_3_number},
 		</if>
 		<if test="validation != null and validation != ''">

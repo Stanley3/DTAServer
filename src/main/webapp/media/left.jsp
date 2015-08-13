@@ -63,7 +63,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li><a href="javascript:;"><span class="title">财务管理</span></a>
 				<ul class="sub-menu">
 					<li><a href="../money/money.jsp">财务汇总</a></li>
-					<li><a href="../money/money_in_new.html">费用充值</a></li>
+					<li><a href="../money/money_in_new_student.html">学员费用充值</a></li>
+					 <shiro:hasPermission name="superadmin">
+					 <li><a href="../money/money_in_new_school.html">驾校费用充值</a>
+					 </shiro:hasPermission>
 					<!-- <li><a href="../money/money_checkout.html">结算费用</a></li>
 					<li><a href="../money/money_feed.html">消费明细</a></li> -->
 				</ul></li>

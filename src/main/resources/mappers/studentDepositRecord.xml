@@ -216,6 +216,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		student_basic_info as SB
 	on 
 		SD.student_id = SB.student_id
+	<if test="school_id != 0">
+		where SB.school_id = #{school_id}
+	</if>
 	<if test="sort != null and sort != ''">
 		order by ${sort} ${order}
 	</if>	
@@ -233,6 +236,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		student_basic_info as SB
 	on 
 		SD.student_id = SB.student_id
+	<if test="school_id != 0">
+		where SB.school_id = #{school_id}
+	</if>
 </select>
 <!-- 学员充值信息全局搜索 -->
 <select id="globalSerach" resultType="ShowDepositRecord" parameterType="ShowDepositRecordVo">
@@ -251,14 +257,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		student_basic_info as SB
 	on 
 		SD.student_id = SB.student_id
-	<where>
+	where 1=1
+		<if test="school_id != 0">
+			and SB.school_id = #{school_id}
+		</if>
+		and(
+		SB.student_name like "%"#{search}"%"
+		or SB.student_phone like "%"#{search}"%"
+		or SD.deposit_amount like "%"#{search}"%"
 		<if test="deposit_date != null and deposit_date != ''">
 			 or deposit_date like "%"#{deposit_date}"%"
 		</if>
-		or SB.student_name like "%"#{search}"%"
-		or SB.student_phone like "%"#{search}"%"
-		or SD.deposit_amount like "%"#{search}"%"
-	</where>
+		)
 	<if test="sort != null and sort != ''">
 		order by ${sort} ${order}
 	</if>
@@ -275,14 +285,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		student_basic_info as SB
 	on 
 		SD.student_id = SB.student_id
-	<where>
+	where 1=1
+		<if test="school_id != 0">
+			and SB.school_id = #{school_id}
+		</if>
+		and(
+		SB.student_name like "%"#{search}"%"
+		or SB.student_phone like "%"#{search}"%"
+		or SD.deposit_amount like "%"#{search}"%"
 		<if test="deposit_date != null and deposit_date != ''">
 			 or deposit_date like "%"#{deposit_date}"%"
 		</if>
-		or SB.student_name like "%"#{search}"%"
-		or SB.student_phone like "%"#{search}"%"
-		or SD.deposit_amount like "%"#{search}"%"
-	</where>
+		)
 </select>
 <select id="getVIPStudentOfCoachInfo" resultType="VIPStudentOfCoachInfo" parameterType="VIPStudentOfCoachInfoVo">
 	select *

@@ -76,7 +76,7 @@
 	HttpSession session2 = request.getSession(false);
     Map<String, Double> moneyMap = null;
     Map<String, Integer> numbersMap = null;
-    float character2Rate = 0, character3Rate = 0 , depositRate = 0;
+    float character2Rate = 0, character3Rate = 0 , depositRate = 0, consumedReate = 0;
     Integer allStudentNumbers = 0,  //所有学员总数
 			allConsumedStudentNumbers = 0, //已消费学员总数
 			allDepositedStudentNumbers = 0, //已充值学员总数
@@ -96,6 +96,7 @@
 			character2Rate = Math.round(allChartered2Numbers * 100.0 / allStudentNumbers);
 			character3Rate = Math.round(allChartered3Numbers * 100.0 / allStudentNumbers);
 			depositRate = Math.round(numbersMap.get("allDepositedStudentNumbers") * 100 / allStudentNumbers);
+			consumedReate = Math.round(numbersMap.get("allConsumedStudentNumbers") * 100 / allStudentNumbers);
 		}
 			
 	}
@@ -588,7 +589,7 @@
 
 											<div class="easy-pie-chart">
 
-												<div class="number bounce"  data-percent="90"><span>+90</span>%</div>
+												<div class="number bounce"  data-percent="<%=consumedReate%>"><span>+<%=consumedReate%></span>%</div>
 
 												<a class="title" href="#">消费比例<i class="m-icon-swapright"></i></a>
 

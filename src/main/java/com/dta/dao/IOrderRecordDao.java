@@ -3,6 +3,8 @@ package com.dta.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dta.dao.base.IBaseAllDao;
 import com.dta.vo.CoachIncomeRecordVo;
 import com.dta.vo.CoachOrderByIdVo;
@@ -217,4 +219,12 @@ public interface IOrderRecordDao extends
 	 */
 	public List<Map<String, Object>> getAmountGroupByOrderStatus(
 			Map<String, Object> map);
+	
+	/**
+	 * 
+	 * @param school_id
+	 * @return
+	 * <p>获取已消费学员的总数
+	 */
+	public int getConsumedStudentNumbers(@Param(value="school_id")Integer school_id);
 }

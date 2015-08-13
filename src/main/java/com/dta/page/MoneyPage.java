@@ -106,6 +106,9 @@ public class MoneyPage {
 				.getDepositedStudentNumbers(school_id);
 		if (allDepositedStudentNumbers == null)
 			allDepositedStudentNumbers = 0;
+		allConsumedStudentNumbers = orderRecordService.getConsumedStudentNumbers(school_id);
+		if(allConsumedStudentNumbers == null)
+			allConsumedStudentNumbers = 0;
 		Map<String, Integer> numbersMap = new HashMap<String, Integer>();
 		numbersMap.put("allStudentNumbers", allStudentNumbers);
 		numbersMap.put("allChartered2Numbers", allChartered2Numbers);
@@ -114,6 +117,7 @@ public class MoneyPage {
 		numbersMap.put("allFree3Numbers", allFree3Numbers);
 		numbersMap
 				.put("allDepositedStudentNumbers", allDepositedStudentNumbers);
+		numbersMap.put("allConsumedStudentNumbers", allConsumedStudentNumbers);
 		return numbersMap;
 	}
 }

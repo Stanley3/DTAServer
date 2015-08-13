@@ -398,4 +398,12 @@ public class OrderRecordServiceImpl extends
 		map.put("school_id", school_id);
 		return dao.getAmountGroupByOrderStatus(map);
 	}
+
+	@Override
+	public int getConsumedStudentNumbers(Integer school_id) {
+		if(school_id == null)
+			throw new IllegalArgumentException("获取已消费学员的总数时，学员的驾校id为null");
+		
+		return dao.getConsumedStudentNumbers(school_id);
+	}
 }

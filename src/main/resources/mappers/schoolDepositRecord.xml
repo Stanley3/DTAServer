@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dta.dao.ISchoolDepositRecordDao">
+<!-- **********增加对象********** -->
+<insert id="addObject" parameterType="SchoolDepositRecord" keyProperty="school_deposit_id" useGeneratedKeys="true">
+	insert into school_deposit_record 
+	<set>
+		<if test="deposit_amount != null and deposit_amount != ''">
+			deposit_amount = #{deposit_amount},
+		</if>
+		<if test="deposit_type != null and deposit_type != ''">
+			deposit_type = #{deposit_type},
+		</if>
+		<if test="deposit_way != null and deposit_way != ''">
+			deposit_way = #{deposit_way},
+		</if>
+		<if test="remark != null and remark != ''">
+			remark = #{remark},
+		</if>
+		<if test="school_id != null and school_id != ''">
+			school_id = #{school_id},
+		</if>
+		<if test="operator != null and operator != ''">
+			operator = #{operator},
+		</if>
+			deposit_date = now()
+	</set>
+</insert>
+<!-- **********删除对象********** -->
+<update id="deleteMultiData">
+	update school_deposit_record set validation = 0 
+	where school_deposit_id in 
+	<foreach item="item" index="index" collection="list"
+		 open="(" separator="," close=")">
+			 #{item}
+	</foreach>
+</update>
+<!-- **********删除一个对象********* -->
+<update id="deleteObjectById" parameterType="int">
+	update school_deposit_record set validation = 0 where school_deposit_id = #{school_deposit_id}
+</update>
+<!-- **********获取所有对象********* -->
+<select id="getAll" resultType="SchoolDepositRecord" parameterType="SchoolDepositRecordVo">
+	select 
+		 school_deposit_id,
+		 deposit_date,
+		 deposit_amount, 
+		 school_name,
+		 deposit_way,
+		 deposit_type,
+		 remark,
+		 school_phone,
+		 user_name as operator_name
+	from 
+		school_deposit_record as sdr
+	join
+		sys_user as su
+	on 
+		sdr.operator = su.user_id
+	join
+		school_info as si
+	on
+		sdr.school_id = si.school_id
+	<if test="order != null and order != ''">
+		order by ${sort} ${order}
+	</if>
+	<!-- <where>
+		<if test="deposit_amount != null and deposit_amount != '' ">
+			and deposit_amount = #{deposit_amount}
+		</if>
+		<if test="deposit_type != null and deposit_type != '' ">
+			and deposit_type = #{deposit_type}
+		</if>
+		<if test="deposit_way != null and deposit_way != '' ">
+			and deposit_way = #{deposit_way}
+		</if>
+		<if test="remark != null and remark != '' ">
+			and remark like "%"#{remark}"%"
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="operator != null and operator != '' ">
+			and operator = #{operator}
+		</if>
+		<if test="deposit_date != null and deposit_date != '' ">
+			and deposit_date like "%"#{deposit_date}"%"
+		</if>
+	</where> -->
+</select>
+<!-- **********获取一个对象********* -->
+<select id="getObjectById" resultType="SchoolDepositRecord" parameterType="int">
+	select * from school_deposit_record
+	where school_deposit_id = #{school_deposit_id} and validation = 1
+</select>
+<!-- **********获取一页对象********** -->
+<select id="getPage" resultType="SchoolDepositRecord" parameterType="SchoolDepositRecord">
+	select * from school_deposit_record
+	<where>
+		validation = 1
+		<if test="school_deposit_id != null and school_deposit_id != '' ">
+			and school_deposit_id = #{school_deposit_id}
+		</if>
+		<if test="deposit_amount != null and deposit_amount != '' ">
+			and deposit_amount = #{deposit_amount}
+		</if>
+		<if test="deposit_type != null and deposit_type != '' ">
+			and deposit_type = #{deposit_type}
+		</if>
+		<if test="deposit_way != null and deposit_way != '' ">
+			and deposit_way = #{deposit_way}
+		</if>
+		<if test="remark != null and remark != '' ">
+			and remark like "%"#{remark}"%"
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="operator != null and operator != '' ">
+			and operator = #{operator}
+		</if>
+		<if test="deposit_date != null and deposit_date != '' ">
+			and deposit_date like "%"#{deposit_date}"%"
+		</if>
+	</where>
+	<if test="sort != null">
+		order by #{sort} #{order}
+	</if>
+	LIMIt #{page}, #{rows}
+</select>
+<!-- **********获取总数********* -->
+<select id="getSize" resultType="int" parameterType="SchoolDepositRecord">
+	select count(*) from school_deposit_record
+	<where>
+		validation = 1
+		<if test="school_deposit_id != null and school_deposit_id != '' ">
+			and school_deposit_id = #{school_deposit_id}
+		</if>
+		<if test="deposit_amount != null and deposit_amount != '' ">
+			and deposit_amount = #{deposit_amount}
+		</if>
+		<if test="deposit_type != null and deposit_type != '' ">
+			and deposit_type = #{deposit_type}
+		</if>
+		<if test="deposit_way != null and deposit_way != '' ">
+			and deposit_way = #{deposit_way}
+		</if>
+		<if test="remark != null and remark != '' ">
+			and remark like "%"#{remark}"%"
+		</if>
+		<if test="school_id != null and school_id != '' ">
+			and school_id = #{school_id}
+		</if>
+		<if test="operator != null and operator != '' ">
+			and operator = #{operator}
+		</if>
+		<if test="deposit_date != null and deposit_date != '' ">
+			and deposit_date like "%"#{deposit_date}"%"
+		</if>
+	</where>
+</select>
+<!-- *********更新对象********* -->
+<update id="updateObjectById" parameterType="SchoolDepositRecord">
+	update school_deposit_record
+	<set>
+		<if test="deposit_amount != null and deposit_amount != ''">
+			deposit_amount = #{deposit_amount},
+		</if>
+		<if test="deposit_type != null and deposit_type != ''">
+			deposit_type = #{deposit_type},
+		</if>
+		<if test="deposit_way != null and deposit_way != ''">
+			deposit_way = #{deposit_way},
+		</if>
+		<if test="remark != null and remark != ''">
+			remark = #{remark},
+		</if>
+		<if test="school_id != null and school_id != ''">
+			school_id = #{school_id},
+		</if>
+		<if test="operator != null and operator != ''">
+			operator = #{operator},
+		</if>
+		<if test="deposit_date != null and deposit_date != ''">
+			deposit_date = #{deposit_date},
+		</if>
+	</set>
+	where school_deposit_id =  #{school_deposit_id}
+</update>
+</mapper>

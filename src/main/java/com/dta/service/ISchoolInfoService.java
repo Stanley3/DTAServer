@@ -1,6 +1,7 @@
 package com.dta.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dta.bean.SchoolInfo;
 import com.dta.bean.SchoolInfoBasedDistance;
@@ -41,4 +42,11 @@ public interface ISchoolInfoService extends
 	public List<SchoolInfoBasedDistance> getSchoolInfo(SchoolInfoVo vo);
 	
 	public int getSchoolInfoSize(Integer subject);
+	
+	/**
+	 * 
+	 * @return
+	 * <p>web添加教练界面 显示所有的驾校及可选教练个数信息
+	 */
+	public List<Map<String, String>> webSelectSchool();
 }

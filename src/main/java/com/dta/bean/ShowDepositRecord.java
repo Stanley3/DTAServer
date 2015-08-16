@@ -21,6 +21,15 @@ public class ShowDepositRecord implements Serializable {
 	private String remark;
 	private String student_name;
 	private String student_phone;
+	private String user_name;//后台操作人员的用户名
+	
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 
 	public String getStudent_name() {
 		return student_name;

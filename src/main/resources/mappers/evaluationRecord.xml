@@ -69,20 +69,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		E.evaluation_record_id
 	from 
 		evaluation_record as E
-	join
-		coach_basic_info as C
-	on 
-		O.coach_id = C.coach_id
 	join 
 		order_record as O
 	on 
 		E.order_id = O.order_id
+	join
+		coach_basic_info as C
+	on 
+		O.coach_id = C.coach_id
 	<where>
 		<if test="evaluation_record_id != null and evaluation_record_id != '' ">
 			and evaluation_record_id = #{evaluation_record_id}
 		</if>
 		<if test="student_id != null and student_id != '' ">
-			and E.student_id = #{student_id}
+			and O.student_id = #{student_id}
 		</if>
 		<!-- <if test="coach_id != null and coach_id != '' ">
 			and E.coach_id = #{coach_id}
@@ -297,7 +297,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SB.student_phone,
 		SC.school_type,
 		SB.student_id,
-		SC.school_id
+		SC.school_id,
+		SC.school_name
 	from 
 		evaluation_record as E
 	join 
@@ -331,6 +332,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="order_id != null and order_id != 0">
 			E.order_id = #{order_id} 
+		</if>
+		<if test="school_id != null and school_id != 0">
+			SC.school_id = #{school_id}
 		</if>
 	</where>
 	<if test="sort != null and sort != ''">
@@ -375,7 +379,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and E.evaluation_type = #{evaluation_type}
 		</if>
 		<if test="order_id != null and order_id != 0">
-			E.order_id = #{order_id}
+			and E.order_id = #{order_id}
+		</if>
+		<if test="school_id != null and school_id != 0">
+			and SC.school_id = #{school_id}
 		</if>
 	</where>
 </select>
@@ -488,7 +495,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		C.phone as coach_phone,
 		SB.student_id,
 		SB.student_name,
-		SB.student_phone
+		SB.student_phone,
+		SC.school_name as coach_school_name
 	from 
 		evaluation_record as E
 	join 
@@ -503,6 +511,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		coach_basic_info as C
 	on 
 		O.coach_id = C.coach_id
+	join
+		school_info as SC
+	on C.school_id = SC.school_id
 	<where>
 		E.evaluation_record_id = #{evaluation_record_id}
 	</where>

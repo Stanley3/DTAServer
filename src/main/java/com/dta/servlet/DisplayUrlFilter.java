@@ -11,6 +11,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -78,6 +79,11 @@ public class DisplayUrlFilter implements Filter {
 								(Integer) map.get("school_id"));
 						session.setAttribute("school_name",
 								(String) map.get("school_name"));
+						session.setAttribute("user_id", (Integer)map.get("user_id"));
+						/*Cookie cookie = new Cookie("school_id", map.get("school_id").toString());
+						cookie.setDomain("/DTAServer");
+						cookie.setMaxAge(1800);
+						httpResponse.addCookie(cookie);*/
 					} else {
 						logger.error("web端用户登录时，不能根据用户名信息获取用户所在的驾校信息");
 						return;

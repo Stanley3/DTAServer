@@ -39,6 +39,8 @@ public class StudentBasicInfo implements Serializable {
 	private String register_date;
 	private String school_name;
 	private Integer havePhoto;
+	private String chartered_coach_name;
+	private Integer chartered_coach_id;
 	// 学员列表页面使用的字段
 	private Integer subject_2_number;
 	private Integer subject_3_number;
@@ -46,6 +48,23 @@ public class StudentBasicInfo implements Serializable {
 	private Integer source;
 	private Integer vip_number;
 	private Integer login_id;
+	
+	
+	public String getChartered_coach_name() {
+		return chartered_coach_name;
+	}
+
+	public void setChartered_coach_name(String chartered_coach_name) {
+		this.chartered_coach_name = chartered_coach_name;
+	}
+
+	public Integer getChartered_coach_id() {
+		return chartered_coach_id;
+	}
+
+	public void setChartered_coach_id(Integer chartered_coach_id) {
+		this.chartered_coach_id = chartered_coach_id;
+	}
 
 	public Integer getStudent_level() {
 		return student_level;

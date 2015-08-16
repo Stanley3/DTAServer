@@ -763,11 +763,9 @@
 	会在DOM完全就绪并可以使用时调用。虽然这也意味着所有元素对脚本而言都是可以访问的，
 	但是，并不意味着所有关联的文件都已经下载完毕。换句话说，当HMTL下载完成并解析为DOM树之后，代码就会执行。 
 	*/
-	window.onload = function(){
-		//getStaticInfo();
-		//alert($('#school_id').val());
+	/* window.onload = function(){
 		
-	};
+	}; */
 	</script>    
 
 

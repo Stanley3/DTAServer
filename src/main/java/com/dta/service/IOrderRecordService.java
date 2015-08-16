@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 
+
 import com.dta.bean.AllEvaluationRecord;
 import com.dta.bean.CoachFianceSummarizing;
 import com.dta.bean.CoachIncomeRecord;
@@ -207,8 +208,9 @@ public interface IOrderRecordService extends
 	 *         完成一个订单，即修改订单的状态为3
 	 *         <p>
 	 *         订单正常结束后，应该修改教练财务记录表的总收入字段，此字段加上这个订单的金额
+	 * @throws Exception 
 	 */
-	public boolean completeOrder(Integer order_id);
+	public boolean completeOrder(Integer order_id) throws Exception;
 
 	/**
 	 * 

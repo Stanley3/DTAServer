@@ -85,12 +85,21 @@
 
 				<div class="controls">
 
-					<select class="validate[required] big m-wrap" tabindex="1" 
+					<!-- <select class="validate[required] big m-wrap" tabindex="1" 
 							name="student_id" id="selectStudent">
 							<option></option>
-					</select>
+					</select> -->
+					<input type="text" class="validate[required] big m-wrap" tabindex="1" 
+						onchange="changeID(this.value);" data-prompt-position="bottomLeft:0,-15">
+					<input type="hidden" name="student_id" id="setStudentId">
 				</div>
 
+			</div>
+			<div class="control-group">
+				<label class="control-label drop-padding-top">学员姓名</label>
+				<div class="controls">
+					<label id="setStudentName" class="m-wrap medium "></label>
+				</div>
 			</div>
 			<div class="control-group">
 
@@ -107,12 +116,11 @@
 
 			<div class="control-group">
 
-				<label class="control-label">学员类型</label>
+				<label class="control-label drop-padding-top">学员类型</label>
 
 				<div class="controls">
 
-					<input class="m-wrap medium" type="text"
-						placeholder="VIP学员－商丘顺达驾校学员" disabled />
+					<label class="m-wrap medium " id="setStudentLevel" ></label>
 				</div>
 
 			</div>
@@ -320,7 +328,8 @@
 			});
 		}
 		function add(){
-			var id = $('#selectStudent').val();
+			$("#form").validationEngine('validate');
+			var id = $('#setStudentId').val();
 			if(id.length != 0){
 				$.ajax({
 					url: '../rest/studentDepositRecord/add',
@@ -338,6 +347,28 @@
 					error: function(xhr, err){
 						alert('网络错误，请重试');
 					}
+				});
+			}
+		}
+		function changeID(idcard_no){
+			if(idcard_no.length == 18 || idcard_no.length == 15){
+				$.ajax({
+					url: '../rest/studentBasicInfo/getStudentInfoByID',
+					type: 'get',
+					data: {
+						idcard_no: idcard_no
+					},
+					dataType: 'json',
+					success: function(data){
+						$('#setStudentName').html(data.student_name);
+						$('#setStudentId').val(data.student_id);
+						var array = ['普通学员', '科目二包过', '科目三包过'];
+						$('#setStudentLevel').html(array[data.student_level] + '-' + data.school_name);
+					},
+					error: function(xhr, err){
+						alert('网络错误');
+					}
+					
 				});
 			}
 		}

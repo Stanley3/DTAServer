@@ -34,10 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="coach_number != null and coach_number != ''">
 			coach_number = #{coach_number},
 		</if>
-		<if test="subject_2_number != null and device_2_status == 1">
+		<if test="subject_2_number != null and device_2_status == 2">
 			subject_2_number = #{subject_2_number},
 		</if>
-		<if test="subject_3_number != null and device_3_status == 1 ">
+		<if test="subject_3_number != null and device_3_status == 2 ">
 			subject_3_number = #{subject_3_number},
 		</if>
 		<if test="validation != null and validation != ''">
@@ -433,5 +433,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 根据学员id和学员科目获取学员驾校和所有和学员科目相符的考场的总数 -->
 <select id="getSchoolInfoSize" resultType="int">
 	select count(school_id) from school_info where school_type = #{subject}
+</select>
+<!-- web添加教练界面 显示所有的驾校及可选教练个数信息 -->
+<select id="webSelectSchool" resultType="map">
+ select
+ S.school_id, 
+ school_name, 
+ (register_number - count(C.coach_id)) as numbers
+ from 
+ school_info as S left join coach_basic_info as C on (S.school_id = C.school_id and C.validation = 1 )
+ where S.validation = 1 and S.school_id > 0
+group by S.school_id;
 </select>
 </mapper>

@@ -22,6 +22,15 @@ public class TrainingRecord {
 	private String school_address;
 	private Integer recordSize;
 	private Integer star;
+	private Integer scanned;
+
+	public Integer getScanned() {
+		return scanned;
+	}
+
+	public void setScanned(Integer scanned) {
+		this.scanned = scanned;
+	}
 
 	public Integer getStar() {
 		return star;

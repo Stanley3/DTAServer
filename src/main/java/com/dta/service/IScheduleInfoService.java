@@ -69,6 +69,7 @@ public interface IScheduleInfoService extends
 	 * @param index
 	 * @return <p>
 	 *         根据coach_id和schedule_date可以定位到某个排班的具体内容，index表示24个时间段中的索引
+	 *         false表示更改precontract_info字段失败，true表示成功
 	 */
 	public boolean isScheduled(Integer coach_id, String schedule_date, int index);
 

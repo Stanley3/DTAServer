@@ -15,6 +15,16 @@ public class OrderInfoVo extends PageParam {
 	private Integer scanned;
 	@QueryParam("now")
 	private String now;
+	@QueryParam("school_id")
+	private Integer school_id;
+	
+	public Integer getSchool_id() {
+		return school_id;
+	}
+
+	public void setSchool_id(Integer school_id) {
+		this.school_id = school_id;
+	}
 
 	public Integer getScanned() {
 		return scanned;

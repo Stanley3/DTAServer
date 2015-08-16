@@ -354,6 +354,7 @@
 									<th class="hidden-480">状态</th>
 									<th class="hidden-480">级别</th>
 									<th class="hidden-480">授课</th>
+									<th class="hidden-480">科目</th>
 									<th class="hidden-480">VIP</th>
 									<th class="hidden-480">操作</th>
 								</tr>
@@ -446,7 +447,7 @@
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
 	<script src="../media/js/app.js"></script>
-
+	
 	<script src="../media/js/table-advanced.js"></script>
 
 	<script>
@@ -457,6 +458,7 @@
 
 		   //TableAdvanced.init();
 		   $('#sample_2').DataTable({
+			   'order': [[0, 'desc'],[1, 'asc']],
 			   'processing': true,
 			   'serverSide': true,
 			  'ajax':{
@@ -470,7 +472,7 @@
 					  data.sort = data.columns[index].data;
 					  data.dir = data.order[0].dir;
 					  data.search = data.search.value;
-					  console.log(data);
+					  data.school_id = $('#school_id').val();
 				  }
 			  },
 			  'columns':[
@@ -526,13 +528,28 @@
 			            	 'data': 'service_count'
 			             },
 			             {
+			            	'data': 'subject',
+			            	'render': function(data, type, row, meta){
+			            		if(type == 'display'){
+			            			if(data == 2){
+			            				return '科目二';
+			            			}else if(data == 3){
+			            				return '科目三';
+			            			}else{
+			            				return '未排班';
+			            			}
+			            		}
+			            		return data;
+			            	}
+			             },
+			             {
 			            	 'data': 'vip'
 			             },
 			             {
 			            	 'data': 'coach_id',
 			            	 'render': function(data, type, row, meta) {
 			            		 if(type == 'display'){
-			            			 var search = encodeURIComponent('coach_id=' + data);
+			            			 var search = encodeURIComponent('coach_id=' + row.coach_id + '&coach_name=' + row.coach_name );
 			            			 return '<a href=\'techer_view_info.html?'+ search + '\'>查看</a>';
 			            		 }
 			            		 return data;

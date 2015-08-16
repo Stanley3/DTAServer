@@ -1,6 +1,7 @@
 package com.dta.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -43,4 +44,11 @@ public interface ISchoolInfoDao extends IBaseAllDao<SchoolInfo, SchoolInfoVo> {
 	public List<SchoolInfoBasedDistance> getSchoolInfo(SchoolInfoVo vo);
 	
 	public int getSchoolInfoSize(@Param(value="subject")Integer subject);
+	
+	/**
+	 * 
+	 * @return
+	 * <p>web添加教练界面 显示所有的驾校及可选教练个数信息
+	 */
+	public List<Map<String, String>> webSelectSchool();
 }

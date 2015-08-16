@@ -416,6 +416,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		O.order_amount,
 		O.order_dead_time,
 		O.order_time,
+		O.course_status,
+		O.scanned,
 		S.student_id,
 		S.student_name,
 		C.coach_id,
@@ -523,6 +525,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where 1=1
 	<if test="order_status != null ">
 		and order_status = #{order_status}
+	</if>
+	<if test="school_id != null and school_id != 0">
+		and SC.school_id = #{school_id}
 	</if>
 	<!-- 表示正在练习 -->
 	<if test="now != null and now != '' and scanned == 1">
@@ -745,10 +750,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</where>
 	<if test="order != null">
-		order by #{sort} #{order}
+		order by ${sort} ${order}
 	</if>
 	<if test="rows != null and rows != 0">
-		limit page, rows
+		limit #{page}, #{rows}
 	</if>
 </select>
 <select id="getCoachOrderByIdSize" resultType="int" parameterType="CoachOrderByIdVo">

@@ -66,174 +66,6 @@
 
 		<div class="navbar-inner">
 
-			<div class="container-fluid">
-
-				<!-- BEGIN LOGO -->
-
-				<a class="brand"  style="margin-left:10px; " href="../main/main.jsp">
-
-				驾考联盟后台管理系统
-
-				</a>
-
-				<!-- END LOGO -->
-
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-
-				<img src="../media/image/menu-toggler.png" alt="" />
-
-				</a>          
-
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-
-				<ul class="nav pull-right">
-
-				
-						
-
-					<!-- BEGIN INBOX DROPDOWN -->
-
-					<li class="dropdown" id="header_inbox_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-envelope"></i>
-
-						<span class="badge">5</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended inbox">
-
-							<li>
-
-								<p>有 5 条未处理投诉</p>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-								<span class="subject">
-
-								<span class="from">学员：张四</span>
-
-								<span class="time">刚刚</span>
-
-								</span>
-
-								<span class="message">
-
-								真是受不了啦还号称服务第一呢啥服务
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-
-								<span class="subject">
-
-								<span class="from">学员：王五</span>
-
-								<span class="time">16 分钟前</span>
-
-								</span>
-
-								<span class="message">
-
-								我去了让我等了半个小时都不让我开始...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-								<span class="subject">
-
-								<span class="from">学员：张三</span>
-
-								<span class="time">2小时前</span>
-
-								</span>
-
-								<span class="message">
-
-								你们的教练实在是太气人了都不好好教!
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="../inbox.html">查看所有投诉信息<i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- 结束全站顶部投诉信息 -->
-
-
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-					
-
-						<span class="username">超级管理员：丁海伟</span>
-
-						<i class="icon-angle-down"></i>
-
-						</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="../extra_profile.html"><i class="icon-user"></i> 修改资料</a></li>
-
-							
-							<li class="divider"></li>
-
-							<li><a href="../extra_lock.html"><i class="icon-lock"></i> 锁定屏幕</a></li>
-
-							<li><a href="../login.html"><i class="icon-key"></i> 退出</a></li>
-
-						</ul>
-
-					</li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
 
 		</div>
 
@@ -252,9 +84,6 @@
 		<div class="page-sidebar nav-collapse collapse">
 
 			<!-- 开始 左侧通用 菜单 -->        
-
-			<!-- <script src="../left.js" type="text/javascript"></script> -->
-
 			<!-- END SIDEBAR MENU -->
 
 		</div>
@@ -335,7 +164,7 @@
 
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
-						<h3 class="page-title">教练订单信息<small>查看教练信息</small>
+						<h3 class="page-title"><span id="coach_name"></span>教练订单信息<small>查看教练信息</small>
 
 						</h3>
 
@@ -373,9 +202,12 @@
 
     <a class=" btn blue"  href="techer_view_info.html" id="teachInfo" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>教练信息</a>
     <a class=" btn purple"  href="techer_view_money.html" id="orderRecord" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>订单记录</a>
-    <a class=" btn blue"  href="techer_view_students.html" id="studentInfo" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>名下学员</a>
+    <!-- <a class=" btn blue"  href="techer_view_students.html" id="studentInfo" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>名下学员</a> -->
     <a class=" btn blue"  href="techer_view_pingjia.html" id="evaluationInfo" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>获得评价</a> 
-    
+    <a class=" btn blue"
+					id="scheduleInfo" href="techer_view_paiban.html"
+					style="margin-bottom:10px;"><i class="icon-hospital"
+					style="margin-right:5px;"></i>教练排班</a>
 
 
 
@@ -531,14 +363,21 @@
 		   App.init();
 
 		   //TableAdvanced.init();
-		   var id = decodeURIComponent(window.location.search).match(/\d+/);
-		   try{
-			   id = parseInt(id);
-			   $('#teachInfo').attr('href', 'techer_view_info.html?' + encodeURIComponent('coach_id=' + id));
-			   $('#orderRecord').attr('href', 'techer_view_money.html?' + encodeURIComponent('coach_id=' + id));
-			   $('#studentInfo').attr('href', 'techer_view_students.html?' + encodeURIComponent('coach_id=' + id));
-			   $('#evaluationInfo').attr('href', 'techer_view_pingjia.html?' + encodeURIComponent('coach_id=' + id));
-		   }catch(err){}
+		    var search = window.location.search;
+			var decodeSearch = decodeURIComponent(search);
+			var coach_id, coach_name;
+			try{
+				coach_id = decodeSearch.split('&')[0].split('=')[1];
+				coach_name = decodeSearch.split('&')[1].split('=')[1];
+				$('#coach_name').html(coach_name);
+			}catch(err){
+				return;
+			}
+		   $('#teachInfo').attr('href', 'techer_view_info.html' + search);
+		   $('#orderRecord').attr('href', 'techer_view_money.html' + search);
+		   $('#studentInfo').attr('href', 'techer_view_students.html' + search);
+		   $('#evaluationInfo').attr('href', 'techer_view_pingjia.html' + search);
+		   $('#scheduleInfo').attr('href', 'techer_view_paiban.html' + search);
 		   $('#sample_2').DataTable({
 				 'processing': true,
 				 'serverSide': true,
@@ -550,10 +389,7 @@
 						  data.sort = data.columns[index].data;
 						  data.dir = data.order[0].dir;
 						  data.search = data.search.value;
-						  try{
-							  	data.coach_id = parseInt(id);
-							  }catch(err){
-							  }
+						  data.coach_id = coach_id;
 					  }
 				 },
 				 'columns': [
@@ -623,7 +459,8 @@
 				            	 'data': 'order_id',
 				            	 'render': function(data, type, row, meta){
 				            		 if(type == 'display')
-				            			 return window.location.href + ' #myModal';
+				            			 //return window.location.href + ' #myModal';
+				            		 	return '详细';
 				            		 return data;
 				            	 }
 				             }

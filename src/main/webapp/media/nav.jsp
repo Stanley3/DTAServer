@@ -181,6 +181,7 @@
 
 				<!-- END TOP NAVIGATION MENU --> 
 				<input type="hidden" id="school_id" value="<%=school_id %>">
+				<input type="hidden" id="school_name" value="<%=school_name %>">
 			</div>
 </body>
 </html>

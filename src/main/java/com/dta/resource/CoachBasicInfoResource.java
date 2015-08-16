@@ -67,6 +67,7 @@ public class CoachBasicInfoResource extends
 		HttpServletRequest request = super.getRequest();
 		HttpServletResponse response = super.getResponse();
 		PrintWriter printer = null;
+		response.setHeader("Content-Type", "text/html;charset=UTF-8");
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (!isMultipart) {
 			/*
@@ -88,6 +89,7 @@ public class CoachBasicInfoResource extends
 				ServletFileUpload fileUpload = new ServletFileUpload();
 				FileItemIterator iterator = fileUpload.getItemIterator(request);
 				printer = response.getWriter();
+				response.setStatus(200);
 				CoachBasicInfo po = new CoachBasicInfo();
 				while (iterator.hasNext()) {
 					FileItemStream item = iterator.next();
@@ -118,7 +120,7 @@ public class CoachBasicInfoResource extends
 				}
 				if (service.addObject(po) == 1) {
 					response.setStatus(200);
-					printer.println("<script>alert('success');window.parent.document.getElementById('form').reset();</script>");
+					printer.println("<script>alert('添加成功');window.parent.document.getElementById('form').reset();</script>");
 					printer.flush();
 					/*
 					 * return Response .status(200) .entity(new ResultBean(
@@ -132,7 +134,7 @@ public class CoachBasicInfoResource extends
 					 * GlobalConstant.OPERATION_FAIL,
 					 * GlobalConstant.INSERT_FAIL)).build();
 					 */
-					printer.println("<script>alert('error')</script>");
+					printer.println("<script>alert('添加失败')</script>");
 					printer.flush();
 				}
 			} catch (Exception e) {
@@ -142,7 +144,11 @@ public class CoachBasicInfoResource extends
 				 * GlobalConstant.OPERATION_EXCEPTION,
 				 * GlobalConstant.OPERATION_EXCEPTION_DESC)) .build();
 				 */
-				printer.println("<script>alert('exception')</script>");
+				response.setStatus(500);
+				try{
+					printer = response.getWriter();
+				}catch(Exception el){}
+				printer.println("<script>alert('系统异常')</script>");
 				printer.flush();
 			}
 		}
@@ -231,16 +237,16 @@ public class CoachBasicInfoResource extends
 				if (service.updateObjectById(po) == 1)
 					return Response
 							.status(200)
-							.entity("<script>alert('success');window.parent.document.getElementById('form').reset();</script>")
+							.entity("<script>alert('更新成功');window.parent.document.getElementById('form').reset();</script>")
 							.build();
 				else {
 					return Response.status(200)
-							.entity("<script>alert('error')</script>").build();
+							.entity("<script>alert('更新失败')</script>").build();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				return Response.status(500)
-						.entity("<script>alert('exception')</script>").build();
+						.entity("<script>alert('系统异常')</script>").build();
 			}
 		}
 	}

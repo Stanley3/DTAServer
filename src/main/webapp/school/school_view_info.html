@@ -176,7 +176,7 @@
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
 						<h3 class="page-title">
-							商丘顺达驾校<small>查看驾校详细信息</small>
+							<span id="school_name1"></span><small>查看驾校详细信息</small>
 
 						</h3>
 
@@ -208,9 +208,9 @@
 					class=" icon-user-md" style="margin-right:5px;"></i>教练信息</a> <a
 					class=" btn blue" href="school_view_students.html" id="studentInfo"
 					style="margin-bottom:10px;"><i class=" icon-male"
-					style="margin-right:5px;"></i>学员信息</a> <a class=" btn blue" id="fianceInfo"
+					style="margin-right:5px;"></i>学员信息</a> <!-- <a class=" btn blue" id="fianceInfo"
 					href="school_view_money.html" style="margin-bottom:10px;"><i
-					class="icon-hospital" style="margin-right:5px;"></i> 财务信息</a>
+					class="icon-hospital" style="margin-right:5px;"></i> 财务信息</a> -->
 
 
 				<div class="portlet box blue">
@@ -218,7 +218,7 @@
 					<div class="portlet-title">
 
 						<div class="caption">
-							<i class="icon-cogs"></i>商丘顺达驾校详细信息
+							<i class="icon-cogs"></i><span id="school_name2"></span>
 						</div>
 
 						<div class="actions" style="margin-left:15px;"></div>
@@ -535,13 +535,21 @@
 
 		   //App.init();
 		   //TableAdvanced.init();
-		   var id = window.location.search.match(/\d+/);
-		   var url = '../rest/schoolInfo/' + id;
-		   if(id != null){
-			   $('#coachInfo').attr('href', 'school_view_techer.html?school_id=' + id);
-			   $('#studentInfo').attr('href', 'school_view_students.html?school_id=' + id);
-			   $('#financeInfo').attr('href', 'school_view_money.html?school_id=' + id);
+		   var search = window.location.search;
+		   var decodeSearch = decodeURIComponent(search);
+		   $('#coachInfo').attr('href', 'school_view_techer.html' + search);
+		   $('#studentInfo').attr('href', 'school_view_students.html' + search);
+		   $('#financeInfo').attr('href', 'school_view_money.html' + search);
+		   var school_id , school_name;
+		   try{
+			   school_id = decodeSearch.split('&')[0].split('=')[1];
+			   school_name = decodeSearch.split('&')[1].split('=')[1];
+			   $('#school_name1').html(school_name);
+			   $('#school_name2').html(school_name);
+		   }catch(err){
+			   return;
 		   }
+		   var url = '../rest/schoolInfo/' + school_id;
 		   //显示或隐藏路考王设备数输入框
 		   $('[name=device_3_status]').each(function(){
 				$(this).click(function(){
@@ -552,50 +560,48 @@
 				});
 			});
 		   console.log($('#coachInfo').attr('href'));
-		   if(id != ""){
-			   $.ajax({
-				   url: url,
-				   type: 'get',
-				   dataType: 'json',
-				   success: function(data){
-					   user_id = data.user_id;
-					   school_id = data.school_id;
-					   $('#schoolName').val(data.school_name);
-					   $('#schoolAddress').val(data.school_address);
-					   $('#schoolPhone').val(data.school_phone);
-					   document.getElementsByName('school_type')[data.school_type-1].checked = true;
-					   document.getElementsByName('device_2_status')[data.device_2_status].checked = 'checked';
-					   document.getElementsByName('device_3_status')[data.device_3_status].checked = 'checked';
-					   $('#registerNumber').val(data.register_number);
-					   $('#vehicleNumber').val(data.vehicle_number);
-					   document.getElementsByName('status')[data.status].checked = 'checked';
-					   $('#longitude').val(data.longitude);
-					   $('#latitude').val(data.latitude);
-					   $('#bankAccount').val(data.bank_account);
-					   $('#accountHolder').val(data.account_holder);
-					   $('#subject2Fee').val(data.subject_2_fee);
-					   $('#subject3Fee').val(data.subject_3_fee);
-					   $('#charter2Fee').val(data.charter_2_fee);
-					   $('#charter3Fee').val(data.charter_3_fee);
-					   $('#contractNo').val(data.contract_no);
-					   $('#schoolmasterName').html(data.schoolmaster_name);
-					   $('#userName').html(data.user_name);
-					   /* $('#userPwd').val(data.user_pwd);
-					   $('#rpassword').val(data.user_pwd); */
-					   $('#obligateCode').html(data.obligate_code);
-					   if(data.device_3_status == 2){
-					   	$('#subject3Number').val(data.subject_3_number);
-					   	$('#subject3Number').css('display', 'inline');
-					   }
-				   },
-				   error: function(xhr, err){
-					   alert(xhr.responseText + ', ' + err);
-				   },
-				   complete: function(xhr, ts){
-					   App.init();//将初始化界面放在此处
+		   $.ajax({
+			   url: url,
+			   type: 'get',
+			   dataType: 'json',
+			   success: function(data){
+				   user_id = data.user_id;
+				   school_id = data.school_id;
+				   $('#schoolName').val(data.school_name);
+				   $('#schoolAddress').val(data.school_address);
+				   $('#schoolPhone').val(data.school_phone);
+				   document.getElementsByName('school_type')[data.school_type-1].checked = true;
+				   document.getElementsByName('device_2_status')[data.device_2_status].checked = 'checked';
+				   document.getElementsByName('device_3_status')[data.device_3_status].checked = 'checked';
+				   $('#registerNumber').val(data.register_number);
+				   $('#vehicleNumber').val(data.vehicle_number);
+				   document.getElementsByName('status')[data.status].checked = 'checked';
+				   $('#longitude').val(data.longitude);
+				   $('#latitude').val(data.latitude);
+				   $('#bankAccount').val(data.bank_account);
+				   $('#accountHolder').val(data.account_holder);
+				   $('#subject2Fee').val(data.subject_2_fee);
+				   $('#subject3Fee').val(data.subject_3_fee);
+				   $('#charter2Fee').val(data.charter_2_fee);
+				   $('#charter3Fee').val(data.charter_3_fee);
+				   $('#contractNo').val(data.contract_no);
+				   $('#schoolmasterName').html(data.schoolmaster_name);
+				   $('#userName').html(data.user_name);
+				   /* $('#userPwd').val(data.user_pwd);
+				   $('#rpassword').val(data.user_pwd); */
+				   $('#obligateCode').html(data.obligate_code);
+				   if(data.device_3_status == 2){
+				    $('#subject3Number').val(data.subject_3_number);
+				   	$('#subject3Number').css('display', 'inline');
 				   }
-			   });
-		   }
+			   },
+			   error: function(xhr, err){
+				   alert(xhr.responseText + ', ' + err);
+			   },
+			   complete: function(xhr, ts){
+				   App.init();//将初始化界面放在此处
+			   }
+		   });
 		});
 	function add(){
 		var formArray = $('#form').serializeArray();
@@ -620,6 +626,10 @@
 			}
 			
 		});
+	}
+	function getURLParameter(name) {
+		alert(location.search);
+	    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 	}
 	</script>
 

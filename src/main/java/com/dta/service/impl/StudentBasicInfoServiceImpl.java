@@ -1,5 +1,6 @@
 package com.dta.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -84,5 +85,25 @@ public class StudentBasicInfoServiceImpl extends
 		// TODO Auto-generated method stub
 		return dao.getStudentNumbers(map);
 	}
+	
+	@Override
+	public StudentBasicInfo getObjectById(Serializable student_id){
+		StudentBasicInfo studentBasicInfo = super.getObjectById(student_id);
+		if(studentBasicInfo.getStudent_level() > 0){
+			Map<String, Object> map = dao.getCharteredCoachByStudentId((Integer)student_id);
+			if(map != null){
+				studentBasicInfo.setChartered_coach_id((Integer)map.get("chartered_coach_id"));
+				studentBasicInfo.setChartered_coach_name((String)map.get("chartered_coach_name"));
+			}else
+				throw new RuntimeException("根据学员id获取学员包车教练信息时，学员信息不符");
+		}
+		return studentBasicInfo;
+	}
 
+	@Override
+	public Map<String, Object> getStudentInfoByID(String idcard_no) {
+		if(idcard_no == null)
+			throw new IllegalArgumentException("根据学员身份证号获取学员信息时，身份证号为null");
+		return dao.getStudentInfoByID(idcard_no);
+	}
 }

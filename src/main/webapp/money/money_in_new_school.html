@@ -76,113 +76,6 @@
 
 		<div class="navbar-inner">
 
-			<div class="container-fluid">
-
-				<!-- BEGIN LOGO -->
-
-				<a class="brand" style="margin-left:10px; " href="../index.html">
-
-					驾考联盟后台管理系统 </a>
-
-				<!-- END LOGO -->
-
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-
-				<a href="javascript:;" class="btn-navbar collapsed"
-					data-toggle="collapse" data-target=".nav-collapse"> <img
-					src="../media/image/menu-toggler.png" alt="" />
-
-				</a>
-
-				<!-- END RESPONSIVE MENU TOGGLER -->
-
-				<!-- BEGIN TOP NAVIGATION MENU -->
-
-				<ul class="nav pull-right">
-
-
-
-
-					<!-- BEGIN INBOX DROPDOWN -->
-
-					<li class="dropdown" id="header_inbox_bar"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-envelope"></i> <span class="badge">5</span>
-
-					</a>
-
-						<ul class="dropdown-menu extended inbox">
-
-							<li>
-
-								<p>有 5 条未处理投诉</p>
-
-							</li>
-
-							<li><a href="../inbox.html?a=view"> <span
-									class="subject"> <span class="from">学员：张四</span> <span
-										class="time">刚刚</span>
-
-								</span> <span class="message"> 真是受不了啦还号称服务第一呢啥服务 </span>
-
-							</a></li>
-
-							<li><a href="../inbox.html?a=view"> <span
-									class="subject"> <span class="from">学员：王五</span> <span
-										class="time">16 分钟前</span>
-
-								</span> <span class="message"> 我去了让我等了半个小时都不让我开始... </span>
-
-							</a></li>
-
-							<li><a href="../inbox.html?a=view"> <span
-									class="subject"> <span class="from">学员：张三</span> <span
-										class="time">2小时前</span>
-
-								</span> <span class="message"> 你们的教练实在是太气人了都不好好教! </span>
-
-							</a></li>
-
-							<li class="external"><a href="../inbox.html">查看所有投诉信息<i
-									class="m-icon-swapright"></i></a></li>
-
-						</ul></li>
-
-					<!-- 结束全站顶部投诉信息 -->
-
-
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> <span class="username">超级管理员：丁海伟</span>
-
-							<i class="icon-angle-down"></i>
-
-					</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="../extra_profile.html"><i class="icon-user"></i>
-									修改资料</a></li>
-
-
-							<li class="divider"></li>
-
-							<li><a href="../extra_lock.html"><i class="icon-lock"></i>
-									锁定屏幕</a></li>
-
-							<li><a href="../login.html"><i class="icon-key"></i> 退出</a></li>
-
-						</ul></li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU -->
-
-			</div>
 
 		</div>
 
@@ -201,8 +94,6 @@
 		<div class="page-sidebar nav-collapse collapse">
 
 			<!-- 开始 左侧通用 菜单 -->
-
-			<script src="../media/left.js" type="text/javascript"></script>
 
 			<!-- END SIDEBAR MENU -->
 
@@ -336,7 +227,7 @@
 					<div class="modal-body">
 
 
-						<iframe src="money_add_school.html?id=1001" width=100% height=240
+						<iframe src="javascript:void(0);" width=100% height=240
 							frameborder=0 scrolling=no></iframe>
 
 
@@ -396,12 +287,11 @@
 							<thead>
 								<tr>
 									<th>充值日期</th>
-									<th>充值姓名</th>
-									<th class="hidden-480">手机号</th>
-									<th class="hidden-480">充值对象</th>
+									<th>充值驾校</th>
+									<th>驾校电话</th>
 									<th class="hidden-480">充值类型</th>
-									<th class="hidden-480">充值金额(元)</th>
 									<th class="hidden-480">充值方式</th>
+									<th class="hidden-480">充值金额(元)</th>
 									<th class="hidden-480">操作人</th>
 								</tr>
 							</thead>
@@ -499,46 +389,59 @@
 			App.init();
 
 			//TableAdvanced.init();
-						
+			var school_id = $('#school_id').val();
+			var iframe = document.getElementsByTagName('iframe')[0];
+			iframe.src = 'money_add_school.html?id=' + school_id;
+			//alert(iframe.src);
 			table = $('#sample_2').DataTable({
+				'order': [[0, 'desc'], [1, 'asc']],
 				'processing': true,
-				'serverSide': true,
 				'ajax': {
-					'url': '../rest/studentDepositRecord/getStuDepInfo',
+					'url': '../rest/schoolDepositRecord/getAll',
 					'type': 'get',
-					'data': function(data, setting){
+					'dataSrc': ''
+					/* 'data': function(data, setting){
 					  var obj = new Object();
 					  var index = data.order[0].column;
 					  obj.sort = data.columns[index].data;
 					  obj.dir = data.order[0].dir;
-					  obj.search = data.search.value;
-					  obj.school_id = $('#school_id').val();
 					  obj.draw = data.draw;
-					  obj.length = data.length;
 					  return obj;
-				  }
+				  } */
 				},
 				'columns': [
 				            {'data': 'deposit_date'},
-				            {'data': 'student_name'},
-				            {'data': 'student_phone'},
-				            {
-				            	'data': null,
-				            	'defaultContent': '学员'
-				            },
+				            {'data': 'school_name'},
+				            {'data': 'school_phone'},
 				            {
 				            	'data': 'deposit_type',
 				            	'render': function(data, type, row, meta){
 				            		if(type == 'display'){
 				            			switch(data){
-				            			case 1:
-				            				return '自由费用';
-				            			case 2:
-				            				return '包科二VIP';
+				            			case 0:
+				            				return '预付费';
+				            			default: 
+				            				return '未知';
+				            			}
+				            		}
+				            		return data;
+				            	}
+				            },
+				            {
+				            	'data': 'deposit_way',
+				            	'render': function(data, type, row, meta){
+				            		if(type == 'display'){
+				            			switch(data){
+				            			case 1: 
+				            				return '现金充值';
+				            			case 2: 
+				            				return '网银转账';
 				            			case 3:
-				            				return '包科三VIP';
+				            				return '支付宝付款';
 				            			case 4: 
-				            				return '打包VIP';
+				            				return '其他方式';
+				            			case 5: 
+				            				return '系统赠送';
 				            			default: 
 				            				return '未知';
 				            			}
@@ -550,82 +453,51 @@
 				            	'data': 'deposit_amount'
 				            }, 
 				            {
-				            	'data': 'deposit_way',
-				            	'render': function(data, type, row, meta){
-				            		if(type == 'display'){
-				            			switch(data){
-				            			case 0: 
-				            				return '现金充值';
-				            			case 1: 
-				            				return '网银转账';
-				            			case 2:
-				            				return '支付宝付款';
-				            			case 3: 
-				            				return '其他方式';
-				            			case 4: 
-				            				return '系统赠送';
-				            			default: 
-				            				return '未知';
-				            			}
-				            		}
-				            		return data;
-				            	}
-				            },
-				            {
 				            	'data': null,
 				            	'render': function(data, type, row, meta){
 				            		var way ;
 				            		var type;
 				            		var remark;
 				            		switch(data.deposit_way){
-				            		case 0:
+				            		case 1:
 				            			way = '现金充值';
 				            			break;
-				            		case 1:
+				            		case 2:
 				            			way = '网银转账';
 				            			break;
-				            		case 2:
+				            		case 3:
 				            			way = '支付宝付款';
 				            			break;
-				            		case 3:
+				            		case 4:
 				            			way = '其他方式';
 				            			break;
-				            		case 4: 
+				            		case 5: 
 				            			way = '系统赠送';
 				            			break;
 				            		default: 
 				            			way = '未知';
 				            		}
 				            		switch(data.deposit_type){
-				            		case 1:
-				            			type = '自由费用';
-				            			break;
-				            		case 2:
-				            			type = '包科二VIP';
-				            			break;
-				            		case 3:
-				            			type = '包科三VIP';
-				            			break;
-				            		case 4:
-				            			type = '大包VIP';
+				            		case 0:
+				            			type = '预付费';
 				            			break;
 				            		default:
 				            			type = '未知';
 				            		}
 				            		remark = data.remark == null ? "" : data.remark;
-				            		return '<a href="#myModal'+ data.deposit_record_id + '" role="button" data-toggle="modal">' + data.student_name + '</a>' +
-				            			'<div id="myModal' + data.deposit_record_id + '" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">' +
+				            		return '<a href="#myModal'+ data.school_deposit_id + '" role="button" data-toggle="modal">' + data.operator_name + '</a>' +
+				            			'<div id="myModal' + data.school_deposit_id + '" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">' +
 				            			'<div class="modal-header">' + 
 				            			'<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>' + 
-				            			'<h3 id="myModalLabel2">' + data.student_name + data.deposit_date.split(' ')[0] + '充值明细</h3>' +
+				            			'<h3 id="myModalLabel2">' + data.school_name + data.deposit_date.split(' ')[0] + '充值明细</h3>' +
 				            			'</div>' +
 				            			'<div class="modal-body">' +
 				            			'<p>充值金额：' + data.deposit_amount + '元</p>' +
-				            			' <p>充值对象：学员</p>' +
+				            			' <p>充值对象：驾校</p>' +
 				            			' <p>充值方式：' + way + '</p>' + 
 				            			'<p>充值类型：' + type + '</p>' +
-				            			'<p>联系电话：' + data.student_phone + '</p>' + 
-				            			' <p>充值人：' + data.student_name + '</p>' + 
+				            			'<p>联系电话：' + data.school_phone + '</p>' + 
+				            			' <p>充值驾校：' + data.school_name + '</p>' + 
 				            			'<p>备注：' + remark + '</p>' + 
 				            			'</div>' + 
 				            			'<div class="modal-footer">' + 
@@ -641,16 +513,13 @@
 			'lengthMenu': [ [10, 25, 50, -1], [10, 25, 50, '全部'] ],
 			'columnDefs':[
 			             {
-			            	 'targets': 7,
+			            	 'targets': 5,
 			            	 'orderable': false
 			             }
 			             ],
 			});
 		});
 		function schoolDeposit() {
-			document.getElementsByTagName('iframe')[1].contentWindow.add();
-		}
-		function studentDeposit() {
 			document.getElementsByTagName('iframe')[0].contentWindow.add();
 		}
 		function reload(){

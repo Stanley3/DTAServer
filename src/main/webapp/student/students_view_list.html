@@ -354,11 +354,11 @@
 
 		jQuery(document).ready(function() {       
 		   App.init();
-
 		   //TableAdvanced.init();
 		   $('#sample_2').DataTable({
 			  'processing': true,
 			  'serverSide': true,
+			  'order': [[0, 'desc'], [1, 'asc']],
 			  'ajax':{
 				  'url': '../rest/studentBasicInfo/getPage',
 				  'type': 'get',
@@ -371,8 +371,14 @@
 					  var search = window.location.search;
 					  if( search.length != 0){
 						  search = decodeURIComponent(search);
-						  var level = search.match(/\d+/);
-						  data.student_level = parseInt(level);
+						  try{
+							  var number = search.match(/\d+/)[0];
+							  var type = search.match(/[A-Z]*(?==)/)[0];
+							  if(type == 'L')
+							  	data.student_level = parseInt(number);
+							  else if(type == 'C')
+								  data.subject = parseInt(number);
+						  }catch(err){return;}
 					  }
 				  }
 			  },
@@ -489,7 +495,9 @@
 			            	 'data': 'student_id',
 			            	 'render': function(data, type, row, meta){
 			            		 if(type == 'display'){
-			            			 return '<a href=\'students_edit.html?student_id=' + data + '\'>查看</a>';
+			            			 var search = encodeURIComponent('coach_id=' + row.student_id 
+			            					 	+ '&student_name=' + row.student_name);
+			            			 return '<a href=\'students_edit.html?' + search + '\'>查看</a>';
 			            		 }
 			            		 return data;
 			            	 },
@@ -504,12 +512,6 @@
 
 		});
 	</script>
-<script type="text/javascript">
-window.onload = function(){
-	//getStaticInfo();
-	//alert($('#school_id').val());
-}
-</script>
 </body>
 
 <!-- END BODY -->

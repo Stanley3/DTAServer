@@ -7,7 +7,7 @@ import javax.ws.rs.FormParam;
 
 import com.dta.vo.PageParam;
 
-public class EvaluationRecord extends PageParam implements Serializable {
+public class EvaluationRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@FormParam("evaluation_record_id")
 	private Integer evaluation_record_id;
@@ -41,7 +41,7 @@ public class EvaluationRecord extends PageParam implements Serializable {
 	// 学员评价界面额外需要的字段
 	private String coach_name;
 	private String phone;
-	private String course_status;
+	private Integer course_status;
 
 	public String getOperation() {
 		return operation;
@@ -74,12 +74,12 @@ public class EvaluationRecord extends PageParam implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public String getCourse_status() {
+	
+	public Integer getCourse_status() {
 		return course_status;
 	}
 
-	public void setCourse_status(String course_status) {
+	public void setCourse_status(Integer course_status) {
 		this.course_status = course_status;
 	}
 

@@ -41,5 +41,5 @@ public class GlobalConstant {
 	public static final String SYSTOTALINCOME = "total_income_id";
 	public static final String SYSTOTALOUTCOME = "total_outcome_id";
 	public static final String SYSUSER = "user_id";
-
+	public static final String SCHOOLDEPOSITRECORD = "school_deposit_id";
 }

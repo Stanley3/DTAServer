@@ -75,7 +75,7 @@
 	<div style=" background-color:#FFF; padding-bottom:5px;">
 		<!-- BEGIN FORM-->
 
-		<form action="#" class="form-horizontal" id="form" method="post" target="formIframe">
+		<form action="../rest/schoolDepositRecord/add" class="form-horizontal" id="form" method="post" target="formIframe">
 
 
 
@@ -88,10 +88,10 @@
 					<div class="controls">
 
 						<select class="validate[required, funcCall[test]] medium m-wrap" tabindex="1" 
-							name="school_id" id="selectSchool">
+							name="school_id" id="selectSchool" data-prompt-position="bottomLeft:0,-15">
 							<option></option>
 					</select>
-
+					<!-- <input type="hidden" id="setSchoolId" name="school_id"> -->
 					</div>
 
 				</div>
@@ -103,7 +103,8 @@
 
 				<div class="controls">
 
-					<input type="text" placeholder="0.00元" class="validate[required, custom[number]] m-wrap big" name="prepaid"/>
+					<input type="text" placeholder="0.00元" class="validate[required, custom[number]] m-wrap big" 
+						name="deposit_amount"/>
 				</div>
 
 			</div>
@@ -114,7 +115,7 @@
 				<div class="controls">
 
 					<label class="radio"> <input type="radio"
-						name="deposit_way11" value="0" checked /> 预付费
+						name="deposit_type" value="0" checked /> 预付费
 
 					</label>
 
@@ -155,12 +156,12 @@
 
 				<div class="controls">
 
-					<textarea class="large m-wrap" rows="2"></textarea>
+					<textarea class="large m-wrap" rows="2" name = "remark"></textarea>
 
 				</div>
 
 			</div>
-			<input type="hidden" value="2" name="user_id">
+			<!-- <input type="hidden" value="2" name="school_id" id="setSchoolId"> -->
 		</form>
 
 		<!-- END FORM-->
@@ -208,23 +209,42 @@
 				placeholder: '请选择一个驾校',
 				language: 'zh-CN'
 			});
-			$('#selectSchool').on('change', function(e){
+			/* $('#selectSchool').on('change', function(e){
 				var school_id = $('#selectSchool').val();
 				//console.log(school_id);
 				if(school_id.length != 0)
 					$('#form').attr('action', '../rest/schoolInfo/update/' + $('#selectSchool').val());
-			});
+					$('')
+			}); */
 		});
 		function test(field, rules, i, options){
 			console.log("hello");
-			alert(22);
 			if(field.val().length == 0)
 				return '必须选择一个驾校';
 		}
 		function add(){
-			alert($('#form').attr('action'));
 			//document.getElementsByTagName('form')[0].submit();
-			$('#form').submit();
+			//$('#form').submit();
+			$("#form").validationEngine('validate');
+			var id = $('#selectSchool').val();
+			if(id != 0)
+				$.ajax({
+					url: $('#form').attr('action'),
+					type: 'post',
+					dataType: 'json',
+					data: $('#form').serialize(),
+					success: function(data){
+						if(data.code == 1){
+							alert('充值成功');
+							form.reset();
+						}
+						else
+							alert('充值失败');
+					},
+					error: function(xhr, err){
+						alert('网络错误，请重试');
+					}
+				});
 		}
 	</script>
 </body>

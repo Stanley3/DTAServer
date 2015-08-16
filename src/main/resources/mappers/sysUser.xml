@@ -184,6 +184,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from sys_user
 	where user_id = #{user_id}
 </select>
+<!-- 一个驾校可有多个管理员，此处应根据用户名来查询 -->
 <select id="getUserByFK" resultType="SysUser">
 	select 
 		 user_id,
@@ -195,11 +196,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 schoolmaster_name,
 		 IF((user_photo IS NULL), 0, 1) AS havePhoto
 	from sys_user 
-	where user_attribute = #{school_id}
+	where user_name = #{user_name}
 </select>
 <!-- 根据用户名等到用户的驾校id 总后台的驾校id为0 -->
 <select id="getSchoolIdByUsername" resultType="Map">
-	select school_id, school_name from sys_user su join school_info si on su.user_attribute = si.school_id where user_name = #{username}
+	select school_id, school_name, user_id from sys_user su join school_info si on su.user_attribute = si.school_id where user_name = #{username}
 </select>
 <!-- 增添驾校管理员 -->
 <insert id="addSchoolAdmin" parameterType="map">

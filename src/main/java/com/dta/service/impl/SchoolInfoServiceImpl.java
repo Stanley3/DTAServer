@@ -61,7 +61,7 @@ public class SchoolInfoServiceImpl extends
 		SchoolInfo schoolInfo = new SchoolInfo();
 		SysUser sysUser = new SysUser();
 		schoolInfo = dao.getObjectById(id);
-		sysUser = userDao.getUserByFK(schoolInfo.getSchool_id());
+		sysUser = userDao.getUserByFK(schoolInfo.getLeader_phone());
 		schoolInfo.setSchoolmaster_name(sysUser.getSchoolmaster_name());
 		schoolInfo.setUser_name(sysUser.getUser_name());
 		schoolInfo.setUser_pwd(sysUser.getUser_pwd());
@@ -120,5 +120,11 @@ public class SchoolInfoServiceImpl extends
 		if(subject == null)
 			throw new IllegalArgumentException("根据学员信息获取驾校信息时，学员科目为null");
 		return dao.getSchoolInfoSize(subject);
+	}
+
+	@Override
+	public List<Map<String, String>> webSelectSchool() {
+		// TODO Auto-generated method stub
+		return dao.webSelectSchool();
 	}
 }

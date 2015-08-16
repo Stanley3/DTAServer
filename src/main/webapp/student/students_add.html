@@ -77,113 +77,6 @@
 
 		<div class="navbar-inner">
 
-			<div class="container-fluid">
-
-				<!-- BEGIN LOGO -->
-
-				<a class="brand" style="margin-left:10px; " href="../index.html">
-
-					驾考联盟后台管理系统 </a>
-
-				<!-- END LOGO -->
-
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-
-				<a href="javascript:;" class="btn-navbar collapsed"
-					data-toggle="collapse" data-target=".nav-collapse"> <img
-					src="../media/image/menu-toggler.png" alt="" />
-
-				</a>
-
-				<!-- END RESPONSIVE MENU TOGGLER -->
-
-				<!-- BEGIN TOP NAVIGATION MENU -->
-
-				<ul class="nav pull-right">
-
-
-
-
-					<!-- BEGIN INBOX DROPDOWN -->
-
-					<li class="dropdown" id="header_inbox_bar"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-envelope"></i> <span class="badge">5</span>
-
-					</a>
-
-						<ul class="dropdown-menu extended inbox">
-
-							<li>
-
-								<p>有 5 条未处理投诉</p>
-
-							</li>
-
-							<li><a href="../inbox.html?a=view"> <span
-									class="subject"> <span class="from">学员：张四</span> <span
-										class="time">刚刚</span>
-
-								</span> <span class="message"> 真是受不了啦还号称服务第一呢啥服务 </span>
-
-							</a></li>
-
-							<li><a href="../inbox.html?a=view"> <span
-									class="subject"> <span class="from">学员：王五</span> <span
-										class="time">16 分钟前</span>
-
-								</span> <span class="message"> 我去了让我等了半个小时都不让我开始... </span>
-
-							</a></li>
-
-							<li><a href="../inbox.html?a=view"> <span
-									class="subject"> <span class="from">学员：张三</span> <span
-										class="time">2小时前</span>
-
-								</span> <span class="message"> 你们的教练实在是太气人了都不好好教! </span>
-
-							</a></li>
-
-							<li class="external"><a href="../inbox.html">查看所有投诉信息<i
-									class="m-icon-swapright"></i></a></li>
-
-						</ul></li>
-
-					<!-- 结束全站顶部投诉信息 -->
-
-
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> <span class="username">超级管理员：丁海伟</span>
-
-							<i class="icon-angle-down"></i>
-
-					</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="../extra_profile.html"><i class="icon-user"></i>
-									修改资料</a></li>
-
-
-							<li class="divider"></li>
-
-							<li><a href="../extra_lock.html"><i class="icon-lock"></i>
-									锁定屏幕</a></li>
-
-							<li><a href="../login.html"><i class="icon-key"></i> 退出</a></li>
-
-						</ul></li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU -->
-
-			</div>
 
 		</div>
 
@@ -202,9 +95,6 @@
 		<div class="page-sidebar nav-collapse collapse">
 
 			<!-- 开始 左侧通用 菜单 -->
-
-			<script src="../media/left.js" type="text/javascript"></script>
-
 			<!-- END SIDEBAR MENU -->
 
 		</div>
@@ -335,17 +225,22 @@
 					<div class="portlet-body">
 						<h3 class="form-section">批量增加学员</h3>
 
-						<form action="#" class="form-horizontal">
+						<form action="../rest/studentBasicInfo/batchAddStudentInfo" 
+						enctype="multipart/form-data" method="post" class="form-horizontal" target="formIframe" 
+							onsubmit="return validate();">
 							<div class="control-group">
 								<label class="control-label">上传文件</label>
 								<div class="controls">
-									<input type="file" class="default" /><span class="help-inline">
+									<input type="file" class="default" name="file" onchange="checkFileExt(this);"/>
+									<span id="fileError" style="color:red;display:none;"></span>
+									<span class="help-inline">
 										注：下载上传模板</span>
 								</div>
 							</div>
-							<button type="submit" style="margin-left:100px;" href="#myModal1"
-								role="button" data-toggle="modal" class="btn blue">上传</button>
-
+							<!-- <button type="submit" style="margin-left:100px;" href="#myModal1"
+								role="button" data-toggle="modal" class="btn blue">上传</button> -->
+							<button type="submit" style="margin-left:100px;"
+								role="button"  class="btn blue">上传</button>
 
 
 							<button type="button" class="btn">取消</button>
@@ -413,11 +308,14 @@
 								<label class="control-label">所属驾校</label>
 
 								<div class="controls">
-
-									<select class="medium m-wrap" tabindex="1"
-										data-placeholder="请选择驾校" id="selectSchool" name="school_id">
-										<option value="0">未选择驾校</option>
-									</select> <span class="help-inline"> 注：如果不选择驾校也可以！</span>
+									<div id="selectSchoolDiv" style="display: none">
+										<select class="validate[required] medium m-wrap" tabindex="1"
+											data-placeholder="请选择驾校" id="selectSchool" onchange="document.getElementById('setSchoolId').value=this.value;">
+											<!-- <option value="0">未选择驾校</option> -->
+										</select> 
+									</div>
+									<label id="setSchoolName"  style="display:none; font-size:1.25em;margin-right:10px;cursor: default;"></label>
+									<input type="hidden" name="school_id" id="setSchoolId">
 								</div>
 
 							</div>
@@ -520,8 +418,12 @@
 								<label class="control-label">照片</label>
 
 								<div class="controls">
-
-									<input type="file" class="default" name="student_photo" />
+									<div class="fileupload-new thumbnail" id="preview"
+										style="width: 200px; height: 200px;">
+										<img src="../media/image/profile.jpg" alt="教练头像"
+											style="width:100%;height:100%;">
+									</div>
+									<input type="file" class="default" name="student_photo" onchange="previewImage(this)" />
 
 								</div>
 
@@ -531,8 +433,7 @@
 
 
 								<h3 class="form-section" style="margin-top:15px;">学员登录信息</h3>
-
-
+								<label>注意：添加后的信息不能修改</label>
 								<div class="control-group">
 
 									<label class="control-label">身份证号<span class="required">*</span></label>
@@ -686,7 +587,7 @@
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
 	<script src="../media/js/app.js"></script>
-
+	<script src="../media/js/picPreview.js"></script>
 	<script src="../media/js/table-advanced.js"></script>
 	<script type="text/javascript" src="../media/js/jquery.validationEngine-zh_CN.js"></script>
 	<script type="text/javascript" src="../media/js/jquery.validationEngine.js"></script>
@@ -699,31 +600,66 @@
 
 		   //TableAdvanced.init();
 		   $('#form').validationEngine();
-		   var dataArray = new Array();
-		   $.ajax({
-			   url: '../rest/schoolInfo/getAll',
-			   type: 'get',
-			   dataType: 'json',
-			   success: function(data){
-				   if(data.length != 0){
-					   for(i in data){
-							 dataArray[i]  = new Object();
-							 dataArray[i].id = data[i].school_id;
-							 dataArray[i].text = data[i].school_name;
-						 }
-					   $('#selectSchool').select2({
-							  data: dataArray
-						   });
-				   }
-			   },
-			   error: function(xhr, err){
-				   alert('加载驾校信息出错');
-			   }
-		   });
+		   var school_id = $('#school_id').val();
+		   if(school_id != 0){
+			   $('#setSchoolName').css('display', 'inline').html($('#school_name').val());
+			   $('#setSchoolId').val(school_id);
+		   }else{
+			   $('#selectSchoolDiv').css('display', 'block');
+			   selectSchool();
+		   }
 		});
+		function selectSchool(){
+			var dataArray = new Array();
+			   $.ajax({
+				   url: '../rest/schoolInfo/getAll',
+				   type: 'get',
+				   dataType: 'json',
+				   success: function(data){
+					   if(data.length != 0){
+						   for(i in data){
+								 dataArray[i]  = new Object();
+								 dataArray[i].id = data[i].school_id;
+								 dataArray[i].text = data[i].school_name;
+							 }
+						   $('#selectSchool').select2({
+								  data: dataArray
+							   });
+						   document.getElementById('setSchoolId').value = dataArray[0].id;
+					   }
+				   },
+				   error: function(xhr, err){
+					   alert('加载驾校信息出错');
+				   }
+			   });
+		}
 		window.onload = function(){
 			//getStaticInfo();
-			alert($('#school_id').val());
+			//alert($('#school_id').val());
+		};
+		function checkFileExt(file){
+			var extArray = file.value.match(/\.[A-z]*/g);
+			var ext;
+			if(extArray != null && extArray.length != 0){
+				ext = extArray[extArray.length-1];
+				if(ext != '.xls' && ext != '.xlsx'){
+					$('#fileError').html('选择的文件错误，请重新选择').css('display', 'inline');
+				}else{
+					$('#fileError').html('').css('display', 'none');
+				}
+			}else{
+				$('#fileError').html('选择的文件错误，请重新选择').css('display', 'inline');
+			}
+		}
+		function validate(){
+			console.log(document.getElementsByName('file')[0].value == '');
+			if(document.getElementsByName('file')[0].value == ''){
+				$('#fileError').html('请选择一个文件！').css('display', 'inline');
+				return false;
+			}
+			if($('#fileError').css('display') == 'inline')
+				return false;
+			return true;
 		}
 	</script>
 

@@ -34,37 +34,6 @@
   <div class="header navbar navbar-inverse navbar-fixed-top"> 
    <!-- BEGIN TOP NAVIGATION BAR --> 
    <div class="navbar-inner"> 
-    <div class="container-fluid"> 
-     <!-- BEGIN LOGO --> 
-     <a class="brand" style="margin-left:10px; " href="../index.html"> 驾考联盟后台管理系统 </a> 
-     <!-- END LOGO --> 
-     <!-- BEGIN RESPONSIVE MENU TOGGLER --> 
-     <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse"> <img src="../media/image/menu-toggler.png" alt="" /> </a> 
-     <!-- END RESPONSIVE MENU TOGGLER --> 
-     <!-- BEGIN TOP NAVIGATION MENU --> 
-     <ul class="nav pull-right"> 
-      <!-- BEGIN INBOX DROPDOWN --> 
-      <li class="dropdown" id="header_inbox_bar"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-envelope"></i> <span class="badge">5</span> </a> 
-       <ul class="dropdown-menu extended inbox"> 
-        <li> <p>有 5 条未处理投诉</p> </li> 
-        <li> <a href="../inbox.html?a=view"> <span class="subject"> <span class="from">学员：张四</span> <span class="time">刚刚</span> </span> <span class="message"> 真是受不了啦还号称服务第一呢啥服务 </span> </a> </li> 
-        <li> <a href="../inbox.html?a=view"> <span class="subject"> <span class="from">学员：王五</span> <span class="time">16 分钟前</span> </span> <span class="message"> 我去了让我等了半个小时都不让我开始... </span> </a> </li> 
-        <li> <a href="../inbox.html?a=view"> <span class="subject"> <span class="from">学员：张三</span> <span class="time">2小时前</span> </span> <span class="message"> 你们的教练实在是太气人了都不好好教! </span> </a> </li> 
-        <li class="external"> <a href="../inbox.html">查看所有投诉信息<i class="m-icon-swapright"></i></a> </li> 
-       </ul> </li> 
-      <!-- 结束全站顶部投诉信息 --> 
-      <!-- BEGIN USER LOGIN DROPDOWN --> 
-      <li class="dropdown user"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="username">超级管理员：丁海伟</span> <i class="icon-angle-down"></i> </a> 
-       <ul class="dropdown-menu"> 
-        <li><a href="../extra_profile.html"><i class="icon-user"></i> 修改资料</a></li> 
-        <li class="divider"></li> 
-        <li><a href="../extra_lock.html"><i class="icon-lock"></i> 锁定屏幕</a></li> 
-        <li><a href="../login.html"><i class="icon-key"></i> 退出</a></li> 
-       </ul> </li> 
-      <!-- END USER LOGIN DROPDOWN --> 
-     </ul> 
-     <!-- END TOP NAVIGATION MENU --> 
-    </div> 
    </div> 
    <!-- END TOP NAVIGATION BAR --> 
   </div> 
@@ -74,7 +43,6 @@
    <!-- 开始侧边栏 --> 
    <div class="page-sidebar nav-collapse collapse"> 
     <!-- 开始 左侧通用 菜单 --> 
-    <script src="../media/left.js" type="text/javascript"></script> 
     <!-- END SIDEBAR MENU --> 
    </div> 
    <!-- 结束侧边栏 --> 
@@ -151,7 +119,10 @@
              </td> 
              </tr> 
            <tr> 
-             <td>学员信息：<a href="javascript:void(0);" id="studentName2"></a>　<a href="javascript:void(0);" id="schoolName"></a>　<span style="color:red;">暂未实现</span></td>
+             <td>学员信息：<a href="javascript:void(0);" id="studentName2"></a>　
+             <!-- <a href="javascript:void(0);" id="schoolName"></a>　 -->
+            <span id="schoolName1"></span>
+             <span id="student_level1"></span></td>
              <td>
              评价类别：<span class="label  label-success evaluation" style="display:none;">评价</span>
                      <span class="label  label-warning advise" style="display:none;">建议</span>
@@ -198,8 +169,16 @@
              <td width="50%">订单金额：<span id="orderAmount"></span></td> 
              </tr> 
            <tr> 
-             <td>学员信息：<a href="javascript:void(0);" id="studentName3"></a>　<a href="../school/school_view_info.html" id="schoolName2"></a>　<span style="color:red;">暂未实现</span></td>
-             <td>教练信息：<a href="javascript:void(0);" id="coachName"></a>　<span id="courseStatus"></span>　<a href="javascript:void(0);" id="schoolName3"></a>　</td> 
+             <td>学员信息：
+             <a href="javascript:void(0);" id="studentName3"></a>　
+             <!-- <a href="../school/school_view_info.html" id="schoolName2"></a> -->
+           	  <span id="schoolName2"></span>
+             <span id="student_level2"></span></td>
+             <td>教练信息：
+             <a href="javascript:void(0);" id="coachName"></a>　
+             <span id="courseStatus"></span>　
+             <!-- <a href="javascript:void(0);" id="schoolName3"></a>　</td> --> 
+             <span id="schoolName3"></span>
              </tr>
            <tr>
              <td>学员电话：<span id="studentPhone"></span></td>
@@ -285,7 +264,7 @@
 		   //TableAdvanced.init();
 		  var search = window.location.search;
 		  var valueArray = search.split('&');
-		  if(valueArray.length != 6){
+		  if(valueArray.length != 7){
 			  App.init();
 			  return;
 		  }
@@ -295,11 +274,19 @@
 		  var school_name = decodeURI(valueArray[3].split('=')[1]);
 		  var evaluation_record_id = valueArray[4].split('=')[1];
 		  var order_id = valueArray[5].split('=')[1];
+		  var student_level = valueArray[6].split('=')[1];
 		  $('#studentName1').html(student_name);
-		  $('#studentName2').html(student_name).attr('href', '../student/students_edit.html?student_id=' + student_id);
-		  $('#schoolName').html(school_name).attr('href', '../school/school_view_info.html?school_id=' + school_id);
+		  var studentSearch = encodeURIComponent('SI=' + student_id + '&SN=' + student_name);
+		  $('#studentName2').html(student_name).attr('href', '../student/students_edit.html?' + studentSearch);
+		  $('#studentName3').html(student_name).attr('href', '../student/students_edit.html?' + studentSearch);
+		 /*  $('#schoolName1').html(school_name).attr('href', '../school/school_view_info.html?school_id=' + school_id); */
+		  $('#schoolName1').html(school_name);
+		  $('#schoolName2').html(school_name);
 		  $('#evaluationForm').attr('action', '../rest/evaluationRecord/update/' + evaluation_record_id);
 		  $('#orderForm').attr('action', '../rest/orderRecord/update/' + order_id);
+		  var levelArray = ['普通学员', '科目二VIP', '科目三VIP'];
+		  $('#student_level1').html(levelArray[student_level]);
+		  $('#student_level2').html(levelArray[student_level]);
 		  loadEvaluationInfo(evaluation_record_id);
 		  //loadOrderInfo(order_id);
 		});
@@ -342,12 +329,12 @@
 				default:
 					break;
 				}
+				$('#schoolName3').html(data.coach_school_name);
 				document.getElementsByName('operation')[0].value = data.evaluation_operation;
 				$('#trainingTime').html(data.trainingTime);
 				$('#orderAmount').html(data.order_amount);
-				$('#studentName3').html(data.student_name).attr('href', '../student/students_edit.html?student_id=' + data.student_id);
-				$('#coachName').html(data.coach_name).attr('href', '../techer/techer_view_info.html?coach_id=' + data.coach_id);
-				//$('#courseStatus').html(data.course_status);
+				$('#coachName').html(data.coach_name).attr('href', '../techer/techer_view_info.html?' + 
+						encodeURIComponent('CI=' + data.coach_id + '&CN=' + data.coach_name));
 				switch(data.course_status){
 				case 2:
 					$('#courseStatus').html('科目二');
@@ -356,18 +343,17 @@
 					$('#courseStatus').html('科目三');
 					break;
 				}
-				$('#schoolName3').html(data.school_address).attr('href', '../school/school_view_info.html?school_id=' + data.school_id);
 				$('#studentPhone').html(data.student_phone);
 				$('#coachPhone').html(data.coach_phone);
 				document.getElementsByName('orderStatus')[data.order_status].checked = true;
-				document.getElementsByName('operation')[1].value = data.order_operation
+				document.getElementsByName('operation')[1].value = data.order_operation;
 			},
 			complete: function(xhr, ts){
 				App.init();
 			}
 		});
 	}
-	function loadOrderInfo(id){
+	/* function loadOrderInfo(id){
 		$.ajax({
 			url: '../rest/orderRecord/' + id,
 			type: 'get',
@@ -376,7 +362,8 @@
 				$('#trainingTime').html(data.training_start_time);
 				$('#orderAmount').html(data.order_amount);
 				$('#studentName3').html(data.student_name).attr('href', '../student/students_edit.html?student_id=' + data.student_id);
-				$('#coachName').html(data.coach_name).attr('href', '../techer/techer_view_info.html?coach_id=' + data.coach_id);
+				$('#coachName2').html(data.coach_name).attr('href', '../techer/techer_view_info.html?' + 
+						encodeURIComponent('CI=' + data.coach_id + '&CN=' + data.coach_name));
 				//$('#courseStatus').html(data.course_status);
 				switch(data.course_status){
 				case 2:
@@ -391,8 +378,8 @@
 				$('#coachPhone').html(data.phone);
 				document.getElementsByName('orderStatus')[data.order_status].checked = true;
 			}
-		});
-	}
+		}); 
+	}*/
 	</script>  
   <!-- END BODY --> 
  </body>

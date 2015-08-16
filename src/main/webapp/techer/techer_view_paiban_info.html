@@ -227,7 +227,7 @@ dd {
 
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
-						<h3 class="page-title">教练排班<small>查看教练排班信息</small>
+						<h3 class="page-title"><span id="coach_name"></span>教练的排班<small>查看教练排班信息</small>
 
 						</h3>
 
@@ -268,10 +268,10 @@ dd {
 					style="margin-right:5px;"></i>教练信息</a> <a class=" btn blue"
 					id="orderRecord" href="techer_view_money.html"
 					style="margin-bottom:10px;"><i class=" icon-user-md"
-					style="margin-right:5px;"></i>订单记录</a> <a id="studentInfo"
+					style="margin-right:5px;"></i>订单记录</a> <!-- <a id="studentInfo"
 					class=" btn blue" href="techer_view_students.html"
 					style="margin-bottom:10px;"><i class=" icon-male"
-					style="margin-right:5px;"></i>名下学员</a> <a class=" btn blue"
+					style="margin-right:5px;"></i>名下学员</a> --> <a class=" btn blue"
 					id="evaluationInfo" href="techer_view_pingjia.html"
 					style="margin-bottom:10px;"><i class="icon-hospital"
 					style="margin-right:5px;"></i>获得评价</a><a class=" btn purple"
@@ -453,39 +453,28 @@ dd {
 				  }
 			  }) ;
 		   });
-		   
-		   infoArray = decodeURIComponent(window.location.search).match(/\d+/g);
 		   var coach_id;
-		   weekArray = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
-		   try {
-			    console.log(infoArray);
-			   	schedule_id =  parseInt(infoArray[0]);
+		   var coach_name = '';
+		   var search ;
+		   try{
+			   infoArray = decodeURIComponent(window.location.search).match(/\d+/g);
+			   schedule_id =  parseInt(infoArray[0]);
 				coach_id = parseInt(infoArray[1]);
-				$('#teachInfo').attr(
-						'href',
-						'techer_view_info.html?'
-								+ encodeURIComponent('coach_id='
-										+ coach_id));
-				$('#orderRecord').attr(
-						'href',
-						'techer_view_money.html?'
-								+ encodeURIComponent('coach_id='
-										+ coach_id));
-				$('#studentInfo').attr(
-						'href',
-						'techer_view_students.html?'
-								+ encodeURIComponent('coach_id='
-										+ coach_id));
-				$('#evaluationInfo').attr(
-						'href',
-						'techer_view_pingjia.html?'
-								+ encodeURIComponent('coach_id='
-										+ coach_id));
-				$('#scheduleInfo').attr('href', 'techer_view_paiban.html?' +encodeURIComponent('coach_id=' + coach_id));
-			} catch (err) {
-				coach_id=0;
-				schedule_id = 0;
-			}
+			   var nameArray = decodeURIComponent(window.location.search).match(/[\u4e00-\u9fa5]/g);
+			   for(i in nameArray){
+					coach_name += nameArray[i];   
+			   }
+			   $('#coach_name').html(coach_name);
+			   search  = '?' + encodeURIComponent('coach_id=' + coach_id + '&coach_name=' + coach_name);
+		   }catch(err){
+			   return;
+		   }
+		    $('#teachInfo').attr('href','techer_view_info.html' + search);
+			$('#orderRecord').attr('href', 'techer_view_money.html' + search);
+			$('#studentInfo').attr('href', 'techer_view_students.html' + search);
+			$('#evaluationInfo').attr('href', 'techer_view_pingjia.html' + search);
+			$('#scheduleInfo').attr('href', 'techer_view_paiban.html' + search);
+		   weekArray = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
 		   //TableAdvanced.init();
 		loadPageInfo(schedule_id);
 		});

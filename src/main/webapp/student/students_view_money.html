@@ -124,10 +124,10 @@
       </div> 
      </div> 
      
-    <a class=" btn blue"  href="students_edit.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>学员信息</a>
-    <a class=" btn blue"  href="students_view_lianxi.html" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>练习记录</a>
-    <a class=" btn purple"  href="students_view_money.html" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>财务记录</a>
-    <a class=" btn blue"  href="students_view_pingjia.html" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>评价记录</a>
+    <a class=" btn blue" id="studentInfo" href="javascript:void(0);" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>学员信息</a>
+    <a class=" btn blue" id="trainingInfo"  href="javascript:void(0);" style="margin-bottom:10px;"><i class=" icon-user-md" style="margin-right:5px;"></i>练习记录</a>
+    <a class=" btn purple"  href="javascript:void(0);" style="margin-bottom:10px;"><i class=" icon-male" style="margin-right:5px;"></i>财务记录</a>
+    <a class=" btn blue" id="evaluationInfo" href="javascript:void(0);" style="margin-bottom:10px;"><i class="icon-hospital" style="margin-right:5px;"></i>评价记录</a>
      
      <div class="portlet box blue"> 
       <div class="portlet-title"> 
@@ -314,8 +314,20 @@
 
 		   App.init();
 
-		   TableAdvanced.init();
-
+		   //TableAdvanced.init();
+		   var id, student_name;
+			var search = window.location.search;
+			var decodeSearch;
+			try{
+				decodeSearch = decodeURIComponent(search);
+				id = decodeSearch.split('&')[0].split('=')[1];
+				student_name = decodeSearch.split('&')[1].split('=')[1];
+			}catch(err){return;}
+			$('#studentName1').html(student_name);
+			$('#studentName2').html(student_name);
+			$('#studentInfo').attr('href', 'students_edit.html' + search);
+			$('#trainingInfo').attr('href', 'students_view_lianxi.html' + search);
+			$('#evaluationInfo').attr('href', 'students_view_pingjia.html' + search);
 		});
 
 	</script>  

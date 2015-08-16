@@ -65,176 +65,6 @@
 		<!-- BEGIN TOP NAVIGATION BAR -->
 
 		<div class="navbar-inner">
-
-			<div class="container-fluid">
-
-				<!-- BEGIN LOGO -->
-
-				<a class="brand"  style="margin-left:10px; " href="../index.html">
-
-				驾考联盟后台管理系统
-
-				</a>
-
-				<!-- END LOGO -->
-
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-
-				<img src="../media/image/menu-toggler.png" alt="" />
-
-				</a>          
-
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-
-				<ul class="nav pull-right">
-
-				
-						
-
-					<!-- BEGIN INBOX DROPDOWN -->
-
-					<li class="dropdown" id="header_inbox_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-envelope"></i>
-
-						<span class="badge">5</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended inbox">
-
-							<li>
-
-								<p>有 5 条未处理投诉</p>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-								<span class="subject">
-
-								<span class="from">学员：张四</span>
-
-								<span class="time">刚刚</span>
-
-								</span>
-
-								<span class="message">
-
-								真是受不了啦还号称服务第一呢啥服务
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-
-								<span class="subject">
-
-								<span class="from">学员：王五</span>
-
-								<span class="time">16 分钟前</span>
-
-								</span>
-
-								<span class="message">
-
-								我去了让我等了半个小时都不让我开始...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="../inbox.html?a=view">
-
-								
-								<span class="subject">
-
-								<span class="from">学员：张三</span>
-
-								<span class="time">2小时前</span>
-
-								</span>
-
-								<span class="message">
-
-								你们的教练实在是太气人了都不好好教!
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="../inbox.html">查看所有投诉信息<i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- 结束全站顶部投诉信息 -->
-
-
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-					
-
-						<span class="username">超级管理员：丁海伟</span>
-
-						<i class="icon-angle-down"></i>
-
-						</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="../extra_profile.html"><i class="icon-user"></i> 修改资料</a></li>
-
-							
-							<li class="divider"></li>
-
-							<li><a href="../extra_lock.html"><i class="icon-lock"></i> 锁定屏幕</a></li>
-
-							<li><a href="../login.html"><i class="icon-key"></i> 退出</a></li>
-
-						</ul>
-
-					</li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
-
 		</div>
 
 		<!-- END TOP NAVIGATION BAR -->
@@ -252,8 +82,6 @@
 		<div class="page-sidebar nav-collapse collapse">
 
 			<!-- 开始 左侧通用 菜单 -->        
-
-			<script src="../media/left.js" type="text/javascript"></script>
 
 			<!-- END SIDEBAR MENU -->
 
@@ -335,7 +163,7 @@
 
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
-						<h3 class="page-title">商丘顺达驾校<small>查看驾校详细信息</small>
+						<h3 class="page-title"><span id="school_name1"></span><small>查看驾校详细信息</small>
 
 						</h3>
 
@@ -371,17 +199,25 @@
 
 
 
-    <a class=" btn blue"  href="school_view_info.html" style="margin-bottom:10px;" id="schoolInfo"><i class="icon-hospital" style="margin-right:5px;"></i>驾校信息</a>
-    <a class=" btn blue"  href="school_view_techer.html" style="margin-bottom:10px;" id="teacherInfo"><i class=" icon-user-md" style="margin-right:5px;"></i>教练信息</a>
-    <a class=" btn purple"  href="javascript:void(0);" style="margin-bottom:10px;" id="studentInfo"><i class=" icon-male" style="margin-right:5px;"></i>学员信息</a>
-    <a class=" btn blue"  href="school_view_money.html" style="margin-bottom:10px;" id="financeInfo"><i class="icon-hospital" style="margin-right:5px;"></i> 财务信息</a>
+    <a class=" btn blue" href="javascript:void(0);"
+					style="margin-bottom:10px;" id="schoolInfo"><i
+					class="icon-hospital" style="margin-right:5px;"></i>驾校信息</a> <a
+					class=" btn blue" href="javascript:void(0);" id="coachInfo"
+					style="margin-bottom:10px;"><i class=" icon-user-md"
+					style="margin-right:5px;"></i>教练信息</a> <a class=" btn purple"
+					href="javascript:void(0);" style="margin-bottom:10px;"
+					id="studentInfo"><i class=" icon-male"
+					style="margin-right:5px;"></i>学员信息</a> <!-- <a class=" btn blue"
+					href="javascript:void(0);" style="margin-bottom:10px;"
+					id="financeInfo"><i class="icon-hospital"
+					style="margin-right:5px;"></i> 财务信息</a> -->
 
 
 				<div class="portlet box blue">
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-cogs"></i>商丘顺达驾校学员信息</div>
+								<div class="caption"><i class="icon-cogs"></i><span id="school_name2"></span>学员信息</div>
 
 	<div class="actions" style="margin-left:15px;"></div>			<div class="tools">
 
@@ -402,146 +238,19 @@
 
 										<tr>
 										  <th><span class="hidden-480">添加时间</span></th>
-
 											<th>学员姓名</th>
-
 											<th>电话</th>
-
-											<th class="hidden-480">状态</th>
 											<th class="hidden-480">科二</th>
-
 											<th class="hidden-480">科三</th>
 											<th class="hidden-480">是否充值</th>
-											<th class="hidden-480">来源</th>
 											<th class="hidden-480">当前</th>
-
 											<th class="hidden-480">是否VIP</th>
+											<th class="hidden-480">状态</th>
 											<th class="hidden-480">操作</th>
-
 										</tr>
 
 									</thead>
 
-									<tbody>
-
-										<tr>
-										  <td class="hidden-480">2015-05-10</td>
-										  <td>张全顺</td>
-
-											<td>18137000061</td>
-											<td class="hidden-480">有效</td>
-											<td class="hidden-480">1次</td>
-
-										  <td class="hidden-480">0次</td>
-										  <td class="hidden-480">100</td>
-										  <td class="hidden-480">后台</td>
-										  <td class="hidden-480">科二</td>
-
-											<td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign" ></i></span></td>
-										  <td class="hidden-480">查看</td>
-
-										</tr>
-
-										<tr >
-										  <td class="hidden-480">2015-05-10</td>
-										  <td>张全蛋</td>
-
-											<td>18137000062</td>
-											<td class="hidden-480">有效</td>
-											<td class="hidden-480">2次</td>
-
-											<td class="hidden-480">0次</td>
-											<td class="hidden-480">200</td>
-											<td class="hidden-480">学校</td>
-											<td class="hidden-480">科二</td>
-
-											<td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign" ></i></span></td>
-											<td class="hidden-480">查看</td>
-
-										</tr>
-
-										<tr >
-										  <td class="hidden-480">2015-05-01</td>
-										  <td>张全福</td>
-
-											<td>18137000063</td>
-											<td class="hidden-480">有效</td>
-											<td class="hidden-480">0次</td>
-
-											<td class="hidden-480">1次</td>
-											<td class="hidden-480">100</td>
-											<td class="hidden-480">注册</td>
-											<td class="hidden-480">科三</td>
-
-											<td class="hidden-480">普通</td>
-											<td class="hidden-480"><a href="school_view_info.html" role="button" >查看</a> </td>
-
-										</tr>
-
-										<tr >
-										  <td class="hidden-480">2015-05-12</td>
-										  <td>张全财</td>
-
-											<td>18137000064</td>
-											<td class="hidden-480">有效</td>
-											<td class="hidden-480">0次</td>
-
-											<td class="hidden-480">2次</td>
-											<td class="hidden-480">200</td>
-											<td class="hidden-480">后台</td>
-											<td class="hidden-480">科三</td>
-
-											<td class="hidden-480">普通</td>
-											<td class="hidden-480">查看</td>
-
-										</tr>
-
-										<tr >
-										  <td class="hidden-480">2015-05-13</td>
-										  <td>张全寿</td>
-
-											<td>18137000065</td>
-											<td class="hidden-480">暂停</td>
-											<td class="hidden-480">0次</td>
-
-											<td class="hidden-480">0次</td>
-											<td class="hidden-480"><span class="label label-warning"><i class=" icon-remove-sign" ></i></span></td>
-											<td class="hidden-480">后台</td>
-											<td class="hidden-480">科二</td>
-
-											<td class="hidden-480"><span class="label label-important"><i class=" icon-ok-sign" ></i></span></td>
-											<td class="hidden-480">查看
-                                </td>
-
-										</tr>
-										<tr >
-										  <td class="hidden-480">2015-05-12</td>
-										  <td>张全武</td>
-										  <td>18137000066</td>
-										  <td class="hidden-480">暂停</td>
-										  <td class="hidden-480">0次</td>
-										  <td class="hidden-480">0次</td>
-										  <td class="hidden-480"><span class="label label-warning"><i class=" icon-remove-sign" ></i></span></td>
-										  <td class="hidden-480">后台</td>
-										  <td class="hidden-480">科二</td>
-										  <td class="hidden-480">普通</td>
-										  <td class="hidden-480">查看</td>
-									  </tr>
-										<tr >
-										  <td class="hidden-480">2015-05-12</td>
-										  <td>张全文</td>
-										  <td>18137000067</td>
-										  <td class="hidden-480">暂停</td>
-										  <td class="hidden-480">0次</td>
-										  <td class="hidden-480">0次</td>
-										  <td class="hidden-480"><span class="label label-warning"><i class=" icon-remove-sign" ></i></span></td>
-										  <td class="hidden-480">学校</td>
-										  <td class="hidden-480">科二</td>
-										  <td class="hidden-480">普通</td>
-										  <td class="hidden-480">查看</td>
-									  </tr>
-
-									</tbody>
 
 								</table></div>
 	
@@ -639,12 +348,144 @@
 		   App.init();
 
 		   //TableAdvanced.init();
-		   var id = window.location.search.match(/\d+/);
-		   if(id != null){
-			   $('#schoolInfo').attr('href', $('#schoolInfo').attr('href') + '?school_id=' + id);
-			   $('#teacherInfo').attr('href', $('#teacherInfo').attr('href') + '?school_id=' + id);
-			   $('#financeInfo').attr('href', $('#financeInfo').attr('href') + '?school_id=' + id);
+		   var search = window.location.search;
+		   var decodeSearch = decodeURIComponent(search);
+		   var school_id , school_name;
+		   try{
+			   school_id = decodeSearch.split('&')[0].split('=')[1];
+			   school_name = decodeSearch.split('&')[1].split('=')[1];
+			   $('#school_name1').html(school_name);
+			   $('#school_name2').html(school_name);
+		   }catch(err){
+			   return;
 		   }
+		  $('#schoolInfo').attr('href', 'school_view_info.html' + search);
+		  $('#coachInfo').attr('href', 'school_view_techer.html' + search);
+		  $('#financeInfo').attr('href', 'school_view_money.html' + search);
+		   $('#sample_2').DataTable({
+				  'processing': true,
+				  'serverSide': true,
+				  'ajax':{
+					  'url': '../rest/studentBasicInfo/getPage',
+					  'type': 'get',
+					  'data': function(data, setting){
+						  var index = data.order[0].column;
+						  data.sort = data.columns[index].data;
+						  data.dir = data.order[0].dir;
+						  data.search = data.search.value;
+						  data.school_id = school_id;
+					  }
+				  },
+				  'columnDefs':[
+				                 {
+				                	 'targets':[3,4,5,6,9],
+				                	 'orderable': false
+				                 }
+				                 ],
+				  'columns':[
+				             {'data': 'register_date'},
+				             {'data': 'student_name'},
+				             {'data': 'student_phone'},
+				             {
+				            	 'data': 'subject_2_number',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 if(data == null)
+				            				 return '0次';
+				            			 else
+				            				 return data + '次';
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'subject_3_number',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 if(data == null)
+				            				 return '0次';
+				            			 else
+				            				 return data + '次';
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'amount',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 if(data == null)
+				            				 return '<span class="label label-warning"><i class=" icon-remove-sign" ></i></span>';
+				            			else
+				            				return data;
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'subject',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 switch(data){
+				            			 case 0: 
+				            				 return '未报名';
+				            			 case 1:
+				            				 return '科目一';
+				            			 case 2:
+				            				 return '科目二';
+				            			 case 3:
+				            				 return '科目三';
+				            			 case 4:
+				            				 return '科目四';
+				            			 case 5: 
+				            				 return '拿证';
+				            			 default:
+				            				return '未知';
+				            			 }
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'student_level',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 if(data == 0)
+				            				 return '普通';
+				            			 else 
+				            				 return '<span class="label label-important"><i class=" icon-ok-sign" ></i></span>';
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'validation',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 if(data == 1)
+				            				 return '有效';
+				            			 else 
+				            				 return '暂停';
+				            		 }
+				            		 return data;
+				            	 }
+				             },
+				             {
+				            	 'data': 'student_id',
+				            	 'render': function(data, type, row, meta){
+				            		 if(type == 'display'){
+				            			 return '<a href=\'students_edit.html?student_id=' + data + '\'>查看</a>';
+				            		 }
+				            		 return data;
+				            	 },
+				            	 'searchable': false
+				             }
+				             ],
+				   'language':{
+					   'url': '../media/json/lang.json'
+				   },
+				   'lengthMenu': [ [10, 25, 50, -1], [10, 25, 50, '全部'] ]
+			   });
 		});
 
 	</script>

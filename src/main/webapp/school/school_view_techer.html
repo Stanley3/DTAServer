@@ -286,7 +286,7 @@
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
 						<h3 class="page-title">
-							商丘顺达驾校<small>查看驾校详细信息</small>
+							<sapn id="school_name1"></sapn><small>查看驾校详细信息</small>
 
 						</h3>
 
@@ -318,10 +318,10 @@
 					style="margin-right:5px;"></i>教练信息</a> <a class=" btn blue"
 					href="javascript:void(0);" style="margin-bottom:10px;"
 					id="studentInfo"><i class=" icon-male"
-					style="margin-right:5px;"></i>学员信息</a> <a class=" btn blue"
+					style="margin-right:5px;"></i>学员信息</a> <!-- <a class=" btn blue"
 					href="javascript:void(0);" style="margin-bottom:10px;"
 					id="financeInfo"><i class="icon-hospital"
-					style="margin-right:5px;"></i> 财务信息</a>
+					style="margin-right:5px;"></i> 财务信息</a> -->
 
 
 				<div class="portlet box blue">
@@ -329,7 +329,7 @@
 					<div class="portlet-title">
 
 						<div class="caption">
-							<i class="icon-cogs"></i>商丘顺达驾校教练信息
+							<i class="icon-cogs"></i><span id="school_name2"></span>教练信息
 						</div>
 
 						<div class="actions" style="margin-left:15px;"></div>
@@ -467,21 +467,27 @@
 		   App.init();
 
 		   //TableAdvanced.init();
-		   var id = window.location.search.match(/\d+/);
-		   if(id != null){
-			   $('#schoolInfo').attr('href', 'school_view_info.html?school_id=' + id);
-			   $('#studentInfo').attr('href', 'school_view_students.html?school_id=' + id);
-			   $('#financeInfo').attr('href', 'school_view_money.html?school_id=' + id);
+		   var search = window.location.search;
+		   var decodeSearch = decodeURIComponent(search);
+		   var school_id , school_name;
+		   try{
+			   school_id = decodeSearch.split('&')[0].split('=')[1];
+			   school_name = decodeSearch.split('&')[1].split('=')[1];
+			   $('#school_name1').html(school_name);
+			   $('#school_name2').html(school_name);
+		   }catch(err){
+			   return;
 		   }
+		   $('#schoolInfo').attr('href', 'school_view_info.html' + search);
+		   $('#studentInfo').attr('href', 'school_view_students.html' + search);
+		   $('#financeInfo').attr('href', 'school_view_money.html' + search);
 		   $('#sample_2').DataTable({
 			   'processing': true,
 			   'ajax':{
 				   'url': '../rest/coachBasicInfo/getAll',
 				   'type': 'get',
 				   'data': function(data){
-					   if(id != null){
-					   		data.school_id = parseInt(id);
-					   }   		
+					   		data.school_id = school_id;
 				   },
 				   'dataSrc': ''
 			   },

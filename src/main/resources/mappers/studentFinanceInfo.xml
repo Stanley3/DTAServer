@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into student_finance_info 
 	<set>
 		<if test="student_id != null">
-			student_id = #{sutdent_id},
+			student_id = #{student_id},
 		</if>
 		<if test="student_finance_amount != null">
 			student_finance_amount = #{student_finance_amount},
@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update student_finance_info 
 	<set>
 		<if test="student_id != null">
-			student_id = #{sutdent_id},
+			student_id = #{student_id},
 		</if>
 		<if test="student_finance_amount != null">
 			student_finance_amount = #{student_finance_amount},

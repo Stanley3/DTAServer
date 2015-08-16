@@ -58,4 +58,16 @@ public class SessionUtil {
 		}
 		return result;
 	}
+	
+	public static Integer getUserIdByRequest(HttpServletRequest request){
+		HttpSession session = request.getSession(false);
+		Integer result = 0;
+		String id;
+		if (session != null) {
+			result = (Integer) session.getAttribute("user_id");
+			id = session.getId();
+			System.out.println(id);
+		}
+		return result;
+	}
 }

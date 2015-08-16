@@ -318,7 +318,7 @@ Header and header elements.
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
-  width: 225px;
+  width: 500px;
 }
 
 .header .brand img {
@@ -5285,4 +5285,8 @@ Datatables Plugin(in v1.3)
 .dataTable .details tr:nth-child(even) td,
 .dataTable .details tr:nth-child(even) th {
   background-color: #eee !important;
+}
+/** 自定义的样式 **/
+.drop-padding-top{
+	padding-top: 0 !important; /*修改承载信息的lable标签上凸的问题*/
 }

@@ -79,6 +79,7 @@ public class StudentFinanceInfoServiceImpl implements
 			studentFinanceInfo = new StudentFinanceInfo();
 			studentFinanceInfo.setStudent_finance_amount(amount);
 			studentFinanceInfo.setStudent_account_balance(amount);
+			studentFinanceInfo.setStudent_id(student_id);
 			return dao.addObject(studentFinanceInfo);
 		}
 	}

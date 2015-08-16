@@ -28,6 +28,7 @@ import com.dta.bean.ResultBean;
 import com.dta.service.IEvaluationRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.utils.SessionUtil;
 import com.dta.vo.AllEvaluationRecordVo;
 import com.dta.vo.CoachEvaluationInfoVo;
 import com.dta.vo.EvaluationRecordVo;
@@ -62,6 +63,7 @@ public class EvaluationRecordResource extends
 				vo.setRows(0);
 			int draw = vo.getDraw() == null ? 0 : vo.getDraw();
 			int size = 0;
+			vo.setSchool_id(super.getSchool_id());
 			List<AllEvaluationRecord> resultList = new ArrayList<AllEvaluationRecord>();
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			if (vo.getSearch() != null && !vo.getSearch().isEmpty()) {
@@ -131,22 +133,22 @@ public class EvaluationRecordResource extends
 			resultMap.put("total", size);
 			if (size != 0) {
 				resultList = service.getCoachEvaluationInfo(vo);
-				List<MapBean> mapBean = service.getEvaluationSize(vo);
-				for (int i = 0; i < mapBean.size(); ++i) {
-					switch (Integer.valueOf(mapBean.get(i).getKey())) {
-					case 0:
-						badEvaluationSize = Integer.valueOf(mapBean.get(i)
-								.getValue());
-						break;
-					case 1:
-						midEvaluationSize = Integer.valueOf(mapBean.get(i)
-								.getValue());
-						break;
-					case 2:
-						goodEvaluationSize = Integer.valueOf(mapBean.get(i)
-								.getValue());
-						break;
-					}
+			}
+			List<MapBean> mapBean = service.getEvaluationSize(vo);
+			for (int i = 0; mapBean != null && i < mapBean.size(); ++i) {
+				switch (Integer.valueOf(mapBean.get(i).getKey())) {
+				case 0:
+					badEvaluationSize = Integer.valueOf(mapBean.get(i)
+							.getValue());
+					break;
+				case 1:
+					midEvaluationSize = Integer.valueOf(mapBean.get(i)
+							.getValue());
+					break;
+				case 2:
+					goodEvaluationSize = Integer.valueOf(mapBean.get(i)
+							.getValue());
+					break;
 				}
 			}
 			resultMap.put("badEvaluationSize", badEvaluationSize);
@@ -163,4 +165,9 @@ public class EvaluationRecordResource extends
 		}
 	}
 
+	@Override
+	public Response updateById(@BeanParam EvaluationRecord po, @PathParam("id") String id){
+		po.setOperator(SessionUtil.getUserIdByRequest(super.getRequest()));
+		return super.updateById(po, id);
+	}
 }

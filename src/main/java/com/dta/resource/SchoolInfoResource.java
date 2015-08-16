@@ -134,4 +134,20 @@ public class SchoolInfoResource extends
 							GlobalConstant.SELECT_FAIL)).build();
 		}
 	}
+	
+	@GET
+	@Path("webSelectSchool")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response webSelectSchool(){
+		try{
+			return Response.status(200).entity(service.webSelectSchool()).build();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return Response
+					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
 }

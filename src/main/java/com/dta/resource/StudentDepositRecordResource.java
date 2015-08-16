@@ -25,6 +25,7 @@ import com.dta.bean.VIPStudentOfCoachInfo;
 import com.dta.service.IStudentDepositRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.utils.SessionUtil;
 import com.dta.vo.DisplayStudentDepositRecordVo;
 import com.dta.vo.ShowDepositRecordVo;
 import com.dta.vo.StudentDepositRecordVo;
@@ -128,5 +129,10 @@ public class StudentDepositRecordResource extends
 					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
 							GlobalConstant.OPERATION_EXCEPTION_DESC)).build();
 		}
+	}
+	@Override
+	public Response add(@BeanParam StudentDepositRecord po){
+		po.setDepositor_id(SessionUtil.getUserIdByRequest(super.getRequest()));
+		return super.add(po);
 	}
 }

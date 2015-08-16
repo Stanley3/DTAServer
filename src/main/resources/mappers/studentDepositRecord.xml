@@ -209,13 +209,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SD.deposit_type,
 		SB.student_name,
 		SB.student_phone,
-		SD.remark
+		SD.remark,
+		su.user_name
 	from 
 		student_deposit_record as SD
 	join 
 		student_basic_info as SB
 	on 
 		SD.student_id = SB.student_id
+	join
+		sys_user as su
+	on
+		SD.depositor_id = su.user_id
 	<if test="school_id != 0">
 		where SB.school_id = #{school_id}
 	</if>
@@ -331,9 +336,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		deposit_date,
 		deposit_amount,
 		deposit_way,
-		deposit_type
+		deposit_type,
+		school_name as deposit_address
 	from
-		student_deposit_record
+		student_deposit_record as sdr
+	join
+		sys_user as su
+	on
+		sdr.depositor_id = su.user_id
+	join
+		school_info as si
+	on
+		su.user_attribute = si.school_id
 	<where>
 		<if test="student_id != null">
 			student_id = #{student_id}

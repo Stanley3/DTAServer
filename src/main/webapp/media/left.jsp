@@ -53,11 +53,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul class="sub-menu">
 					<li><a href="../student/students_add.html">添加学员</a></li>
 					<li><a href="../student/students_view_list.html">学员列表</a></li>
-					<li><a href="../student/students_view_list.html?L%3d=0">自由学员</a></li>
-					<li><a href="../student/students_view_list.html?L%3d=2">包科二学员</a></li>
-					<li><a href="../student/students_view_list.html?L%3d=3">包科三学员</a></li>
-					<li><a href="../student/students_view_list.html">尚未报名</a></li>
-					<li><a href="../student/students_view_list.html">拿证学员</a></li>
+					<li><a href="../student/students_view_list.html?L%3d0">自由学员</a></li>
+					<li><a href="../student/students_view_list.html?L%3d2">包科二学员</a></li>
+					<li><a href="../student/students_view_list.html?L%3d3">包科三学员</a></li>
+					<li><a href="../student/students_view_list.html?C%3d0">尚未报名</a></li>
+					<li><a href="../student/students_view_list.html?C%3d5">拿证学员</a></li>
 				</ul></li>
 
 			<li><a href="javascript:;"><span class="title">财务管理</span></a>

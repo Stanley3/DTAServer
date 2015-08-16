@@ -2,7 +2,6 @@ package com.dta.resource;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +15,7 @@ import javax.ws.rs.Path;
 
 //import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -38,6 +38,7 @@ import com.dta.bean.TrainingRecord;
 import com.dta.service.IOrderRecordService;
 import com.dta.utils.GlobalConstant;
 import com.dta.utils.ServiceProvider;
+import com.dta.utils.SessionUtil;
 import com.dta.vo.CoachIncomeRecordVo;
 import com.dta.vo.CoachOrderByIdVo;
 import com.dta.vo.CoachPrecontractRecordVo;
@@ -147,6 +148,7 @@ public class OrderRecordResource extends
 			if (vo.getRows() == -1)
 				vo.setRows(0);
 			int draw = vo.getDraw();
+			vo.setSchool_id(super.getSchool_id());
 			int size = service.getOrderInfoSize(vo);
 			List<OrderInfo> listResult = new ArrayList<OrderInfo>();
 			if (size != 0)
@@ -254,6 +256,7 @@ public class OrderRecordResource extends
 
 	@Override
 	public Response add(@BeanParam OrderRecord po) {
+		System.out.println("子类的add方法得到执行!");
 		try {
 			int result = service.addObject(po);
 			switch (result) {
@@ -426,5 +429,11 @@ public class OrderRecordResource extends
 					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
 							e.getMessage())).build();
 		}
+	}
+	
+	@Override
+	public Response updateById(@BeanParam OrderRecord po, @PathParam("id") String id){
+		po.setOperator(SessionUtil.getUserIdByRequest(super.getRequest()));
+		return super.updateById(po, id);
 	}
 }

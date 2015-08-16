@@ -709,6 +709,21 @@ var App = function () {
             });
         }
     }
+    var loadHTML = function(url){
+    	$.ajax({
+    		url: url,
+    		async: false,
+    		type: 'get',
+    		dataType: 'html',
+    		success: function(data){
+    			$('.navbar-inner').html(data);
+    			$('.navbar-inner').html($('#nav').html());
+    		},
+    		error: function(xhr, err){
+    			$('.navbar-inner').html('<intput type="hidden" value="-1" id="school_id">');
+    		}
+    	});
+    };
 
     //* END:CORE HANDLERS *//
 
@@ -718,7 +733,7 @@ var App = function () {
         init: function () {
         	//load navigation bar
         	var timestamp = (new Date()).valueOf();
-        	$('.navbar-inner').load('../media/nav.jsp?timestamp=' + timestamp + ' #nav');
+        	loadHTML('../media/nav.jsp?timestamp=' + timestamp);
         	//load sidebar
         	$('.page-sidebar').load('../media/left.jsp #leftNav');
             //IMPORTANT!!!: Do not modify the core handlers call order.

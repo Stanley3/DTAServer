@@ -44,7 +44,7 @@ public class BatchOperation {
 		calendar.set(Calendar.HOUR_OF_DAY, 1);
 		// calendar.add(Calendar.MINUTE, 1);
 		beginTime = calendar.getTime();
-		logger.debug("开启定时器");
+		logger.debug("在" + dateFormat.format(beginTime) + "开启定时器");
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {

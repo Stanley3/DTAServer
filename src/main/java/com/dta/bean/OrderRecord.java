@@ -185,10 +185,7 @@ public class OrderRecord implements Serializable {
 	}
 
 	public String getOrder_dead_time() {
-		if (order_dead_time != null)
-			return order_dead_time.substring(0,
-					order_dead_time.lastIndexOf('.'));
-		return null;
+		return order_dead_time;
 	}
 
 	public void setOrder_dead_time(String order_dead_time) {

@@ -139,9 +139,13 @@ public class OrderRecordServiceImpl extends
 					po.setOrder_amount(subject_2_fee);
 				else if (po.getCourse_status() == 3)
 					po.setOrder_amount(subject_3_fee);
+				//修改排班表和学员财务表成功之后才增添一条订单
 				if (scheduleInfoService.isScheduled(po.getCoach_id(),
-						scheduleDateArray[i], j))
+						scheduleDateArray[i], j) &&
+						studentFinanceService.updateBalanceByStudentId(studentBasicInfo.getStudent_id(), 
+								po.getOrder_amount(), -1)==1){
 					result += dao.addObject(po);
+				}
 			}
 		}
 		return result;
@@ -372,13 +376,13 @@ public class OrderRecordServiceImpl extends
 
 	@Override
 	@Transactional
-	public boolean completeOrder(Integer order_id) {
+	public boolean completeOrder(Integer order_id) throws Exception {
 		if (order_id == null)
 			throw new IllegalArgumentException("完成一个订单时，订单order_id为null");
 		boolean result = false;
 		OrderRecord orderRecord = dao.getObjectById(order_id);
 		orderRecord.setOrder_status(3);
-		if (dao.updateObjectById(orderRecord) == 1) {
+		if (updateObjectById(orderRecord) == 1) {
 			CoachFinanceRecord coachFinanceRecord = new CoachFinanceRecord();
 			coachFinanceRecord.setOrder_amount(orderRecord.getOrder_amount());
 			coachFinanceRecord.setCoach_id(orderRecord.getCoach_id());

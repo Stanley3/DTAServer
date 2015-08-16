@@ -3,6 +3,8 @@ package com.dta.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dta.bean.GatherStudentInfo;
 import com.dta.bean.StudentBasicInfo;
 import com.dta.vo.StudentBasicInfoVo;
@@ -37,4 +39,12 @@ public interface IStudentBasicInfoService extends
 	 * 
 	 */
 	public Integer getStudentNumbers(Map<String, Integer> map);
+	
+	/**
+	 * 
+	 * @param idcard_no
+	 * @return
+	 * <p>根据学员的身份证号获取学员的信息
+	 */
+	public Map<String, Object> getStudentInfoByID(@Param(value="idcard_no")String idcard_no);
 }

@@ -70,12 +70,13 @@ public class BaseAllResource<T, V> {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response add(@BeanParam T po) {
+		System.out.println("父类的add方法得到执行!");
 		try {
-			if (po instanceof CoachBasicInfo) {
+			/*if (po instanceof CoachBasicInfo) {
 				String idCard_no = ((CoachBasicInfo) po).getIdentity_card_no();
 				((CoachBasicInfo) po).setLogin_pwd(idCard_no
 						.substring(idCard_no.length() - 6));
-			}
+			}*/
 			if (service.addObject(po) == 1) {
 				return Response
 						.status(201)
@@ -84,7 +85,7 @@ public class BaseAllResource<T, V> {
 								GlobalConstant.INSERT_SUCCESS)).build();
 			} else {
 				return Response
-						.status(500)
+						.status(200)
 						.entity(new ResultBean(GlobalConstant.OPERATION_FAIL,
 								GlobalConstant.INSERT_FAIL)).build();
 			}
@@ -239,11 +240,11 @@ public class BaseAllResource<T, V> {
 			int page = (Integer) access.invoke(vo, "getPage");
 			int draw = (Integer) access.invoke(vo, "getDraw");
 			int rows = (Integer) access.invoke(vo, "getRows");
-			try {
+			/*try {
 				access.invoke(vo, "setSchool_id", school_id);
 			} catch (IllegalArgumentException e) {
 
-			}
+			}*/
 			if (page >= 0 && draw >= 0) {
 				/* access.invoke(vo, "setPage", (page-1)*rows); */
 				List<T> resultList = null;
@@ -337,8 +338,16 @@ public class BaseAllResource<T, V> {
 		return request;
 	}
 
-	@Context
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
 	}
+
+	public Integer getSchool_id() {
+		return school_id;
+	}
+
+	public void setSchool_id(Integer school_id) {
+		this.school_id = school_id;
+	}
+	
 }

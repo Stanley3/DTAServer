@@ -83,8 +83,11 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/logout = logout
+				/software/** = anon
 				/rest/studentLoginInfo/login = anon
 				/rest/coachBasicInfo/login = anon
+				/rest/coachBasicInfo/downloadPhoto = anon
+				/rest/studentBasicInfo/downloadPhoto = anon
 				/media/** = anon
 				/error.jsp = anon
 				/index.jsp = anon

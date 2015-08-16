@@ -1,5 +1,7 @@
 package com.dta.resource;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -9,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +32,8 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 
 import com.dta.bean.GatherStudentInfo;
@@ -49,7 +54,7 @@ public class StudentBasicInfoResource extends
 			.getBean("studentBasicInfoServiceImpl");
 	public IStudentLoginInfoService loginInfoService = (IStudentLoginInfoService) ServiceProvider
 			.getBean("studentLoginInfoServiceImpl");
-
+	private Logger logger = LoggerFactory.getLogger("com.dta.resource.StudentBasicInfoResource");
 	public StudentBasicInfoResource() {
 		super.setService(service);
 		super.setMianId(GlobalConstant.STUDENTBASICINFO);
@@ -66,6 +71,7 @@ public class StudentBasicInfoResource extends
 		HttpServletRequest request = super.getRequest();
 		HttpServletResponse response = super.getResponse();
 		PrintWriter printer = null;
+		response.setHeader("Content-Type", "text/html;charset=UTF-8");
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (!isMultipart) {
 			response.setStatus(200);
@@ -82,6 +88,7 @@ public class StudentBasicInfoResource extends
 				ServletFileUpload fileUpload = new ServletFileUpload();
 				FileItemIterator iterator = fileUpload.getItemIterator(request);
 				printer = response.getWriter();
+				response.setStatus(200);
 				StudentBasicInfo po = new StudentBasicInfo();
 				while (iterator.hasNext()) {
 					FileItemStream item = iterator.next();
@@ -117,16 +124,20 @@ public class StudentBasicInfoResource extends
 					// 新增
 					result = service.addObject(po);
 				if (result == 1) {
-					response.setStatus(200);
-					printer.println("<script>alert('success');window.parent.document.getElementById('form').reset();</script>");
+					printer.println("<script>alert('添加成功');window.parent.document.getElementById('form').reset();</script>");
 					printer.flush();
 				} else {
-					printer.println("<script>alert('error')</script>");
+					printer.println("<script>alert('添加失败')</script>");
 					printer.flush();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				printer.println("<script>alert('exception')</script>");
+				response.setStatus(200);
+				try{
+					printer = response.getWriter();
+				}catch(Exception el){
+				}
+				printer.println("<script>alert('系统异常')</script>");
 				printer.flush();
 			}
 		}
@@ -140,6 +151,7 @@ public class StudentBasicInfoResource extends
 		StudentBasicInfo po = service.downloadPhoto(id);
 		if (po != null && po.getStudent_photo() != null) {
 			response.setHeader("Content-Type", "image/jpeg;charset=utf-8");
+			response.setHeader("Content-Length", po.getStudent_photo().length + "");
 			response.setHeader("Content-Disposition",
 					"attachment;filename=\"pic.jpg\"");
 			try {
@@ -260,6 +272,103 @@ public class StudentBasicInfoResource extends
 					.status(500)
 					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
 							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+	
+	@GET
+	@Path("getStudentInfoByID")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getStudentInfoByID(@QueryParam("idcard_no")String idcard_no){
+		try{
+			return Response.status(200).entity(service.getStudentInfoByID(idcard_no)).build();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return Response
+					.status(500)
+					.entity(new ResultBean(GlobalConstant.OPERATION_EXCEPTION,
+							GlobalConstant.SELECT_FAIL)).build();
+		}
+	}
+	
+	@POST
+	@Path("batchAddStudentInfo")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Produces(MediaType.TEXT_HTML)
+	public void batchAddStudentInfo(){
+		HttpServletRequest request = super.getRequest();
+		HttpServletResponse response = super.getResponse();
+		PrintWriter printer = null;
+		try{
+			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+			if (!isMultipart) {
+				response.setStatus(200);
+				try {
+					printer = response.getWriter();
+					printer.println("<script>alert('未找到文件');document.getElementsByTagName('form')[0].reset();</script>");
+					printer.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else{
+				try{
+					ServletFileUpload fileUpload = new ServletFileUpload();
+					FileItemIterator iterator = fileUpload.getItemIterator(request);
+					printer = response.getWriter();
+					boolean result = false;
+					while(iterator.hasNext()){
+						FileItemStream item = iterator.next();
+						String name = item.getFieldName();
+						InputStream stream = item.openStream();
+						if(item.isFormField()){
+							
+						}else{
+							InputStream tmpStream = stream;
+							int size = tmpStream.available();
+							String fileName = item.getName();
+							System.out.println(fileName);
+							String fileExt = fileName.split("\\.")[1];
+							fileName = UUID.randomUUID().toString() + "." + fileExt;
+							if(size != 0){
+								File tmpFile = new File("c:/tmpFile");
+								if(!tmpFile.exists())
+									tmpFile.mkdirs();
+								FileOutputStream outStream = new FileOutputStream(new File("c:/tmpFile/" + fileName));
+								if(FileCopyUtils.copy(tmpStream, outStream) !=0)
+									result = true;
+							}
+						}
+					}
+					response.setStatus(200);
+					if(result){
+						printer = response.getWriter();
+						printer.println("<script>alert('sucess');document.getElementsByTagName('form')[0].reset();</script>");
+						printer.flush();
+					}else{
+						printer = response.getWriter();
+						printer.println("<script>alert('fail');document.getElementsByTagName('form')[0].reset();</script>");
+						printer.flush();
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+					response.setStatus(200);
+					printer = response.getWriter();
+					printer.println("<script>alert('exception');document.getElementsByTagName('form')[0].reset();</script>");
+					printer.flush();
+				}
+			}
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			try {
+				printer = response.getWriter();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			printer.println("<script>alert('exception2');document.getElementsByTagName('form')[0].reset();</script>");
+			printer.flush();
 		}
 	}
 }

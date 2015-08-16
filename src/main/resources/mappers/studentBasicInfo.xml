@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update student_basic_info set validation = 0 where student_id = #{student_id}
 </update>
 <!-- **********获取所有对象********* -->
-<select id="getAll" resultType="StudentBasicInfo" parameterType="StudentBasicInfo">
+<select id="getAll" resultType="StudentBasicInfo" parameterType="StudentBasicInfoVo">
 	select 
 		 ST.register_date,
 		 ST.student_id,
@@ -90,6 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="validation != null and validation != '' ">
 			and ST.validation = #{validation}
 		</if>
+		<if test="subject != null">
+			and subject = #{subject}
+		</if>
 	</where>
 	<if test="sort != null and order != null">
 		order by ${sort} ${order}
@@ -108,7 +111,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SB.driving_license_type,
 		SB.validation,
 		SB.student_level,
-		SL.login_pwd,
 		SL.obligate_code,
 		SL.login_id,
 		IF((student_photo is null), 0, 1) as havePhoto
@@ -178,6 +180,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="student_level != null">
 			and ST.student_level = #{student_level}
 		</if>
+		<if test="subject != null">
+			and subject = #{subject}
+		</if>
 	</where>
 	group by student_id
 	<if test="sort != null and order != null">
@@ -213,6 +218,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="student_level != null">
 			and student_level = #{student_level}
+		</if>
+		<if test="subject != null">
+			and subject = #{subject}
 		</if>
 	</where>
 </select>
@@ -295,5 +303,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</where>
 		</otherwise>
 	</choose>
+</select>
+<!-- 根据学员id获取学员包车教练的信息 -->
+<select id="getCharteredCoachByStudentId" resultType="map">
+	select 
+		cbi.coach_id as chartered_coach_id,
+		coach_name as chartered_coach_name
+	from 
+		student_deposit_record as sdr
+	join
+		coach_basic_info as cbi
+	on 
+		sdr.chartered_coach = cbi.coach_id
+	where 
+		sdr.student_id = #{student_id}
+	order by deposit_date desc
+	limit 0 ,1
+</select>
+<select id="getStudentInfoByID" resultType="map" parameterType="string">
+	select 
+		student_id,
+		student_name,
+		school_name,
+		student_level
+	from
+		student_basic_info as sbi
+	join
+		school_info as si
+	on 
+		sbi.school_id = si.school_id
+	where
+		identity_card_no = #{idcard_no}
 </select>
 </mapper>

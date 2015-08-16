@@ -393,7 +393,8 @@
 				    "data": "school_id",
 				    "render": function(data, type, row, meta){
 				    	if(type == 'display'){
-				    		return "<a href=\"school_view_info.html?school_id=" + data + "\">查看</a>";
+				    		var search = encodeURIComponent('school_id=' + row.school_id + '&school_name=' + row.school_name);
+				    		return "<a href=\"school_view_info.html?" + search + "\">查看</a>";
 				    	}
 				    	return data;
 				    }

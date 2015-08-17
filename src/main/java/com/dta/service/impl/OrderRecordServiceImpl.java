@@ -410,4 +410,10 @@ public class OrderRecordServiceImpl extends
 		
 		return dao.getConsumedStudentNumbers(school_id);
 	}
+
+	@Override
+	public List<OrderRecord> scanOrderRecord(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.scanOrderRecord(map);
+	}
 }

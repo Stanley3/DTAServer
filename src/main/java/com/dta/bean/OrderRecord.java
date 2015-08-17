@@ -50,11 +50,20 @@ public class OrderRecord implements Serializable {
 	private Integer scanned;
 	private Integer student_level;
 	private Integer device_type;
-
+	private String order_freeze_time;
+	
 	private String coach_name;
 	private String phone;
 	private String school_address;
 	private Integer havePhoto;
+	
+	public String getOrder_freeze_time() {
+		return order_freeze_time;
+	}
+
+	public void setOrder_freeze_time(String order_freeze_time) {
+		this.order_freeze_time = order_freeze_time;
+	}
 
 	public Integer getDevice_type() {
 		return device_type;

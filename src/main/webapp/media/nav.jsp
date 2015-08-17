@@ -51,7 +51,7 @@
 
 						<i class="icon-envelope"></i>
 
-						<span class="badge">5</span>
+						<!-- <span class="badge">0</span> -->
 
 						</a>
 
@@ -59,11 +59,11 @@
 
 							<li>
 
-								<p>有 5 条未处理投诉</p>
+								<p>有 0 条未处理投诉</p>
 
 							</li>
 
-							<li>
+							<!-- <li>
 
 								<a href="inbox.html?a=view">
 
@@ -130,11 +130,11 @@
 
 								</a>
 
-							</li>
+							</li> -->
 
 							<li class="external">
 
-								<a href="inbox.html">查看所有投诉信息<i class="m-icon-swapright"></i></a>
+								<a href="javascript:void(0);">查看所有投诉信息<i class="m-icon-swapright"></i></a>
 
 							</li>
 
@@ -154,7 +154,7 @@
 
 					
 
-						<span class="username">超级管理员：<span id="username"><shiro:principal /></span></span>
+						<span class="username">管理员：<span id="username"><shiro:principal /></span></span>
 
 						<i class="icon-angle-down"></i>
 

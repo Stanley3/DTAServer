@@ -810,4 +810,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</otherwise>
 	</choose>
 </select>
+<!-- 夜中批量处理数据时，根据条件获取订单表的内容 -->
+<select id="scanOrderRecord" resultType="map" parameterType="map" >
+		select 
+			order_id,
+			student_id,
+			coach_id,
+			order_amount,
+			order_status,
+			scanned
+		from order_record
+		<where>
+			<if test="order_status != null">
+				and order_status = #{order_status}
+			</if>
+			<if test="scanned != null">
+				and scanned = #{scanned}
+			</if>
+			<if test="trainingTime != null">
+				and date_format(training_start_time, '%Y-%m-%d') = #{trainingTime}
+			</if>
+		</where>
+</select>
  </mapper>

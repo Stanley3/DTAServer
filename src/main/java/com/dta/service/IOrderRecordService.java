@@ -229,4 +229,12 @@ public interface IOrderRecordService extends
 	 * <p>获取已消费学员的总数
 	 */
 	public int getConsumedStudentNumbers(Integer school_id);
+	
+	/**
+	 * 
+	 * @param map
+	 * @return
+	 * 夜中批量处理数据时，根据条件获取订单表的内容
+	 */
+	public List<OrderRecord> scanOrderRecord(Map<String, Object>map);
 }

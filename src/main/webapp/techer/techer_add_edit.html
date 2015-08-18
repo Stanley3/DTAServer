@@ -237,11 +237,12 @@
 
 								<div class="controls" >
 									<div id="selectSchoolDiv" style="display:none">
-									<select  class="medium m-wrap" tabindex="1" id="selectSchool" name="school_id" 
+									<select  class="medium m-wrap" tabindex="1" id="selectSchool"
 										  onchange="displayCoachNumbers(this.value);">
 									</select>
 									</div>
 									<label id="setSchoolName"  style="dispaly:none; font-size:1.25em;margin-right:10px;"></label>
+									<input type="hidden" id="setSchoolId" name="school_id">
 									 <span class="btn red disabled">还可增加<span id="remainCoachNumbers">0</span>位教练！</span><span
 										class="help-inline"> 注：在此处显示还可以增加多少位教练</span>
 								</div>
@@ -570,6 +571,7 @@
 		   }
 		});
 	function displayCoachNumbers(id){
+		$('#setSchoolId').val(id);//设置教练所属驾校id
 		if($('#school_id').val() == 0){
 			var number;
 			for(i in dataArray){

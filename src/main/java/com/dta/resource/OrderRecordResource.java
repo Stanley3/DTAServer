@@ -221,7 +221,7 @@ public class OrderRecordResource extends
 			resultMap.put("subject2TeachingTimes", subject2TeachingTimes);
 			resultMap.put("subject3TeachingTimes", subject3TeachingTimes);
 			resultMap.put("freezeAmount", freezeAmount);
-			resultMap.put("coach_id", list.get(0).getCoach_id());
+			resultMap.put("coach_id", coach_id);
 			return Response.status(200).entity(resultMap).build();
 		} catch (Exception e) {
 			e.printStackTrace();

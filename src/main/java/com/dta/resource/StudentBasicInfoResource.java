@@ -258,11 +258,11 @@ public class StudentBasicInfoResource extends
 			}
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("subject_2_used_course", subject_2_used_course);
-			resultMap.put("subject_2_passed", list != null ? list
+			resultMap.put("subject_2_passed", (list != null && list.size()>0) ? list
 					.get(subject_2).getSubject_2_passed() : 0);
 			resultMap.put("subject_2_used_day", subject_2_used_day);
 			resultMap.put("subject_3_used_course", subject_3_used_course);
-			resultMap.put("subject_3_passed", list != null ? list
+			resultMap.put("subject_3_passed", (list != null && list.size()>0) ? list
 					.get(subject_3).getSubject_3_passed() : 0);
 			resultMap.put("subject_3_used_day", subject_3_used_day);
 			return Response.status(200).entity(resultMap).build();

@@ -183,7 +183,7 @@
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
-	<script src="media/js/app.js" type="text/javascript"></script>
+	<!-- <script src="media/js/app.js" type="text/javascript"></script> -->
 
 	<script src="media/js/login.js" type="text/javascript"></script>      
 
@@ -191,7 +191,7 @@
 
 	<script>
 		jQuery(document).ready(function() {     
-		  App.init();
+		  //App.init();
 		  Login.init();
 		});
 	</script>

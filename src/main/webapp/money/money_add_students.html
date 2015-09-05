@@ -64,6 +64,11 @@
 	rel="stylesheet" />
 <link href="../media/css/validationEngine.jquery.css" rel="stylesheet"
 	type="text/css">
+<style type="text/css">
+.loading{
+	display: none;
+}
+</style>
 </head>
 
 <!-- END HEAD -->
@@ -81,7 +86,7 @@
 
 			<div class="control-group">
 
-				<label class="control-label">身份证号</label>
+				<label class="control-label">手机号</label>
 
 				<div class="controls">
 
@@ -98,6 +103,7 @@
 			<div class="control-group">
 				<label class="control-label drop-padding-top">学员姓名</label>
 				<div class="controls">
+					<img src="../media/image/loading.gif" alt="loading" class="loading">
 					<label id="setStudentName" class="m-wrap medium "></label>
 				</div>
 			</div>
@@ -119,7 +125,7 @@
 				<label class="control-label drop-padding-top">学员类型</label>
 
 				<div class="controls">
-
+					<img src="../media/image/loading.gif" alt="loading" class="loading">
 					<label class="m-wrap medium " id="setStudentLevel" ></label>
 				</div>
 
@@ -351,7 +357,16 @@
 			}
 		}
 		function changeID(idcard_no){
-			if(idcard_no.length == 18 || idcard_no.length == 15){
+			//if(idcard_no.length == 18 || idcard_no.length == 15){
+				// 暂修改为手机号
+			if(idcard_no.length == 11){
+				/* $('.loading').each(function(){
+						$(this).css('display', 'inline');
+					}
+				}); */
+				$('.loading').css('display', 'inline');
+				$('#setStudentName').html("");
+				$('#setStudentLevel').html("");
 				$.ajax({
 					url: '../rest/studentBasicInfo/getStudentInfoByID',
 					type: 'get',
@@ -367,8 +382,10 @@
 					},
 					error: function(xhr, err){
 						alert('网络错误');
+					},
+					complete: function(xhr, txt){
+						$('.loading').css('display', 'none');
 					}
-					
 				});
 			}
 		}

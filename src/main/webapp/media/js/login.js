@@ -3,7 +3,12 @@ var Login = function () {
     return {
         //main function to initiate the module
         init: function () {
-        	
+        	$('.login-form').click(function(){
+        		//alert(2);
+        		$(this).attr('disabled', 'disabled').removeClass('green').addClass('gray');
+        		return;
+        		alert($(this).hasClass('green'));
+        	});
            $('.login-form').validate({
 	            errorElement: 'label', //default input error message container
 	            errorClass: 'help-inline', // default input error message class
@@ -30,6 +35,7 @@ var Login = function () {
 	            },
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
+	            	//$(':submit').removeAttr('disabled').removeClass('gray').addClass('green');
 	                $('.alert-error', $('.login-form')).show();
 	            },
 
@@ -60,7 +66,7 @@ var Login = function () {
 	                if ($('.login-form').validate().form()) {
 	                   // window.location.href = "main/main.jsp";
 	                	//$('.login-form').ajaxSumit();
-	                	console.log(e);
+	                	//console.log(e);
 	                	document.getElementsByTagName('form')[0].submit();
 	                }
 	                return false;

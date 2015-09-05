@@ -811,7 +811,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</choose>
 </select>
 <!-- 夜中批量处理数据时，根据条件获取订单表的内容 -->
-<select id="scanOrderRecord" resultType="map" parameterType="map" >
+<select id="scanOrderRecord" resultType="OrderRecord" parameterType="map" >
 		select 
 			order_id,
 			student_id,

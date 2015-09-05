@@ -333,6 +333,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on 
 		sbi.school_id = si.school_id
 	where
-		identity_card_no = #{idcard_no}
+		<!-- identity_card_no = #{idcard_no} --><!-- 暂修改为手机号 -->
+		student_phone = #{idcard_no}
 </select>
 </mapper>
